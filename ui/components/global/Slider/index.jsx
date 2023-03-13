@@ -5,13 +5,13 @@ import styles from '@/ui/components/global/Slider/Slider.module.scss';
 const initLists = [
   {
     id: 1,
-    author: 'author1',
     song: 'song1',
+    author: 'author1',
   },
   {
     id: 2,
-    author: 'author2',
     song: 'song2',
+    author: 'author2',
   },
   /*   {
     id: 3,
@@ -27,6 +27,11 @@ const initLists = [
 
 export default function Slider() {
   const [musicCard, setMusicCard] = useState(initLists);
+  const [idCard, setIdCard] = useState(null);
+
+  const getIdCard = () => {
+    setIdCard();
+  };
 
   const leftArrowClick = () => {
     console.log('left');
@@ -38,11 +43,21 @@ export default function Slider() {
   const allMusicCard = initLists.map((initList) => {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.card_img}>{initList.id} Component</div>
+        <div className={styles.card_img}>
+          {initList.id} Card
+          <div className={styles.wrapper_button}>
+            <button onClick={leftArrowClick}>
+              <a href=''>left</a>
+            </button>
+            <button onClick={rightArrowClick}>
+              <a href=''>right</a>
+            </button>
+          </div>
+        </div>
         <div className={styles.card_item}>
           <ul key={initList.id}>
-            <li>{initList.author}</li>
             <li>{initList.song}</li>
+            <li>{initList.author}</li>
           </ul>
         </div>
       </div>
@@ -52,8 +67,7 @@ export default function Slider() {
   return (
     <div className='container'>
       <h2>Новинки DLESS</h2>
-      <button onClick={leftArrowClick}>left</button>
-      <button onClick={rightArrowClick}>right</button>
+
       {allMusicCard}
     </div>
   );
