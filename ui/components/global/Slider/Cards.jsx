@@ -13,6 +13,16 @@ const musicData = [
     author: 'author2',
     song: 'song2',
   },
+  {
+    id: 3,
+    author: 'author3',
+    song: 'song3',
+  },
+  {
+    id: 4,
+    author: 'author4',
+    song: 'song4',
+  },
 ];
 
 export default function Cards() {
@@ -20,7 +30,7 @@ export default function Cards() {
 
   const card = cards.map((card) => {
     return (
-      <div>
+      <>
         <div className={styles.wrapper}>
           <div className={styles.button}>
             <button
@@ -46,14 +56,26 @@ export default function Cards() {
               <li className={styles.wrapper_item}>{card.author}</li>
               <li className={styles.wrapper_item}>{card.song}</li>
             </ul>
+            <div className={styles.links}>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+              <a href=''></a>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   });
 
   return (
-    <div className='container'>
+    <div>
       <h2>Новинки на DLESS</h2>
 
       {card}

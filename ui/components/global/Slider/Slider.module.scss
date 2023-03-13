@@ -40,3 +40,16 @@
     margin: 0 10px;
   }
 }
+
+.links {
+  display: flex;
+  margin: 10px 0;
+  justify-content: center;
+  a {
+    display: inline-block;
+    width: 25px;
+    height: 4px;
+    background: white;
+    margin: 0 15px;
+  }
+}
