@@ -1,44 +1,50 @@
 import Head from 'next/head';
 import Script from 'next/script';
-import { fetchAPI } from '@/utils/api/fetch'
+import { fetchAPI } from '@/utils/api/fetch';
 import Player from '@/ui/components/global/Player';
+import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
 
 export const getServerSideProps = async () => {
-  const response = await fetchAPI('/audios')
-  const audios = await response.json()
+  const response = await fetchAPI('/audios');
+  const audios = await response.json();
 
   return {
-    props: { audios }
-  }
-}
+    props: { audios },
+  };
+};
 
 export default function Home({ audios }) {
-  const attr = audios?.data[audios?.data.length - 1]
-  const [track, setTrack] = useState({id: attr?.id, ...attr?.attributes})
+  const attr = audios?.data[audios?.data.length - 1];
+  const [track, setTrack] = useState({ id: attr?.id, ...attr?.attributes });
 
   const addTrack = (id, attributes) => {
-    setTrack({id, ...attributes})
-  }
+    setTrack({ id, ...attributes });
+  };
 
   return (
     <>
       <Head>
-        <title>{track.author} - {track.name}</title>
+        <title>
+          {track.author} - {track.name}
+        </title>
         <meta name='description' content='Decathlon lessons project' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
+      <Slider />
+
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
         <ul className='list'>
-          { audios && audios?.data.map(({ id, attributes }) => (
-            <li key={id} onClick={() => addTrack(id, attributes)}>
-              <strong>{attributes.author}</strong> - {attributes.name}
-            </li>
-          )) }
+          {audios &&
+            audios?.data.map(({ id, attributes }) => (
+              <li key={id} onClick={() => addTrack(id, attributes)}>
+                <strong>{attributes.author}</strong> - {attributes.name}
+              </li>
+            ))}
         </ul>
       </div>
 
