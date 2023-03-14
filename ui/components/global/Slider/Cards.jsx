@@ -7,21 +7,25 @@ const musicData = [
     id: 1,
     author: 'author1',
     song: 'song1',
+    img: 'https://samesound.ru/wp-content/uploads/2019/02/synthwave-album-cover.jpg',
   },
   {
     id: 2,
     author: 'author2',
     song: 'song2',
+    img: 'https://amiel.club/uploads/posts/2022-03/1647706433_59-amiel-club-p-kartinki-dlya-treka-67.jpg',
   },
   {
     id: 3,
     author: 'author3',
     song: 'song3',
+    img: 'https://abrakadabra.fun/uploads/posts/2022-02/1644479400_8-abrakadabra-fun-p-fon-dlya-oblozhki-alboma-12.jpg',
   },
   {
     id: 4,
     author: 'author4',
     song: 'song4',
+    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/7b4b17163192441.63e217fed33b0.jpg',
   },
 ];
 
@@ -54,7 +58,8 @@ export default function Cards() {
           </button>
         </div>
         <div className={styles.header}>
-          <h3>{card.id} Card</h3>
+          {/*  <h3>{card.id} Card</h3> */}
+          <img src={card.img}></img>
         </div>
         <div>
           <ul key={card.id} className={styles.wrapper_list}>
