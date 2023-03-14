@@ -56,18 +56,18 @@ export default function Cards() {
               <li className={styles.wrapper_item}>{card.author}</li>
               <li className={styles.wrapper_item}>{card.song}</li>
             </ul>
-            <div className={styles.links}>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-              <a href=''></a>
-            </div>
+          </div>
+          <div className={styles.links}>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
+            <a href=''></a>
           </div>
         </div>
       </>
@@ -77,8 +77,7 @@ export default function Cards() {
   return (
     <div>
       <h2>Новинки на DLESS</h2>
-
-      {card}
+      <div className={styles.cardWrapper}>{card}</div>
     </div>
   );
 }
