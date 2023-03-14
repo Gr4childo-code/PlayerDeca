@@ -29,21 +29,28 @@ export default function Cards() {
   const [cardsData, setCardsData] = useState(musicData);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const leftArrowClick = () => {};
-  const rightArrowClick = () => {};
-
   const card = cardsData[currentSlide];
 
+  console.log(card);
+  console.log(currentSlide);
+
+  const leftArrowClick = () => {
+    setCurrentSlide(currentSlide === 0 ? currentSlide : currentSlide - 1);
+  };
+  const rightArrowClick = () => {
+    setCurrentSlide(currentSlide === 3 ? currentSlide : currentSlide + 1);
+  };
+
   return (
-    <div className={styles.cardWrapper}>
-      <h2>Новинки на DLESS</h2>
+    <div>
+      <h2>Новинки DLESS</h2>
       <div className={styles.wrapper}>
         <div className={styles.button}>
           <button className={styles.button_left} onClick={leftArrowClick}>
-            left
+            prev
           </button>
           <button className={styles.button_right} onClick={rightArrowClick}>
-            right
+            next
           </button>
         </div>
         <div className={styles.header}>
@@ -51,8 +58,8 @@ export default function Cards() {
         </div>
         <div>
           <ul key={card.id} className={styles.wrapper_list}>
-            <li className={styles.wrapper_item}>{card.author}</li>
             <li className={styles.wrapper_item}>{card.song}</li>
+            <li className={styles.wrapper_item}>{card.author}</li>
           </ul>
         </div>
         <div className={styles.links}>

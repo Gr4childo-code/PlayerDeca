@@ -1,18 +1,9 @@
-.cardWrapper {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin: 10px 0;
-  width: 600px;
-  height: 400px;
-}
-
 .wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 600px;
+  max-width: 600px;
   height: 400px;
   background: rgb(50, 50, 75);
   border-radius: 5px;
@@ -39,7 +30,7 @@
     cursor: pointer;
     position: absolute;
     left: 0px;
-    top: 160px;
+    top: 145px;
     margin: 0 10px;
     width: 40px;
     height: 30px;
@@ -48,7 +39,7 @@
     cursor: pointer;
     position: absolute;
     right: 0px;
-    top: 160px;
+    top: 145px;
     margin: 0 10px;
     width: 40px;
     height: 30px;
