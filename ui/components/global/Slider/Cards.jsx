@@ -26,25 +26,26 @@ const musicData = [
 ];
 
 export default function Cards() {
-  const [cards, setCards] = useState(musicData);
+  const [cardsData, setCardsData] = useState(musicData);
+  const [curr, setCurr] = useState(0);
 
-  const card = cards.map((card) => {
+  console.log(cardsData.length);
+
+  const leftArrowClick = () => {
+    setCurr((curr) => (curr === 0 ? cardsData.length - 1 : curr - 1));
+  };
+  const rightArrowClick = () => {
+    setCurr((curr) => (curr === cardsData.length - 1 ? 0 : curr + 1));
+  };
+  const card = cardsData.map((card) => {
     return (
       <>
         <div className={styles.wrapper}>
           <div className={styles.button}>
-            <button
-              className={styles.button_left}
-              onClick={() => {
-                console.log('left');
-              }}>
+            <button className={styles.button_left} onClick={leftArrowClick}>
               left
             </button>
-            <button
-              className={styles.button_right}
-              onClick={() => {
-                console.log('right');
-              }}>
+            <button className={styles.button_right} onClick={rightArrowClick}>
               right
             </button>
           </div>
