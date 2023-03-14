@@ -1,10 +1,19 @@
+.title {
+  margin-bottom: 10px;
+}
+
+.mainWrapper_cards {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
 .wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 600px;
-  height: 100%;
   background: rgb(50, 50, 75);
   border-radius: 5px;
   &_list {
@@ -13,6 +22,9 @@
   &_item {
     padding: 5px 10px;
     list-style-type: none;
+    &:last-child {
+      opacity: 0.5;
+    }
   }
 }
 
@@ -24,23 +36,25 @@
   h3 {
     position: absolute;
   }
-  img {
+  &_img {
     width: 600px;
     max-height: 320px;
+    border-radius: 5px 5px 0 0;
+    object-fit: cover;
   }
 }
 
 .button {
   display: flex;
   justify-content: space-between;
+  font-size: 35px;
+  user-select: none;
   &_left {
     cursor: pointer;
     position: absolute;
     left: 0px;
     top: 145px;
     margin: 0 10px;
-    width: 40px;
-    height: 30px;
   }
   &_right {
     cursor: pointer;
@@ -48,8 +62,6 @@
     right: 0px;
     top: 145px;
     margin: 0 10px;
-    width: 40px;
-    height: 30px;
   }
 }
 
