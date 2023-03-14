@@ -38,7 +38,7 @@ export default function Cards() {
     setCurrentSlide(currentSlide === 0 ? currentSlide : currentSlide - 1);
   };
   const rightArrowClick = () => {
-    setCurrentSlide(currentSlide === 3 ? currentSlide : currentSlide + 1);
+    setCurrentSlide(currentSlide >= 3 ? currentSlide - 3 : currentSlide + 1);
   };
 
   return (
