@@ -1,3 +1,12 @@
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 10px 0;
+  width: 600px;
+  height: 400px;
+}
+
 .wrapper {
   position: relative;
   display: flex;
@@ -62,12 +71,4 @@
       opacity: 0.5;
     }
   }
-}
-
-.cardWrapper {
-  display: flex;
-  overflow: hidden;
-  margin: 10px 0;
-  width: 600px;
-  height: 400px;
 }

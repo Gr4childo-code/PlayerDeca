@@ -27,58 +27,47 @@ const musicData = [
 
 export default function Cards() {
   const [cardsData, setCardsData] = useState(musicData);
-  const [curr, setCurr] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  console.log(cardsData.length);
+  const leftArrowClick = () => {};
+  const rightArrowClick = () => {};
 
-  const leftArrowClick = () => {
-    setCurr((curr) => (curr === 0 ? cardsData.length - 1 : curr - 1));
-  };
-  const rightArrowClick = () => {
-    setCurr((curr) => (curr === cardsData.length - 1 ? 0 : curr + 1));
-  };
-  const card = cardsData.map((card) => {
-    return (
-      <>
-        <div className={styles.wrapper}>
-          <div className={styles.button}>
-            <button className={styles.button_left} onClick={leftArrowClick}>
-              left
-            </button>
-            <button className={styles.button_right} onClick={rightArrowClick}>
-              right
-            </button>
-          </div>
-          <div className={styles.header}>
-            <h3>{card.id} Card</h3>
-          </div>
-          <div>
-            <ul key={card.id} className={styles.wrapper_list}>
-              <li className={styles.wrapper_item}>{card.author}</li>
-              <li className={styles.wrapper_item}>{card.song}</li>
-            </ul>
-          </div>
-          <div className={styles.links}>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-            <a href=''></a>
-          </div>
-        </div>
-      </>
-    );
-  });
+  const card = cardsData[currentSlide];
 
   return (
-    <div>
+    <div className={styles.cardWrapper}>
       <h2>Новинки на DLESS</h2>
-      <div className={styles.cardWrapper}>{card}</div>
+      <div className={styles.wrapper}>
+        <div className={styles.button}>
+          <button className={styles.button_left} onClick={leftArrowClick}>
+            left
+          </button>
+          <button className={styles.button_right} onClick={rightArrowClick}>
+            right
+          </button>
+        </div>
+        <div className={styles.header}>
+          <h3>{card.id} Card</h3>
+        </div>
+        <div>
+          <ul key={card.id} className={styles.wrapper_list}>
+            <li className={styles.wrapper_item}>{card.author}</li>
+            <li className={styles.wrapper_item}>{card.song}</li>
+          </ul>
+        </div>
+        <div className={styles.links}>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+          <a href=''></a>
+        </div>
+      </div>
     </div>
   );
 }
