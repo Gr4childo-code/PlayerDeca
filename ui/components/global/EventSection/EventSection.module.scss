@@ -23,6 +23,10 @@
   }
   &_month {
     font-size: 30px;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
   &_year,
   &_time {
@@ -50,14 +54,21 @@
       height: 35px;
       border-radius: 2px;
       margin-bottom: 10px;
-      background-color: var(--button-color-orange);
+      background: var(--gradient);
+      color: #fff;
       outline: none;
       box-shadow: none;
       border: none;
+      border-radius: 5px;
     }
   }
   &_title {
     font-size: 28px;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: bold;
   }
   &_descr {
     font-size: 20px;
