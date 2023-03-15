@@ -22,12 +22,13 @@
     padding: 10px 0;
     background: var(--slider-background);
     color: var(--slider-lists-color);
+    filter: contrast(90%);
   }
   &_item {
     padding: 5px 10px;
     list-style-type: none;
     &:last-child {
-      opacity: 0.5;
+      opacity: 0.6;
     }
   }
 }
