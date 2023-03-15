@@ -14,11 +14,13 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 600px;
-  background: rgb(50, 50, 75);
+  background: var(--slider-background);
+  border: var(--slider-border);
   border-radius: 5px;
   &_list {
     padding: 10px 0;
-    background: rgb(27, 27, 41);
+    background: var(--slider-background);
+    color: var(--slider-lists-color);
   }
   &_item {
     padding: 5px 10px;
@@ -36,6 +38,7 @@
   height: 100%;
   h3 {
     position: absolute;
+    color: var(--slider-button-color);
   }
   &_img {
     width: 600px;
@@ -56,6 +59,7 @@
     left: 0px;
     top: 145px;
     margin: 0 10px;
+    color: var(--slider-button-color);
   }
   &_right {
     cursor: pointer;
@@ -63,6 +67,7 @@
     right: 0px;
     top: 145px;
     margin: 0 10px;
+    color: var(--slider-button-color);
   }
 }
 
@@ -74,7 +79,7 @@
     display: inline-block;
     width: 45px;
     height: 4px;
-    background: white;
+    background: var(--slider-link);
     margin: 0 10px;
     border-radius: 2px;
     &:hover,
