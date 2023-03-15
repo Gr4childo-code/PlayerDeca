@@ -7,14 +7,17 @@
   border-radius: 5px 5px 0 0;
   transition: all 0.5s;
   &:hover {
-    box-shadow: 0 0 4px var(--player-color-one);
+    box-shadow: 0 0 10px var(--player-color-one);
   }
-  .image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px 5px 0 0;
+  .header {
+    .image {
+      object-fit: contain;
+      // position: relative;
+
+      border-radius: 5px 5px 0 0;
+    }
   }
+
   .footer {
     margin: 0;
     padding: 5px;
@@ -33,11 +36,6 @@
         opacity: 1;
       }
     }
-    // .activeOptions {
-    //   opacity: 1;
-    //   display: flex;
-    //   align-items: center;
-    // }
 
     .playerBox {
       height: 60px;

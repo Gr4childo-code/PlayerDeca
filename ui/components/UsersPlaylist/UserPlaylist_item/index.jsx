@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from './UsersPlaylist_item.module.scss';
 import Image from 'next/image';
 
 const UserPlaylist_item = ({ image, author, nameplaylist, id }) => {
   const [isPlay, setIsPlay] = useState(true);
+  const router = useRouter();
 
   return (
     <div className={styles.playlist_item}>
@@ -14,6 +16,9 @@ const UserPlaylist_item = ({ image, author, nameplaylist, id }) => {
           width={150}
           height={150}
           alt={nameplaylist}
+          onClick={() => {
+            router.push(`/playlist/${id}`);
+          }}
         />
       </div>
       <div className={styles.footer}>

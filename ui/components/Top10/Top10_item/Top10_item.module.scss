@@ -8,7 +8,7 @@
   filter: contrast(70%);
   transition: all 0.5s;
   &_music {
-    margin-left: 10px;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -25,6 +25,9 @@
   }
 
   .number {
+    text-align: center;
+    width: 20px;
+    height: 20px;
     font-size: 25px;
   }
   .options {

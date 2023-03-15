@@ -6,18 +6,21 @@ import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
 
 import Top10 from '@/ui/components/Top10/Top10';
-import UsersPlaylist from '@/ui/components/UsersPlaylist/UsersPlaylist';
+import UsersPlaylist from '@/ui/components/UsersPlaylist';
+import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const response = await fetchAPI('/audios');
   const audios = await response.json();
 
+  const response2 = await fetchAPI(`/audios?${first10()}`);
+  const audioTop = await response2.json();
   return {
-    props: { audios },
+    props: { audios, audioTop },
   };
 };
 
-export default function Home({ audios }) {
+export default function Home({ audios, audioTop }) {
   const attr = audios?.data[audios?.data.length - 1];
   const [track, setTrack] = useState({ id: attr?.id, ...attr?.attributes });
 
@@ -36,13 +39,12 @@ export default function Home({ audios }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Slider />
-
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
         <div className='container_main'>
           <div className='container_left'>
+            <Slider />
             <UsersPlaylist />
 
             {/* <ul className='list'>
@@ -55,7 +57,7 @@ export default function Home({ audios }) {
             </ul> */}
           </div>
           <div className='container_right'>
-            <Top10 audios={audios} />
+            <Top10 audioTop={audioTop} />
           </div>
         </div>
 

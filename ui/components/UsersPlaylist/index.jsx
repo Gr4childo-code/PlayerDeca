@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './UsersPlaylist.module.scss';
-import UserPlaylist_item from './UserPlaylist_item/UserPlaylist_item';
+import UserPlaylist_item from './UserPlaylist_item';
 
 const playList = [
   {
@@ -43,6 +43,7 @@ const UsersPlaylist = () => {
               image={audio.image}
               nameplaylist={audio.nameplaylist}
               author={audio.author}
+              id={audio.id}
             />
           ))}
         </div>
