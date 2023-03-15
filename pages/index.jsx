@@ -26,7 +26,7 @@ export default function Home({ audios }) {
     <>
       <Head>
         <title>
-          {track.author} - {track.name}
+          {track?.author} - {track?.name}
         </title>
         <meta name='description' content='Decathlon lessons project' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
