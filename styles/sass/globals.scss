@@ -52,7 +52,18 @@ a {
   max-width: 1440px;
   margin: auto;
   padding: 0 10px;
+  &_main{
+    width: 100%;
+    display: flex;
+    .container_left{
+      flex-grow: 1;
+    }
+    .container_right{
+      width: 30%;
+    }
+  }
 }
+
 
 .list {
   list-style: none;
