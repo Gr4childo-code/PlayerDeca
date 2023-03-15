@@ -1,17 +1,70 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: start;
-  padding: 20px;
+  margin-top: 10px;
+  padding: 0 20px;
   width: 100%;
-  height: 340px;
-  border: 2px solid wheat;
+  min-height: 340px;
+  border-top: 2px solid var(--search-default);
   li {
     list-style-type: none;
-    margin: 0 0 10px 0;
   }
   img {
     width: 220px;
     height: 200px;
+    border-radius: 5px;
+  }
+}
+
+.dataEvent {
+  &_number {
+    font-size: 80px;
+  }
+  &_month {
+    font-size: 30px;
+  }
+  &_year,
+  &_time {
+    font-size: 15px;
+    filter: contrast(20%);
+  }
+}
+
+.eventInfo {
+  display: flex;
+  align-items: center;
+  &_texts {
+    margin: 0 50px;
+    li {
+      padding-bottom: 10px;
+    }
+  }
+  &_links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    button {
+      width: 100%;
+      height: 35px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      background-color: var(--button-color-orange);
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+  }
+  &_title {
+    font-size: 28px;
+  }
+  &_descr {
+    font-size: 20px;
+    filter: contrast(20%);
+  }
+  &_author {
+    padding-top: 20px;
+    font-size: 15px;
+    filter: contrast(20%);
   }
 }
