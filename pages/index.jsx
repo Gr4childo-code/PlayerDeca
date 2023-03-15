@@ -2,8 +2,12 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { fetchAPI } from '@/utils/api/fetch';
 import Player from '@/ui/components/global/Player';
-import EventSection from '@/ui/components/global/EventSection';
+import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
+import EventSection from '@/ui/components/global/EventSection';
+
+import Top10 from '@/ui/components/Top10/Top10';
+import UsersPlaylist from '@/ui/components/UsersPlaylist/UsersPlaylist';
 
 export const getServerSideProps = async () => {
   const response = await fetchAPI('/audios');
@@ -37,17 +41,28 @@ export default function Home({ audios }) {
 
       <div className='container'>
         <EventSection />
-        <ul className='list'>
-          {audios &&
-            audios?.data.map(({ id, attributes }) => (
-              <li key={id} onClick={() => addTrack(id, attributes)}>
-                <strong>{attributes.author}</strong> - {attributes.name}
-              </li>
-            ))}
-        </ul>
-      </div>
+        <Slider />
 
-      {attr && <Player track={track} nx={track.id} />}
+        <div className='container_main'>
+          <div className='container_left'>
+            <UsersPlaylist />
+
+            <ul className='list'>
+              {audios &&
+                audios?.data.map(({ id, attributes }) => (
+                  <li key={id} onClick={() => addTrack(id, attributes)}>
+                    <strong>{attributes.author}</strong> - {attributes.name}
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className='container_right'>
+            <Top10 audios={audios} />
+          </div>
+        </div>
+
+        {attr && <Player track={track} nx={track.id} />}
+      </div>
     </>
   );
 }
