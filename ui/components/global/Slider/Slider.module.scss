@@ -4,11 +4,12 @@
 
 .mainWrapper_cards {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 20px 0;
 }
 
 .wrapper {
+  margin: 20px 0;
   position: relative;
   display: flex;
   flex-direction: column;
