@@ -1,21 +1,13 @@
+
 import qs from 'qs';
 
 const SearchByAuthor = (input = null) => {
   const query = qs.stringify(
     {
       filters: {
-        $or: [
-          {
-            name: {
-              $containsi: input,
-            },
-          },
-          {
-            author: {
-              $containsi: input,
-            },
-          },
-        ],
+        author: {
+          $containsi: input,
+        },
       },
     },
     {
@@ -25,4 +17,20 @@ const SearchByAuthor = (input = null) => {
   return query;
 };
 
-export { SearchByAuthor };
+const first10 = () => {
+  const query1 = qs.stringify(
+    {
+      pagination: {
+        page: 1,
+        pageSize: 10,
+      },
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
+    }
+  );
+  return query1;
+  // dsajda
+};
+
+export { SearchByAuthor, first10 };
