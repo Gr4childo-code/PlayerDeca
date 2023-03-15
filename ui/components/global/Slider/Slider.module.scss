@@ -82,10 +82,9 @@
     width: 45px;
     height: 4px;
     background: var(--slider-link);
-    margin: 0 10px;
+    margin: 0 5px;
     border-radius: 2px;
-    &:hover,
-    :active {
+    &:hover {
       opacity: 0.5;
     }
   }

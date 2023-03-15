@@ -1,4 +1,5 @@
 import React, { use, useState } from 'react';
+import Link from 'next/link';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
@@ -45,11 +46,11 @@ export default function Cards({ musicData, title }) {
           </ul>
         </>
         <div className={styles.links}>
-          <a href='/' onMouseEnter={() => currLink(0)}></a>
-          <a href='/' onMouseEnter={() => currLink(1)}></a>
-          <a href='/' onMouseEnter={() => currLink(2)}></a>
-          <a href='/' onMouseEnter={() => currLink(3)}></a>
-          <a href='/' onMouseEnter={() => currLink(4)}></a>
+          <Link href='/' onMouseEnter={() => currLink(0)}></Link>
+          <Link href='/' onMouseEnter={() => currLink(1)}></Link>
+          <Link href='/' onMouseEnter={() => currLink(2)}></Link>
+          <Link href='/' onMouseEnter={() => currLink(3)}></Link>
+          <Link href='/' onMouseEnter={() => currLink(4)}></Link>
           {/* <a href=''></a>
           <a href=''></a>
           <a href=''></a>
