@@ -33,9 +33,12 @@ export default function Player({ track, nx }) {
     setIsPlay(!isPlay);
 
     if (isPlay) {
-      audioTimeUpdate();
-
+      audio.src = `${process.env.NEXT_PUBLIC_API_URL}${track.path}`
+      audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${track.posterPath}`
       audio.volume = volume / 100
+      audio.load()
+
+      audioTimeUpdate();
       audio.play();
       return;
     }
@@ -44,15 +47,20 @@ export default function Player({ track, nx }) {
   };
 
   if ( nx != isNx ) {
-    setIsNx(nx)
+    setIsPlay(false);
+
+    audio.src = `${process.env.NEXT_PUBLIC_API_URL}${track.path}`
+    audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${track.posterPath}`
+    audio.load()
     audio.currentTime = 0;
-    setIsPlay(true);
-    audio.pause();
+    audio.play()
+    
+    setIsNx(nx)
   }
 
   useEffect(() => {
     setAudio(AudioInit(track));
-  }, [track]);
+  }, []);
 
   const rewind = (e, active) => {
     setIsPlayMove(active)
