@@ -5,7 +5,7 @@
 .mainWrapper_cards {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0;
+  margin: 20px 0;
 }
 
 .wrapper {
@@ -17,6 +17,7 @@
   background: rgb(50, 50, 75);
   border-radius: 5px;
   &_list {
+    padding: 10px 0;
     background: rgb(27, 27, 41);
   }
   &_item {
@@ -67,7 +68,7 @@
 
 .links {
   display: flex;
-  margin: 10px 0;
+  padding: 10px 0;
   justify-content: center;
   a {
     display: inline-block;
