@@ -3,7 +3,7 @@ import { EventItem } from './EventItem';
 
 export default function EventSection() {
   return (
-    <div>
+    <>
       <h2>События</h2>
       <EventItem
         dataEvent={'30'}
@@ -27,6 +27,6 @@ export default function EventSection() {
           'https://play-lh.googleusercontent.com/5SA-3vo78uGvVrTQ-Or-XrjYMum8r7lAgmGxPHP5aWUidCBUuJbZbny8M2c8NWNJPRo'
         }
       />
-    </div>
+    </>
   );
 }
