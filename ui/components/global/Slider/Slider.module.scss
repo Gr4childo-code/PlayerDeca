@@ -20,9 +20,8 @@
   border-radius: 5px;
   &_list {
     padding: 10px 0;
-    background: var(--slider-background);
+    background: var(--gradient);
     color: var(--slider-lists-color);
-    filter: contrast(90%);
   }
   &_item {
     padding: 5px 10px;
@@ -77,6 +76,8 @@
   display: flex;
   padding: 10px 0;
   justify-content: center;
+  background: transparent;
+
   a {
     display: inline-block;
     width: 45px;
