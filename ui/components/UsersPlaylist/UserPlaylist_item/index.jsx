@@ -4,11 +4,8 @@ import styles from './UsersPlaylist_item.module.scss';
 import Image from 'next/image';
 
 const UserPlaylist_item = ({ audio }) => {
-  const audios = audio.map((item) => {
-    console.log(item);
-  });
-  console.log(audios);
   const [isPlay, setIsPlay] = useState(true);
+  console.log(audio);
   const router = useRouter();
 
   return (
@@ -23,7 +20,7 @@ const UserPlaylist_item = ({ audio }) => {
               height={150}
               alt={audio.nameplaylist}
               onClick={() => {
-                router.push(`/playlist/${id}`);
+                router.push(`/playlist/${audio.id}`);
               }}
             />
           </div>

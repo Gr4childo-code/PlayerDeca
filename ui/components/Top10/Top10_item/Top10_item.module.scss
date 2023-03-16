@@ -7,12 +7,14 @@
   font-size: 15px;
   filter: contrast(70%);
   transition: all 0.5s;
+  cursor: pointer;
   &_music {
     margin-left: 20px;
     display: flex;
     flex-direction: column;
     text-align: left;
     flex-grow: 1;
+    color: var(--text-color-white);
     .author {
       color: var(--player-color-one);
     }
