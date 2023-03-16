@@ -1,6 +1,6 @@
 .search {
   margin-left: 15px;
-  background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
+  background: var(--gradient);
   width: 500px;
   border-radius: 10px;
   z-index: 999;
@@ -16,9 +16,9 @@
     border-radius: 10px;
     width: 100%;
     cursor: pointer;
-    color: white;
+    color: var(--text-color-white);
     &::-webkit-input-placeholder {
-      color: white;
+      color: var(--text-color-white);
     }
   }
 
@@ -30,7 +30,7 @@
     top: 70px;
     border-radius: 10px;
     max-height: 50vh;
-    background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
+    background: var(--gradient);
     overflow-y: none;
     overflow-y: auto;
     .item {
