@@ -1,19 +1,23 @@
+.wrapper {
+  display: flex;
+}
 .playlist_item {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  // padding-bottom: 20px;
   height: 230px;
   width: 150px;
-  background-color: rgba(255, 85, 0, 0.192);
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 5px 5px;
   transition: all 0.5s;
+  box-shadow: 0 0 5px var(--player-color-one);
+  filter: contrast(70%);
   &:hover {
+    filter: contrast(100%);
     box-shadow: 0 0 10px var(--player-color-one);
   }
   .header {
     .image {
       object-fit: contain;
-      // position: relative;
-
       border-radius: 5px 5px 0 0;
     }
   }
@@ -81,7 +85,6 @@
 
 @media (prefers-color-scheme: dark) {
   .playlist_item {
-    background: rgba(255, 255, 255, 0.2);
     .footer {
       .playerBox__play {
         background: transparentize(#fff4ee, 0.9);

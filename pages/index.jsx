@@ -6,7 +6,7 @@ import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
 import EventSection from '@/ui/components/global/EventSection';
 
-import Top10 from '@/ui/components/Top10/Top10';
+import Top10 from '@/ui/components/Top10';
 import UsersPlaylist from '@/ui/components/UsersPlaylist';
 import { first10 } from '@/utils/api/QueryParams';
 
@@ -46,24 +46,17 @@ export default function Home({ audios, audioTop }) {
         <EventSection />
         <Slider />
 
-        <div className='container_main'>
-          <div className='container_left'>
-            <Slider />
-            <UsersPlaylist />
+        <UsersPlaylist />
+        <Top10 audioTop={audioTop} />
 
-            <ul className='list'>
-              {audios &&
-                audios?.data.map(({ id, attributes }) => (
-                  <li key={id} onClick={() => addTrack(id, attributes)}>
-                    <strong>{attributes.author}</strong> - {attributes.name}
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className='container_right'>
-            <Top10 audioTop={audioTop} />
-          </div>
-        </div>
+        <ul className='list'>
+          {audios &&
+            audios?.data.map(({ id, attributes }) => (
+              <li key={id} onClick={() => addTrack(id, attributes)}>
+                <strong>{attributes.author}</strong> - {attributes.name}
+              </li>
+            ))}
+        </ul>
 
         {attr && <Player track={track} nx={track.id} />}
       </div>

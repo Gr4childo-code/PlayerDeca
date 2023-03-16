@@ -3,32 +3,39 @@ import styles from './UsersPlaylist.module.scss';
 import UserPlaylist_item from './UserPlaylist_item';
 
 const playList = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150x150',
-    nameplaylist: 'Phonk',
-    author: 'Danill',
-  },
-  {
-    id: 2,
-    image: 'https://via.placeholder.com/150x150',
-    nameplaylist: 'Phonk',
-    author: 'Danill',
-  },
-  {
-    id: 3,
-    image: 'https://via.placeholder.com/150x150',
-    nameplaylist: 'Phonk',
-    author: 'Danill',
-  },
-  {
-    id: 4,
-    image: 'https://via.placeholder.com/150x150',
-    nameplaylist: 'Phonk',
-    author: 'Danill',
-  },
+  [
+    {
+      image: 'https://via.placeholder.com/150x150',
+      nameplaylist: '1',
+      author: 'Danill',
+    },
+    {
+      image: 'https://via.placeholder.com/150x150',
+      nameplaylist: '2',
+      author: 'Danill',
+    },
+    {
+      image: 'https://via.placeholder.com/150x150',
+      nameplaylist: '3',
+      author: 'Danill',
+    },
+  ],
+
+  [
+    {
+      image: 'https://via.placeholder.com/150x150',
+      nameplaylist: 'Phonk',
+      author: 'Aleksey',
+    },
+    {
+      image: 'https://via.placeholder.com/150x150',
+      nameplaylist: 'Phonk',
+      author: 'Aleksey',
+    },
+  ],
 ];
 const UsersPlaylist = () => {
+  console.log(playList);
   return (
     <div>
       <h2 className={styles.title}>
@@ -39,11 +46,12 @@ const UsersPlaylist = () => {
         <div className={styles.container_playlist}>
           {playList.map((audio) => (
             <UserPlaylist_item
-              key={audio.id}
-              image={audio.image}
-              nameplaylist={audio.nameplaylist}
-              author={audio.author}
-              id={audio.id}
+              audio={audio}
+              // key={audio.id}
+              // image={audio.image}
+              // nameplaylist={audio.nameplaylist}
+              // author={audio.author}
+              // id={audio.id}
             />
           ))}
         </div>
