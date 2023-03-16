@@ -4,6 +4,7 @@ import { fetchAPI } from '@/utils/api/fetch';
 import Player from '@/ui/components/global/Player';
 import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
+import EventSection from '@/ui/components/global/EventSection';
 
 import Top10 from '@/ui/components/Top10/Top10';
 import UsersPlaylist from '@/ui/components/UsersPlaylist/UsersPlaylist';
@@ -36,23 +37,24 @@ export default function Home({ audios }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Slider />
-
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
+        <EventSection />
+        <Slider />
+
         <div className='container_main'>
           <div className='container_left'>
             <UsersPlaylist />
 
-            {/* <ul className='list'>
+            <ul className='list'>
               {audios &&
                 audios?.data.map(({ id, attributes }) => (
                   <li key={id} onClick={() => addTrack(id, attributes)}>
                     <strong>{attributes.author}</strong> - {attributes.name}
                   </li>
                 ))}
-            </ul> */}
+            </ul>
           </div>
           <div className='container_right'>
             <Top10 audios={audios} />
