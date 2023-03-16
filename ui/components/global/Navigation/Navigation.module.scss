@@ -2,7 +2,7 @@
   display: flex;
   &_list {
     display: flex;
-      align-items: center;
+    align-items: center;
     list-style-type: none;
   }
   &_item {
@@ -10,9 +10,10 @@
     span {
       cursor: pointer;
     }
-    &_search{
-    display: flex;
+    &_search {
+      display: flex;
       align-items: center;
+      cursor: pointer;
     }
   }
   &_link {
@@ -20,5 +21,4 @@
       margin: 0 10px 0 0;
     }
   }
-  
 }

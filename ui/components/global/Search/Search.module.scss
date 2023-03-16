@@ -3,7 +3,6 @@
   background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
   width: 500px;
   border-radius: 10px;
-  // display: flex;
   z-index: 999;
   display: none;
   &.active {
