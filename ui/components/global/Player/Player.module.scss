@@ -147,37 +147,37 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .player {
-    background: rgba(255, 255, 255, 0.1);
-  }
+// @media (prefers-color-scheme: dark) {
+//   .player {
+//     background: rgba(255, 255, 255, 0.1);
+//   }
 
-  .playerBar {
-    background: rgba(255, 255, 255, 0.2);
-    &__progressMove {
-      background: rgba(255, 255, 255, 0.2);
-    }
-  }
+//   .playerBar {
+//     background: rgba(255, 255, 255, 0.2);
+//     &__progressMove {
+//       background: rgba(255, 255, 255, 0.2);
+//     }
+//   }
 
-  .playerBox {
-    &__play {
-      background: transparentize(#fff4ee, 0.9);
-      &:hover {
-        box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
-      }
-    }
-    &__body {
-      color: rgba(255, 255, 255, 0.5);
-      strong {
-        color: rgba(255, 255, 255, 0.8);
-      }
-    }
-  }
+//   .playerBox {
+//     &__play {
+//       background: transparentize(#fff4ee, 0.9);
+//       &:hover {
+//         box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
+//       }
+//     }
+//     &__body {
+//       color: rgba(255, 255, 255, 0.5);
+//       strong {
+//         color: rgba(255, 255, 255, 0.8);
+//       }
+//     }
+//   }
 
-  .playerVolume {
-    background: rgba(255, 255, 255, 0.2);
-  }
-}
+//   .playerVolume {
+//     background: rgba(255, 255, 255, 0.2);
+//   }
+// }
 
 @media screen and (max-width: 768px) {
   .playerBox {
