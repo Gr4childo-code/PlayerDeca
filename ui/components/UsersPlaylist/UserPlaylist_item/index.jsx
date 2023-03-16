@@ -5,13 +5,12 @@ import Image from 'next/image';
 
 const UserPlaylist_item = ({ audio }) => {
   const [isPlay, setIsPlay] = useState(true);
-  console.log(audio);
   const router = useRouter();
 
   return (
     <div className={styles.wrapper}>
-      {audio.map((audio) => (
-        <div className={styles.playlist_item}>
+      {audio.map((audio, index) => (
+        <div className={styles.playlist_item} key={index}>
           <div className={styles.header}>
             <Image
               className={styles.image}

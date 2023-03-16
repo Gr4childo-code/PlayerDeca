@@ -40,7 +40,6 @@ const playList = [
   ],
 ];
 const UsersPlaylist = () => {
-  console.log(playList);
   return (
     <div>
       <h2 className={styles.title}>
@@ -49,8 +48,8 @@ const UsersPlaylist = () => {
       </h2>
       <div className={styles.container_wrapper}>
         <div className={styles.container_playlist}>
-          {playList.map((audio) => (
-            <UserPlaylist_item audio={audio} />
+          {playList.map((audio, index) => (
+            <UserPlaylist_item audio={audio} key={index} />
           ))}
         </div>
       </div>
