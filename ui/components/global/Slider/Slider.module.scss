@@ -20,14 +20,14 @@
   border-radius: 5px;
   &_list {
     padding: 10px 0;
-    background: var(--slider-background);
+    background: var(--gradient);
     color: var(--slider-lists-color);
   }
   &_item {
     padding: 5px 10px;
     list-style-type: none;
     &:last-child {
-      opacity: 0.5;
+      opacity: 0.6;
     }
   }
 }
@@ -76,15 +76,16 @@
   display: flex;
   padding: 10px 0;
   justify-content: center;
+  background: transparent;
+
   a {
     display: inline-block;
     width: 45px;
     height: 4px;
     background: var(--slider-link);
-    margin: 0 10px;
+    margin: 0 5px;
     border-radius: 2px;
-    &:hover,
-    :active {
+    &:hover {
       opacity: 0.5;
     }
   }
