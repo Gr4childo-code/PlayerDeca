@@ -3,7 +3,12 @@
   background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
   width: 500px;
   border-radius: 10px;
-  display: flex;
+  // display: flex;
+  z-index: 999;
+  display: none;
+  &.active {
+    display: flex;
+  }
   &_bar {
     background: none;
     padding-left: 10px;
@@ -13,7 +18,7 @@
     width: 100%;
     cursor: pointer;
     color: white;
-    &::-webkit-input-placeholder{
+    &::-webkit-input-placeholder {
       color: white;
     }
   }

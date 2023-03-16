@@ -1,4 +1,3 @@
-
 import qs from 'qs';
 
 const SearchByAuthor = (input = null) => {
@@ -20,9 +19,10 @@ const SearchByAuthor = (input = null) => {
 const first10 = () => {
   const query1 = qs.stringify(
     {
+      sort: ['likes:desc'],
       pagination: {
-        page: 1,
-        pageSize: 10,
+        start: 0,
+        limit: 10,
       },
     },
     {

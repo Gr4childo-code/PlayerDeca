@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Drops from '../Dropdown';
 
 import styles from '@/ui/components/global/Navigation/Navigation.module.scss';
-import Search from '../Search/Search';
+import Search from '../Search';
 
 export default function Navigation(props) {
   const [show, setShow] = useState(false);

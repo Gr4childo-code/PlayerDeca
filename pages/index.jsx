@@ -6,19 +6,22 @@ import Slider from '@/ui/components/global/Slider';
 import { useState } from 'react';
 import EventSection from '@/ui/components/global/EventSection';
 
-import Top10 from '@/ui/components/Top10/Top10';
-import UsersPlaylist from '@/ui/components/UsersPlaylist/UsersPlaylist';
+import Top10 from '@/ui/components/Top10';
+import UsersPlaylist from '@/ui/components/UsersPlaylist';
+import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const response = await fetchAPI('/audios');
   const audios = await response.json();
 
+  const response2 = await fetchAPI(`/audios?${first10()}`);
+  const audioTop = await response2.json();
   return {
-    props: { audios },
+    props: { audios, audioTop },
   };
 };
 
-export default function Home({ audios }) {
+export default function Home({ audios, audioTop }) {
   const attr = audios?.data[audios?.data.length - 1];
   const [track, setTrack] = useState({ id: attr?.id, ...attr?.attributes });
 
@@ -43,23 +46,17 @@ export default function Home({ audios }) {
         <EventSection />
         <Slider />
 
-        <div className='container_main'>
-          <div className='container_left'>
-            <UsersPlaylist />
+        <UsersPlaylist />
+        <Top10 audioTop={audioTop} />
 
-            <ul className='list'>
-              {audios &&
-                audios?.data.map(({ id, attributes }) => (
-                  <li key={id} onClick={() => addTrack(id, attributes)}>
-                    <strong>{attributes.author}</strong> - {attributes.name}
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className='container_right'>
-            <Top10 audios={audios} />
-          </div>
-        </div>
+        <ul className='list'>
+          {audios &&
+            audios?.data.map(({ id, attributes }) => (
+              <li key={id} onClick={() => addTrack(id, attributes)}>
+                <strong>{attributes.author}</strong> - {attributes.name}
+              </li>
+            ))}
+        </ul>
 
         {attr && <Player track={track} nx={track.id} />}
       </div>

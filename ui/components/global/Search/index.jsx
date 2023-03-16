@@ -11,10 +11,8 @@ const Search = () => {
   const [searchAudio, setserchAudio] = useState([]);
   const [inputValue, setinputValue] = useState('');
   const [show, setShow] = useState(false);
-  const search_Block = show && <Search_block />;
 
   const handleChangeFilter = (e) => {
-    e.preventDefault();
     setinputValue(e.target.value);
   };
 
@@ -47,13 +45,10 @@ const Search = () => {
         onClick={() => {
           setShow(!show);
         }}></span>
-      {search_Block}
-    </>
-  );
-
-  function Search_block() {
-    return (
-      <div className={styles.search}>
+      <div
+        className={
+          !show ? `${styles.search}` : `${styles.search} ${styles.active}`
+        }>
         <input
           className={styles.search_bar}
           type={'text'}
@@ -68,8 +63,8 @@ const Search = () => {
           ''
         )}
       </div>
-    );
-  }
+    </>
+  );
 };
 
 export default Search;
