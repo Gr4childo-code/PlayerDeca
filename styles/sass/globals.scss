@@ -9,12 +9,14 @@
   --button-color-orange: #ff5d0f;
   --button-color-grey: rgba(170, 170, 170, 0.7);
   --preloader: #000;
-  --slider-background: rgb(50, 50, 75);
+  --slider-background: #171717;
   --slider-border: 1px solid black;
   --slider-link: #fff;
   --slider-button-color: #fff;
   --slider-lists-color: #fff;
-  --search-default: rgba(0, 0, 0, 0.1);
+
+  --search-default: rgba(0, 0, 0, 0.8);
+
   --gradient: linear-gradient(89.96deg, #ff5d0f 0.03%, #ff9c0f 99.96%);
 }
 
@@ -24,12 +26,13 @@
     --foreground-rgb: 255, 255, 255;
     --button-color-default: #171717;
     --preloader: #fff;
-    --slider-background: rgb(50, 50, 75);
+    --slider-background: #171717;
     --slider-border: none;
     --slider-link: #fff;
     --slider-button-color: #fff;
     --slider-lists-color: #fff;
     --search-default: rgba(255, 255, 255, 0.1);
+    --gradient: linear-gradient(89.96deg, #ff5d0f 0.03%, #ff9c0f 99.96%);
   }
 }
 
