@@ -5,16 +5,19 @@ import UserPlaylist_item from './UserPlaylist_item';
 const playList = [
   [
     {
+      id: 1,
       image: 'https://via.placeholder.com/150x150',
       nameplaylist: '1',
       author: 'Danill',
     },
     {
+      id: 2,
       image: 'https://via.placeholder.com/150x150',
       nameplaylist: '2',
       author: 'Danill',
     },
     {
+      id: 3,
       image: 'https://via.placeholder.com/150x150',
       nameplaylist: '3',
       author: 'Danill',
@@ -23,11 +26,13 @@ const playList = [
 
   [
     {
+      id: 4,
       image: 'https://via.placeholder.com/150x150',
       nameplaylist: 'Phonk',
       author: 'Aleksey',
     },
     {
+      id: 5,
       image: 'https://via.placeholder.com/150x150',
       nameplaylist: 'Phonk',
       author: 'Aleksey',
@@ -45,14 +50,7 @@ const UsersPlaylist = () => {
       <div className={styles.container_wrapper}>
         <div className={styles.container_playlist}>
           {playList.map((audio) => (
-            <UserPlaylist_item
-              audio={audio}
-              // key={audio.id}
-              // image={audio.image}
-              // nameplaylist={audio.nameplaylist}
-              // author={audio.author}
-              // id={audio.id}
-            />
+            <UserPlaylist_item audio={audio} />
           ))}
         </div>
       </div>
