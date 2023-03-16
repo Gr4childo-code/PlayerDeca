@@ -55,7 +55,7 @@
         cursor: pointer;
         margin-right: 15px;
         position: relative;
-        background: #fff4ee;
+        background: transparentize(#fff4ee, 0.9);
         &:before {
           content: "";
           width: 0;
@@ -78,22 +78,22 @@
           left: 0;
         }
         &:hover {
-          box-shadow: 0 0 4px var(--player-color-one);
-        }
-      }
-    }
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .playlist_item {
-    .footer {
-      .playerBox__play {
-        background: transparentize(#fff4ee, 0.9);
-        &:hover {
           box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
         }
       }
     }
   }
 }
+
+// @media (prefers-color-scheme: dark) {
+//   .playlist_item {
+//     .footer {
+//       .playerBox__play {
+//         background: transparentize(#fff4ee, 0.9);
+//         &:hover {
+//           box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
+//         }
+//       }
+//     }
+//   }
+// }
