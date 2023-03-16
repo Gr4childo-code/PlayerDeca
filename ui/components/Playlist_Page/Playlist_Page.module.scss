@@ -1,46 +1,76 @@
 .wrapper {
   display: flex;
+  width: 100%;
 }
-.playlist_item {
-  margin-right: 20px;
-  // padding-bottom: 20px;
-  height: 230px;
-  width: 150px;
-  border-radius: 5px 5px 5px 5px;
-  transition: all 0.5s;
-  box-shadow: 0 0 5px var(--player-color-one);
-  filter: contrast(70%);
-  &:hover {
-    filter: contrast(100%);
-    box-shadow: 0 0 10px var(--player-color-one);
-  }
-  .header {
-    .image {
-      object-fit: contain;
-      border-radius: 5px 5px 0 0;
-    }
-  }
+.left_side {
+  display: flex;
+  flex-direction: column;
+  // width: 100%;
 
-  .footer {
-    margin: 0;
-    padding: 5px;
-    transition: all 1s;
-    .subtitle {
-      color: var(--text-color-white);
-      .author {
+  .description {
+    margin-top: 20px;
+    .release {
+      margin-bottom: 10px;
+      .date {
         font-weight: bold;
         color: var(--player-color-one);
       }
     }
+    .rating {
+      .number {
+        font-weight: bold;
+        color: var(--player-color-one);
+      }
+    }
+  }
+}
+.rigth_side {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  .list_item {
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
 
+    padding: 0 10px;
+    font-size: 15px;
+    filter: contrast(70%);
+    transition: all 0.5s;
+    cursor: pointer;
+    &_music {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      flex-grow: 1;
+      color: var(--text-color-white);
+      .author {
+        color: var(--player-color-one);
+      }
+    }
+
+    &:hover {
+      filter: contrast(100%);
+      box-shadow: 0 0 4px var(--player-color-one);
+    }
+
+    .number {
+      text-align: center;
+      width: 20px;
+      height: 20px;
+      font-size: 25px;
+      color: var(--text-color-white);
+    }
     .options {
-      opacity: 0;
       display: flex;
       align-items: center;
-      transition: all 0.2s;
-      &:hover {
-        opacity: 1;
-      }
+      gap: 5px;
+      color: var(--text-color-white);
     }
 
     .playerBox {
