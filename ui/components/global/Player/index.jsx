@@ -54,7 +54,7 @@ export default function Player({ track, nx }) {
     audio.load()
     audio.currentTime = 0;
     audio.play()
-    
+
     setIsNx(nx)
   }
 
