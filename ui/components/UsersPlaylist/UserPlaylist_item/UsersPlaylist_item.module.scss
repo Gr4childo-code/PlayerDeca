@@ -25,11 +25,14 @@
     margin: 0;
     padding: 5px;
     transition: all 1s;
-
-    .author {
-      font-weight: bold;
-      color: var(--player-color-one);
+    .subtitle {
+      color: var(--text-color-white);
+      .author {
+        font-weight: bold;
+        color: var(--player-color-one);
+      }
     }
+
     .options {
       opacity: 0;
       display: flex;
