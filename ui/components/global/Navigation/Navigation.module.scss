@@ -1,6 +1,5 @@
 .navMain {
   display: flex;
-  color: var(--text-color-white);
   &_list {
     display: flex;
     align-items: center;
@@ -15,7 +14,6 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      color: white;
     }
   }
   &_link {

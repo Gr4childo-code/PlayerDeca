@@ -5,9 +5,8 @@
   letter-spacing: 2px;
   transition: opacity 0.2s;
   font-weight: bold;
-  color: var(--text-color-white);
   span {
-    color: var(--player-color-one);
+    color: var(--ui-color-one);
   }
   &:hover {
     opacity: 0.7;

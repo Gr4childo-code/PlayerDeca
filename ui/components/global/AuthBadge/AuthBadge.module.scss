@@ -10,12 +10,11 @@
     width: calc(100% - 46px)
   }
   &__ava {
-    border: 1px solid #ccc;
     box-sizing: border-box;
     width: 34px;
     height: 34px;
     margin-left: 12px;
-    background: rgba(255,255,255,.3);
+    background: var(--gray);
     border-radius: 100%;
     overflow: hidden;
     img {
@@ -26,16 +25,5 @@
   }
   &:hover {
     opacity: .7;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .authBadge {
-    &__name {
-      color: rgba(255,255,255,.8)
-    }
-    &__ava {
-      background: rgba(255,255,255,.1);
-    }
   }
 }
