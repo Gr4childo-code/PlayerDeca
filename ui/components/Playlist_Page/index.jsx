@@ -27,9 +27,8 @@ const Playlist_Page = () => {
           </div>
         </div>
         <div className={styles.rigth_side}>
-          <div>Likes</div>
-          <div>Playlst name</div>
-          <div>Author</div>
+          <div className={styles.playlist_name}>Playlst name</div>
+          <div className={styles.playlist_author}>Author</div>
           <div className={styles.list_item}>
             <div className={styles.number}>1</div>
             <div className={styles.list_item_music}>
