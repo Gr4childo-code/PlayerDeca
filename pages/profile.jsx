@@ -3,6 +3,7 @@ import { authOptions } from 'pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth/next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import SidebarMenu from '@/ui/components/Sidebar/SidebarMenu';
 
 export const getServerSideProps = async (context) => {
   const sessionServer = await getServerSession(
@@ -40,25 +41,11 @@ const profile = ({ sessionServer }) => {
     router.push(url);
   };
 
-  const menuItems = [
-    { id: 1, label: 'Аккаунт', link: '/account' },
-    { id: 2, label: 'Мои подборки / Загрузить', link: '/my-playlists' },
-    { id: 3, label: 'Настройки', link: '/settings' },
-  ];
-
   return (
     <div className='container'>
       <div className='profile'>
         <div className='profile__menu'>
-          {menuItems.map(({ id, label, link }) => {
-            return (
-              <ul key={id}>
-                <a href={link}>
-                  <li>{label}</li>
-                </a>
-              </ul>
-            );
-          })}
+          <SidebarMenu />
           <button onClick={handle}>Выход</button>
         </div>
         <div className='profile__content'>
