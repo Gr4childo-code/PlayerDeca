@@ -46,16 +46,9 @@ export default function Cards({ musicData, title }) {
           </ul>
         </>
         <div className={styles.links}>
-          <Link href='/' onMouseEnter={() => currLink(0)}></Link>
-          <Link href='/' onMouseEnter={() => currLink(1)}></Link>
-          <Link href='/' onMouseEnter={() => currLink(2)}></Link>
-          <Link href='/' onMouseEnter={() => currLink(3)}></Link>
-          <Link href='/' onMouseEnter={() => currLink(4)}></Link>
-          {/* <a href=''></a>
-          <a href=''></a>
-          <a href=''></a>
-          <a href=''></a>
-          <a href=''></a> */}
+          {cardsData && [...new Array(cardsData.length)].map((e, index) => (
+            <div onMouseEnter={() => currLink(index)} className={`${styles.links__points} ${index === currentSlide ? styles.links__active : ''}`} key={index}></div>
+          ))}
         </div>
       </div>
     </div>
