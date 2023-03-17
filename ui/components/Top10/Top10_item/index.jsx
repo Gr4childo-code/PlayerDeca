@@ -7,7 +7,6 @@ const Top10_item = ({ id, attributes }) => {
   return (
     <div className={styles.list_item}>
       <div className={styles.number}>{id}</div>
-
       <div className={styles.list_item_music}>
         <div className={styles.author}>{attributes.author}</div>
         <div>{attributes.name}</div>
