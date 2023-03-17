@@ -43,13 +43,18 @@ export default function Home({ audios, audioTop }) {
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
-        <EventSection />
-        <Slider />
+        <div className="content">
+          <div className="content__left">
+            <Slider />
+            <UsersPlaylist />
+            <EventSection />
+          </div>
+          <div className="content__right">
+            <Top10 audioTop={audioTop} />
+          </div>
+        </div>
 
-        <UsersPlaylist />
-        <Top10 audioTop={audioTop} />
-
-        <ul className='list'>
+        <ul className='list' hidden>
           {audios &&
             audios?.data.map(({ id, attributes }) => (
               <li key={id} onClick={() => addTrack(id, attributes)}>

@@ -38,18 +38,28 @@ const profile = ({ sessionServer }) => {
 
   return (
     <div className='container'>
-      <button onClick={handle}>Log Out</button>
-      <ul>
-        <li>
-          Имя: {user.name ? user.name : 'Не указано'}
-        </li>
-        <li>
-          Username: {user.username}
-        </li>
-        <li>
-          Email: {user.email}
-        </li>
-      </ul>
+      <div className="profile">
+        <div className="profile__menu">
+          <p>Аккаунт</p>
+          <p>Мои подборки / Загрузить</p>
+          <p>Настройки</p>
+          <p>Выход</p>
+        </div>
+        <div className="profile__content">
+          <button onClick={handle}>Log Out</button>
+          <ul>
+            <li>
+              Имя: {user.name ? user.name : 'Не указано'}
+            </li>
+            <li>
+              Username: {user.username}
+            </li>
+            <li>
+              Email: {user.email}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
