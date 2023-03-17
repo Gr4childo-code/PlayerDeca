@@ -82,6 +82,36 @@ a {
   }
 }
 
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__left {
+    width: calc(70% - 20px)
+  }
+
+  &__right {
+    width: 30%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+
+  &__menu {
+    width: 220px;
+  }
+
+  &__content {
+    width: calc(100% - 240px)
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
