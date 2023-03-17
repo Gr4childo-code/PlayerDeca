@@ -50,21 +50,24 @@
   justify-content: space-between;
   font-size: 35px;
   user-select: none;
-  &_left {
-    cursor: pointer;
+  &_left,
+  &_right {
+    margin: auto;
     position: absolute;
-    left: 0px;
-    top: 145px;
-    margin: 0 10px;
+    top: 0;
+    bottom: 76px;
+    cursor: pointer;
     color: var(--slider-button-color);
+    height: 44px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+  &_left {
+    left: 10px;
   }
   &_right {
-    cursor: pointer;
-    position: absolute;
-    right: 0px;
-    top: 145px;
-    margin: 0 10px;
-    color: var(--slider-button-color);
+    right: 10px;
   }
 }
 
