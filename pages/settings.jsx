@@ -1,6 +1,6 @@
 import React from 'react';
-import SidebarLayout from '@/ui/components/Sidebar/SidebarContent';
+import SidebarContent from '@/ui/components/Sidebar/SidebarContent';
 
 export default function Settings() {
-  return <SidebarLayout>Настройки</SidebarLayout>;
+  return <SidebarContent>Настройки</SidebarContent>;
 }

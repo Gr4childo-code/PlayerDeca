@@ -41,6 +41,12 @@ const profile = ({ sessionServer }) => {
     router.push(url);
   };
 
+  /*   const userData = {
+    name: user.name ? user.name : 'Не указано',
+    username: user.username,
+    email: user.email,
+  };
+ */
   return (
     <div className='container'>
       <div className='profile'>
