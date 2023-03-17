@@ -15,7 +15,11 @@
   --slider-button-color: #fff;
   --slider-lists-color: #fff;
   --search-default: rgba(255, 255, 255, 0.1);
-  --gradient: linear-gradient(-90deg, var(--player-color-one), var(--player-color-two));
+  --gradient: linear-gradient(
+    -90deg,
+    var(--player-color-one),
+    var(--player-color-two)
+  );
 }
 
 * {
@@ -35,6 +39,10 @@ body {
   background-color: #121212;
   padding-bottom: 100px;
   color: #fff;
+}
+
+li {
+  list-style-type: none;
 }
 
 a {
@@ -59,7 +67,7 @@ a {
     padding: 10px 0;
     cursor: pointer;
     user-select: none;
-    transition: background .1s;
+    transition: background 0.1s;
     &:hover {
       background: rgba(255, 255, 255, 0.1);
     }
@@ -72,7 +80,7 @@ a {
   align-items: flex-start;
 
   &__left {
-    width: calc(70% - 20px)
+    width: calc(70% - 20px);
   }
 
   &__right {
@@ -89,9 +97,13 @@ a {
 
   &__menu {
     width: 220px;
+    height: 100vh;
+    background: var(--player-color-one);
   }
 
   &__content {
-    width: calc(100% - 240px)
+    width: calc(100% - 240px);
+    height: 100vh;
+    background: var(--player-color-two);
   }
 }
