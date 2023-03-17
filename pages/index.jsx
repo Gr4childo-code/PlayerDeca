@@ -23,11 +23,7 @@ export const getServerSideProps = async () => {
 
 export default function Home({ audios, audioTop }) {
   const attr = audios?.data[audios?.data.length - 1];
-  const [track, setTrack] = useState({ id: attr?.id, ...attr?.attributes });
-
-  const addTrack = (id, attributes) => {
-    setTrack({ id, ...attributes });
-  };
+  const [track] = useState({ id: attr?.id, ...attr?.attributes });
 
   return (
     <>
@@ -51,20 +47,10 @@ export default function Home({ audios, audioTop }) {
           </div>
           <div className="content__right">
             <Top10 audioTop={audioTop} />
-
-            <h2>Example</h2>
-            <ul className='list'>
-              {audios &&
-                audios?.data.map(({ id, attributes }) => (
-                  <li key={id} onClick={() => addTrack(id, attributes)}>
-                    <strong>{attributes.author}</strong> - {attributes.name}
-                  </li>
-                ))}
-            </ul>
           </div>
         </div>
 
-        {attr && <Player track={track} nx={track.id} />}
+        {attr && <Player track={track} audios={audios} />}
       </div>
     </>
   );

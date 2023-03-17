@@ -5,7 +5,7 @@
   padding: 0 20px;
   width: 100%;
   min-height: 340px;
-  border-top: 2px solid var(--search-default);
+  border-top: 2px solid var(--gray-60);
   li {
     list-style-type: none;
   }
@@ -55,11 +55,11 @@
       border-radius: 2px;
       margin-bottom: 10px;
       background: var(--gradient);
-      color: #fff;
       outline: none;
       box-shadow: none;
       border: none;
       border-radius: 5px;
+      color: var(--whtie)
     }
   }
   &_title {

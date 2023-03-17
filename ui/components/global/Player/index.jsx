@@ -3,7 +3,7 @@ import { AudioInit, AudioTime } from './audio'
 
 import styles from '@/ui/components/global/Player/Player.module.scss'
 
-export default function Player({ track, nx }) {
+export default function Player({ track, audios }) {
   const [audio, setAudio] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
   const [isPlayMove, setIsPlayMove] = useState(false);
@@ -11,9 +11,10 @@ export default function Player({ track, nx }) {
   const [fullTime, setfullTime] = useState('00:00');
   const [currentTime, setCurrentTime] = useState('00:00');
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
-  const [volume, setVolume] = useState(70);
+  const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false)
-  const [isNx, setIsNx] = useState(nx)
+  const [addTracks, setAddTracks] = useState(track)
+  const [isPlayList, setIsPlayList] = useState(false)
 
   const audioTimeUpdate = () => {
     audio.addEventListener('timeupdate', () => {
@@ -33,8 +34,8 @@ export default function Player({ track, nx }) {
     setIsPlay(!isPlay);
 
     if (isPlay) {
-      audio.src = `${process.env.NEXT_PUBLIC_API_URL}${track.path}`
-      audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${track.posterPath}`
+      audio.src = `${process.env.NEXT_PUBLIC_API_URL}${addTracks.path}`
+      audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${addTracks.posterPath}`
       audio.volume = volume / 100
       audio.load()
 
@@ -45,18 +46,6 @@ export default function Player({ track, nx }) {
 
     audio.pause();
   };
-
-  if ( nx != isNx ) {
-    setIsPlay(false);
-
-    audio.src = `${process.env.NEXT_PUBLIC_API_URL}${track.path}`
-    audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${track.posterPath}`
-    audio.load()
-    audio.currentTime = 0;
-    audio.play()
-
-    setIsNx(nx)
-  }
 
   useEffect(() => {
     setAudio(AudioInit(track));
@@ -111,6 +100,16 @@ export default function Player({ track, nx }) {
     return () => document.removeEventListener('keydown', keyCode);
   }, [audio, isPlay]);
 
+  const addTrack = (id, attributes) => {
+    setIsPlay(false);
+    setAddTracks({id, ...attributes})
+
+    audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`
+    audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.posterPath}`
+    audio.currentTime = 0;
+    audio.play()
+  }
+
   return (
     <>
       <div className={styles.player} id="player" onMouseMove={rewindMove}>
@@ -129,10 +128,23 @@ export default function Player({ track, nx }) {
           <div className={styles.playerBox}>
             <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
             <div className={styles.playerBox__body}>
-              <strong>{track.author}</strong> - {track.name}
-              <span>
-                {currentTime} / {fullTime}
-              </span>
+              <div className={styles.playerBox__info} onClick={() => setIsPlayList(!isPlayList)}>
+                <div>
+                  <strong>{addTracks.author}</strong> - {addTracks.name}
+                </div>
+                <span>
+                  {currentTime} / {fullTime}
+                </span>
+              </div>
+              <div className={`${styles.playlist} ${isPlayList ? styles.playlist__active : ''}`}>
+                <div className={styles.playlist__overflow}>
+                  {audios && audios?.data.map(({ id, attributes }) => (
+                    <div className={`${styles.playlist__item} ${addTracks.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => addTrack(id, attributes)}>
+                      <strong>{attributes.author}</strong> - {attributes.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
             <div
               className={styles.playerVolume}

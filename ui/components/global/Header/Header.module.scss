@@ -1,12 +1,12 @@
 .headerInfo {
-  background: var(--gradient);
-  color: #fff;
+  background: var(--ui-color-one);
   padding: 7px 0;
   font-size: 14px;
 }
 
 .header {
   padding: 14px 0;
+  border-bottom: 1px solid var(--gray-60);
   &__box {
     display: flex;
     align-items: center;
