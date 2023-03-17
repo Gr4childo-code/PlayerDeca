@@ -51,17 +51,18 @@ export default function Home({ audios, audioTop }) {
           </div>
           <div className="content__right">
             <Top10 audioTop={audioTop} />
+
+            <h2>Example</h2>
+            <ul className='list'>
+              {audios &&
+                audios?.data.map(({ id, attributes }) => (
+                  <li key={id} onClick={() => addTrack(id, attributes)}>
+                    <strong>{attributes.author}</strong> - {attributes.name}
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
-
-        <ul className='list' hidden>
-          {audios &&
-            audios?.data.map(({ id, attributes }) => (
-              <li key={id} onClick={() => addTrack(id, attributes)}>
-                <strong>{attributes.author}</strong> - {attributes.name}
-              </li>
-            ))}
-        </ul>
 
         {attr && <Player track={track} nx={track.id} />}
       </div>
