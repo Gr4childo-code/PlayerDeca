@@ -46,7 +46,7 @@
     background: rgba(255, 255, 255, 0.2);
   }
   &__progress {
-    background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
+    background: var(--gradient);
   }
   &__progressMove {
     background: rgba(0, 0, 0, 0.08);
@@ -140,44 +140,12 @@
   &__progress {
     width: 50%;
     height: 4px;
-    background: linear-gradient(to left, var(--player-color-one), var(--player-color-two));
+    background: var(--gradient);
     pointer-events: none;
     border-radius: 10px;
     position: relative;
   }
 }
-
-// @media (prefers-color-scheme: dark) {
-//   .player {
-//     background: rgba(255, 255, 255, 0.1);
-//   }
-
-//   .playerBar {
-//     background: rgba(255, 255, 255, 0.2);
-//     &__progressMove {
-//       background: rgba(255, 255, 255, 0.2);
-//     }
-//   }
-
-//   .playerBox {
-//     &__play {
-//       background: transparentize(#fff4ee, 0.9);
-//       &:hover {
-//         box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
-//       }
-//     }
-//     &__body {
-//       color: rgba(255, 255, 255, 0.5);
-//       strong {
-//         color: rgba(255, 255, 255, 0.8);
-//       }
-//     }
-//   }
-
-//   .playerVolume {
-//     background: rgba(255, 255, 255, 0.2);
-//   }
-// }
 
 @media screen and (max-width: 768px) {
   .playerBox {
