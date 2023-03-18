@@ -90,7 +90,7 @@ a {
     top: 0;
   }
 }
-
+/* 
 .profile {
   display: flex;
   justify-content: space-between;
@@ -98,15 +98,13 @@ a {
   &__menu {
     width: 220px;
     height: 100vh;
-    background: var(--player-color-one);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: 1px dashed var(--player-color-one);
   }
 
   &__content {
     width: calc(100% - 240px);
     height: 100vh;
-    background: var(--player-color-two);
+    border: 1px dashed var(--player-color-two);
   }
 }
+ */
