@@ -49,9 +49,9 @@ export default function Home({ audios, audioTop }) {
             <Top10 audioTop={audioTop} />
           </div>
         </div>
-
-        {attr && <Player track={track} audios={audios} />}
       </div>
+
+      {attr && <Player track={track} audios={audios} />}
     </>
   );
 }
