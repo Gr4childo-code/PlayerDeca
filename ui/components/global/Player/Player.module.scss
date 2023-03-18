@@ -82,15 +82,27 @@
   display: flex;
   align-items: center;
   position: relative;
+  &__cover {
+    background: var(--black);
+    width: 60px;
+    height: 60px;
+    position: relative;
+  }
+
   &__play {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     box-sizing: border-box;
     cursor: pointer;
-    position: relative;
     background: var(--white-10);
     transition: transform .1s, box-shadow .1s;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     &:before {
       content: "";
       width: 0;
