@@ -1,6 +1,15 @@
 import React from 'react';
-import SidebarContent from '@/ui/components/Sidebar/SidebarContent';
+import Layout from '@/ui/components/Sidebar/Layout';
 
 export default function Settings() {
-  return <SidebarContent>Настройки</SidebarContent>;
+  return (
+    <Layout>
+      Настройки
+      <ul>
+        <li>Изменить имя</li>
+        <li>Изменить Username </li>
+        <li>Изменить Email </li>
+      </ul>
+    </Layout>
+  );
 }

@@ -1,6 +1,15 @@
 import React from 'react';
-import SidebarContent from '@/ui/components/Sidebar/SidebarContent';
+import Layout from '@/ui/components/Sidebar/Layout';
 
 export default function Account() {
-  return <SidebarContent>Будут данные</SidebarContent>;
+  return (
+    <Layout>
+      Информация об аккаунте
+      <ul>
+        <li>Имя: </li>
+        <li>Username: </li>
+        <li>Email: </li>
+      </ul>
+    </Layout>
+  );
 }

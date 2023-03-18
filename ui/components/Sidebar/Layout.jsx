@@ -1,7 +1,7 @@
 import React from 'react';
 import SidebarMenu from './SidebarMenu';
 
-export default function SidebarContent({ children }) {
+export default function Layout({ children }) {
   return (
     <div className='container'>
       <div className='profile'>

@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import SidebarMenu from '@/ui/components/Sidebar/SidebarMenu';
+import Layout from '@/ui/components/Sidebar/Layout';
 
 export const getServerSideProps = async (context) => {
   const sessionServer = await getServerSession(
@@ -45,15 +46,12 @@ const profile = ({ sessionServer }) => {
     name: user.name ? user.name : 'Не указано',
     username: user.username,
     email: user.email,
-  };
- */
+  }; */
+
   return (
     <div className='container'>
-      <div className='profile'>
-        <div className='profile__menu'>
-          <SidebarMenu />
-          <button onClick={handle}>Выход</button>
-        </div>
+      <Layout />
+      {/* <div className='profile'>
         <div className='profile__content'>
           <ul>
             <li>Имя: {user.name ? user.name : 'Не указано'}</li>
@@ -61,7 +59,8 @@ const profile = ({ sessionServer }) => {
             <li>Email: {user.email}</li>
           </ul>
         </div>
-      </div>
+      </div> */}
+      <button onClick={handle}>Выход</button>
     </div>
   );
 };

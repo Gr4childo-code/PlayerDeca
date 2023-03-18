@@ -99,6 +99,9 @@ a {
     width: 220px;
     height: 100vh;
     background: var(--player-color-one);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__content {
