@@ -21,7 +21,7 @@ const Header = () => {
             <div className={styles.header__left}>
               <Logo />
             </div>
-            <div>
+            <div className={styles.header__center}>
               <Navigation />
             </div>
             <div className={styles.header__right}>

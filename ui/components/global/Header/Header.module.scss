@@ -7,13 +7,19 @@
 .header {
   padding: 14px 0;
   border-bottom: 1px solid var(--gray-60);
+  position: relative;
   &__box {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  &__left,
+  &__left {
+    width: 85px;
+  }
   &__right {
     width: 170px;
+  }
+  &__center {
+    width: calc(100% - 255px)
   }
 }

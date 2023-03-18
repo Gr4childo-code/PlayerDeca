@@ -235,6 +235,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 10px;
+    transition: background .1s;
     &:first-child {
       border: none;
     }
