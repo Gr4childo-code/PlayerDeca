@@ -79,7 +79,7 @@ a {
   padding: 0 20px;
 }
 
-.content {
+.layout {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -94,6 +94,14 @@ a {
     position: sticky;
     top: 0;
   }
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: bold;
+  padding: 40px 0 10px;
 }
 
 .profile {
