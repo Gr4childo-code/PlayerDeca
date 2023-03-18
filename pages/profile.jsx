@@ -46,24 +46,26 @@ const profile = ({ sessionServer }) => {
   return (
     <>
       <Layout>
-        <ul className={styles.userInfo__list}>
-          <li>Имя: {user.name ? user.name : 'Не указано'}</li>
+        <div>
+          <ul className={styles.userStat__list}>
+            <li className={styles.userStat__item}>
+              <p className={styles.userStat__title}>Liked</p>
+              <span>33</span>
+            </li>
+            <li className={styles.userStat__item}>
+              <p className={styles.userStat__title}>Listened</p>
+              <span>476 ч</span>
+            </li>
+            <li className={styles.userStat__item}>
+              <p className={styles.userStat__title}>Created playlists</p>
+              <span>8</span>
+            </li>
+          </ul>
+        </div>
+        <ul className={styles.userInfo}>
+          <li>Name: {user.name ? user.name : 'Не указано'}</li>
           <li>Username: {user.username}</li>
-          <li>Email: {user.email}</li>
-        </ul>
-        <ul className={styles.userInfo__list}>
-          <li className={styles.userInfo__item}>
-            <h3>Песен нравится </h3>
-            <span>33</span>
-          </li>
-          <li className={styles.userInfo__item}>
-            <h3>Прослушал в минутах</h3>
-            <span>476</span>
-          </li>
-          <li className={styles.userInfo__item}>
-            <h3>Создал плейлистов</h3>
-            <span>8</span>
-          </li>
+          <li>Country: Россия</li>
         </ul>
       </Layout>
       <button onClick={handle}>Log out</button>

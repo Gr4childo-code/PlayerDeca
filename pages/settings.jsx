@@ -4,7 +4,7 @@ import Layout from '@/ui/components/Sidebar/Layout';
 export default function Settings() {
   return (
     <Layout>
-      Настройки
+      <h2>Настройки</h2>
       <ul>
         <li>Изменить имя</li>
         <li>Изменить Username </li>
