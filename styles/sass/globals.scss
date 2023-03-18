@@ -61,8 +61,11 @@ body {
 
 body {
   background: var(--background);
-  padding-bottom: 100px;
   color: var(--white);
+}
+
+#__next {
+  padding-bottom: 100px;
 }
 
 a {
