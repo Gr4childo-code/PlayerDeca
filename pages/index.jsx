@@ -11,7 +11,7 @@ import UsersPlaylist from '@/ui/components/UsersPlaylist';
 import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const response = await fetchAPI('/audios');
+  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
   const audios = await response.json();
 
   const response2 = await fetchAPI(`/audios?${first10()}`);
