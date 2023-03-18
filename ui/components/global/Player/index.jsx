@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AudioInit, AudioTime } from './audio'
+import Image from 'next/image'
 
 import styles from '@/ui/components/global/Player/Player.module.scss'
 
@@ -103,11 +104,14 @@ export default function Player({ track, audios }) {
   const addTrack = (id, attributes) => {
     setIsPlay(false);
     setAddTracks({id, ...attributes})
-
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`
     audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.posterPath}`
     audio.currentTime = 0;
     audio.play()
+  }
+
+  const customLoader = () => {
+    return addTracks?.posterPath ? `${process.env.NEXT_PUBLIC_API_URL}${addTracks?.posterPath}` : ''
   }
 
   return (
@@ -126,7 +130,17 @@ export default function Player({ track, audios }) {
 
         <div className='container'>
           <div className={styles.playerBox}>
-            <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
+            <div className={styles.playerBox__cover}>
+              {addTracks?.posterPath && <Image
+                src="profilePic.webp"
+                width={60}
+                height={60}
+                alt="User profile picture"
+                quality={80}
+                loader={customLoader}
+              />}
+              <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
+            </div>
             <div className={styles.playerBox__body}>
               <div className={styles.playerBox__info} onClick={() => setIsPlayList(!isPlayList)}>
                 <div>
