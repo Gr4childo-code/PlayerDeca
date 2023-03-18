@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ audios, audioTop }) {
-  const attr = audios?.data[audios?.data.length - 1];
+  const attr = audios?.data[0];
   const [track] = useState({ id: attr?.id, ...attr?.attributes });
 
   return (
