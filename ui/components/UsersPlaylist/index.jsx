@@ -41,11 +41,10 @@ const playList = [
 ];
 const UsersPlaylist = () => {
   return (
-    <div>
-      <h2 className={styles.title}>
-        <span>d</span>
-        less USERS PLAYLIST
-      </h2>
+    <>
+      <div className='title'>
+        USERS PLAYLIST
+      </div>
       <div className={styles.container_wrapper}>
         <div className={styles.container_playlist}>
           {playList.map((audio, index) => (
@@ -53,7 +52,7 @@ const UsersPlaylist = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

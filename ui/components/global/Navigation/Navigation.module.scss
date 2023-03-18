@@ -1,9 +1,40 @@
 .nav {
   &__btn {
-    width: 22px;
-    height: 22px;
-    background: var(--gray);
+    width: 20px;
+    height: 20px;
     cursor: pointer;
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    &:before {
+      background: linear-gradient(to bottom, var(--gray) 4px, transparent 4px);
+      background-size: auto 8px;
+    }
+    &:hover:before {
+      background: linear-gradient(to bottom, var(--white-50) 4px, transparent 4px);
+      background-size: auto 8px;
+    }
+    &_active {
+      transform: rotate(45deg);
+      &:before,
+      &:after {
+        background: var(--gray) !important;
+      }
+      &:before {
+        width: 4px;
+      }
+      &:after {
+        height: 4px;
+      }
+    }
   }
 
   &__box {

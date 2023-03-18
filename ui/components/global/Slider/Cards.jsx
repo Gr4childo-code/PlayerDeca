@@ -25,15 +25,11 @@ export default function Cards({ musicData, title }) {
 
   return (
     <div>
-      <h2 className={styles.title}>{title}</h2>
+      <div className='title'>{title}</div>
       <div className={styles.wrapper}>
         <div className={styles.button}>
-          <span className={styles.button_left} onClick={leftArrowClick}>
-            &lt;
-          </span>
-          <span className={styles.button_right} onClick={rightArrowClick}>
-            &gt;
-          </span>
+          <span className={styles.button_left} onClick={leftArrowClick}></span>
+          <span className={styles.button_right} onClick={rightArrowClick}></span>
         </div>
         <div className={styles.header}>
           <h3>{card.id} Music card</h3>

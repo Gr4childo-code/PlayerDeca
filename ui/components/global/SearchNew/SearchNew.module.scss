@@ -1,0 +1,25 @@
+.search {
+  width: 100%;
+  max-width: 300px;
+  margin-left: 15px;
+  &__fields {
+    appearance: none;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    outline: none;
+    background: var(--gray-60);
+    color: var(--white-50);
+    width: 100%;
+    display: block;
+    font-size: 12px;
+    transition: background .15s;
+    &:hover {
+      background: var(--gray-80);
+    }
+    &:focus {
+      background: var(--gray);
+    }
+  }
+}

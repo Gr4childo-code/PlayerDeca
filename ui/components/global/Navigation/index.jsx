@@ -44,7 +44,7 @@ export default function Navigation() {
   return (
     <>
       <div className={styles.nav}>
-        <div className={styles.nav__btn} onClick={() => setIsNav(!isNav)}></div>
+        <div className={`${styles.nav__btn} ${isNav ? styles.nav__btn_active : ''}`} onClick={() => setIsNav(!isNav)}></div>
         <div className={`${styles.nav__box} ${isNav ? styles.nav__box_active : ''}`}>
           {list && list.map(({ id, name, href }) => (
             <Link href={href} key={id} className={styles.nav__link}>

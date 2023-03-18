@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ audios, audioTop }) {
-  const attr = audios?.data[audios?.data.length - 1];
+  const attr = audios?.data[0];
   const [track] = useState({ id: attr?.id, ...attr?.attributes });
 
   return (
@@ -39,13 +39,13 @@ export default function Home({ audios, audioTop }) {
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
-        <div className="content">
-          <div className="content__left">
+        <div className="layout">
+          <div className="layout__left">
             <Slider />
             <UsersPlaylist />
             <EventSection />
           </div>
-          <div className="content__right">
+          <div className="layout__right">
             <Top10 audioTop={audioTop} />
           </div>
         </div>
