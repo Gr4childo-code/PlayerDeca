@@ -9,7 +9,7 @@ const menuItems = [
   { id: 3, label: 'Настройки', link: '/settings' },
 ];
 
-export default function SidebarMenu() {
+export default function Sidebar() {
   return (
     <div>
       <ul className={styles.list}>

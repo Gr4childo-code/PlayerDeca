@@ -3,7 +3,6 @@ import { authOptions } from 'pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth/next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import SidebarMenu from '@/ui/components/Sidebar/SidebarMenu';
 import Layout from '@/ui/components/Sidebar/Layout';
 
 export const getServerSideProps = async (context) => {
@@ -50,17 +49,14 @@ const profile = ({ sessionServer }) => {
 
   return (
     <div className='container'>
-      <Layout />
-      {/* <div className='profile'>
-        <div className='profile__content'>
-          <ul>
-            <li>Имя: {user.name ? user.name : 'Не указано'}</li>
-            <li>Username: {user.username}</li>
-            <li>Email: {user.email}</li>
-          </ul>
-        </div>
-      </div> */}
-      <button onClick={handle}>Выход</button>
+      <Layout>
+        Профиль
+        <ul>
+          <li>Имя: {user.name ? user.name : 'Не указано'}</li>
+          <li>Username: {user.username}</li>
+          <li>Email: {user.email}</li>
+        </ul>
+      </Layout>
     </div>
   );
 };

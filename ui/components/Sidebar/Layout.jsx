@@ -1,12 +1,12 @@
 import React from 'react';
-import SidebarMenu from './SidebarMenu';
+import Sidebar from './Sidebar';
 
 export default function Layout({ children }) {
   return (
     <div className='container'>
       <div className='profile'>
         <div className='profile__menu'>
-          <SidebarMenu />
+          <Sidebar />
         </div>
         <div className='profile__content'>{children}</div>
       </div>
