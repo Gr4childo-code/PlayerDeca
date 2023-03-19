@@ -16,7 +16,7 @@ export default function Layout({ children }) {
         <div className={styles.profile__menu}>
           <button
             className={styles.profile__button}
-            onMouseEnter={sideBarActive}></button>
+            onClick={sideBarActive}></button>
           {isActive && <Sidebar />}
         </div>
         <div className={styles.profile__content}>{children}</div>

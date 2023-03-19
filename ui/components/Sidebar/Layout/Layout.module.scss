@@ -1,23 +1,26 @@
 .profile {
   display: flex;
   justify-content: space-between;
+
   &__menu {
     width: 220px;
     height: 100vh;
-    border: 1px dashed var(--player-color-one);
+    /* border: 1px dashed var(--player-color-one); */
     display: flex;
     flex-direction: column;
     align-items: start;
     button {
-      background: transparent;
-      border: 2px solid var(--player-color-one);
+      width: 30px;
+      cursor: pointer;
+      background: var(--gradient);
+      border-radius: 5px;
     }
   }
 
   &__content {
     width: calc(100% - 240px);
     height: 100vh;
-    border: 1px dashed var(--player-color-two);
+    /* border: 1px dashed var(--player-color-two); */
     display: flex;
     flex-direction: column;
   }
@@ -26,9 +29,8 @@
     display: flex;
     justify-content: start;
     align-items: start;
-    width: 100% /* calc(100% - 190px) */;
+    width: 100%;
     height: 30px;
-    border-radius: 2px;
     border: none;
     outline: none;
     box-shadow: none;

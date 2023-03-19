@@ -6,8 +6,8 @@ import Contacts from '@/ui/components/Sidebar/Contacts';
 export default function Account() {
   return (
     <Layout>
-      <Statistics />
-      <Contacts />
+      <Statistics liked={24} listened={878} playlists={8} />
+      <Contacts email={'admin@gmail.com'} phoneNum={'+7 (800) 080-08-08'} />
     </Layout>
   );
 }

@@ -50,10 +50,14 @@ const profile = ({ sessionServer }) => {
         <Image width={120} height={120} />
         <ul className={styles.userInfo}>
           <li className={styles.userInfo__item}>
-            Name: {user.name ? user.name : 'Не указано'}
+            <span>Name:</span> {user.name ? user.name : 'Не указано'}
           </li>
-          <li className={styles.userInfo__item}>Username: {user.username}</li>
-          <li className={styles.userInfo__item}>Email: {user.email}</li>
+          <li className={styles.userInfo__item}>
+            <span>Username:</span> {user.username}
+          </li>
+          <li className={styles.userInfo__item}>
+            <span>Email:</span> {user.email}
+          </li>
         </ul>
       </Layout>
       <button onClick={handle}>Log out</button>

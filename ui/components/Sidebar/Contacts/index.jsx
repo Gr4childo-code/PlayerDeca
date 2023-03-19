@@ -2,18 +2,18 @@ import React from 'react';
 
 import styles from '../Contacts/Contacts.module.scss';
 
-export default function Contacts() {
+export default function Contacts({ email, phoneNum }) {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h3 className={styles.title}>Contacts</h3>
       <ul>
         <li className={styles.account__item}>
           <p className={styles.account__subTitle}>Email</p>
-          <p className={styles.account__descr}>admin@gmail.com</p>
+          <p className={styles.account__descr}>{email}</p>
         </li>
         <li className={styles.account__item}>
           <p className={styles.account__subTitle}>Основной телефон</p>
-          <p className={styles.account__descr}>+7 (800) 080-08-08</p>
+          <p className={styles.account__descr}>{phoneNum}</p>
         </li>
         <li className={styles.account__item}>
           <div className={styles.account__links}>
