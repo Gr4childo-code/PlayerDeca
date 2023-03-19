@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { AudioInit, AudioTime } from './audio'
 import Image from 'next/image'
+import Head from 'next/head';
 
 import styles from '@/ui/components/global/Player/Player.module.scss'
 
-export default function Player({ track, audios }) {
+export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
   const [isPlayMove, setIsPlayMove] = useState(false);
@@ -14,19 +15,30 @@ export default function Player({ track, audios }) {
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false)
-  const [addTracks, setAddTracks] = useState(track)
+  const [addTracks, setAddTracks] = useState({id: audios?.data[0].id, ...audios?.data[0].attributes})
   const [isPlayList, setIsPlayList] = useState(false)
+  
+  useEffect(() => {
+    setAudio(AudioInit(addTracks));
+  }, []);
 
   const audioTimeUpdate = () => {
-    audio.addEventListener('timeupdate', () => {
-      let pr = (audio.currentTime / audio.duration) * 100;
+    let pr
+
+    audio.addEventListener('canplaythrough', () => {
       setfullTime(AudioTime(audio.duration));
+    })
+
+    audio.addEventListener('timeupdate', () => {
+      pr = (audio.currentTime / audio.duration) * 100;
       setCurrentTime(AudioTime(audio.currentTime));
       setPercentage(pr);
     });
 
     audio.addEventListener('ended', () => {
       audio.currentTime = 0;
+      let random = Math.floor(Math.random() * audios?.data.length - 1)
+      addTrack(audios?.data[random]?.id, audios?.data[random]?.attributes)
       setIsPlay(true);
     })
   };
@@ -35,11 +47,6 @@ export default function Player({ track, audios }) {
     setIsPlay(!isPlay);
 
     if (isPlay) {
-      audio.src = `${process.env.NEXT_PUBLIC_API_URL}${addTracks.path}`
-      audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${addTracks.posterPath}`
-      audio.volume = volume / 100
-      audio.load()
-
       audioTimeUpdate();
       audio.play();
       return;
@@ -47,10 +54,6 @@ export default function Player({ track, audios }) {
 
     audio.pause();
   };
-
-  useEffect(() => {
-    setAudio(AudioInit(track));
-  }, []);
 
   const rewind = (e, active) => {
     setIsPlayMove(active)
@@ -102,12 +105,16 @@ export default function Player({ track, audios }) {
   }, [audio, isPlay]);
 
   const addTrack = (id, attributes) => {
-    setIsPlay(false);
     setAddTracks({id, ...attributes})
+    audioTimeUpdate();
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`
     audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.posterPath}`
     audio.currentTime = 0;
-    audio.play()
+    
+    setTimeout(() => {
+      setIsPlay(false);
+      audio.play()
+    }, 0)
   }
 
   const customLoader = () => {
@@ -116,6 +123,10 @@ export default function Player({ track, audios }) {
 
   return (
     <>
+      <Head>
+        <title>author - name</title>
+      </Head>
+
       <div className={styles.player} id="player" onMouseMove={rewindMove}>
         <div
           className={styles.playerBar}
