@@ -1,6 +1,7 @@
 function AudioInit (e) {
   if (e) {
     const audio = new Audio()
+          audio.src = `${process.env.NEXT_PUBLIC_API_URL}${e.path}`
     return audio
   }
 

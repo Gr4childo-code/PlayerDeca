@@ -3,7 +3,7 @@ import Script from 'next/script';
 import { fetchAPI } from '@/utils/api/fetch';
 import Player from '@/ui/components/global/Player';
 import Slider from '@/ui/components/global/Slider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EventSection from '@/ui/components/global/EventSection';
 
 import Top10 from '@/ui/components/Top10';
@@ -22,15 +22,9 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ audios, audioTop }) {
-  const attr = audios?.data[0];
-  const [track] = useState({ id: attr?.id, ...attr?.attributes });
-
   return (
     <>
       <Head>
-        <title>
-          {track.author} - {track.name}
-        </title>
         <meta name='description' content='Decathlon lessons project' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
@@ -51,7 +45,7 @@ export default function Home({ audios, audioTop }) {
         </div>
       </div>
 
-      {attr && <Player track={track} audios={audios} />}
+      {audios && <Player audios={audios} />}
     </>
   );
 }
