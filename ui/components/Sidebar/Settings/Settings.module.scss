@@ -5,94 +5,9 @@
 }
 
 .title {
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
   span {
     color: var(--player-color-one);
   }
-}
-
-.list {
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 20px;
-  &__item {
-    margin: 0 10px;
-    label {
-      font-size: 25px;
-      color: var(--player-color-two);
-    }
-  }
-}
-
-.input[type='text'],
-.input[type='password'],
-.input[type='email'] {
-  margin: 20px 0;
-  padding: 10px;
-  width: 100%;
-  min-height: 20px;
-  font-size: 20px;
-  color: var(--player-color-one);
-  border: none;
-  outline: none;
-  background: transparent;
-  border-bottom: 1px solid var(--player-color-one);
-  filter: contrast(50%);
-  box-sizing: border-box;
-  &:hover,
-  &:focus {
-    border: none;
-    outline: none;
-    transition: all 0.5s;
-    border-bottom: 1px solid var(--player-color-one);
-    filter: contrast(100%);
-  }
-  &:active {
-    border: none;
-    outline: none;
-    border-bottom: 1px solid var(--player-color-one);
-    filter: contrast(100%);
-  }
-}
-
-.input::placeholder {
-  color: rgb(215, 215, 215);
-}
-
-.userWrapper {
-  width: 250px;
-}
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-  margin-top: 20px;
-  &__item {
-    display: flex;
-    margin-top: 10px;
-    p {
-      color: var(--player-color-two);
-      padding: 0 10px;
-    }
-  }
-}
-
-.form {
-  width: 500px;
-  margin: 0 auto;
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100px;
-  height: 20px;
-  color: white;
-  background: var(--player-color-one);
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  cursor: pointer;
 }

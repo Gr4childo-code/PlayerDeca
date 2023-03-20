@@ -48,7 +48,7 @@ const profile = ({ sessionServer }) => {
     <>
       <Layout>
         <div className={styles.wrapper}>
-          <Image width={120} height={120} />
+          <Image width={80} height={80} />
           <ul className={styles.userInfo}>
             <li className={styles.userInfo__item}>
               <p className={styles.userInfo__title}>Name:</p>

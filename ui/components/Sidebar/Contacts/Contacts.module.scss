@@ -3,7 +3,7 @@
 }
 
 .title {
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
   span {
     color: var(--player-color-one);
@@ -16,7 +16,7 @@
   }
   &__subTitle {
     color: var(--player-color-two);
-    font-size: 18px;
+    font-size: 15px;
     margin: 10px 10px 0;
   }
   &__descr {
