@@ -97,6 +97,7 @@
 
 .playlist_wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 70px;
 }
@@ -118,8 +119,6 @@
   }
 
   &_footer {
-    // margin: 0;
-    // padding: 5px;
     transition: all 1s;
     .subtitle {
       .author {
