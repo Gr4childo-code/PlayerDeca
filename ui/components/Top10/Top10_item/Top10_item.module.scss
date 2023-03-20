@@ -14,7 +14,6 @@
     flex-direction: column;
     text-align: left;
     flex-grow: 1;
-    color: var(--text-color-white);
     .author {
       color: var(--ui-color-one);
     }
@@ -30,7 +29,6 @@
     width: 20px;
     height: 20px;
     font-size: 25px;
-    color: var(--text-color-white);
   }
   .options {
     display: flex;

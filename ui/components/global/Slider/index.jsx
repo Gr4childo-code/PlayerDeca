@@ -35,10 +35,47 @@ export default function Slider() {
       img: 'https://i.etsystatic.com/41209560/r/il/213a64/4662160468/il_fullxfull.4662160468_6zx5.jpg',
     },
   ];
+  const playList = [
+    [
+      {
+        id: 1,
+        image: 'https://via.placeholder.com/150x150',
+        nameplaylist: '1',
+        author: 'Danill',
+      },
+      {
+        id: 2,
+        image: 'https://via.placeholder.com/150x150',
+        nameplaylist: '2',
+        author: 'Danill',
+      },
+      {
+        id: 3,
+        image: 'https://via.placeholder.com/150x150',
+        nameplaylist: '3',
+        author: 'Danill',
+      },
+    ],
 
+    [
+      {
+        id: 4,
+        image: 'https://via.placeholder.com/150x150',
+        nameplaylist: 'Phonk',
+        author: 'Aleksey',
+      },
+      {
+        id: 5,
+        image: 'https://via.placeholder.com/150x150',
+        nameplaylist: 'Phonk',
+        author: 'Aleksey',
+      },
+    ],
+  ];
   return (
     <div className={styles.mainWrapper_cards}>
-      <Cards musicData={musicData} title={'Новинки DLESS'} />
+      <Cards musicData={musicData} title={'Новинки DLESS'} type={'news'} />
+      <Cards musicData={playList} title={'Playlist'} type={'playlist'} />
     </div>
   );
 }
