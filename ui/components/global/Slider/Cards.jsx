@@ -8,7 +8,6 @@ export default function Cards({ musicData, title, type }) {
   const [cardsData] = useState(musicData);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  console.log(cardsData);
   const card = cardsData[currentSlide];
 
   const leftArrowClick = () => {
