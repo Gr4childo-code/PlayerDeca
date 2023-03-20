@@ -1,0 +1,35 @@
+.wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  span {
+    color: var(--player-color-one);
+  }
+}
+
+.settings {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    &:hover {
+      background: var(--search-default);
+      transition: all 0.8s;
+      opacity: 1;
+    }
+  }
+}

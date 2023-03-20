@@ -1,0 +1,31 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  span {
+    color: var(--player-color-one);
+  }
+}
+.account {
+  &__item {
+    border-bottom: 1px solid var(--search-default);
+    padding: 20px 20px;
+  }
+  &__subTitle {
+    color: var(--player-color-two);
+    font-size: 15px;
+    margin: 10px 10px 0;
+  }
+  &__descr {
+    padding: 5px 20px;
+    font-size: 25px;
+  }
+  &__links {
+    img {
+      margin: 5px 0 0 20px;
+    }
+  }
+}

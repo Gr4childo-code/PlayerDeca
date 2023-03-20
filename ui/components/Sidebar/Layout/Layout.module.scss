@@ -1,0 +1,38 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+
+  &__menu {
+    width: 220px;
+    height: 100vh;
+    /* border: 1px dashed var(--player-color-one); */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    button {
+      width: 30px;
+      cursor: pointer;
+      background: var(--gradient);
+      border-radius: 5px;
+    }
+  }
+
+  &__content {
+    width: calc(100% - 240px);
+    height: 100vh;
+    /* border: 1px dashed var(--player-color-two); */
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+}
