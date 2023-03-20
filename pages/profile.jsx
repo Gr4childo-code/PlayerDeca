@@ -47,21 +47,28 @@ const profile = ({ sessionServer }) => {
   return (
     <>
       <Layout>
-        <Image width={120} height={120} />
-        <ul className={styles.userInfo}>
-          <li className={styles.userInfo__item}>
-            <p>Name:</p> {user.name ? user.name : 'Не указано'}
-          </li>
-          <li className={styles.userInfo__item}>
-            <p>Username:</p> {user.username}
-          </li>
-          <li className={styles.userInfo__item}>
-            <p>Email:</p> {user.email}
-          </li>
-          <li className={styles.userInfo__item}>
-            <button onClick={handle}>Log out</button>
-          </li>
-        </ul>
+        <div className={styles.wrapper}>
+          <Image width={120} height={120} />
+          <ul className={styles.userInfo}>
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Name:</p>
+              <p className={styles.userInfo__descr}>
+                {user.name ? user.name : 'Не указано'}
+              </p>
+            </li>
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Username:</p>
+              <p className={styles.userInfo__descr}>{user.username}</p>
+            </li>
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Email:</p>
+              <p className={styles.userInfo__descr}>{user.email}</p>
+            </li>
+            <li className={styles.userInfo__item}>
+              <button onClick={handle}>Log out</button>
+            </li>
+          </ul>
+        </div>
       </Layout>
     </>
   );

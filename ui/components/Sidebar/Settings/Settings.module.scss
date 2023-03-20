@@ -19,7 +19,7 @@
   &__item {
     margin: 0 10px;
     label {
-      font-size: 20px;
+      font-size: 25px;
       color: var(--player-color-two);
     }
   }
@@ -70,6 +70,7 @@
   margin-top: 20px;
   &__item {
     display: flex;
+    margin-top: 10px;
     p {
       color: var(--player-color-two);
       padding: 0 10px;

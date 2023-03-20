@@ -4,20 +4,21 @@ import Sidebar from '..';
 import styles from './Layout.module.scss';
 
 export default function Layout({ children }) {
-  const [isActive, setIsActive] = useState(true);
+  /*   const [isActive, setIsActive] = useState(true);
 
   const sideBarActive = () => {
     setIsActive(!isActive);
-  };
+  }; */
 
   return (
     <div className='container'>
       <div className={styles.profile}>
         <div className={styles.profile__menu}>
-          <button
+          <Sidebar />
+          {/* <button
             className={styles.profile__button}
             onClick={sideBarActive}></button>
-          {isActive && <Sidebar />}
+          {isActive && } */}
         </div>
         <div className={styles.profile__content}>{children}</div>
       </div>
