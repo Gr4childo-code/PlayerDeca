@@ -7,8 +7,7 @@ const Top10 = ({ audioTop }) => {
   return (
     <div className={styles.sticky}>
       <div className='title'>
-        Топ 10 <span>d</span>
-        less TRACK
+        Топ 10
       </div>
       <ul className={styles.list}>
         {audioTop.data?.map(({ id, attributes }, index) => (

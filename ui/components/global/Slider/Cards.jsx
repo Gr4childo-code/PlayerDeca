@@ -1,12 +1,11 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 import { useRouter } from 'next/router';
 export default function Cards({ musicData, title, type }) {
   const router = useRouter();
-  const [cardsData, setCardsData] = useState(musicData);
+  const [cardsData] = useState(musicData);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   console.log(cardsData);

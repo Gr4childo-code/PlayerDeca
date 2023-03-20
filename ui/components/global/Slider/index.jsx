@@ -74,8 +74,8 @@ export default function Slider() {
   ];
   return (
     <div className={styles.mainWrapper_cards}>
-      <Cards musicData={musicData} title={'Новинки DLESS'} type={'news'} />
-      <Cards musicData={playList} title={'Playlist'} type={'playlist'} />
+      <Cards musicData={musicData} title={'Новинки'} type={'news'} />
+      <Cards musicData={playList} title={'Плейлисты'} type={'playlist'} />
     </div>
   );
 }
