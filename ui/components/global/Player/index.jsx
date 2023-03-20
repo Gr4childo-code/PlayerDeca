@@ -121,10 +121,12 @@ export default function Player({ audios }) {
     return addTracks?.posterPath ? `${process.env.NEXT_PUBLIC_API_URL}${addTracks?.posterPath}` : ''
   }
 
+  const title = `${addTracks.author} - ${addTracks.name}`
+
   return (
     <>
       <Head>
-        <title>author - name</title>
+        <title>{title}</title>
       </Head>
 
       <div className={styles.player} id="player" onMouseMove={rewindMove}>

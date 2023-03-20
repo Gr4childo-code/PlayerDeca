@@ -50,7 +50,7 @@
     background: var(--black-10);
     opacity: 0;
     transition: opacity 0.1s;
-    border-right: 1px solid var(--ui-color-one);
+    border-right: 1px solid var(--gray);
     box-sizing: border-box;
     &:before,
     &:after {
@@ -64,14 +64,14 @@
       font-size: 11px;
       line-height: 1;
       padding: 3px 0;
-      background: var(--ui-color-one);
+      background: var(--gray);
       padding: 2px 4px;
       border-radius: 5px;
       margin-bottom: 5px;
     }
     &:after {
       content: '';
-      border-top: 5px solid var(--ui-color-one);
+      border-top: 5px solid var(--gray);
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
     }
