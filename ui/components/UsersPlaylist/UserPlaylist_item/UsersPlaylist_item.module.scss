@@ -8,11 +8,11 @@
   width: 150px;
   border-radius: 5px 5px 5px 5px;
   transition: all 0.5s;
-  box-shadow: 0 0 5px var(--player-color-one);
+  box-shadow: 0 0 5px var(--ui-color-one);
   filter: contrast(70%);
   &:hover {
     filter: contrast(100%);
-    box-shadow: 0 0 10px var(--player-color-one);
+    box-shadow: 0 0 10px var(--ui-color-one);
   }
   .header {
     .image {
@@ -29,7 +29,7 @@
       color: var(--text-color-white);
       .author {
         font-weight: bold;
-        color: var(--player-color-one);
+        color: var(--ui-color-one);
       }
     }
 
@@ -66,7 +66,7 @@
           bottom: 0;
           left: 2px;
           right: 0;
-          border-left: 8px solid var(--player-color-one);
+          border-left: 8px solid var(--ui-color-one);
           border-top: 6px solid transparent;
           border-bottom: 6px solid transparent;
         }
@@ -74,7 +74,7 @@
           border: none;
           width: 10px;
           height: 10px;
-          background: var(--player-color-one);
+          background: var(--ui-color-one);
           left: 0;
         }
         &:hover {
