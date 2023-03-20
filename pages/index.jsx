@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import EventSection from '@/ui/components/global/EventSection';
 
 import Top10 from '@/ui/components/Top10';
-import UsersPlaylist from '@/ui/components/UsersPlaylist';
 import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
@@ -33,13 +32,12 @@ export default function Home({ audios, audioTop }) {
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
 
       <div className='container'>
-        <div className="layout">
-          <div className="layout__left">
+        <div className='layout'>
+          <div className='layout__left'>
             <Slider />
-            <UsersPlaylist />
             <EventSection />
           </div>
-          <div className="layout__right">
+          <div className='layout__right'>
             <Top10 audioTop={audioTop} />
           </div>
         </div>

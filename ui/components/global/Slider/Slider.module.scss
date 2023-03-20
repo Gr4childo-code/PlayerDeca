@@ -8,7 +8,7 @@
   border-radius: 5px;
   box-shadow: 0 5px 5px var(--black-10);
   &_list {
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(50px);
     position: absolute;
     bottom: 0;
@@ -87,10 +87,95 @@
     background: var(--white-20);
     margin: 0 5px;
     border-radius: 2px;
-    transition: background .1s;
+    transition: background 0.1s;
   }
 
   &__active {
     background: var(--ui-color-one);
+  }
+}
+
+.playlist_wrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 70px;
+}
+.playlist_item {
+  margin-right: 20px;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.5s;
+  box-shadow: 0 0 5px var(--ui-color-one);
+  filter: contrast(70%);
+  &:hover {
+    filter: contrast(100%);
+    box-shadow: 0 0 10px var(--ui-color-one);
+  }
+  &_header {
+    .image {
+      object-fit: contain;
+      border-radius: 5px 5px 0 0;
+    }
+  }
+
+  &_footer {
+    // margin: 0;
+    // padding: 5px;
+    transition: all 1s;
+    .subtitle {
+      .author {
+        font-weight: bold;
+        color: var(--ui-color-one);
+      }
+    }
+
+    .options {
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .playerBox {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      &__play {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin-right: 15px;
+        position: relative;
+        background: transparentize(#fff4ee, 0.9);
+        &:before {
+          content: "";
+          width: 0;
+          height: 0;
+          margin: auto;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 2px;
+          right: 0;
+          border-left: 8px solid var(--ui-color-one);
+          border-top: 6px solid transparent;
+          border-bottom: 6px solid transparent;
+        }
+        &.active:before {
+          border: none;
+          width: 10px;
+          height: 10px;
+          background: var(--ui-color-one);
+          left: 0;
+        }
+        &:hover {
+          box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
+        }
+      }
+    }
   }
 }
