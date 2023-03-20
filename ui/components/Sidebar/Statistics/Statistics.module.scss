@@ -1,12 +1,12 @@
 .wrapper {
-  border-bottom: 1px solid var(--search-default);
+  border-bottom: 1px solid var(--gray-50);
 }
 
 .title {
   font-size: 30px;
   text-align: center;
   span {
-    color: var(--player-color-one);
+    color: var(--ui-color-one);
   }
 }
 
@@ -39,6 +39,6 @@
     }
   }
   &__title {
-    color: var(--player-color-two);
+    color: var(--ui-color-two);
   }
 }

@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--search-default);
+  background-color: var(--black-60);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 20px;
@@ -34,7 +34,7 @@
     width: 22px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--white);
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
@@ -42,11 +42,11 @@
 }
 
 input:checked + .slider {
-  background-color: var(--player-color-one);
+  background-color: var(--ui-color-one);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--player-color-one);
+  box-shadow: 0 0 1px var(--ui-color-one);
 }
 
 input:checked + .slider:before {

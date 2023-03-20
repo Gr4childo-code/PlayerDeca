@@ -6,16 +6,16 @@
   font-size: 30px;
   text-align: center;
   span {
-    color: var(--player-color-one);
+    color: var(--ui-color-one);
   }
 }
 .account {
   &__item {
-    border-bottom: 1px solid var(--search-default);
+    border-bottom: 1px solid var(--gray-50);
     padding: 20px 20px;
   }
   &__subTitle {
-    color: var(--player-color-two);
+    color: var(--ui-color-two);
     font-size: 15px;
     margin: 10px 10px 0;
   }

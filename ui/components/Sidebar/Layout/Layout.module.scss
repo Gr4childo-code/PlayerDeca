@@ -5,14 +5,13 @@
   &__menu {
     width: 220px;
     height: 100vh;
-    /* border: 1px dashed var(--player-color-one); */
     display: flex;
     flex-direction: column;
     align-items: start;
     button {
       width: 30px;
       cursor: pointer;
-      background: var(--gradient);
+      background: var(--black-30);
       border-radius: 5px;
     }
   }
@@ -20,9 +19,9 @@
   &__content {
     width: calc(100% - 240px);
     height: 100vh;
-    /* border: 1px dashed var(--player-color-two); */
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
   }
 
   &__button {

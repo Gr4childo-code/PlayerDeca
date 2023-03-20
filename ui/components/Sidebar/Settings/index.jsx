@@ -15,9 +15,9 @@ export default function Settings() {
           <li className={styles.settings__item}>
             Воспроизводить автоматически <Switch />
           </li>
-          <li className={styles.settings__item}>Погладить кота <Switch /></li>
-          <li className={styles.settings__item}>Не гладить кота <Switch /></li>
-          <li className={styles.settings__item}>Что за настройка? <Switch /></li>
+          <li className={styles.settings__item}>Не уведомлять о нововведениях<Switch /></li>
+          <li className={styles.settings__item}>Приватные плейлисты<Switch /></li>
+          <li className={styles.settings__item}>Свичнуть<Switch /></li>
         </ul>
       </div>
     </>
