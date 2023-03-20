@@ -1,26 +1,76 @@
-.navMain {
-  display: flex;
-  color: var(--text-color-white);
-  &_list {
+.nav {
+  &__btn {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    &:before {
+      background: linear-gradient(to bottom, var(--gray) 4px, transparent 4px);
+      background-size: auto 8px;
+    }
+    &:hover:before {
+      background: linear-gradient(to bottom, var(--white-50) 4px, transparent 4px);
+      background-size: auto 8px;
+    }
+    &_active {
+      transform: rotate(45deg);
+      &:before,
+      &:after {
+        background: var(--gray) !important;
+      }
+      &:before {
+        width: 4px;
+      }
+      &:after {
+        height: 4px;
+      }
+    }
+  }
+
+  &__box {
+    background: var(--gray-90);
+    margin:auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px var(--black-10);
+    box-sizing: border-box;
+    max-width: 1400px;
     display: flex;
-    align-items: center;
-    list-style-type: none;
-  }
-  &_item {
-    padding: 0 18px;
-    span {
-      cursor: pointer;
-    }
-    &_search {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      color: white;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .1s, transform .1s;
+    pointer-events: none;
+    &_active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
   }
-  &_link {
-    a {
-      margin: 0 10px 0 0;
+
+  &__link {
+    display: block;
+    width: 25%;
+    padding: 10px 20px;
+    transition: background .1s;
+    border-radius: 10px;
+    &:hover {
+      background: var(--white-10);
     }
   }
 }

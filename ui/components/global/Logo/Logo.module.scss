@@ -1,13 +1,18 @@
 .logo {
   font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   transition: opacity 0.2s;
+  text-transform: uppercase;
   font-weight: bold;
-  color: var(--text-color-white);
-  span {
-    color: var(--player-color-one);
+  display: flex;
+  align-items: center;
+  &:before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: url('/logo.svg') no-repeat;
+    background-size: 100% auto;
+    margin-right: 5px;
   }
   &:hover {
     opacity: 0.7;

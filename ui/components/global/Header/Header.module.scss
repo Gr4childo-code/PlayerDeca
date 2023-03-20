@@ -1,19 +1,27 @@
 .headerInfo {
-  background: var(--gradient);
-  color: #fff;
+  background: var(--ui-color-one);
   padding: 7px 0;
   font-size: 14px;
 }
 
 .header {
   padding: 14px 0;
+  border-bottom: 1px solid var(--gray-60);
+  position: relative;
   &__box {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  &__left,
+  &__left {
+    width: 95px;
+  }
   &__right {
     width: 170px;
+  }
+  &__center {
+    width: calc(100% - 265px);
+    display: flex;
+    align-items: center;
   }
 }

@@ -27,7 +27,7 @@ export default function EventSection() {
 
   return (
     <>
-      <h2>События</h2>
+      <div className='title'>События</div>
       { event && event.map ((e) => (
         <EventItem
           key={e.id}

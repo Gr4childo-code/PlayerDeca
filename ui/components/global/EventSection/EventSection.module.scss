@@ -1,28 +1,26 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  padding: 0 20px;
   width: 100%;
-  min-height: 340px;
-  border-top: 2px solid var(--search-default);
+  min-height: 260px;
+  border-top: 2px solid var(--gray-60);
   li {
-    list-style-type: none;
+    list-style: none;
   }
   img {
-    width: 220px;
-    height: 200px;
+    width: 180px;
+    height: 160px;
     border-radius: 5px;
   }
 }
 
 .dataEvent {
   &_number {
-    font-size: 80px;
+    font-size: 60px;
     font-weight: 700;
   }
   &_month {
-    font-size: 30px;
+    font-size: 22px;
     background: var(--gradient);
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -39,7 +37,10 @@
   display: flex;
   align-items: center;
   &_texts {
-    margin: 0 50px;
+    margin: 0 40px;
+    &:first-child {
+      margin-left: 0;
+    }
     li {
       padding-bottom: 10px;
     }
@@ -55,15 +56,15 @@
       border-radius: 2px;
       margin-bottom: 10px;
       background: var(--gradient);
-      color: #fff;
       outline: none;
       box-shadow: none;
       border: none;
       border-radius: 5px;
+      color: var(--whtie)
     }
   }
   &_title {
-    font-size: 28px;
+    font-size: 24px;
     background: var(--gradient);
     background-clip: text;
     -webkit-text-fill-color: transparent;

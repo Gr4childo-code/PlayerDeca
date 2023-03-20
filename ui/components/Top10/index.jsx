@@ -6,10 +6,9 @@ import Top10_item from './Top10_item';
 const Top10 = ({ audioTop }) => {
   return (
     <div className={styles.sticky}>
-      <h2 className={styles.title}>
-        Топ 10 <span>d</span>
-        less TRACK
-      </h2>
+      <div className='title'>
+        Топ 10
+      </div>
       <ul className={styles.list}>
         {audioTop.data?.map(({ id, attributes }, index) => (
           <Top10_item key={id} id={index + 1} attributes={attributes} />
