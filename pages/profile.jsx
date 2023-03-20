@@ -58,9 +58,11 @@ const profile = ({ sessionServer }) => {
           <li className={styles.userInfo__item}>
             <p>Email:</p> {user.email}
           </li>
+          <li className={styles.userInfo__item}>
+            <button onClick={handle}>Log out</button>
+          </li>
         </ul>
       </Layout>
-      <button onClick={handle}>Log out</button>
     </>
   );
 };

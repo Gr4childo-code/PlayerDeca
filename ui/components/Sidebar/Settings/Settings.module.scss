@@ -87,4 +87,11 @@
   justify-content: center;
   margin: 0 auto;
   width: 100px;
+  height: 20px;
+  color: white;
+  background: var(--player-color-one);
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
 }
