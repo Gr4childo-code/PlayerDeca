@@ -10,7 +10,9 @@ export default function Statistics({
 }) {
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>Statistics</h3>
+      <h3 className={styles.title}>
+        <span>S</span>tatistics
+      </h3>
       <ul className={styles.userStat__list}>
         <li className={styles.userStat__item}>
           <p className={styles.userStat__title}>Liked</p>

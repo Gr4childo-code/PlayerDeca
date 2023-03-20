@@ -5,7 +5,9 @@ import styles from '../Contacts/Contacts.module.scss';
 export default function Contacts({ email, phoneNum }) {
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>Contacts</h3>
+      <h3 className={styles.title}>
+        <span>C</span>ontacts
+      </h3>
       <ul>
         <li className={styles.account__item}>
           <p className={styles.account__subTitle}>Email</p>

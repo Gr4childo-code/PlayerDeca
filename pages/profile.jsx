@@ -50,13 +50,13 @@ const profile = ({ sessionServer }) => {
         <Image width={120} height={120} />
         <ul className={styles.userInfo}>
           <li className={styles.userInfo__item}>
-            <span>Name:</span> {user.name ? user.name : 'Не указано'}
+            <p>Name:</p> {user.name ? user.name : 'Не указано'}
           </li>
           <li className={styles.userInfo__item}>
-            <span>Username:</span> {user.username}
+            <p>Username:</p> {user.username}
           </li>
           <li className={styles.userInfo__item}>
-            <span>Email:</span> {user.email}
+            <p>Email:</p> {user.email}
           </li>
         </ul>
       </Layout>
