@@ -1,5 +1,7 @@
 import { Roboto } from '@next/font/google'
 import { SessionProvider } from "next-auth/react"
+import { fetchAPI } from '@/utils/api/fetch';
+import Player from '@/ui/components/global/Player';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -15,7 +17,8 @@ import Layout from '../ui/components/global/Layout';
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps }
+  pageProps: { session, ...pageProps },
+  audios
 }) {
   return (
     <SessionProvider session={session}>
@@ -23,7 +26,15 @@ export default function App({
         <Layout>
           <Component {...pageProps} />
         </Layout>
+
+        {audios && <Player audios={audios} />}
       </div>
     </SessionProvider>
   );
 }
+
+App.getInitialProps = async () => {
+  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
+  const audios = await response.json();
+  return { audios }
+};

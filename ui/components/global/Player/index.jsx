@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { AudioInit, AudioTime } from './audio'
-import Image from 'next/image'
 import Head from 'next/head';
 
 import styles from '@/ui/components/global/Player/Player.module.scss'
@@ -117,14 +116,12 @@ export default function Player({ audios }) {
     }, 0)
   }
 
-  const customLoader = () => {
-    return addTracks?.posterPath ? `${process.env.NEXT_PUBLIC_API_URL}${addTracks?.posterPath}` : ''
-  }
+  const title = `${addTracks.author} - ${addTracks.name}`
 
   return (
     <>
       <Head>
-        <title>author - name</title>
+        <title>{title}</title>
       </Head>
 
       <div className={styles.player} id="player" onMouseMove={rewindMove}>
@@ -142,14 +139,7 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {addTracks?.posterPath && <Image
-                src="profilePic.webp"
-                width={60}
-                height={60}
-                alt="User profile picture"
-                quality={80}
-                loader={customLoader}
-              />}
+              {addTracks?.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + addTracks?.posterPath} />}
               <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
             </div>
             <div className={styles.playerBox__body}>
@@ -165,7 +155,12 @@ export default function Player({ audios }) {
                 <div className={styles.playlist__overflow}>
                   {audios && audios?.data.map(({ id, attributes }) => (
                     <div className={`${styles.playlist__item} ${addTracks.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => addTrack(id, attributes)}>
-                      <strong>{attributes.author}</strong> - {attributes.name}
+                      <div className={styles.playlist__cover}>
+                        {attributes.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} />}
+                      </div>
+                      <div className={styles.playlist__info}>
+                        <strong>{attributes.author}</strong> - {attributes.name}
+                      </div>
                     </div>
                   ))}
                 </div>

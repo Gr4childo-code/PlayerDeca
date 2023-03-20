@@ -1,26 +1,21 @@
 import Head from 'next/head';
 import Script from 'next/script';
 import { fetchAPI } from '@/utils/api/fetch';
-import Player from '@/ui/components/global/Player';
 import Slider from '@/ui/components/global/Slider';
-import { useEffect, useState } from 'react';
 import EventSection from '@/ui/components/global/EventSection';
 
 import Top10 from '@/ui/components/Top10';
 import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
-  const audios = await response.json();
-
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
   return {
-    props: { audios, audioTop },
+    props: { audioTop },
   };
 };
 
-export default function Home({ audios, audioTop }) {
+export default function Home({ audioTop }) {
   return (
     <>
       <Head>
@@ -42,8 +37,6 @@ export default function Home({ audios, audioTop }) {
           </div>
         </div>
       </div>
-
-      {audios && <Player audios={audios} />}
     </>
   );
 }

@@ -3,18 +3,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 5px;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 5px 5px var(--black-10);
   &_list {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(50px);
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
     padding: 15px 20px;
+    border-radius: 5px;
   }
   &_item {
     list-style-type: none;
@@ -39,7 +36,7 @@
     width: 100%;
     max-width: 100%;
     max-height: 500px;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     object-fit: cover;
   }
 }
@@ -78,16 +75,20 @@
 .links {
   display: flex;
   position: absolute;
-  bottom: 0;
+  margin-top: 5px;
+  top: 100%;
   left: 0;
   right: 0;
   &__points {
     flex: 1;
-    height: 4px;
+    height: 6px;
     background: var(--white-20);
-    margin: 0 5px;
+    margin-left: 6px;
     border-radius: 2px;
     transition: background 0.1s;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   &__active {

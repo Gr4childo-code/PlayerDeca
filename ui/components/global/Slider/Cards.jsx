@@ -38,7 +38,6 @@ export default function Cards({ musicData, title, type }) {
               onClick={rightArrowClick}></span>
           </div>
           <div className={styles.header}>
-            <h3>{card.id} Music card</h3>
             <img src={card.img} className={styles.header_img}></img>
           </div>
           <>
