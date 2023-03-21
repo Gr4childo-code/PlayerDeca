@@ -106,6 +106,7 @@ a {
   line-height: 1.3;
   font-weight: bold;
   padding: 45px 0 10px;
+  margin: 0;
 }
 
 .profile {
@@ -118,5 +119,48 @@ a {
 
   &__content {
     width: calc(100% - 240px)
+  }
+}
+
+// Example css
+.btn,
+.fields {
+  display: block;
+  appearance: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: none;
+  height: 40px;
+  padding: 0 15px;
+  outline: none;
+}
+
+.fields {
+  width: 100%;
+  background: var(--gray-60);
+  color: var(--white-50);
+  transition: background .15s;
+  &:hover {
+    background: var(--gray-80);
+  }
+  &:focus {
+    background: var(--gray);
+  }
+}
+
+.btn {
+  cursor: pointer;
+  color: var(--white);
+  background: var(--ui-color-one);
+  transition: background .15s;
+  &:hover {
+    background: var(--ui-color-two);
+  }
+}
+
+.auth {
+  max-width: 350px;
+  .fields {
+    margin-bottom: 10px;
   }
 }

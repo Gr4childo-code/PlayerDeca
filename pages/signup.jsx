@@ -71,22 +71,17 @@ export default function SignUp() {
     <>
       <div className='container'>
         {/* <Registration /> */}
-        <form onSubmit={addReg}>
-          <p>
-            <input type="text" placeholder='username' value={reg.username} onChange={changeUsername} />
-          </p>
-          <p>
-            <input type="email" placeholder='email' value={reg.email} onChange={changeEmail} />
-          </p>
-          <p>
-            <input type="password" placeholder='password' value={reg.password} onChange={changePassword} />
-          </p>
-          <p>
-            <button type='submit'>
+        <div className="auth">
+          <h1 className='title'>Регистрация</h1>
+          <form onSubmit={addReg}>
+            <input type="text" placeholder='username' value={reg.username} onChange={changeUsername} className="fields" />
+            <input type="email" placeholder='email' value={reg.email} onChange={changeEmail} className="fields" />
+            <input type="password" placeholder='password' value={reg.password} onChange={changePassword} className="fields" />
+            <button type='submit' className="btn">
               Зарегистрироваться
             </button>
-          </p>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );
