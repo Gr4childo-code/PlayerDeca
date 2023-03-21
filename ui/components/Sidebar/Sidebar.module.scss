@@ -6,8 +6,11 @@
   background: var(--black-20);
   height: 100vh;
   border-radius: 5px;
+  align-items: center;
+  padding: 10px 10px;
+
   a {
-    width: 100%;
+    width: calc(100% - 5px);
     padding: 10px 10px;
     font-size: 18px;
     border-radius: 5px;
