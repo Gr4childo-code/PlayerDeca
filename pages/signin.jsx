@@ -6,25 +6,6 @@ import { getServerSession } from "next-auth/next"
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 
-export const getServerSideProps = async ({ req, res }) => {
-  const sessionServer = await getServerSession(req, res, authOptions)
-
-  if (sessionServer) {
-    return {
-      redirect: {
-        destination: '/profile',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      sessionServer
-    }
-  }
-}
-
 export default function SignIn() {
   const { data: session } = useSession()
   const [login, setLogin] = useState('')
@@ -69,19 +50,41 @@ export default function SignIn() {
       </Head>
 
       <div className='container'>
-        <input type="text" placeholder='login' value={login} onChange={changeLogin} />
-        <input type="password" placeholder='pass' value={passsword} onChange={changePassword} />
-        <button onClick={loginIn}>
-          Sign In
-        </button>
-        
-        <div>
-          <br />
-          <Link href='/signup'>
-            Sign Up
-          </Link>
+        <h1 className='title'>Авторизация</h1>
+        <div className="auth">
+          <input type="text" placeholder='login' value={login} onChange={changeLogin} className="fields" />
+          <input type="password" placeholder='pass' value={passsword} onChange={changePassword} className="fields" />
+          <button onClick={loginIn} className="btn">
+            Войти
+          </button>
+          
+          <div>
+            <br />
+            <Link href='/signup'>
+              Зарегистрироваться
+            </Link>
+          </div>
         </div>
       </div>
     </>
   )
+}
+
+export const getServerSideProps = async ({ req, res }) => {
+  const sessionServer = await getServerSession(req, res, authOptions)
+
+  if (sessionServer) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      sessionServer
+    }
+  }
 }
