@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 
   &__menu {
     width: 220px;
@@ -23,7 +24,7 @@
     flex-direction: column;
     padding: 10px 0;
     background: var(--black-20);
-    margin-top: 10px;
+    border-radius: 5px;
   }
 
   &__button {
