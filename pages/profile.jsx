@@ -1,11 +1,19 @@
-import { signOut } from "next-auth/react"
-import { authOptions } from 'pages/api/auth/[...nextauth]'
-import { getServerSession } from "next-auth/next"
-import { useRouter } from "next/router"
-import { useState } from "react"
+import { signOut } from 'next-auth/react';
+import { authOptions } from 'pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Layout from '@/ui/components/Sidebar/Layout';
+import Image from 'next/image';
+
+import styles from '../ui/components/Sidebar/Layout/Profile.module.scss';
 
 export const getServerSideProps = async (context) => {
-  const sessionServer = await getServerSession(context.req, context.res, authOptions)
+  const sessionServer = await getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
 
   if (!sessionServer) {
     return {
@@ -18,49 +26,51 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      sessionServer
-    }
-  }
-}
+      sessionServer,
+    },
+  };
+};
 
 const profile = ({ sessionServer }) => {
-  const router = useRouter()
-  const [user] = useState(sessionServer?.user)
+  const router = useRouter();
+  const [user] = useState(sessionServer?.user);
 
   const handle = async () => {
     const { url } = await signOut({
       redirect: false,
-      callbackUrl: "/"
-    })
+      callbackUrl: '/',
+    });
 
-    router.push(url)
-  }
+    router.push(url);
+  };
 
   return (
-    <div className='container'>
-      <div className="profile">
-        <div className="profile__menu">
-          <p>Аккаунт</p>
-          <p>Мои подборки / Загрузить</p>
-          <p>Настройки</p>
-          <p>Выход</p>
-        </div>
-        <div className="profile__content">
-          <button onClick={handle}>Log Out</button>
-          <ul>
-            <li>
-              Имя: {user.name ? user.name : 'Не указано'}
+    <>
+      <Layout>
+        <div className={styles.wrapper}>
+          <Image width={80} height={80} />
+          <ul className={styles.userInfo}>
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Name:</p>
+              <p className={styles.userInfo__descr}>
+                {user.name ? user.name : 'Не указано'}
+              </p>
             </li>
-            <li>
-              Username: {user.username}
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Username:</p>
+              <p className={styles.userInfo__descr}>{user.username}</p>
             </li>
-            <li>
-              Email: {user.email}
+            <li className={styles.userInfo__item}>
+              <p className={styles.userInfo__title}>Email:</p>
+              <p className={styles.userInfo__descr}>{user.email}</p>
+            </li>
+            <li className={styles.userInfo__item}>
+              <button onClick={handle}>Log out</button>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
+      </Layout>
+    </>
   );
 };
 
