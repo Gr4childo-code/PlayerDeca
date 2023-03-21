@@ -1,0 +1,50 @@
+.wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  span {
+    color: var(--ui-color-one);
+  }
+}
+
+.playlists {
+  &__list {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 10px;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    background: var(--black-30);
+    border: 1px dashed var(--gray-50);
+    cursor: pointer;
+    &:hover {
+      background: var(--ui-color-one);
+      transition: all 0.8s;
+      opacity: 1;
+    }
+  }
+  &__descr {
+    padding: 10px 0;
+  }
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* backdrop-filter: blur(50px);
+background: rgba(0, 0, 0, 0.5); */
