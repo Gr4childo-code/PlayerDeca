@@ -14,13 +14,13 @@
     justify-content: space-between;
   }
   &__left {
-    width: 85px;
+    width: 95px;
   }
   &__right {
     width: 170px;
   }
   &__center {
-    width: calc(100% - 255px);
+    width: calc(100% - 265px);
     display: flex;
     align-items: center;
   }

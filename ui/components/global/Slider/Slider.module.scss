@@ -3,18 +3,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 5px;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 5px 5px var(--black-10);
   &_list {
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(50px);
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
     padding: 15px 20px;
+    border-radius: 5px;
   }
   &_item {
     list-style-type: none;
@@ -39,7 +36,7 @@
     width: 100%;
     max-width: 100%;
     max-height: 500px;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     object-fit: cover;
   }
 }
@@ -78,19 +75,107 @@
 .links {
   display: flex;
   position: absolute;
-  bottom: 0;
+  margin-top: 5px;
+  top: 100%;
   left: 0;
   right: 0;
   &__points {
     flex: 1;
-    height: 4px;
+    height: 6px;
     background: var(--white-20);
-    margin: 0 5px;
+    margin-left: 6px;
     border-radius: 2px;
-    transition: background .1s;
+    transition: background 0.1s;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   &__active {
     background: var(--ui-color-one);
+  }
+}
+
+.playlist_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 70px;
+}
+.playlist_item {
+  margin-right: 20px;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.5s;
+  box-shadow: 0 0 5px var(--ui-color-one);
+  filter: contrast(70%);
+  &:hover {
+    filter: contrast(100%);
+    box-shadow: 0 0 10px var(--ui-color-one);
+  }
+  &_header {
+    .image {
+      object-fit: contain;
+      border-radius: 5px 5px 0 0;
+    }
+  }
+
+  &_footer {
+    transition: all 1s;
+    .subtitle {
+      .author {
+        font-weight: bold;
+        color: var(--ui-color-one);
+      }
+    }
+
+    .options {
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .playerBox {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      &__play {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin-right: 15px;
+        position: relative;
+        background: transparentize(#fff4ee, 0.9);
+        &:before {
+          content: "";
+          width: 0;
+          height: 0;
+          margin: auto;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 2px;
+          right: 0;
+          border-left: 8px solid var(--ui-color-one);
+          border-top: 6px solid transparent;
+          border-bottom: 6px solid transparent;
+        }
+        &.active:before {
+          border: none;
+          width: 10px;
+          height: 10px;
+          background: var(--ui-color-one);
+          left: 0;
+        }
+        &:hover {
+          box-shadow: 0 0 4px transparentize(#fff4ee, 0.6);
+        }
+      }
+    }
   }
 }

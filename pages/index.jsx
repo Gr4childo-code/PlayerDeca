@@ -16,13 +16,10 @@ import { fetchAPI } from '@/utils/api/fetch';
 import { first10 } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
-  const audios = await response.json();
-
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
   return {
-    props: { audios, audioTop },
+    props: { audioTop },
   };
 };
 
@@ -40,6 +37,7 @@ export default function Home({ audios, audioTop }) {
     setList([...list, toastItem]);
   };
 
+export default function Home({ audioTop }) {
   return (
     <>
       <Head>
@@ -84,7 +82,6 @@ export default function Home({ audios, audioTop }) {
         <div className='layout'>
           <div className='layout__left'>
             <Slider />
-            <UsersPlaylist />
             <EventSection />
           </div>
           <div className='layout__right'>
@@ -93,6 +90,7 @@ export default function Home({ audios, audioTop }) {
         </div>
       </div>
       {audios && <Player audios={audios} />}
+
     </>
   );
 }
