@@ -1,25 +1,22 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from '@/ui/components/global/Toast/Toast.module.scss';
-const Toast = ({ toastlist, position, setList }) => {
-  const deleteToast = useCallback(
-    (id) => {
-      const toastListItem = toastlist.filter((e) => e.id !== id);
-      setList(toastListItem);
-    },
-    [toastlist, setList]
-  );
+const Toast = ({ toastlist, setList }) => {
+  const deleteToast = (id) => {
+    const toastListItem = toastlist.filter((e) => e.id !== id);
+    setList(toastListItem);
+  };
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (toastlist.length) {
-  //       deleteToast(toastlist[0].id);
-  //     }
-  //   }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (toastlist.length) {
+        deleteToast(toastlist[0].id);
+      }
+    }, 3000);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [toastlist, deleteToast]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [toastlist, deleteToast]);
 
   return (
     <div className={`${styles.container} `}>

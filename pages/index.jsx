@@ -49,13 +49,13 @@ export default function Home({ audios, audioTop }) {
       </Head>
 
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
-      <Toast toastlist={list} position={'bottom-right'} setList={setList} />
+      <Toast toastlist={list} setList={setList} />
       <button
         onClick={() => {
           showToast({
             type: 'error',
-            title: 'message',
-            description: 'message',
+            title: 'Error',
+            description: 'API has been deleted',
           });
         }}>
         Error
