@@ -2,7 +2,7 @@
   font-size: 25px;
   text-align: center;
   span {
-    color: var(--player-color-one);
+    color: var(--ui-color-one);
   }
 }
 
@@ -10,15 +10,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 10px;
   width: 150px;
   height: 120px;
   border-radius: 5px;
   padding: 15px;
   font-size: 10px;
-  border: 1px dashed var(--player-color-one);
+  border: 1px dashed var(--ui-color-one);
   opacity: 0.8;
   &:hover {
-    border: 1px dashed var(--player-color-one);
+    border: 1px dashed var(--ui-color-one);
     opacity: 1;
     transform: scale(102%);
     transition: all 0.5s;
@@ -33,12 +34,12 @@
   }
 
   &__item {
-    margin-top: 10px;
+    margin: 10px 10px 0;
     padding: 10px;
-    background: var(--search-default);
+    background: var(--gray-50);
     border-radius: 5px;
     &:hover {
-      background: var(--player-color-one);
+      background: var(--ui-color-one);
       transition: all 0.8s;
       opacity: 1;
     }
