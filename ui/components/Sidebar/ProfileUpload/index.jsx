@@ -1,8 +1,8 @@
 import React, { use, useState } from 'react';
 
-import styles from '../Upload/Dropzone.module.scss';
+import styles from '../ProfileUpload/Dropzone.module.scss';
 
-export default function Dropzone({ uploadFiles }) {
+export default function ProfileUpload({ uploadFiles }) {
   const [files, setFiles] = useState(uploadFiles);
 
   return (

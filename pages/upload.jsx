@@ -1,6 +1,6 @@
 import Layout from '@/ui/components/Sidebar/Layout';
 import React from 'react';
-import Dropzone from '@/ui/components/Sidebar/Upload';
+import ProfileUpload from '@/ui/components/Sidebar/ProfileUpload';
 
 export default function Upload() {
   const uploadFiles = [
@@ -13,7 +13,7 @@ export default function Upload() {
 
   return (
     <Layout>
-      <Dropzone uploadFiles={uploadFiles} />
+      <ProfileUpload uploadFiles={uploadFiles} />
     </Layout>
   );
 }
