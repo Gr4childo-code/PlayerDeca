@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth/next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Layout from '@/ui/components/Sidebar/Layout';
-import Image from 'next/image';
 
 import styles from '../ui/components/Sidebar/Layout/Profile.module.scss';
 
@@ -48,7 +47,6 @@ const profile = ({ sessionServer }) => {
     <>
       <Layout>
         <div className={styles.wrapper}>
-          <Image width={80} height={80} />
           <ul className={styles.userInfo}>
             <li className={styles.userInfo__item}>
               <p className={styles.userInfo__title}>Name:</p>
