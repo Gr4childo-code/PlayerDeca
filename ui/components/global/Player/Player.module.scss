@@ -195,7 +195,7 @@
   &__progress {
     width: 50%;
     height: 4px;
-    background: var(--ui-color-one);
+    background: var(--white-30);
     pointer-events: none;
     border-radius: 10px;
     position: relative;
@@ -257,6 +257,28 @@
       height: auto;
       border-radius: 5px;
     }
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity .15s;
+    }
+    &:before {
+      background: var(--black-20);
+    }
+    &:after {
+      margin: auto;
+      width: 0;
+      height: 0;
+      border-top:  5px solid transparent;
+      border-left:  5px solid white;
+      border-bottom:  5px solid transparent;
+    }
     &_active {
       position: absolute;
       top: 0;
@@ -308,9 +330,23 @@
     &_active, &:hover {
       background: var(--white-10);
     }
+    &:hover {
+      .playlist__cover {
+        &:before,
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
     &_active {
       .playlist__cover_active {
         opacity: 1;
+      }
+      .playlist__cover {
+        &:before,
+        &::after {
+          opacity: 0 !important;
+        }
       }
     }
   }
