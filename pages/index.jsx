@@ -44,9 +44,9 @@ export default function Home({ audioTop }) {
       </Head>
 
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
-      
+
       <Toast toastlist={list} setList={setList} />
-      <button
+      {/* <button
         onClick={() => {
           showToast({
             type: 'error',
@@ -75,7 +75,7 @@ export default function Home({ audioTop }) {
           });
         }}>
         Success
-      </button>
+      </button> */}
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
