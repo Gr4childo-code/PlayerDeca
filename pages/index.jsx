@@ -1,14 +1,12 @@
 //Next/React
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Script from 'next/script';
 
 //Components
-import Player from '@/ui/components/global/Player';
 import Slider from '@/ui/components/global/Slider';
 import EventSection from '@/ui/components/global/EventSection';
 import Top10 from '@/ui/components/Top10';
-import UsersPlaylist from '@/ui/components/UsersPlaylist';
 import Toast from '@/ui/components/global/Toast';
 
 //Utils
@@ -23,7 +21,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-export default function Home({ audios, audioTop }) {
+export default function Home({ audioTop }) {
   const [list, setList] = useState([]);
   let toastItem = null;
 
@@ -37,7 +35,6 @@ export default function Home({ audios, audioTop }) {
     setList([...list, toastItem]);
   };
 
-export default function Home({ audioTop }) {
   return (
     <>
       <Head>
@@ -47,6 +44,7 @@ export default function Home({ audioTop }) {
       </Head>
 
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
+      
       <Toast toastlist={list} setList={setList} />
       <button
         onClick={() => {
@@ -89,8 +87,6 @@ export default function Home({ audioTop }) {
           </div>
         </div>
       </div>
-      {audios && <Player audios={audios} />}
-
     </>
   );
 }
