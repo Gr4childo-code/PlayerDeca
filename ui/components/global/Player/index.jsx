@@ -27,10 +27,8 @@ export default function Player({ audios }) {
       setfullTime(AudioTime(audio.duration));
     })
 
-    let _percentage = 0;
     audio?.addEventListener('timeupdate', () => {
-      _percentage = (audio.currentTime / audio.duration) * 100;
-      setPercentage(_percentage);
+      setPercentage((audio.currentTime / audio.duration) * 100);
       setCurrentTime(AudioTime(audio.currentTime));
     });
 
