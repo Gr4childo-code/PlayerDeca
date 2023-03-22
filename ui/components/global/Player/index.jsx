@@ -37,6 +37,8 @@ export default function Player({ audios }) {
     audio.addEventListener('ended', () => {
       audio.currentTime = 0;
       let random = Math.floor(Math.random() * audios?.data.length - 1)
+      audio.currentTime = 0
+      audio.load()
       addTrack(audios?.data[random]?.id, audios?.data[random]?.attributes)
       setIsPlay(true);
     })
@@ -157,6 +159,11 @@ export default function Player({ audios }) {
                     <div className={`${styles.playlist__item} ${addTracks.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => addTrack(id, attributes)}>
                       <div className={styles.playlist__cover}>
                         {attributes.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} />}
+                        <div className={styles.playlist__cover_active}>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
                       </div>
                       <div className={styles.playlist__info}>
                         <strong>{attributes.author}</strong> - {attributes.name}
