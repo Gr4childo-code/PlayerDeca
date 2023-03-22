@@ -62,7 +62,7 @@ export default function Cards({ musicData, title, type }) {
     );
   } else if (type == 'playlist') {
     return (
-      <div>
+      <div key={card.id}>
         <div className='title'>{title}</div>
         <div className={styles.wrapper}>
           <div className={styles.button}>
@@ -75,7 +75,7 @@ export default function Cards({ musicData, title, type }) {
           </div>
           <div className={styles.playlist_wrapper}>
             {card.map((item) => (
-              <div className={styles.playlist_item}>
+              <div className={styles.playlist_item} key={item.id}>
                 <div className={styles.playlist_item_header}>
                   <Image
                     className={styles.image}
