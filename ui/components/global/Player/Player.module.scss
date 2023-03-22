@@ -275,6 +275,7 @@
         height: 10px;
         margin: 0 1px 10px;
         animation: musicIcon 1s infinite linear;
+        animation-fill-mode: both;
         border-radius: 10px;
         &:nth-child(1) {
           animation-delay: .2s;
