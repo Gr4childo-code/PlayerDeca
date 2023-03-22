@@ -1,0 +1,53 @@
+.track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 15px;
+  transition: background 0.15s;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background: var(--gray-90);
+    box-shadow: 0 10px 10px var(--black-10);
+  }
+
+  &__cover {
+    width: 50px;
+    height: 50px;
+    background: var(--black);
+    margin-left: 10px;
+    &__img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+  }
+  &__number {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    font-size: 25px;
+  }
+  &__options {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  &__music {
+    margin-left: 20px;
+    flex-grow: 1;
+    &__name {
+      color: var(--white-90);
+      font-size: 18px;
+      padding-bottom: 3px;
+    }
+    &__author {
+      color: var(--white-50);
+      font-size: 18px;
+      padding-bottom: 3px;
+    }
+  }
+}

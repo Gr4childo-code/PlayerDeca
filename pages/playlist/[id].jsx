@@ -4,6 +4,12 @@ import Script from 'next/script';
 import Playlist_Page from '@/ui/components/Playlist_Page';
 
 const Details = () => {
+  const audio = [
+    { id: 1, attributes: { name: 'Трек', author: 'Автор' } },
+    { id: 2, attributes: { name: 'Трек', author: 'Автор' } },
+
+    { id: 3, attributes: { name: 'Трек', author: 'Автор' } },
+  ];
   return (
     <>
       <Head>
@@ -12,7 +18,9 @@ const Details = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
-      <Playlist_Page />
+      <div className='container'>
+        <Playlist_Page audio={audio} />
+      </div>
     </>
   );
 };
