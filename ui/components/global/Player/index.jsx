@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { AudioInit, AudioTime } from './audio'
+import { useEffect, useState, useRef } from 'react';
+import { AudioInit, AudioTime } from './player'
 import Head from 'next/head';
 
 import styles from '@/ui/components/global/Player/Player.module.scss'
@@ -14,46 +14,39 @@ export default function Player({ audios }) {
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false)
-  const [addTracks, setAddTracks] = useState({id: audios?.data[0].id, ...audios?.data[0].attributes})
+  const [track, setTrack] = useState({id: audios?.data[0].id, ...audios?.data[0].attributes})
   const [isPlayList, setIsPlayList] = useState(false)
-  
+  const _indexTrach = useRef(0)
+
   useEffect(() => {
-    setAudio(AudioInit(addTracks));
+    setAudio(AudioInit(track));
   }, []);
 
-  const audioTimeUpdate = () => {
-    let pr
-
-    audio.addEventListener('canplaythrough', () => {
+  useEffect(() => {
+    audio?.addEventListener('canplaythrough', () => {
       setfullTime(AudioTime(audio.duration));
     })
 
-    audio.addEventListener('timeupdate', () => {
-      pr = (audio.currentTime / audio.duration) * 100;
+    let _percentage = 0;
+    audio?.addEventListener('timeupdate', () => {
+      _percentage = (audio.currentTime / audio.duration) * 100;
+      setPercentage(_percentage);
       setCurrentTime(AudioTime(audio.currentTime));
-      setPercentage(pr);
     });
 
-    audio.addEventListener('ended', () => {
-      audio.currentTime = 0;
-      let random = Math.floor(Math.random() * audios?.data.length - 1)
-      audio.currentTime = 0
-      audio.load()
-      addTrack(audios?.data[random]?.id, audios?.data[random]?.attributes)
-      setIsPlay(true);
+    audio?.addEventListener('ended', () => {
+      _indexTrach.current < (audios?.data.length - 1) ? _indexTrach.current++ : _indexTrach.current = 0
+      nextTrack(audios?.data[_indexTrach.current]?.id, audios?.data[_indexTrach.current]?.attributes)
     })
-  };
+
+    const keyCode = (e) => e.keyCode === 32 ? play() : false
+    document.addEventListener('keydown', keyCode);
+    return () => document.removeEventListener('keydown', keyCode);
+  }, [audio ?? null])
 
   const play = () => {
-    setIsPlay(!isPlay);
-
-    if (isPlay) {
-      audioTimeUpdate();
-      audio.play();
-      return;
-    }
-
-    audio.pause();
+    setIsPlay(!audio.paused);
+    audio?.paused ? audio.play() : audio.pause();
   };
 
   const rewind = (e, active) => {
@@ -66,7 +59,6 @@ export default function Player({ audios }) {
 
       audio.currentTime = rewind;
       audio.muted = true
-      audioTimeUpdate();
       return
     }
 
@@ -76,12 +68,11 @@ export default function Player({ audios }) {
   const rewindMove = (e) => {
     const elem = document.querySelector("#player")
     const rect = elem.getBoundingClientRect();
-
     setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio.duration))
     elem.children[0].children[0].style.width = `${(e.pageX / rect.width) * 100}%`
   };
 
-  const volumes = (e, active) => {
+  const volumeTrack = (e, active) => {
     setVolumeMove(active)
 
     if (active) {
@@ -94,36 +85,18 @@ export default function Player({ audios }) {
     }
   }
 
-  useEffect(() => {
-    const keyCode = (e) => {
-      if (e.keyCode === 32) {
-        play();
-      }
-    };
-
-    document.addEventListener('keydown', keyCode);
-    return () => document.removeEventListener('keydown', keyCode);
-  }, [audio, isPlay]);
-
-  const addTrack = (id, attributes) => {
-    setAddTracks({id, ...attributes})
-    audioTimeUpdate();
+  const nextTrack = (id, attributes) => {
+    setTrack({id, ...attributes})
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`
-    audio.poster = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.posterPath}`
-    audio.currentTime = 0;
-    
-    setTimeout(() => {
-      setIsPlay(false);
-      audio.play()
-    }, 0)
+    play()
   }
 
-  const title = `${addTracks.author} - ${addTracks.name}`
+  const _title = `${track.author} - ${track.name}`
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{_title}</title>
       </Head>
 
       <div className={styles.player} id="player" onMouseMove={rewindMove}>
@@ -141,13 +114,13 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {addTracks?.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + addTracks?.posterPath} />}
+              {track?.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath} />}
               <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
             </div>
             <div className={styles.playerBox__body}>
               <div className={styles.playerBox__info} onClick={() => setIsPlayList(!isPlayList)}>
                 <div>
-                  <strong>{addTracks.author}</strong> - {addTracks.name}
+                  <strong>{track.author}</strong> - {track.name}
                 </div>
                 <span>
                   {currentTime} / {fullTime}
@@ -155,8 +128,8 @@ export default function Player({ audios }) {
               </div>
               <div className={`${styles.playlist} ${isPlayList ? styles.playlist__active : ''}`}>
                 <div className={styles.playlist__overflow}>
-                  {audios && audios?.data.map(({ id, attributes }) => (
-                    <div className={`${styles.playlist__item} ${addTracks.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => addTrack(id, attributes)}>
+                  {audios && audios?.data.map(({ id, attributes }, index) => (
+                    <div className={`${styles.playlist__item} ${track.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => {nextTrack(id, attributes), _indexTrach.current = index}}>
                       <div className={styles.playlist__cover}>
                         {attributes.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} />}
                         <div className={styles.playlist__cover_active}>
@@ -175,10 +148,10 @@ export default function Player({ audios }) {
             </div>
             <div
               className={styles.playerVolume}
-              onMouseMove={(e) => volumes(e, volumeMove)}
-              onMouseDown={(e) => volumes(e, true)}
-              onMouseUp={(e) => volumes(e, false)}
-              onMouseLeave={(e) => volumes(e, false)}
+              onMouseMove={(e) => volumeTrack(e, volumeMove)}
+              onMouseDown={(e) => volumeTrack(e, true)}
+              onMouseUp={(e) => volumeTrack(e, false)}
+              onMouseLeave={(e) => volumeTrack(e, false)}
             >
               <div className={styles.playerVolume__progress} style={{width: `${volume}%`}}></div>
             </div>
