@@ -18,12 +18,13 @@ import Layout from '../ui/components/global/Layout';
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
-  audios
+  audios,
+  menu
 }) {
   return (
     <SessionProvider session={session}>
       <div className={roboto.className}>
-        <Layout>
+        <Layout menu={menu}>
           <Component {...pageProps} />
         </Layout>
 
@@ -34,7 +35,11 @@ export default function App({
 }
 
 App.getInitialProps = async () => {
-  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
-  const audios = await response.json();
-  return { audios }
+  const audiosResp = await fetchAPI('/audios?fields=name,path,author,posterPath&sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
+  const audios = await audiosResp.json();
+
+  const menuResp = await  fetchAPI('/styles?fields=name&pagination[limit]=100');
+  const menu = await menuResp.json();
+
+  return { audios, menu }
 };
