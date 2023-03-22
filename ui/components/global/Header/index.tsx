@@ -7,7 +7,7 @@ import SearchNew from '@/ui/components/global/SearchNew'
 
 import styles from './Header.module.scss';
 
-const Header = () => {
+const Header = ({ menu }) => {
   return (
     <>
       <div className={styles.headerInfo}>
@@ -23,7 +23,7 @@ const Header = () => {
               <Logo />
             </div>
             <div className={styles.header__center}>
-              <Navigation />
+              <Navigation menu={menu} />
               <SearchNew />
             </div>
             <div className={styles.header__right}>
