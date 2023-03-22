@@ -10,17 +10,18 @@ export default function Playlists({ playlistsData, img }) {
       <ul className={styles.playlists__list}>
         {playlistsData.map(({ id, img }) => {
           return (
-            <Link href={'/'}>
-              <li key={id} className={styles.playlists__item}>
+            <li key={id} className={styles.playlists__item}>
+              <Link href={'/'}>
                 <Image
                   className={styles.img}
                   width={150}
                   height={150}
                   src={img}
+                  alt={'imgPlaylist'}
                 />
                 <p className={styles.playlists__descr}>Playlist: {id}</p>
-              </li>
-            </Link>
+              </Link>
+            </li>
           );
         })}
       </ul>
