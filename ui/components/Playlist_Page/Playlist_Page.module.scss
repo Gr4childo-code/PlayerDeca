@@ -6,9 +6,21 @@
   display: flex;
   flex-direction: column;
 
+  img {
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
   .release {
-    margin-bottom: 10px;
+    margin: 10px 0;
+    color: var(--white-80);
+    font-size: 20px;
+
     &__dates {
+      margin-left: 15px;
       font-weight: bold;
       font-size: 20px;
       color: var(--ui-color-one);
@@ -17,7 +29,10 @@
 
   .rate {
     margin-bottom: 10px;
+    color: var(--white-80);
+    font-size: 20px;
     &__star {
+      margin-left: 15px;
       color: var(--ui-color-one);
       font-size: 20px;
     }

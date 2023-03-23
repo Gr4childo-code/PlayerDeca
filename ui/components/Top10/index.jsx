@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from '@/ui/components/Top10/Top10.module.scss'
-import Track from '../Track'
+import React from 'react';
+import styles from '@/ui/components/Top10/Top10.module.scss';
+import Track from '../Track';
 
 const Top10 = ({ audioTop }) => {
   return (
@@ -10,7 +10,7 @@ const Top10 = ({ audioTop }) => {
         <Track key={id} id={id} index={index + 1} attributes={attributes} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Top10
+export default Top10;

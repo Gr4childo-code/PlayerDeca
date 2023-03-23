@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from '@/ui/components/Track/Track.module.scss'
+import React from 'react';
+import styles from '@/ui/components/Track/Track.module.scss';
 const Track = ({ id, index, attributes }) => {
   return (
     <div className={styles.track} key={id}>
@@ -28,7 +28,7 @@ const Track = ({ id, index, attributes }) => {
         <i className='fa-regular fa-heart'></i>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Track
+export default Track;

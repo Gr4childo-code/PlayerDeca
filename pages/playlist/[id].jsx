@@ -2,14 +2,27 @@ import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import Playlist_Page from '@/ui/components/Playlist_Page';
+import { fetchAPI } from '@/utils/api/fetch';
+import { playlistID } from '@/utils/api/QueryParams';
 
-const Details = () => {
-  const audio = [
-    { id: 1, attributes: { name: 'Трек', author: 'Автор' } },
-    { id: 2, attributes: { name: 'Трек', author: 'Автор' } },
+export const getServerSideProps = async (context) => {
+  const { id } = context.params;
+  const response = await fetchAPI(`/playlists?${playlistID(id)}`);
+  const list = await response.json();
+  console.log(list.data.attributes);
+  if (list.data.length == 0) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { list },
+  };
+};
 
-    { id: 3, attributes: { name: 'Трек', author: 'Автор' } },
-  ];
+const Details = ({ list }) => {
+  const { data } = list;
+
   return (
     <>
       <Head>
@@ -19,7 +32,7 @@ const Details = () => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <Playlist_Page audio={audio} />
+        <Playlist_Page playlist={data.flat(Infinity)} />
       </div>
     </>
   );
