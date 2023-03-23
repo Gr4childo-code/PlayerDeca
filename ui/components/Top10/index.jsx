@@ -1,19 +1,14 @@
 import React from 'react';
-
 import styles from '@/ui/components/Top10/Top10.module.scss';
-import Top10_item from './Top10_item';
+import Track from '../Track';
 
 const Top10 = ({ audioTop }) => {
   return (
-    <div className={styles.sticky}>
-      <div className='title'>
-        Топ 10
-      </div>
-      <ul className={styles.list}>
-        {audioTop.data?.map(({ id, attributes }, index) => (
-          <Top10_item key={id} id={index + 1} attributes={attributes} />
-        ))}
-      </ul>
+    <div className={styles.wrapper}>
+      <div className='title'>Топ 10</div>
+      {audioTop.data?.map(({ id, attributes }, index) => (
+        <Track key={id} id={id} index={index + 1} attributes={attributes} />
+      ))}
     </div>
   );
 };
