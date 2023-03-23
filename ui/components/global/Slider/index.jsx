@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
+import SlideDescription from './SlideDescription';
 import Image from 'next/image';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
@@ -34,22 +35,10 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
           className={styles.header__img}
           alt={`image ${currentSlide}`}></Image>
       </div>
-      <>
-        <ul
-          key={slide.id}
-          className={`${
-            filter == 'blur'
-              ? styles.wrapper__blur
-              : styles.wrapper__list && filter == 'boxShadow'
-              ? styles.wrapper__boxShadow
-              : styles.wrapper__list && filter == 'none'
-              ? styles.wrapper__none
-              : styles.wrapper__list
-          }`}>
-          <li className={styles.wrapper__item}>{slide.song}</li>
-          <li className={styles.wrapper__item}>{slide.author}</li>
-        </ul>
-      </>
+
+      {/* Если есть данные - будет описание слайда (Песня, Автор и тд) */}
+      {data && <SlideDescription filter={filter} slide={slide} />}
+
       {/*  Кнопки и пагинация */}
       {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
       {pagination && (

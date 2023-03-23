@@ -107,18 +107,21 @@ export default function Home({ audioTop }) {
               pagination={true}
               filter={'blur'}
               buttons={false}
+              title={'Slider 4'}
             />
             <Slider
               data={dataImage3}
               pagination={true}
               filter={'boxShadow'}
               buttons={false}
+              title={'Slider 5'}
             />
             <Slider
               data={dataImage1}
               pagination={false}
               filter={'none'}
               buttons={true}
+              title={'Slider 6'}
             />
             <EventSection />
           </div>
