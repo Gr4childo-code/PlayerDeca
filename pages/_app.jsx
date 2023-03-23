@@ -1,7 +1,7 @@
 import { Roboto } from '@next/font/google'
-import { SessionProvider } from "next-auth/react"
-import { fetchAPI } from '@/utils/api/fetch';
-import Player from '@/ui/components/global/Player';
+import { SessionProvider } from 'next-auth/react'
+import { fetchAPI } from '@/utils/api/fetch'
+import Player from '@/ui/components/global/Player'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -9,16 +9,15 @@ const roboto = Roboto({
   weight: ['400', '700'],
 })
 
-import '@/styles/sass/Normalize.scss';
-import '@/styles/sass/globals.scss';
-import '@/styles/sass/Button.scss';
+import '@/styles/sass/Normalize.scss'
+import '@/styles/sass/globals.scss'
 
-import Layout from '../ui/components/global/Layout';
+import Layout from '../ui/components/global/Layout'
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
-  audios
+  audios,
 }) {
   return (
     <SessionProvider session={session}>
@@ -30,11 +29,11 @@ export default function App({
         {audios && <Player audios={audios} />}
       </div>
     </SessionProvider>
-  );
+  )
 }
 
 App.getInitialProps = async () => {
-  const response = await fetchAPI('/audios?sort=id:desc'); // /audios?sort=id:desc&pagination[limit]=25
-  const audios = await response.json();
+  const response = await fetchAPI('/audios?sort=id:desc') // /audios?sort=id:desc&pagination[limit]=25
+  const audios = await response.json()
   return { audios }
-};
+}
