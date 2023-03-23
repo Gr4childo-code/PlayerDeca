@@ -1,6 +1,6 @@
 const images1 = [
 	{
-		id: 1, song: 'Song 1', author: 'Author 1', img: 'https://via.placeholder.com/946x500/901C3F/FFFFFF'
+		id: 1, song: 'Song 1', author: 'Author 1', img: 'https://via.placeholder.com/946x500/601C3F/FFFFFF'
 	},
 	{ id: 2, song: 'Song 2', author: 'Author 2', img: 'https://via.placeholder.com/946x500/FF3783/FFFFFF' },
 	{ id: 3, song: 'Song 3', author: 'Author 3', img: 'https://via.placeholder.com/946x500/C70039/FFFFFF' },

@@ -81,9 +81,9 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            {/*  <Slider images={dataImage2} /> */}
+            <Slider data={dataImage2} />
             <Slider data={dataImage1} />
-            {/*   <Slider images={dataImage3} /> */}
+            <Slider data={dataImage3} />
             <EventSection />
           </div>
           <div className='layout__right'>
