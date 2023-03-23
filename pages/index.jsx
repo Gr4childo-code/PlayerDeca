@@ -12,9 +12,9 @@ import Toast from '@/ui/components/global/Toast';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10 } from '@/utils/api/QueryParams';
-import dataSlider1 from '../ui/components/global/Slider/dataSlider1';
-import dataSlider2 from '../ui/components/global/Slider/dataSlider2';
-import dataSlider3 from '../ui/components/global/Slider/dataSlider3';
+import dataSlider1 from '../ui/components/global/Slider/dataSlider/dataSlider1';
+import dataSlider2 from '../ui/components/global/Slider/dataSlider/dataSlider2';
+import dataSlider3 from '../ui/components/global/Slider/dataSlider/dataSlider3';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
@@ -91,7 +91,7 @@ export default function Home({ audioTop }) {
             <Slider
               data={dataSlider3}
               pagination={true}
-              filter={'boxShadow'}
+              filter={'gradient'}
               buttons={false}
               title={'Новые плейлисты'}
             />
@@ -112,7 +112,7 @@ export default function Home({ audioTop }) {
             <Slider
               data={dataSlider3}
               pagination={true}
-              filter={'boxShadow'}
+              filter={'gradient'}
               buttons={false}
               title={'Slider 5'}
             />

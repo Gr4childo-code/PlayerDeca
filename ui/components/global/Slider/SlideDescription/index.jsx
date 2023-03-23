@@ -10,8 +10,8 @@ export default function SlideDescription({ filter, slide }) {
         className={`${
           filter == 'blur'
             ? styles.wrapper__blur
-            : styles.wrapper__list && filter == 'boxShadow'
-            ? styles.wrapper__boxShadow
+            : styles.wrapper__list && filter == 'gradient'
+            ? styles.wrapper__gradient
             : styles.wrapper__list && filter == 'none'
             ? styles.wrapper__none
             : styles.wrapper__list
