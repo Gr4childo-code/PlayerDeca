@@ -14,7 +14,7 @@ const Playlist_Page = ({ playlist }) => {
               src={
                 process.env.NEXT_PUBLIC_API_URL + poster.data.attributes?.url
               }
-              // className={styles.side__bar__cover__img}
+              className={styles.side__bar__cover__img}
             />
           )}
         </div>
@@ -40,10 +40,14 @@ const Playlist_Page = ({ playlist }) => {
           </div>
         </div>
         <hr className={styles.hr} />
-        {audio &&
+        {audio ? (
+          audio &&
           audio?.data.map(({ id, attributes }, index) => (
             <Track key={id} id={id} index={index + 1} attributes={attributes} />
-          ))}
+          ))
+        ) : (
+          <div className={styles.nonTrack}>Треков нет</div>
+        )}
       </div>
     </div>
   );

@@ -5,15 +5,19 @@
 .side__bar {
   display: flex;
   flex-direction: column;
-
-  img {
+  &__cover {
     width: 300px;
     height: 300px;
-    background-size: cover;
-    max-width: 100%;
-    height: auto;
+    background: var(--black);
     border-radius: 5px;
+    &__img {
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
+
   .release {
     margin: 10px 0;
     color: var(--white-80);
@@ -66,5 +70,11 @@
     margin: 20px 0;
 
     border: 1px solid var(--ui-color-one);
+  }
+  .nonTrack {
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 1.5px;
+    color: var(--white-90);
   }
 }
