@@ -13,7 +13,7 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
   const slide = currentDataSlide[currentSlide];
 
   const handlePrevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? data.length - 1 : currentSlide - 1);
+    setCurrentSlide(currentSlide === 0 ? currentSlide : currentSlide - 1);
   };
 
   const handleNextSlide = () => {
