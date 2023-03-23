@@ -1,7 +1,7 @@
 import qs from 'qs';
 
 const SearchByAuthor = (input = null) => {
-  const query = qs.stringify(
+  const queryFilter = qs.stringify(
     {
       filters: {
         author: {
@@ -13,11 +13,11 @@ const SearchByAuthor = (input = null) => {
       encodeValuesOnly: true, // prettify URL
     }
   );
-  return query;
+  return queryFilter;
 };
 
 const first10 = () => {
-  const query1 = qs.stringify(
+  const queryFirst10 = qs.stringify(
     {
       sort: ['likes:desc'],
       pagination: {
@@ -29,8 +29,25 @@ const first10 = () => {
       encodeValuesOnly: true, // prettify URL
     }
   );
-  return query1;
+  return queryFirst10;
   // dsajda
 };
 
-export { SearchByAuthor, first10 };
+const playlistID = (query) => {
+  const queryPlaylistID = qs.stringify(
+    {
+      filters: {
+        id: {
+          $eq: query,
+        },
+      },
+      populate: ['poster', 'audio', 'users_permissions_user'],
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
+    }
+  );
+  return queryPlaylistID;
+};
+
+export { SearchByAuthor, first10, playlistID };
