@@ -12,9 +12,9 @@ import Toast from '@/ui/components/global/Toast';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10 } from '@/utils/api/QueryParams';
-import dataImage1 from '../ui/components/global/Slider/dataImage1';
-import dataImage2 from '../ui/components/global/Slider/dataImage2';
-import dataImage3 from '../ui/components/global/Slider/dataImage3';
+import dataSlider1 from '../ui/components/global/Slider/dataSlider1';
+import dataSlider2 from '../ui/components/global/Slider/dataSlider2';
+import dataSlider3 from '../ui/components/global/Slider/dataSlider3';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
@@ -82,42 +82,42 @@ export default function Home({ audioTop }) {
         <div className='layout'>
           <div className='layout__left'>
             <Slider
-              data={dataImage2}
+              data={dataSlider2}
               pagination={true}
               filter={'blur'}
               buttons={true}
               title={'Новинки Dless'}
             />
             <Slider
-              data={dataImage3}
+              data={dataSlider3}
               pagination={true}
               filter={'boxShadow'}
               buttons={false}
               title={'Новые плейлисты'}
             />
             <Slider
-              data={dataImage1}
+              data={dataSlider1}
               pagination={true}
               filter={'none'}
               buttons={true}
               title={'Новые альбомы'}
             />
             <Slider
-              data={dataImage2}
+              data={dataSlider2}
               pagination={true}
               filter={'blur'}
               buttons={false}
               title={'Slider 4'}
             />
             <Slider
-              data={dataImage3}
+              data={dataSlider3}
               pagination={true}
               filter={'boxShadow'}
               buttons={false}
               title={'Slider 5'}
             />
             <Slider
-              data={dataImage1}
+              data={dataSlider1}
               pagination={false}
               filter={'none'}
               buttons={true}

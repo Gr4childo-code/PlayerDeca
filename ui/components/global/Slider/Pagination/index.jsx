@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '@/ui/components/global/Slider/Slider.module.scss';
+import styles from '@/ui/components/global/Slider/Pagination/Pagination.module.scss';
 
 export default function Pagination({
   currentDataSlide,
