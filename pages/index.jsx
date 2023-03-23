@@ -81,9 +81,9 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <Slider data={dataImage2} />
-            <Slider data={dataImage1} />
-            <Slider data={dataImage3} />
+            <Slider data={dataImage2} pagination={true} filter={'blur'} />
+            <Slider data={dataImage1} pagination={false} filter={'none'} />
+            <Slider data={dataImage3} pagination={true} filter={'boxShadow'} />
             <EventSection />
           </div>
           <div className='layout__right'>

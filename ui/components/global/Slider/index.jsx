@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({ data }) {
+export default function Slider({ data, pagination, filter }) {
   const [currentDataSlide] = useState(data);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -33,22 +33,34 @@ export default function Slider({ data }) {
           alt={`image ${currentSlide}`}></img>
       </div>
       <>
-        <ul key={slide.id} className={styles.wrapper__list}>
+        <ul
+          key={slide.id}
+          className={`${
+            filter == 'blur'
+              ? styles.wrapper__blur
+              : styles.wrapper__list && filter == 'boxShadow'
+              ? styles.wrapper__boxShadow
+              : styles.wrapper__list && filter == 'none'
+              ? styles.wrapper__none
+              : styles.wrapper__list
+          }`}>
           <li className={styles.wrapper__item}>{slide.song}</li>
           <li className={styles.wrapper__item}>{slide.author}</li>
         </ul>
       </>
-      <div className={styles.links}>
-        {currentDataSlide &&
-          [...new Array(currentDataSlide.length)].map((e, index) => (
-            <div
-              onMouseEnter={() => currLink(index)}
-              className={`${styles.links__points} ${
-                index === currentSlide ? styles.links__active : ''
-              }`}
-              key={index}></div>
-          ))}
-      </div>
+      {pagination && (
+        <div className={styles.links}>
+          {currentDataSlide &&
+            [...new Array(currentDataSlide.length)].map((e, index) => (
+              <div
+                onMouseEnter={() => currLink(index)}
+                className={`${styles.links__points} ${
+                  index === currentSlide ? styles.links__active : ''
+                }`}
+                key={index}></div>
+            ))}
+        </div>
+      )}
     </div>
   );
 }

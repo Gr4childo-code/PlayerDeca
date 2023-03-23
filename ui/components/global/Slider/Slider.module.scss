@@ -5,8 +5,35 @@
   justify-content: space-between;
   margin-top: 20px;
   &__list {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: var(--black-80);
+  }
+  &__blur {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(50px);
+  }
+  &__boxShadow {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: var(--ui-color-one);
+    backdrop-filter: blur(50px);
+  }
+  &__none {
     position: absolute;
     bottom: 7px;
     left: 7px;
