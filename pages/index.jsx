@@ -12,6 +12,9 @@ import Toast from '@/ui/components/global/Toast';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10 } from '@/utils/api/QueryParams';
+import dataSlider1 from '../ui/components/global/Slider/dataSlider/dataSlider1';
+import dataSlider2 from '../ui/components/global/Slider/dataSlider/dataSlider2';
+import dataSlider3 from '../ui/components/global/Slider/dataSlider/dataSlider3';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
@@ -34,7 +37,6 @@ export default function Home({ audioTop }) {
     };
     setList([...list, toastItem]);
   };
-
   return (
     <>
       <Head>
@@ -79,7 +81,48 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <Slider />
+            <Slider
+              data={dataSlider2}
+              pagination={true}
+              filter={'blur'}
+              buttons={true}
+              title={'Новинки Dless'}
+            />
+            <Slider
+              data={dataSlider3}
+              pagination={true}
+              filter={'gradient'}
+              buttons={false}
+              title={'Новые плейлисты'}
+            />
+            <Slider
+              data={dataSlider1}
+              pagination={true}
+              filter={'none'}
+              buttons={true}
+              title={'Новые альбомы'}
+            />
+            <Slider
+              data={dataSlider2}
+              pagination={true}
+              filter={'blur'}
+              buttons={false}
+              title={'Slider 4'}
+            />
+            <Slider
+              data={dataSlider3}
+              pagination={true}
+              filter={'gradient'}
+              buttons={false}
+              title={'Slider 5'}
+            />
+            <Slider
+              data={dataSlider1}
+              pagination={false}
+              filter={'none'}
+              buttons={true}
+              title={'Slider 6'}
+            />
             <EventSection />
           </div>
           <div className='layout__right'>
