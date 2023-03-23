@@ -1,15 +1,11 @@
 import { useState } from 'react';
+import Buttons from './Buttons';
+import Pagination from './Pagination';
+import Image from 'next/image';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({
-  title,
-  data,
-  pagination,
-  filter,
-  buttons,
-  size,
-}) {
+export default function Slider({ title, data, pagination, filter, buttons }) {
   const [currentDataSlide] = useState(data);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -23,28 +19,20 @@ export default function Slider({
     setCurrentSlide(currentSlide === data.length - 1 ? 0 : currentSlide + 1);
   };
 
-  const currLink = (index) => {
+  const currentLink = (index) => {
     setCurrentSlide(index);
   };
 
   return (
     <div className={styles.wrapper}>
       <h2>{title}</h2>
-      {buttons && (
-        <div className={styles.button}>
-          <span
-            onClick={handlePrevSlide}
-            className={styles.button__left}></span>
-          <span
-            onClick={handleNextSlide}
-            className={styles.button__right}></span>
-        </div>
-      )}
       <div className={styles.header}>
-        <img
+        <Image
+          width={946}
+          height={500}
           src={slide.img}
           className={styles.header__img}
-          alt={`image ${currentSlide}`}></img>
+          alt={`image ${currentSlide}`}></Image>
       </div>
       <>
         <ul
@@ -62,18 +50,14 @@ export default function Slider({
           <li className={styles.wrapper__item}>{slide.author}</li>
         </ul>
       </>
+      {/*  Кнопки и пагинация */}
+      {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
       {pagination && (
-        <div className={styles.links}>
-          {currentDataSlide &&
-            [...new Array(currentDataSlide.length)].map((e, index) => (
-              <div
-                onMouseEnter={() => currLink(index)}
-                className={`${styles.links__points} ${
-                  index === currentSlide ? styles.links__active : ''
-                }`}
-                key={index}></div>
-            ))}
-        </div>
+        <Pagination
+          currentDataSlide={currentDataSlide}
+          currentSlide={currentSlide}
+          currentLink={currentLink}
+        />
       )}
     </div>
   );

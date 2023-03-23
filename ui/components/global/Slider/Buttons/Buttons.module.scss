@@ -1,0 +1,54 @@
+.button {
+  display: flex;
+  justify-content: space-between;
+  font-size: 35px;
+  user-select: none;
+  &__left,
+  &__right {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 76px;
+    cursor: pointer;
+    color: var(--slider-button-color);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid var(--white);
+    border-left: 2px solid var(--white);
+  }
+  &__left {
+    left: 20px;
+    transform: rotate(-45deg);
+  }
+  &__right {
+    right: 20px;
+    transform: rotate(135deg);
+  }
+}
+
+.links {
+  display: flex;
+  position: absolute;
+  margin-top: 5px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  &__points {
+    flex: 1;
+    height: 6px;
+    background: var(--white-20);
+    margin-left: 6px;
+    border-radius: 2px;
+    transition: background 0.1s;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__active {
+    background: var(--ui-color-one);
+  }
+}
