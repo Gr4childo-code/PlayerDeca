@@ -2,18 +2,18 @@ import { useState } from 'react';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({ images }) {
-  const [currentImage] = useState(images);
+export default function Slider({ data }) {
+  const [currentDataSlide] = useState(data);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slide = currentImage[currentSlide];
+  const slide = currentDataSlide[currentSlide];
 
   const handlePrevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
+    setCurrentSlide(currentSlide === 0 ? data.length - 1 : currentSlide - 1);
   };
 
   const handleNextSlide = () => {
-    setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
+    setCurrentSlide(currentSlide === data.length - 1 ? 0 : currentSlide + 1);
   };
 
   const currLink = (index) => {
@@ -28,19 +28,19 @@ export default function Slider({ images }) {
       </div>
       <div className={styles.header}>
         <img
-          src={slide}
+          src={slide.img}
           className={styles.header__img}
           alt={`image ${currentSlide}`}></img>
       </div>
       <>
-        <ul key={currentSlide} className={styles.wrapper__list}>
-          <li className={styles.wrapper__item}>Song</li>
-          <li className={styles.wrapper__item}>Author</li>
+        <ul key={slide.id} className={styles.wrapper__list}>
+          <li className={styles.wrapper__item}>{slide.song}</li>
+          <li className={styles.wrapper__item}>{slide.author}</li>
         </ul>
       </>
       <div className={styles.links}>
-        {currentImage &&
-          [...new Array(currentImage.length)].map((e, index) => (
+        {currentDataSlide &&
+          [...new Array(currentDataSlide.length)].map((e, index) => (
             <div
               onMouseEnter={() => currLink(index)}
               className={`${styles.links__points} ${
