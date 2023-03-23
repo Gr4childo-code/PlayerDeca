@@ -12,6 +12,9 @@ import Toast from '@/ui/components/global/Toast';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10 } from '@/utils/api/QueryParams';
+import dataImage1 from '../ui/components/global/Slider/dataImage1';
+import dataImage2 from '../ui/components/global/Slider/dataImage2';
+import dataImage3 from '../ui/components/global/Slider/dataImage3';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
@@ -34,20 +37,6 @@ export default function Home({ audioTop }) {
     };
     setList([...list, toastItem]);
   };
-
-  const images = [
-    'https://via.placeholder.com/400x200/FF5733/FFFFFF',
-    'https://via.placeholder.com/400x200/C70039/FFFFFF',
-    'https://via.placeholder.com/400x200/900C3F/FFFFFF',
-    'https://via.placeholder.com/400x200/FF5743/FFFFFF',
-    'https://via.placeholder.com/400x200/C70059/FFFFFF',
-    'https://via.placeholder.com/400x200/901C3F/FFFFFF',
-    'https://via.placeholder.com/400x200/FF4733/FFFFFF',
-    'https://via.placeholder.com/400x200/C71139/FFFFFF',
-    'https://via.placeholder.com/400x200/511C3F/FFFFFF',
-    'https://via.placeholder.com/400x200/411C3F/FFFFFF',
-  ];
-
   return (
     <>
       <Head>
@@ -92,7 +81,9 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <Slider images={images} />
+            <Slider images={dataImage2} />
+            <Slider images={dataImage1} />
+            <Slider images={dataImage3} />
             <EventSection />
           </div>
           <div className='layout__right'>

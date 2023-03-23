@@ -16,6 +16,10 @@ export default function Slider({ images }) {
     setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
   };
 
+  const currLink = (index) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.button}>
