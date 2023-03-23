@@ -81,9 +81,45 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <Slider data={dataImage2} pagination={true} filter={'blur'} />
-            <Slider data={dataImage1} pagination={false} filter={'none'} />
-            <Slider data={dataImage3} pagination={true} filter={'boxShadow'} />
+            <Slider
+              data={dataImage2}
+              pagination={true}
+              filter={'blur'}
+              buttons={true}
+              title={'Новинки Dless'}
+            />
+            <Slider
+              data={dataImage3}
+              pagination={true}
+              filter={'boxShadow'}
+              buttons={false}
+              title={'Новые плейлисты'}
+            />
+            <Slider
+              data={dataImage1}
+              pagination={true}
+              filter={'none'}
+              buttons={true}
+              title={'Новые альбомы'}
+            />
+            <Slider
+              data={dataImage2}
+              pagination={true}
+              filter={'blur'}
+              buttons={false}
+            />
+            <Slider
+              data={dataImage3}
+              pagination={true}
+              filter={'boxShadow'}
+              buttons={false}
+            />
+            <Slider
+              data={dataImage1}
+              pagination={false}
+              filter={'none'}
+              buttons={true}
+            />
             <EventSection />
           </div>
           <div className='layout__right'>

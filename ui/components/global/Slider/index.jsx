@@ -2,7 +2,14 @@ import { useState } from 'react';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({ data, pagination, filter }) {
+export default function Slider({
+  title,
+  data,
+  pagination,
+  filter,
+  buttons,
+  size,
+}) {
   const [currentDataSlide] = useState(data);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -22,10 +29,17 @@ export default function Slider({ data, pagination, filter }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.button}>
-        <span onClick={handlePrevSlide} className={styles.button__left}></span>
-        <span onClick={handleNextSlide} className={styles.button__right}></span>
-      </div>
+      <h2>{title}</h2>
+      {buttons && (
+        <div className={styles.button}>
+          <span
+            onClick={handlePrevSlide}
+            className={styles.button__left}></span>
+          <span
+            onClick={handleNextSlide}
+            className={styles.button__right}></span>
+        </div>
+      )}
       <div className={styles.header}>
         <img
           src={slide.img}
