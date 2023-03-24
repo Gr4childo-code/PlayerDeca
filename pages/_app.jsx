@@ -1,10 +1,15 @@
-import { Roboto } from '@next/font/google';
-import { SessionProvider } from 'next-auth/react';
-import { fetchAPI } from '@/utils/api/fetch';
-import Player from '@/ui/components/global/Player';
+
 
 import AppContext from '@/ui/components/global/AppContext';
 import { useState, createContext } from 'react';
+import { Roboto } from '@next/font/google'
+import { SessionProvider } from 'next-auth/react'
+import { fetchAPI } from '@/utils/api/fetch'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
+
+import Player from '@/ui/components/global/Player'
 
 const roboto = Roboto({
   subsets: ['latin'],

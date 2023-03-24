@@ -4,6 +4,10 @@ import AppContext from '../AppContext';
 import Head from 'next/head';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMusic } from '@fortawesome/free-solid-svg-icons'
+
+import styles from '@/ui/components/global/Player/Player.module.scss'
 
 export default function Player() {
   const context = useContext(AppContext);
@@ -141,6 +145,11 @@ export default function Player() {
                 }`}
                 onClick={play}
               ></div>
+              {track?.posterPath ?
+                <img src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath} /> :
+                <FontAwesomeIcon icon={faMusic} />
+              }
+              <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
             </div>
             <div className={styles.playerBox__body}>
               <div
@@ -190,6 +199,17 @@ export default function Player() {
                         <div className={styles.playlist__info}>
                           <strong>{attributes.author}</strong> -{' '}
                           {attributes.name}
+                  {audios && audios?.data.map(({ id, attributes }, index) => (
+                    <div className={`${styles.playlist__item} ${track.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => {nextTrack(id, attributes), _indexTrach.current = index}}>
+                      <div className={styles.playlist__cover}>
+                        {attributes.posterPath ?
+                          <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} /> :
+                          <FontAwesomeIcon icon={faMusic} />
+                        }
+                        <div className={styles.playlist__cover_active}>
+                          <span></span>
+                          <span></span>
+                          <span></span>
                         </div>
                       </div>
                     ))}
