@@ -8,17 +8,16 @@ import Slider from '@/ui/components/global/Slider';
 import EventSection from '@/ui/components/global/EventSection';
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
-
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const response2 = await fetchAPI(`/audios?${first10()}`);
-  const audioTop = await response2.json();
+  const first10Resp = await fetchAPI(`/audios?${first10()}`);
+  const audioTop = await first10Resp.json();
 
-  const response3 = await fetchAPI(`/playlists?${playlistNew()}`);
-  const playlists = await response3.json();
+  const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
+  const playlists = await playlistNewResp.json();
   return {
     props: { audioTop, playlists },
   };
@@ -46,7 +45,6 @@ export default function Home({ audioTop, playlists }) {
       </Head>
 
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
-
       <Toast toastlist={list} setList={setList} />
       {/* <button
         onClick={() => {
