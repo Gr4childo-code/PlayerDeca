@@ -17,6 +17,7 @@ export const EventItem = ({ id, index, attributes }) => {
     9: 'Ноября',
     10: 'Декабря',
   };
+  console.log(poster.data.attributes.name); //путь до кратинки
 
   const eventDate = new Date(date);
   const eventMonth = arrMonth[eventDate.getMonth()];
