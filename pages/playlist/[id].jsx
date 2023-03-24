@@ -9,7 +9,6 @@ export const getServerSideProps = async (context) => {
   const { id } = context.params;
   const response = await fetchAPI(`/playlists?${playlistID(id)}`);
   const list = await response.json();
-  console.log(list.data.attributes);
   if (list.data.length == 0) {
     return {
       notFound: true,
@@ -32,7 +31,7 @@ const Details = ({ list }) => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <Playlist_Page playlist={data.flat(Infinity)} />
+        <Playlist_Page playlist={data} />
       </div>
     </>
   );

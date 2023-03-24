@@ -1,0 +1,51 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+  &__list {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: var(--black-80);
+  }
+  &__blur {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(50px);
+  }
+  &__gradient {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background: var(--gradient);
+    backdrop-filter: blur(50px);
+  }
+  &__none {
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+    padding: 15px 20px;
+    border-radius: 5px;
+  }
+  &__item {
+    list-style-type: none;
+    padding: 2px 0;
+    &:last-child {
+      opacity: 0.6;
+    }
+  }
+}
