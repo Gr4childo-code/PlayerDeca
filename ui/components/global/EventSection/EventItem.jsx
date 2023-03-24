@@ -7,13 +7,32 @@ export const EventItem = ({ id, index, attributes }) => {
   console.log(attributes);
   console.log(poster.data.attributes.name);
 
+  const arrMonth = [
+    'Января',
+    'Февраля',
+    'Марта',
+    'Апреля',
+    'Мая',
+    'Июня',
+    'Июля',
+    'Августа',
+    'Сентября',
+    'Ноября',
+    'Декабря',
+  ];
+
+  const myDate = new Date(date);
+  const year = myDate.getFullYear();
+  /* const month = myDate.getMonth(); */
+  const day = myDate.getDate();
+
   return (
     <div className={styles.wrapper} key={id} index={index}>
       <div className={styles.eventInfo}>
         <ul className={styles.eventInfo__texts}>
-          <li className={styles.dataEvent__number}></li>
-          <li className={styles.dataEvent__month}>{date}</li>
-          <li className={styles.dataEvent__year}></li>
+          <li className={styles.dataEvent__number}>{day}</li>
+          <li className={styles.dataEvent__month}>{arrMonth[2]}</li>
+          <li className={styles.dataEvent__year}>{year}</li>
           <li className={styles.dataEvent__time}>{time}</li>
         </ul>
         <a href='http:/'>
