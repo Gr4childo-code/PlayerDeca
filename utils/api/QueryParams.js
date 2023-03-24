@@ -36,12 +36,22 @@ const first10 = () => {
 const playlistID = (query) => {
   const queryPlaylistID = qs.stringify(
     {
+      fields: ['title', 'createdAt', 'id'],
+
       filters: {
         id: {
           $eq: query,
         },
       },
-      populate: ['poster', 'audio', 'users_permissions_user'],
+      populate: {
+        poster: {
+          fields: ['url'],
+        },
+        audio: { fields: ['posterPath', 'name', 'author', 'id'] },
+        users_permissions_user: {
+          fields: ['name'],
+        },
+      },
     },
     {
       encodeValuesOnly: true, // prettify URL
@@ -50,4 +60,25 @@ const playlistID = (query) => {
   return queryPlaylistID;
 };
 
-export { SearchByAuthor, first10, playlistID };
+const playlistNew = () => {
+  const queryPlaylistNew = qs.stringify(
+    {
+      fields: ['title', 'createdAt'],
+      populate: {
+        poster: {
+          fields: ['url'],
+        },
+        users_permissions_user: {
+          fields: ['name'],
+        },
+      },
+      sort: ['createdAt:desc'],
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
+    }
+  );
+  return queryPlaylistNew;
+};
+
+export { SearchByAuthor, first10, playlistID, playlistNew };
