@@ -17,14 +17,19 @@ export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
 
+  const responceEvents = await fetch(
+    'https://api.dless.ru/api/events?fields=title,place,date,time,author&populate=poster'
+  );
+  const events = await responceEvents.json();
+
   const response3 = await fetchAPI(`/playlists?${playlistNew()}`);
   const playlists = await response3.json();
   return {
-    props: { audioTop, playlists },
+    props: { audioTop, playlists, events },
   };
 };
 
-export default function Home({ audioTop, playlists }) {
+export default function Home({ audioTop, playlists, events }) {
   const [list, setList] = useState([]);
   let toastItem = null;
 
@@ -37,6 +42,9 @@ export default function Home({ audioTop, playlists }) {
     };
     setList([...list, toastItem]);
   };
+
+  console.log(events, 'Твой запрос пришел');
+
   return (
     <>
       <Head>
@@ -91,10 +99,11 @@ export default function Home({ audioTop, playlists }) {
             <Slider
               data={playlists.data}
               pagination={true}
+              filter={'blur'}
               title={'Плейлисты пользователей'}
             />
 
-            <EventSection />
+            <EventSection events={events} />
           </div>
           <div className='layout__right'>
             <Top10 audioTop={audioTop} />
