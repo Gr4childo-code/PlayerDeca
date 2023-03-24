@@ -11,13 +11,13 @@ import Toast from '@/ui/components/global/Toast';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew, mainEvents } from '@/utils/api/QueryParams';
+import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
 
-  const responceEvents = await fetchAPI(`/events?${mainEvents()}`);
+  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
   const events = await responceEvents.json();
 
   const response3 = await fetchAPI(`/playlists?${playlistNew()}`);

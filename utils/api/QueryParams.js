@@ -81,7 +81,7 @@ const playlistNew = () => {
 	return queryPlaylistNew;
 };
 
-const mainEvents = () => {
+const dataEvents = () => {
 	const queryEvents = qs.stringify(
 		{
 			fields: ['title', 'place', 'date', 'author', 'time'],
@@ -97,4 +97,4 @@ const mainEvents = () => {
 	return queryEvents
 }
 
-export { SearchByAuthor, first10, playlistID, playlistNew, mainEvents };
+export { SearchByAuthor, first10, playlistID, playlistNew, dataEvents };
