@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 import Buttons from './Buttons';
 import Pagination from './Pagination';
 import SlideDescription from './SlideDescription';
-import Image from 'next/image';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function Slider({ title, data, pagination, filter, buttons }) {
   const [currentDataSlide] = useState(data);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const router = useRouter();
   const slide = currentDataSlide[currentSlide];
 
   const handlePrevSlide = () => {
@@ -31,13 +32,15 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
         <img
           width={946}
           height={500}
-          // src={slide.img}
           src={
             process.env.NEXT_PUBLIC_API_URL +
             slide.attributes?.poster?.data?.attributes?.url
           }
           className={styles.header__img}
           alt={`image ${currentSlide}`}
+          onClick={() => {
+            router.push(`/playlists/${slide.id}`);
+          }}
         />
       </div>
 
