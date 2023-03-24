@@ -15,9 +15,12 @@ export default function SlideDescription({ filter, slide }) {
             : styles.wrapper__list && filter == 'none'
             ? styles.wrapper__none
             : styles.wrapper__list
-        }`}>
-        <li className={styles.wrapper__item}>{slide.song}</li>
-        <li className={styles.wrapper__item}>{slide.author}</li>
+        }`}
+      >
+        <li className={styles.wrapper__item}>
+          {slide.attributes.users_permissions_user.data.attributes.name}
+        </li>
+        <li className={styles.wrapper__item}>{slide.attributes.title}</li>
       </ul>
     </>
   );

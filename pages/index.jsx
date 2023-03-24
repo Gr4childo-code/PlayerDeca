@@ -11,20 +11,20 @@ import Toast from '@/ui/components/global/Toast';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10 } from '@/utils/api/QueryParams';
-import dataSlider1 from '../ui/components/global/Slider/dataSlider/dataSlider1';
-import dataSlider2 from '../ui/components/global/Slider/dataSlider/dataSlider2';
-import dataSlider3 from '../ui/components/global/Slider/dataSlider/dataSlider3';
+import { first10, playlistNew } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
+
+  const response3 = await fetchAPI(`/playlists?${playlistNew()}`);
+  const playlists = await response3.json();
   return {
-    props: { audioTop },
+    props: { audioTop, playlists },
   };
 };
 
-export default function Home({ audioTop }) {
+export default function Home({ audioTop, playlists }) {
   const [list, setList] = useState([]);
   let toastItem = null;
 
@@ -81,48 +81,19 @@ export default function Home({ audioTop }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <Slider
-              data={dataSlider2}
-              pagination={true}
-              filter={'blur'}
-              buttons={true}
-              title={'Новинки Dless'}
-            />
-            <Slider
+            {/* <Slider
               data={dataSlider3}
               pagination={true}
               filter={'gradient'}
               buttons={false}
               title={'Новые плейлисты'}
-            />
+            /> */}
             <Slider
-              data={dataSlider1}
+              data={playlists.data}
               pagination={true}
-              filter={'none'}
-              buttons={true}
-              title={'Новые альбомы'}
+              title={'Плейлисты пользователей'}
             />
-            <Slider
-              data={dataSlider2}
-              pagination={true}
-              filter={'blur'}
-              buttons={false}
-              title={'Slider 4'}
-            />
-            <Slider
-              data={dataSlider3}
-              pagination={true}
-              filter={'gradient'}
-              buttons={false}
-              title={'Slider 5'}
-            />
-            <Slider
-              data={dataSlider1}
-              pagination={false}
-              filter={'none'}
-              buttons={true}
-              title={'Slider 6'}
-            />
+
             <EventSection />
           </div>
           <div className='layout__right'>
