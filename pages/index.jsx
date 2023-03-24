@@ -17,8 +17,8 @@ export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
 
-  const responceEvents = await fetch(
-    'https://api.dless.ru/api/events?fields=title,place,date,time,author&populate=poster'
+  const responceEvents = await fetchAPI(
+    `/events?fields=title,place,date,time,author&populate=poster`
   );
   const events = await responceEvents.json();
 
@@ -43,7 +43,7 @@ export default function Home({ audioTop, playlists, events }) {
     setList([...list, toastItem]);
   };
 
-  console.log(events, 'Твой запрос пришел');
+  /*   console.log(events, 'Твой запрос пришел'); */
 
   return (
     <>

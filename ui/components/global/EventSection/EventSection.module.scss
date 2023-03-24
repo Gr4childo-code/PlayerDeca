@@ -15,19 +15,19 @@
 }
 
 .dataEvent {
-  &_number {
+  &__number {
     font-size: 60px;
     font-weight: 700;
   }
-  &_month {
+  &__month {
     font-size: 22px;
     background: var(--gradient);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  &_year,
-  &_time {
+  &__year,
+  &__time {
     font-size: 15px;
     filter: contrast(20%);
   }
@@ -36,7 +36,7 @@
 .eventInfo {
   display: flex;
   align-items: center;
-  &_texts {
+  &__texts {
     margin: 0 40px;
     &:first-child {
       margin-left: 0;
@@ -45,7 +45,7 @@
       padding-bottom: 10px;
     }
   }
-  &_links {
+  &__links {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +63,7 @@
       color: var(--whtie);
     }
   }
-  &_title {
+  &__title {
     font-size: 24px;
     background: var(--gradient);
     background-clip: text;
@@ -71,11 +71,11 @@
     color: transparent;
     font-weight: bold;
   }
-  &_descr {
+  &__place {
     font-size: 20px;
     filter: contrast(20%);
   }
-  &_author {
+  &__author {
     padding-top: 20px;
     font-size: 15px;
     filter: contrast(20%);
