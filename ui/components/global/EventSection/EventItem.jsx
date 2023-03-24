@@ -1,38 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from '@/ui/components/global/EventSection/EventSection.module.scss';
 
 export const EventItem = ({ id, index, attributes }) => {
   const { title, place, date, time, author, poster } = attributes;
-  console.log(attributes);
-  console.log(poster.data.attributes.name);
+  const arrMonth = {
+    0: 'Января',
+    1: 'Февраля',
+    2: 'Марта',
+    3: 'Апреля',
+    4: 'Мая',
+    5: 'Июня',
+    6: 'Июля',
+    7: 'Августа',
+    8: 'Сентября',
+    9: 'Ноября',
+    10: 'Декабря',
+  };
 
-  const arrMonth = [
-    'Января',
-    'Февраля',
-    'Марта',
-    'Апреля',
-    'Мая',
-    'Июня',
-    'Июля',
-    'Августа',
-    'Сентября',
-    'Ноября',
-    'Декабря',
-  ];
-
-  const myDate = new Date(date);
-  const year = myDate.getFullYear();
-  /* const month = myDate.getMonth(); */
-  const day = myDate.getDate();
+  const eventDate = new Date(date);
+  const eventMonth = arrMonth[eventDate.getMonth()];
+  const eventYear = eventDate.getFullYear();
+  const eventDay = eventDate.getDate();
 
   return (
     <div className={styles.wrapper} key={id} index={index}>
       <div className={styles.eventInfo}>
         <ul className={styles.eventInfo__texts}>
-          <li className={styles.dataEvent__number}>{day}</li>
-          <li className={styles.dataEvent__month}>{arrMonth[2]}</li>
-          <li className={styles.dataEvent__year}>{year}</li>
+          <li className={styles.dataEvent__number}>{eventDay}</li>
+          <li className={styles.dataEvent__month}>{eventMonth}</li>
+          <li className={styles.dataEvent__year}>{eventYear}</li>
           <li className={styles.dataEvent__time}>{time}</li>
         </ul>
         <a href='http:/'>
