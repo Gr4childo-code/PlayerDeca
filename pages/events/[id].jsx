@@ -1,20 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
-import EventCurrent from '@/ui/components/global/EventSection/EventCurrent';
+import EventSection from '@/ui/components/global/EventSection';
+
+import { dataEvents } from '@/utils/api/QueryParams';
+
 import { fetchAPI } from '@/utils/api/fetch';
-import { mainEvents } from '@/utils/api/QueryParams';
 
-export const getServerSideProps = async (context) => {
-  const { id } = context.params;
+export const getServerSideProps = async () => {
+  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
+  const events = await responceEvents.json();
 
-  const response = await fetchAPI(`/events/${mainEvents(id)}`);
-  const events = await response.json();
-  if (events.data.length == 0) {
-    return {
-      notFound: true,
-    };
-  }
   return {
     props: { events },
   };
@@ -31,7 +27,9 @@ const CurrentEvent = ({ events }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
-      <div className='container'>Страничка</div>
+      <div className='container'>
+        <EventSection events={data} />
+      </div>
     </>
   );
 };

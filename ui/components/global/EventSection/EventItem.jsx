@@ -34,7 +34,7 @@ export const EventItem = ({ id, index, attributes }) => {
           <li className={styles.dataEvent__year}>{eventYear}</li>
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
         </ul>
-        <Link href='/events'>
+        <Link href='/events/[id]' as={`/events/${id}`}>
           <img
             src={process.env.NEXT_PUBLIC_API_URL + attributes?.poster}
             alt='done'

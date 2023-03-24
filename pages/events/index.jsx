@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Events() {
-  return <div>Events</div>;
+export default function index() {
+  return <div>События</div>;
 }
