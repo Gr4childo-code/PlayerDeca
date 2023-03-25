@@ -1,24 +1,24 @@
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
-import EventSection from '@/ui/components/global/EventSection';
+import { Event } from '@/ui/components/global/EventSection/Event';
 
+//utils
+import { fetchAPI } from '@/utils/api/fetch';
 import { dataEvents } from '@/utils/api/QueryParams';
 
-import { fetchAPI } from '@/utils/api/fetch';
+export const getServerSideProps = async (context) => {
+  const { id } = context.params;
 
-export const getServerSideProps = async () => {
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
-  const events = await responceEvents.json();
+  const data = await responceEvents.json();
 
   return {
-    props: { events },
+    props: { data },
   };
 };
 
-const CurrentEvent = ({ events }) => {
-  const { data } = events;
-
+const CurrentEvent = ({ data }) => {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ const CurrentEvent = ({ events }) => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <EventSection events={data} />
+        <Event data={data} />
       </div>
     </>
   );

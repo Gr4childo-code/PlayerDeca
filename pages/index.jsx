@@ -5,9 +5,9 @@ import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
-import EventSection from '@/ui/components/global/EventSection';
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
+import AllEvents from './events';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
@@ -98,7 +98,7 @@ export default function Home({ audioTop, playlists, events }) {
               filter={'blur'}
               title={'Плейлисты пользователей'}
             />
-            <EventSection events={events} />
+            <AllEvents events={events} />
           </div>
           <div className='layout__right'>
             <Top10 audioTop={audioTop} />
