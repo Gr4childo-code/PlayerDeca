@@ -28,13 +28,13 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
   return (
     <div className={styles.wrapper}>
       <h2>{title}</h2>
-      <div className={styles.header} id={slide.id}>
+      <div className={styles.header} id={slide?.id}>
         <img
           width={946}
           height={500}
           src={
             process.env.NEXT_PUBLIC_API_URL +
-            slide.attributes?.poster?.data?.attributes?.url
+            slide?.attributes?.poster?.data?.attributes?.url
           }
           className={styles.header__img}
           alt={`image ${currentSlide}`}
