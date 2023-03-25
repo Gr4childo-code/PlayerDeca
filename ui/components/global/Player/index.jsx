@@ -17,7 +17,7 @@ export default function Player({ audios }) {
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false)
-  const [track, setTrack] = useState({id: audios?.data[0].id, ...audios?.data[0].attributes})
+  const [track, setTrack] = useState({id: audios?.data[0]?.id, ...audios?.data[0]?.attributes})
   const [isPlayList, setIsPlayList] = useState(false)
   const _indexTrach = useRef(0)
 
