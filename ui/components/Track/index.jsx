@@ -1,5 +1,9 @@
 import React from 'react';
 import styles from '@/ui/components/Track/Track.module.scss';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-regular-svg-icons'
+
 const Track = ({ id, index, attributes }) => {
   return (
     <div className={styles.track} key={id}>
@@ -26,6 +30,7 @@ const Track = ({ id, index, attributes }) => {
             setIsPlay(!isPlay);
           }}></div> */}
         <i className='fa-regular fa-heart'></i>
+        <FontAwesomeIcon icon={faHeart} />
       </div>
     </div>
   );
