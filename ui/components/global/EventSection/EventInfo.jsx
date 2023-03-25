@@ -3,12 +3,9 @@ import Link from 'next/link';
 
 import styles from '@/ui/components/global/EventSection/EventSection.module.scss';
 
-export const EventInfo = ({ id, attributes, event }) => {
-  if (!event) {
-    return alert('Событие пустое');
-  }
-
+export const EventInfo = ({ id, attributes, index }) => {
   const { title, place, date, time, author, poster } = attributes || {};
+
   const allMonths = {
     0: 'Января',
     1: 'Февраля',
@@ -37,7 +34,7 @@ export const EventInfo = ({ id, attributes, event }) => {
           <li className={styles.dataEvent__year}>{eventYear}</li>
           <li className={styles.dataEvent__time}>{/* {time.slice(0, 5)} */}</li>
         </ul>
-        <Link href={`/events/[id]`}>
+        <Link href={`/events/${id}`}>
           {/* <img
             src={process.env.NEXT_PUBLIC_API_URL + attributes?.poster}
             alt='done'
