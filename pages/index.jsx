@@ -100,8 +100,6 @@ export default function Home({ audioTop, playlists, events }) {
               filter={'blur'}
               title={'Плейлисты пользователей'}
             />
-
-            <EventSection events={events} />
           </div>
           <div className='layout__right'>
             <Top10 audioTop={audioTop} />
