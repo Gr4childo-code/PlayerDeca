@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { AudioInit, AudioTime } from './player'
 import Head from 'next/head';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMusic } from '@fortawesome/free-solid-svg-icons'
+
 import styles from '@/ui/components/global/Player/Player.module.scss'
 
 export default function Player({ audios }) {
@@ -14,7 +17,7 @@ export default function Player({ audios }) {
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false)
-  const [track, setTrack] = useState({id: audios?.data[0].id, ...audios?.data[0].attributes})
+  const [track, setTrack] = useState({id: audios?.data[0]?.id, ...audios?.data[0]?.attributes})
   const [isPlayList, setIsPlayList] = useState(false)
   const _indexTrach = useRef(0)
 
@@ -112,7 +115,10 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {track?.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath} />}
+              {track?.posterPath ?
+                <img src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath} /> :
+                <FontAwesomeIcon icon={faMusic} />
+              }
               <div className={`${styles.playerBox__play} ${!isPlay ? styles.active : ''}`} onClick={play}></div>
             </div>
             <div className={styles.playerBox__body}>
@@ -129,7 +135,10 @@ export default function Player({ audios }) {
                   {audios && audios?.data.map(({ id, attributes }, index) => (
                     <div className={`${styles.playlist__item} ${track.id === id ? styles.playlist__item_active : ''}`} key={id} onClick={() => {nextTrack(id, attributes), _indexTrach.current = index}}>
                       <div className={styles.playlist__cover}>
-                        {attributes.posterPath && <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} />}
+                        {attributes.posterPath ?
+                          <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} /> :
+                          <FontAwesomeIcon icon={faMusic} />
+                        }
                         <div className={styles.playlist__cover_active}>
                           <span></span>
                           <span></span>
