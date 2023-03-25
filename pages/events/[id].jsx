@@ -10,17 +10,19 @@ import { dataEvents } from '@/utils/api/QueryParams';
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
 
-  const responceEvents = await fetchAPI(`/events/${id}`);
-  const data = await responceEvents.json();
+  const responce = await fetchAPI(`/events?${dataEvents(id)}`);
+  const events = await responce.json();
 
   return {
-    props: { event: data },
+    props: { events },
   };
 };
 
-const EventCurr = ({ event }) => {
+const EventCurr = ({ events }) => {
+  const { data } = events;
+
   return (
-    <>
+    <div>
       <Head>
         <meta name='description' content='Decathlon lessons project' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -28,9 +30,9 @@ const EventCurr = ({ event }) => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <EventInfo event={event} />
+        <EventInfo event={data} />
       </div>
-    </>
+    </div>
   );
 };
 

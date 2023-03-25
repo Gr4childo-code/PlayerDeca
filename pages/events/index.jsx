@@ -16,7 +16,7 @@ export const getServerSideProps = async () => {
 
 export default function Events({ events }) {
   return (
-    <div>
+    <div className='container'>
       <div className='title'>События</div>
       {events.data?.map(({ id, attributes }, index) => (
         <ul>
