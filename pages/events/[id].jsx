@@ -12,7 +12,6 @@ export const getServerSideProps = async (context) => {
 
   const responce = await fetchAPI(`/events?${dataEventsId(id)}`);
   const events = await responce.json();
-  console.log(events);
 
   return {
     props: { events },

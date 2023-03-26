@@ -54,4 +54,3 @@ export const EventInfo = ({ id, attributes, index }) => {
     </div>
   );
 };
-/* title,place,date,time,author, poster */
