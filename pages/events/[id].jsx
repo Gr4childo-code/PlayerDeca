@@ -30,7 +30,7 @@ const EventCurr = ({ events }) => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <EventInfo event={data} />
+        <EventInfo events={data} />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import EventsAll from '@/ui/components/global/EventSection/EventsAll';
 
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
+import { dataEvents } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
