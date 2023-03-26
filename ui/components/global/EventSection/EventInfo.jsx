@@ -3,11 +3,8 @@ import Link from 'next/link';
 
 import styles from '@/ui/components/global/EventSection/EventSection.module.scss';
 
-export const EventInfo = ({ id, attributes, index, events }) => {
-  const { title, place, date, time, author, poster } =
-    attributes || {} || events[0].attributes;
-
-  /* console.log(events[0].attributes); */
+export const EventInfo = ({ id, attributes, index }) => {
+  const { title, place, date, time, author, poster } = attributes || {};
 
   const allMonths = {
     0: 'Января',
@@ -29,13 +26,13 @@ export const EventInfo = ({ id, attributes, index, events }) => {
   const eventDay = eventDate.getDate();
 
   return (
-    <div className={styles.wrapper} /* index={index} */>
+    <div className={styles.wrapper} index={index}>
       <div className={styles.eventInfo}>
         <ul className={styles.eventInfo__texts}>
           <li className={styles.dataEvent__number}>{eventDay}</li>
           <li className={styles.dataEvent__month}>{eventMonth}</li>
           <li className={styles.dataEvent__year}>{eventYear}</li>
-          <li className={styles.dataEvent__time}>{/* {time.slice(0, 5)} */}</li>
+          <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
         </ul>
         <Link href={`/events/${id}`}>
           {/* <img

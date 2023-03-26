@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
-import { EventInfo } from '@/ui/components/global/EventSection/EventInfo';
+import EventId from '@/ui/components/global/EventSection/EventId';
 
 //utils
 import { fetchAPI } from '@/utils/api/fetch';
@@ -31,7 +31,7 @@ const EventCurrentId = ({ events }) => {
       </Head>
       <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
-        <EventInfo events={data} />
+        <EventId events={data} />
       </div>
     </div>
   );
