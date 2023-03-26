@@ -19,6 +19,7 @@ const SearchByAuthor = (input = null) => {
 const first10 = () => {
   const queryFirst10 = qs.stringify(
     {
+      fields: ['name', 'path', 'author', 'posterPath', 'likes'],
       sort: ['likes:desc'],
       pagination: {
         start: 0,
