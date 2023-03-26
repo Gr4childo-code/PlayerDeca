@@ -7,7 +7,7 @@ import Script from 'next/script';
 import Slider from '@/ui/components/global/Slider';
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
-import EventsAll from '@/ui/components/global/EventSection/EventsAll';
+import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
-import EventId from '@/ui/components/global/EventSection/EventId';
+import EventId from '@/ui/components/DlessEvents/EventId';
 
 //utils
 import { fetchAPI } from '@/utils/api/fetch';

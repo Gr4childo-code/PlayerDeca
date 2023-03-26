@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-import styles from '@/ui/components/global/EventSection/EventSection.module.scss';
+import styles from '@/ui/components/DlessEvents/DlessEvents.module.scss';
 
 export const EventInfo = ({ id, attributes, index }) => {
   const { title, place, date, time, author, poster } = attributes || {};

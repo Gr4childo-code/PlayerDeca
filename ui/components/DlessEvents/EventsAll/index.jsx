@@ -1,5 +1,5 @@
 import React from 'react';
-import { EventInfo } from '@/ui/components/global/EventSection/EventInfo';
+import { EventInfo } from '@/ui/components/DlessEvents/EventsInfo';
 
 export default function EventsAll({ events }) {
   return (

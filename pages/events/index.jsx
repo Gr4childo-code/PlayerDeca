@@ -1,5 +1,5 @@
 import React from 'react';
-import EventsAll from '@/ui/components/global/EventSection/EventsAll';
+import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 import { fetchAPI } from '@/utils/api/fetch';
 import { dataEvents } from '@/utils/api/QueryParams';
