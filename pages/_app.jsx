@@ -29,6 +29,7 @@ export default function App({
   menu,
 }) {
   const [audioContext, setAudioContext] = useState(audios);
+
   return (
     <SessionProvider session={session}>
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
@@ -37,7 +38,7 @@ export default function App({
             <Component {...pageProps} />
           </Layout>
 
-          {audios && <Player />}
+          {audios && <Player audios={audioContext} />}
         </div>
       </AppContext.Provider>
     </SessionProvider>

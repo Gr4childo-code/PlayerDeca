@@ -6,13 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
-import AppContext from '../AppContext';
 
-export default function Player() {
-  const context = useContext(AppContext);
-  const audios = context.audioContext;
+export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
-  const [isPlay, setIsPlay] = useState(true);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [percentage, setPercentage] = useState(0);
   const [fullTime, setfullTime] = useState('00:00');
@@ -20,36 +16,39 @@ export default function Player() {
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false);
+  const [isPlayList, setIsPlayList] = useState(false);
+
   const [track, setTrack] = useState({
     id: audios?.data[0]?.id,
     ...audios?.data[0]?.attributes,
   });
-  const [isPlayList, setIsPlayList] = useState(false);
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    setAudio(AudioInit(track));
+    return () => setAudio(AudioInit(track));
   }, []);
 
   useEffect(() => {
-    audio?.addEventListener('canplaythrough', () => {
-      setfullTime(AudioTime(audio.duration));
-    });
-
-    audio?.addEventListener('timeupdate', () => {
-      setPercentage((audio.currentTime / audio.duration) * 100);
-      setCurrentTime(AudioTime(audio.currentTime));
-    });
-
-    audio?.addEventListener('ended', () => {
-      _indexTrach.current < audios?.data.length - 1
-        ? _indexTrach.current++
-        : (_indexTrach.current = 0);
-      nextTrack(
-        audios?.data[_indexTrach.current]?.id,
-        audios?.data[_indexTrach.current]?.attributes
-      );
-    });
+    audio?.addEventListener('loadeddata', () => {
+      audio?.addEventListener('canplaythrough', () => {
+        setfullTime(AudioTime(audio.duration));
+      });
+  
+      audio?.addEventListener('timeupdate', () => {
+        setPercentage((audio.currentTime / audio.duration) * 100);
+        setCurrentTime(AudioTime(audio.currentTime));
+      });
+  
+      audio?.addEventListener('ended', () => {
+        _indexTrach.current < audios?.data.length - 1
+          ? _indexTrach.current++
+          : (_indexTrach.current = 0);
+        nextTrack(
+          audios?.data[_indexTrach.current]?.id,
+          audios?.data[_indexTrach.current]?.attributes
+        );
+      });
+    })
 
     const keyCode = (e) => (e.keyCode === 32 ? play() : false);
     document.addEventListener('keydown', keyCode);
@@ -57,7 +56,6 @@ export default function Player() {
   }, [audio ?? null]);
 
   const play = () => {
-    setIsPlay(!audio.paused);
     audio?.paused ? audio.play() : audio.pause();
   };
 
@@ -80,7 +78,7 @@ export default function Player() {
   const rewindMove = (e) => {
     const elem = document.querySelector('#player');
     const rect = elem.getBoundingClientRect();
-    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio.duration));
+    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
     elem.children[0].children[0].style.width = `${
       (e.pageX / rect.width) * 100
     }%`;
@@ -143,7 +141,7 @@ export default function Player() {
               )}
               <div
                 className={`${styles.playerBox__play} ${
-                  !isPlay ? styles.active : ''
+                  !audio?.paused ? styles.active : ''
                 }`}
                 onClick={play}
               ></div>
