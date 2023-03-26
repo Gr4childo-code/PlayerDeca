@@ -25,7 +25,7 @@ export default function Player({ audios }) {
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    return () => setAudio(AudioInit(track));
+    setAudio(AudioInit(track));
   }, []);
 
   useEffect(() => {
