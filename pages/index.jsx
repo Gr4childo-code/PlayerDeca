@@ -7,23 +7,26 @@ import Script from 'next/script';
 import Slider from '@/ui/components/global/Slider';
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
-import Events from './events';
+import EventsAll from '@/ui/components/global/EventSection/EventsAll';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
+import {
+  first10,
+  playlistNew /* , dataEvents  */,
+} from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const response2 = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await response2.json();
 
-  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
-  const events = await responceEvents.json();
+  /* const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
+  const events = await responceEvents.json(); */
 
   const response3 = await fetchAPI(`/playlists?${playlistNew()}`);
   const playlists = await response3.json();
   return {
-    props: { audioTop, playlists, events },
+    props: { audioTop, playlists /* , events  */ },
   };
 };
 
@@ -96,7 +99,7 @@ export default function Home({ audioTop, playlists, events }) {
               filter={'blur'}
               title={'Плейлисты пользователей'}
             />
-            <Events events={events} />
+            {/* <EventsAll events={events} /> */}
           </div>
           <div className='layout__right'>
             <Top10 audioTop={audioTop} />
