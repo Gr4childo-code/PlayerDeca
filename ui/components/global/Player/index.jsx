@@ -48,7 +48,12 @@ export default function Player({ audios }) {
       );
     });
 
-    const keyCode = (e) => (e.keyCode === 32 ? play() : false);
+    const keyCode = (e) => {
+      if (e.keyCode === 32) {
+        e.preventDefault()
+        play()
+      }
+    };
     document.addEventListener('keydown', keyCode);
     return () => document.removeEventListener('keydown', keyCode);
   }, [audio ?? null]);
