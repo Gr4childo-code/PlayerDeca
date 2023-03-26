@@ -29,26 +29,24 @@ export default function Player({ audios }) {
   }, []);
 
   useEffect(() => {
-    audio?.addEventListener('loadeddata', () => {
-      audio?.addEventListener('canplaythrough', () => {
-        setfullTime(AudioTime(audio.duration));
-      });
-  
-      audio?.addEventListener('timeupdate', () => {
-        setPercentage((audio.currentTime / audio.duration) * 100);
-        setCurrentTime(AudioTime(audio.currentTime));
-      });
-  
-      audio?.addEventListener('ended', () => {
-        _indexTrach.current < audios?.data.length - 1
-          ? _indexTrach.current++
-          : (_indexTrach.current = 0);
-        nextTrack(
-          audios?.data[_indexTrach.current]?.id,
-          audios?.data[_indexTrach.current]?.attributes
-        );
-      });
-    })
+    audio?.addEventListener('canplaythrough', () => {
+      setfullTime(AudioTime(audio.duration));
+    });
+
+    audio?.addEventListener('timeupdate', () => {
+      setPercentage((audio.currentTime / audio.duration) * 100);
+      setCurrentTime(AudioTime(audio.currentTime));
+    });
+
+    audio?.addEventListener('ended', () => {
+      _indexTrach.current < audios?.data.length - 1
+        ? _indexTrach.current++
+        : (_indexTrach.current = 0);
+      nextTrack(
+        audios?.data[_indexTrach.current]?.id,
+        audios?.data[_indexTrach.current]?.attributes
+      );
+    });
 
     const keyCode = (e) => (e.keyCode === 32 ? play() : false);
     document.addEventListener('keydown', keyCode);
