@@ -85,16 +85,22 @@ const dataEvents = () => {
 	const queryEvents = qs.stringify(
 		{
 			fields: ['title', 'place', 'date', 'author', 'time'],
-			populate: {
-				poster: {
-					data: {
-						attributes: ['url']
-					}
-				}
-			}
+		}
+	)
+	return queryEvents
+}
+const dataEventsId = (query) => {
+	const queryEvents = qs.stringify(
+		{
+			filters: {
+				id: {
+					$eq: query,
+				},
+			},
+			fields: ['title', 'place', 'date', 'author', 'time'],
 		}
 	)
 	return queryEvents
 }
 
-export { SearchByAuthor, first10, playlistID, playlistNew, dataEvents };
+export { SearchByAuthor, first10, playlistID, playlistNew, dataEvents, dataEventsId };

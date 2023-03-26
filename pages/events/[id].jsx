@@ -5,20 +5,21 @@ import { EventInfo } from '@/ui/components/global/EventSection/EventInfo';
 
 //utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { dataEvents } from '@/utils/api/QueryParams';
+import { dataEventsId } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
 
-  const responce = await fetchAPI(`/events?${dataEvents(id)}`);
+  const responce = await fetchAPI(`/events?${dataEventsId(id)}`);
   const events = await responce.json();
+  console.log(events);
 
   return {
     props: { events },
   };
 };
 
-const EventCurr = ({ events }) => {
+const EventCurrentId = ({ events }) => {
   const { data } = events;
 
   return (
@@ -36,4 +37,4 @@ const EventCurr = ({ events }) => {
   );
 };
 
-export default EventCurr;
+export default EventCurrentId;

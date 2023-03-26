@@ -3,8 +3,11 @@ import Link from 'next/link';
 
 import styles from '@/ui/components/global/EventSection/EventSection.module.scss';
 
-export const EventInfo = ({ id, attributes, index }) => {
-  const { title, place, date, time, author, poster } = attributes || {};
+export const EventInfo = ({ id, attributes, index, events }) => {
+  const { title, place, date, time, author, poster } =
+    attributes || {} || events[0].attributes;
+
+  /* console.log(events[0].attributes); */
 
   const allMonths = {
     0: 'Января',
