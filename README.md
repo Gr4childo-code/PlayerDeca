@@ -15,4 +15,22 @@ pnpm dev
 
 ## API
 
-В режиме наполнения
+### Audios
+```bash
+[domain]/api/audios
+```
+
+### Events
+```bash
+[domain]/api/events
+```
+
+### Playlists
+```bash
+[domain]/api/playlists
+```
+
+### Styles
+```bash
+[domain]/api/styles
+```
