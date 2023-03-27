@@ -6,7 +6,6 @@ import styles from '@/ui/components/DlessEvents/DlessEvents.module.scss';
 export const EventInfo = ({ id, attributes, index }) => {
   const { title, place, date, time, author, poster } = attributes || {};
   const { data } = poster;
-  console.log(data);
 
   const allMonths = {
     0: 'Января',
