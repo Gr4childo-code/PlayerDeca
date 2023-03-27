@@ -19,6 +19,7 @@ const roboto = Roboto({
 
 import '@/styles/sass/Normalize.scss';
 import '@/styles/sass/globals.scss';
+import '@/styles/sass/grid.scss';
 
 import Layout from '../ui/components/global/Layout';
 
