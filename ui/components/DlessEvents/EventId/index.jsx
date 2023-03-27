@@ -42,13 +42,13 @@ export default function EventId({ events }) {
       </div>
       <div className={styles.eventInfo__right}>
         <p className={styles.eventInfo__title}>{title}</p>
+        <p className={styles.eventInfo__author}>{author}</p>
         <p className={styles.eventInfo}>
           Здесь будет большое красивое описание события! <br />
           Оно будет просто нереально крутое, виртуально-превиртуально: проще,
           лучше, качественнее - такого вы еще не видели! <br />
           Но для этого нам нужно API
         </p>
-        <p className={styles.eventInfo__author}>{author}</p>
       </div>
     </div>
   );
