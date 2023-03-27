@@ -6,13 +6,13 @@ export default function Switch() {
   return (
     <>
       <div>
-        <label class={styles.switch}>
+        <label className={styles.switch}>
           <input type='checkbox' />
-          <span class={styles.slider}></span>
+          <span className={styles.slider}></span>
         </label>
-        <label class={styles.switch}>
+        <label className={styles.switch}>
           <input type='checkbox' />
-          <span class={styles.slider__round}></span>
+          <span className={styles.slider__round}></span>
         </label>
       </div>
     </>

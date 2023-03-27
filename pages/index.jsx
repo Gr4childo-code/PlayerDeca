@@ -5,25 +5,31 @@ import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
-import EventSection from '@/ui/components/global/EventSection';
+import SliderItem from '@/ui/components/global/Slider/SliderItem';
+
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
+import EventsAll from '@/ui/components/DlessEvents/EventsAll';
+
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew } from '@/utils/api/QueryParams';
+import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await first10Resp.json();
 
+  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
+  const events = await responceEvents.json();
+
   const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
   const playlists = await playlistNewResp.json();
   return {
-    props: { audioTop, playlists },
+    props: { audioTop, playlists, events },
   };
 };
 
-export default function Home({ audioTop, playlists }) {
+export default function Home({ audioTop, playlists, events }) {
   const [list, setList] = useState([]);
   let toastItem = null;
 
@@ -36,6 +42,7 @@ export default function Home({ audioTop, playlists }) {
     };
     setList([...list, toastItem]);
   };
+
   return (
     <>
       <Head>
@@ -84,13 +91,16 @@ export default function Home({ audioTop, playlists }) {
               buttons={false}
               title={'Новые плейлисты'}
             /> */}
-            <Slider
-              data={playlists.data}
-              pagination={true}
-              title={'Плейлисты пользователей'}
-            />
 
-            <EventSection />
+            <Slider>
+              <SliderItem
+                data={playlists.data}
+                pagination={true}
+                buttons={true}
+                filter={'blur'}
+              />
+            </Slider>
+            <EventsAll events={events} />
           </div>
           <div className='layout__right'>
             <Top10 audioTop={audioTop} />
