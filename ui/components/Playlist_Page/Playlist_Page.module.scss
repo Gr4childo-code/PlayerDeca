@@ -95,19 +95,10 @@
       margin-left: 20px;
       justify-content: center;
       .release {
-        font-size: 13px;
-        &__dates {
-          font-size: 15px;
-        }
+        font-size: 15px;
       }
       .rate {
-        margin-bottom: 10px;
-        font-size: 20px;
-        &__star {
-          margin-left: 15px;
-          color: var(--ui-color-one);
-          font-size: 20px;
-        }
+        font-size: 15px;
       }
     }
   }

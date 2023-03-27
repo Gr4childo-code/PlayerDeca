@@ -56,8 +56,6 @@
 @include mq(tablet) {
   .track {
     &__music {
-      margin-left: 20px;
-      flex-grow: 1;
       &__name {
         color: var(--white-90);
         font-size: 15px;
@@ -73,6 +71,7 @@
 }
 @include mq(phone) {
   .track {
+    height: 60px;
     &__cover {
       width: 30px;
       height: 30px;
