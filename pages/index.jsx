@@ -5,11 +5,11 @@ import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
+import SliderItem from '@/ui/components/global/Slider/SliderItem';
 
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
-
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
@@ -19,10 +19,8 @@ export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await first10Resp.json();
 
-
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
   const events = await responceEvents.json();
-
 
   const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
   const playlists = await playlistNewResp.json();
@@ -94,12 +92,14 @@ export default function Home({ audioTop, playlists, events }) {
               title={'Новые плейлисты'}
             /> */}
 
-            <Slider
-              data={playlists.data}
-              pagination={true}
-              filter={'blur'}
-              title={'Плейлисты пользователей'}
-            />
+            <Slider>
+              <SliderItem
+                data={playlists.data}
+                pagination={true}
+                buttons={true}
+                filter={'blur'}
+              />
+            </Slider>
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
