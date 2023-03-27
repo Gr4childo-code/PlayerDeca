@@ -6,11 +6,7 @@ export default function EventsAll({ events }) {
     <div className='container'>
       <div className='title'>События</div>
       {events.data?.map(({ id, attributes }, index) => (
-        <ul key={id}>
-          <li>
-            <EventInfo id={id} index={index + 1} attributes={attributes} />
-          </li>
-        </ul>
+        <EventInfo key={id} id={id} index={index + 1} attributes={attributes} />
       ))}
     </div>
   );

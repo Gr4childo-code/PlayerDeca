@@ -39,14 +39,15 @@ export const EventInfo = ({ id, attributes, index }) => {
           src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
           alt='no image'
         />
-        <Link href={`/events/${id}`} className={styles.eventInfo__wrapper}>
-          <ul className={styles.eventInfo__texts}>
-            <li className={styles.eventInfo__title}>{title}</li>
-            <li className={styles.eventInfo__place}>{place}</li>
-            <li className={styles.eventInfo__author}>{author}</li>
-          </ul>
-        </Link>
       </div>
+
+      <Link href={`/events/${id}`} className={styles.eventInfo__wrapper}>
+        <ul className={styles.eventInfo__texts}>
+          <li className={styles.eventInfo__title}>{title}</li>
+          <li className={styles.eventInfo__place}>{place}</li>
+          <li className={styles.eventInfo__author}>{author}</li>
+        </ul>
+      </Link>
       <div className={styles.eventInfo__links}>
         <button>
           <a href='http://'> Купить билет </a>
