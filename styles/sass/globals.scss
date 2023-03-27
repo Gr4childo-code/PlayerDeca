@@ -53,6 +53,7 @@
 
   // Gradient
   --gradient: linear-gradient(-90deg, var(--ui-color-one), var(--ui-color-two), var(--ui-color-three));
+  --gradient-text: linear-gradient(180deg,#fff,#aaa),#fff;
 }
 
 * {
