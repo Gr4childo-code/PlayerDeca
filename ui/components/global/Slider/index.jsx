@@ -27,7 +27,6 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className='title'>{title}</div>
       <div className={styles.header} id={slide?.id}>
         <img
           width={946}
