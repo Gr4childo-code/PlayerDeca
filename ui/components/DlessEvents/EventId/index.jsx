@@ -43,10 +43,10 @@ export default function EventId({ events }) {
             src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
             alt='no image'
           />
-          <button className={styles.eventInfo__links}>
-            <a href='http://'> Купить билет </a>
-          </button>
         </div>
+        <button className={styles.eventInfo__links}>
+          <a href='http://'> Купить билет </a>
+        </button>
       </div>
       <div className={styles.eventInfo__right}>
         <p className={styles.eventInfo__title}>{title}</p>

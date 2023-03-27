@@ -38,6 +38,7 @@
 
   &__left {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 400px;
     padding: 10px;
