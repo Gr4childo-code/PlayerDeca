@@ -28,7 +28,7 @@ export const EventInfo = ({ id, attributes, index }) => {
 
   return (
     <div className={styles.wrapper} key={id} index={index}>
-      <div className={styles.eventInfo}>
+      <div className={styles.eventInfo__left}>
         <ul className={styles.eventInfo__texts}>
           <li className={styles.dataEvent__number}>{eventDay}</li>
           <li className={styles.dataEvent__month}>{eventMonth}</li>
@@ -39,19 +39,22 @@ export const EventInfo = ({ id, attributes, index }) => {
           src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
           alt='no image'
         />
-        <Link href={`/events/${id}`} className={styles.eventInfo__wrapper}>
-          <ul className={styles.eventInfo__texts}>
-            <li className={styles.eventInfo__title}>{title}</li>
-            <li className={styles.eventInfo__place}>{place}</li>
-            <li className={styles.eventInfo__author}>{author}</li>
-          </ul>
+      </div>
+
+      <div className={styles.eventInfo__right}>
+        <Link href={`/events/${id}`} className={styles.eventInfo__title}>
+          {title}
+        </Link>
+        <Link href={`/events/${id}`} className={styles.eventInfo__place}>
+          {place}
+        </Link>
+        <Link href={`/events/${id}`} className={styles.eventInfo__author}>
+          {author}
         </Link>
       </div>
-      <div className={styles.eventInfo__links}>
-        <button>
-          <a href='http://'> Купить билет </a>
-        </button>
-      </div>
+      <Link href='http://' className={styles.eventInfo__button}>
+        Купить билет
+      </Link>
     </div>
   );
 };
