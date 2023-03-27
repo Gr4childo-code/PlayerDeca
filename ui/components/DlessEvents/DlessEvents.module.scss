@@ -36,6 +36,9 @@
 .eventInfo {
   display: flex;
   align-items: center;
+  &__wrapper {
+    margin: 0 20px;
+  }
   &__texts {
     margin: 0 40px;
     &:first-child {
