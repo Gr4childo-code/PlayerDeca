@@ -5,6 +5,8 @@ import styles from '@/ui/components/DlessEvents/DlessEvents.module.scss';
 
 export const EventInfo = ({ id, attributes, index }) => {
   const { title, place, date, time, author, poster } = attributes || {};
+  const { data } = poster;
+  console.log(data);
 
   const allMonths = {
     0: 'Января',
@@ -36,7 +38,7 @@ export const EventInfo = ({ id, attributes, index }) => {
         </ul>
         <Link href={`/events/${id}`}>
           <img
-            src={process.env.NEXT_PUBLIC_API_URL + attributes?.poster}
+            src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
             alt='done'
           />
           <ul className={styles.eventInfo__texts}>
