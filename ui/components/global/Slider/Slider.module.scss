@@ -1,9 +1,9 @@
 .wrapper {
+  margin-top: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 20px;
   &__list {
     position: absolute;
     bottom: 7px;

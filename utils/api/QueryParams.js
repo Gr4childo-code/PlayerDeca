@@ -17,20 +17,22 @@ const SearchByAuthor = (input = null) => {
 };
 
 const first10 = () => {
-	const queryFirst10 = qs.stringify(
-		{
-			sort: ['likes:desc'],
-			pagination: {
-				start: 0,
-				limit: 10,
-			},
-		},
-		{
-			encodeValuesOnly: true, // prettify URL
-		}
-	);
-	return queryFirst10;
-	// dsajda
+  const queryFirst10 = qs.stringify(
+    {
+      fields: ['name', 'path', 'author', 'posterPath', 'likes'],
+      sort: ['likes:desc'],
+      pagination: {
+        start: 0,
+        limit: 10,
+      },
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
+    }
+  );
+  return queryFirst10;
+  // dsajda
+
 };
 
 const playlistID = (query) => {

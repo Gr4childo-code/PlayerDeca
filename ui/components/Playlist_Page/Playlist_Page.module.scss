@@ -71,6 +71,10 @@
 
     border: 1px solid var(--ui-color-one);
   }
+  .tracks{
+    display: flex;
+    flex-direction: column;
+  }
   .nonTrack {
     text-align: center;
     font-size: 40px;

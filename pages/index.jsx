@@ -5,23 +5,27 @@ import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
+
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
+
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const response2 = await fetchAPI(`/audios?${first10()}`);
-  const audioTop = await response2.json();
+  const first10Resp = await fetchAPI(`/audios?${first10()}`);
+  const audioTop = await first10Resp.json();
+
 
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
   const events = await responceEvents.json();
 
-  const response3 = await fetchAPI(`/playlists?${playlistNew()}`);
-  const playlists = await response3.json();
+
+  const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
+  const playlists = await playlistNewResp.json();
   return {
     props: { audioTop, playlists, events },
   };
@@ -48,7 +52,6 @@ export default function Home({ audioTop, playlists, events }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
       <Toast toastlist={list} setList={setList} />
       {/* <button
         onClick={() => {
@@ -90,6 +93,7 @@ export default function Home({ audioTop, playlists, events }) {
               buttons={false}
               title={'Новые плейлисты'}
             /> */}
+
             <Slider
               data={playlists.data}
               pagination={true}

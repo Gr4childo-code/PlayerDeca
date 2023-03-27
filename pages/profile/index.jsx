@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Layout from '@/ui/components/Sidebar/Layout';
 
-import styles from '../ui/components/Sidebar/Layout/Profile.module.scss';
+import styles from '../../ui/components/Sidebar/Layout/Profile.module.scss';
 
 export const getServerSideProps = async (context) => {
   const sessionServer = await getServerSession(
