@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import AppContext from '../global/AppContext';
+import AppContext from '@/ui/components/global/AppContext';
 import styles from '@/ui/components/Top10/Top10.module.scss';
 import Track from '../Track';
 

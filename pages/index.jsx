@@ -5,6 +5,7 @@ import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
+import SliderItem from '@/ui/components/global/Slider/SliderItem';
 import EventSection from '@/ui/components/global/EventSection';
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
@@ -84,11 +85,14 @@ export default function Home({ audioTop, playlists }) {
               buttons={false}
               title={'Новые плейлисты'}
             /> */}
-            <Slider
-              data={playlists.data}
-              pagination={true}
-              title={'Плейлисты пользователей'}
-            />
+            <Slider>
+              <SliderItem
+                data={playlists.data}
+                filter={'blur'}
+                buttons={true}
+                pagination={true}
+              />
+            </Slider>
 
             <EventSection />
           </div>

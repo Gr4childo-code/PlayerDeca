@@ -1,9 +1,12 @@
-import React from 'react';
+import { useContext } from 'react';
+import AppContext from '@/ui/components/global/AppContext';
 
 import styles from '@/ui/components/Playlist_Page/Playlist_Page.module.scss';
 import Track from '../Track';
 
 const Playlist_Page = ({ playlist }) => {
+  const { setAudioContext } = useContext(AppContext);
+
   const { audio, poster, users_permissions_user } = playlist[0].attributes;
   return (
     <div className={styles.wrapper}>
@@ -42,14 +45,26 @@ const Playlist_Page = ({ playlist }) => {
           </div>
         </div>
         <hr className={styles.hr} />
-        {audio ? (
-          audio &&
-          audio?.data.map(({ id, attributes }, index) => (
-            <Track key={id} id={id} index={index + 1} attributes={attributes} />
-          ))
-        ) : (
-          <div className={styles.nonTrack}>Треков нет</div>
-        )}
+        <div
+          className={styles.tracks}
+          onClick={() => {
+            setAudioContext(audio);
+          }}
+        >
+          {audio ? (
+            audio &&
+            audio?.data.map(({ id, attributes }, index) => (
+              <Track
+                key={id}
+                id={id}
+                index={index + 1}
+                attributes={attributes}
+              />
+            ))
+          ) : (
+            <div className={styles.nonTrack}>Треков нет</div>
+          )}
+        </div>
       </div>
     </div>
   );
