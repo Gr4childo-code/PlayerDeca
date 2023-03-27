@@ -38,7 +38,7 @@ export const EventInfo = ({ id, attributes, index }) => {
         </ul>
         <img
           src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
-          alt='done'
+          alt='no image'
         />
         <Link href={`/events/${id}`} className={styles.eventInfo__wrapper}>
           <ul className={styles.eventInfo__texts}>

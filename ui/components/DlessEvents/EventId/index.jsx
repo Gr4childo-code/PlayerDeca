@@ -5,6 +5,10 @@ import styles from './EventId.module.scss';
 export default function EventId({ events }) {
   const { title, place, date, time, author, poster, id } = events[0].attributes;
 
+  const { data } = poster;
+
+  console.log(data);
+
   const months = {
     0: 'Января',
     1: 'Февраля',
@@ -34,8 +38,12 @@ export default function EventId({ events }) {
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
           <li className={styles.eventInfo__place}>{place}</li>
         </ul>
-        <div className={styles.eventInfo__links}>
-          <button>
+        <div>
+          <img
+            src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
+            alt='no image'
+          />
+          <button className={styles.eventInfo__links}>
             <a href='http://'> Купить билет </a>
           </button>
         </div>

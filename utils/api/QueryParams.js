@@ -103,6 +103,11 @@ const dataEventsId = (query) => {
 				},
 			},
 			fields: ['title', 'place', 'date', 'author', 'time'],
+			populate: {
+				poster: {
+					fields: ['url'],
+				}
+			}
 		}
 	)
 	return queryEvents
