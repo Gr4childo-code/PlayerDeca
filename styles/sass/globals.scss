@@ -1,7 +1,7 @@
 // Light theme
 :root {
   // Default
-  --background: #262424;
+  --background: #111111;
 
   // Black
   --black-10: rgba(0, 0, 0, 0.1);
@@ -47,11 +47,12 @@
   --success: #07cf29;
 
   // UI
-  --ui-color-one: #fc581f;
-  --ui-color-two: #ff8962;
+  --ui-color-one: #e92a67;
+  --ui-color-two: #a853ba;
+  --ui-color-three: #2a8af6;
 
   // Gradient
-  --gradient: linear-gradient(-90deg, var(--ui-color-one), var(--ui-color-two));
+  --gradient: linear-gradient(-90deg, var(--ui-color-one), var(--ui-color-two), var(--ui-color-three));
 }
 
 * {
