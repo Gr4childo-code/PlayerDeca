@@ -47,15 +47,6 @@ export default function Player({ audios }) {
         audios?.data[_indexTrach.current]?.attributes
       );
     });
-
-    const keyCode = (e) => {
-      if (e.keyCode === 32) {
-        e.preventDefault()
-        play()
-      }
-    };
-    document.addEventListener('keydown', keyCode);
-    return () => document.removeEventListener('keydown', keyCode);
   }, [audio ?? null]);
 
   const play = () => {
