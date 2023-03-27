@@ -145,7 +145,7 @@ export default function Player({ audios }) {
                 className={styles.playerBox__info}
                 onClick={() => setIsPlayList(!isPlayList)}
               >
-                <div>
+                <div className={styles.playerBox__info__description}>
                   <strong>{track.author}</strong> - {track.name}
                 </div>
                 <span>

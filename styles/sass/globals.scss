@@ -1,3 +1,4 @@
+@import "@/styles/sass/grid.scss";
 // Light theme
 :root {
   // Default
@@ -146,7 +147,7 @@ a {
   width: 100%;
   background: var(--gray-60);
   color: var(--white-50);
-  transition: background .15s;
+  transition: background 0.15s;
   &:hover {
     background: var(--gray-80);
   }
@@ -159,7 +160,7 @@ a {
   cursor: pointer;
   color: var(--white);
   background: var(--ui-color-one);
-  transition: background .15s;
+  transition: background 0.15s;
   &:hover {
     background: var(--ui-color-two);
   }
@@ -169,5 +170,30 @@ a {
   max-width: 350px;
   .fields {
     margin-bottom: 10px;
+  }
+}
+@include mq(SMdesktop) {
+  .layout {
+    &__left {
+      width: calc(60% - 20px);
+    }
+
+    &__right {
+      width: 40%;
+    }
+  }
+}
+
+@include mq(tablet) {
+  .layout {
+    flex-direction: column;
+    justify-content: space-between;
+    &__left {
+      width: 100%;
+    }
+
+    &__right {
+      width: 100%;
+    }
   }
 }

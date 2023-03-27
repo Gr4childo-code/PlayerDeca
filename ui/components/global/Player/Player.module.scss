@@ -1,4 +1,4 @@
-@import '@/styles/sass/grid.scss';
+@import "@/styles/sass/grid.scss";
 
 .player {
   position: fixed;
@@ -72,7 +72,7 @@
       margin-bottom: 5px;
     }
     &:after {
-      content: '';
+      content: "";
       border-top: 5px solid var(--gray);
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
@@ -93,7 +93,7 @@
     align-items: center;
     justify-content: center;
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       top: 0;
@@ -107,7 +107,7 @@
       border-radius: 5px;
     }
     svg {
-      opacity: .3;
+      opacity: 0.3;
       width: 50%;
       height: 50%;
     }
@@ -120,7 +120,7 @@
     box-sizing: border-box;
     cursor: pointer;
     background: var(--white-10);
-    transition: transform .1s, box-shadow .1s;
+    transition: transform 0.1s, box-shadow 0.1s;
     margin: auto;
     position: absolute;
     top: 0;
@@ -179,7 +179,7 @@
     justify-content: center;
     cursor: pointer;
     padding: 0 20px;
-    transition: background .15s;
+    transition: background 0.15s;
     &:hover {
       background: var(--gray);
     }
@@ -226,9 +226,9 @@
   pointer-events: none;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity .15s, transform .15s;
+  transition: opacity 0.15s, transform 0.15s;
   &:before {
-    content: '';
+    content: "";
     border-top: 10px solid var(--gray-90);
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
@@ -269,18 +269,18 @@
       border-radius: 5px;
     }
     svg {
-      opacity: .3;
+      opacity: 0.3;
     }
     &:before,
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       opacity: 0;
-      transition: opacity .15s;
+      transition: opacity 0.15s;
     }
     &:before {
       background: var(--black-20);
@@ -289,9 +289,9 @@
       margin: auto;
       width: 0;
       height: 0;
-      border-top:  5px solid transparent;
-      border-left:  5px solid white;
-      border-bottom:  5px solid transparent;
+      border-top: 5px solid transparent;
+      border-left: 5px solid white;
+      border-bottom: 5px solid transparent;
     }
     &_active {
       position: absolute;
@@ -304,7 +304,7 @@
       align-items: flex-end;
       justify-content: center;
       opacity: 0;
-      transition: opacity .15s;
+      transition: opacity 0.15s;
       span {
         background: var(--white-80);
         width: 3px;
@@ -314,10 +314,10 @@
         animation-fill-mode: both;
         border-radius: 10px;
         &:nth-child(1) {
-          animation-delay: .2s;
+          animation-delay: 0.2s;
         }
         &:nth-child(2) {
-          animation-delay: .4s;
+          animation-delay: 0.4s;
         }
       }
     }
@@ -335,13 +335,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 5px;
-    transition: background .15s;
+    transition: background 0.15s;
     display: flex;
     align-items: center;
     &:first-child {
       border: none;
     }
-    &_active, &:hover {
+    &_active,
+    &:hover {
       background: var(--white-10);
     }
     &:hover {
@@ -380,6 +381,21 @@
 
   .playerVolume {
     display: none;
+  }
+}
+
+@include mq(phone) {
+  .playerBox {
+    &__body {
+      font-size: 13px;
+    }
+    &__info {
+      width: calc(100% - 70px);
+      &__description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
 }
 

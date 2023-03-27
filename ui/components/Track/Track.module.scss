@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .track {
   display: flex;
   align-items: center;
@@ -48,6 +50,47 @@
       color: var(--white-50);
       font-size: 18px;
       padding-bottom: 3px;
+    }
+  }
+}
+@include mq(tablet) {
+  .track {
+    &__music {
+      margin-left: 20px;
+      flex-grow: 1;
+      &__name {
+        color: var(--white-90);
+        font-size: 15px;
+        padding-bottom: 3px;
+      }
+      &__author {
+        color: var(--white-50);
+        font-size: 15px;
+        padding-bottom: 3px;
+      }
+    }
+  }
+}
+@include mq(phone) {
+  .track {
+    &__cover {
+      width: 30px;
+      height: 30px;
+      &__img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    &__music {
+      &__name {
+        font-size: 13px;
+        padding-bottom: 3px;
+      }
+      &__author {
+        font-size: 13px;
+        padding-bottom: 3px;
+      }
     }
   }
 }

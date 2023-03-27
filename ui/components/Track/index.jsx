@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '@/ui/components/Track/Track.module.scss';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 const Track = ({ id, index, attributes }) => {
   return (
@@ -29,7 +29,6 @@ const Track = ({ id, index, attributes }) => {
           onClick={() => {
             setIsPlay(!isPlay);
           }}></div> */}
-        <i className='fa-regular fa-heart'></i>
         <FontAwesomeIcon icon={faHeart} />
       </div>
     </div>
