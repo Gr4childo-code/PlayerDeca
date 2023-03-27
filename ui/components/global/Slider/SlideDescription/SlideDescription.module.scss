@@ -5,6 +5,7 @@
   justify-content: space-between;
   margin-top: 20px;
   &__list {
+    margin: 0 10px;
     position: absolute;
     bottom: 7px;
     left: 7px;
@@ -14,6 +15,7 @@
     background: var(--black-80);
   }
   &__blur {
+    margin: 0 10px;
     position: absolute;
     bottom: 7px;
     left: 7px;
@@ -24,6 +26,7 @@
     backdrop-filter: blur(50px);
   }
   &__gradient {
+    margin: 0 10px;
     position: absolute;
     bottom: 7px;
     left: 7px;
