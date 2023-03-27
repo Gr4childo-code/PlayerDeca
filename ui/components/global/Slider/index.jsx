@@ -39,7 +39,7 @@ export default function Slider({ title, data, pagination, filter, buttons }) {
           className={styles.header__img}
           alt={`image ${currentSlide}`}
           onClick={() => {
-            router.push(`/playlists/${slide.id}`);
+            router.push(`/playlist/${slide.id}`);
           }}
         />
       </div>
