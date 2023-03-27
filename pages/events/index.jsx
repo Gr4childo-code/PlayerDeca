@@ -5,8 +5,8 @@ import { fetchAPI } from '@/utils/api/fetch';
 import { dataEvents } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async () => {
-  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
-  const events = await responceEvents.json();
+  const responce = await fetchAPI(`/events?${dataEvents()}`);
+  const events = await responce.json();
 
   return {
     props: { events },

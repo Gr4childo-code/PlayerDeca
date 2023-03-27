@@ -85,10 +85,15 @@ const dataEvents = () => {
 	const queryEvents = qs.stringify(
 		{
 			fields: ['title', 'place', 'date', 'author', 'time'],
-		}
-	)
+			populate: {
+				poster: {
+					fields: ['url'],
+				}
+			}
+		})
 	return queryEvents
 }
+
 const dataEventsId = (query) => {
 	const queryEvents = qs.stringify(
 		{

@@ -26,7 +26,7 @@ export const EventInfo = ({ id, attributes, index }) => {
   const eventDay = eventDate.getDate();
 
   return (
-    <div className={styles.wrapper} index={index}>
+    <div className={styles.wrapper} key={id} index={index}>
       <div className={styles.eventInfo}>
         <ul className={styles.eventInfo__texts}>
           <li className={styles.dataEvent__number}>{eventDay}</li>
@@ -35,10 +35,10 @@ export const EventInfo = ({ id, attributes, index }) => {
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
         </ul>
         <Link href={`/events/${id}`}>
-          {/* <img
+          <img
             src={process.env.NEXT_PUBLIC_API_URL + attributes?.poster}
             alt='done'
-          /> */}
+          />
           <ul className={styles.eventInfo__texts}>
             <li className={styles.eventInfo__title}>{title}</li>
             <li className={styles.eventInfo__place}>{place}</li>
