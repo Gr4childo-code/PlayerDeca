@@ -22,4 +22,24 @@
       background: var(--gray);
     }
   }
+
+  &__overflow{
+    transform: translateY(20px);
+    transition: opacity 0.5s;
+    opacity: 0;
+    &__active{
+      opacity: 1;
+      z-index: 999;
+      top: 50px;
+      margin-bottom: 37px;
+      position: absolute;
+      background: var(--gray-90);
+      width: 600px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      box-shadow: 0 10px 10px var(--black-10);
+      padding: 10px;
+      pointer-events: none;
+    }
+  }
 }
