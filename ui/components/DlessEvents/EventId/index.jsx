@@ -32,25 +32,23 @@ export default function EventId({ events }) {
           <li className={styles.dataEvent__month}>{eventMonth}</li>
           <li className={styles.dataEvent__year}>{eventYear}</li>
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
-        </ul>
-        <ul className={styles.eventInfo__texts}>
-          <li className={styles.eventInfo__title}>{title}</li>
           <li className={styles.eventInfo__place}>{place}</li>
-          <li className={styles.eventInfo__author}>{author}</li>
-          <li className={styles.eventInfo__links}>
-            <button>
-              <a href='http://'> Купить билет </a>
-            </button>
-          </li>
         </ul>
+        <div className={styles.eventInfo__links}>
+          <button>
+            <a href='http://'> Купить билет </a>
+          </button>
+        </div>
       </div>
       <div className={styles.eventInfo__right}>
+        <p className={styles.eventInfo__title}>{title}</p>
         <p className={styles.eventInfo}>
           Здесь будет большое красивое описание события! <br />
           Оно будет просто нереально крутое, виртуально-превиртуально: проще,
           лучше, качественнее - такого вы еще не видели! <br />
           Но для этого нам нужно API
         </p>
+        <p className={styles.eventInfo__author}>{author}</p>
       </div>
     </div>
   );
