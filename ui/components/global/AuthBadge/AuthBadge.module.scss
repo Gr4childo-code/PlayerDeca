@@ -48,6 +48,13 @@
     opacity: 0.7;
   }
 }
+@include mq(desktop) {
+  .authBadge {
+    &__name {
+      display: flex;
+    }
+  }
+}
 @include mq(phone) {
   .authBadge {
     &__name {
