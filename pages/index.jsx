@@ -86,6 +86,8 @@ export default function Home({ audioTop, playlists }) {
             /> */}
             <Slider
               data={playlists.data}
+              filter={'blur'}
+              buttons={true}
               pagination={true}
               title={'Плейлисты пользователей'}
             />
