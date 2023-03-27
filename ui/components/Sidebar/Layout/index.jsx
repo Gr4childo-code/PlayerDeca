@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from '..';
 
 import styles from './Layout.module.scss';
