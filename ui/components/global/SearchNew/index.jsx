@@ -1,29 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { SearchByAuthor } from '@/utils/api/QueryParams';
 import { fetchAPI } from '@/utils/api/fetch';
 import { debounceFunc } from '@/utils/api/debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import AppContext from '@/ui/components/global/AppContext';
 
 import styles from './SearchNew.module.scss';
 
 const SearchNew = () => {
-  const [searchAudio, setserchAudio] = useState([]);
+  const { setAudioContext } = useContext(AppContext);
+
+  const [searchAudio, setserchAudio] = useState(null || []);
   const [inputValue, setinputValue] = useState('');
 
   const handleChangeFilter = (e) => {
     setinputValue(e.target.value);
   };
 
-  const getSearch = () => {
-    fetchAPI(`/audios?${SearchByAuthor(inputValue)}`, 'get').then(
-      async (response) => {
-        const { data } = await response.json();
-        console.log(data);
-        setserchAudio(data);
-      }
+  const getSearch = async () => {
+    const SearchResp = await fetchAPI(
+      `/audios?${SearchByAuthor(inputValue)}`,
+      'get'
     );
+    const response = await SearchResp.json();
+    setserchAudio(response);
   };
 
   useEffect(() => {
@@ -55,8 +57,14 @@ const SearchNew = () => {
             : styles.search__overflow__active
         }
       >
-        {searchAudio?.map(({ id, attributes }) => (
-          <div key={id} className={styles.item}>
+        {searchAudio?.data?.map(({ id, attributes }) => (
+          <div
+            key={id}
+            className={styles.item}
+            onClick={() => {
+              setAudioContext(searchAudio);
+            }}
+          >
             <div className={styles.item__cover}>
               {attributes.posterPath ? (
                 <img
