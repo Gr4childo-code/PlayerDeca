@@ -2,11 +2,13 @@ import React from 'react';
 
 import styles from '@/ui/components/global/Slider/SlideDescription/SlideDescription.module.scss';
 
-export default function SlideDescription({ filter, slide }) {
+export default function SlideDescription({ filter, description }) {
+  console.log(description);
+
   return (
     <>
       <ul
-        key={slide?.id}
+        /* key={slide?.id} */
         className={`${
           filter == 'blur'
             ? styles.wrapper__blur
@@ -18,10 +20,12 @@ export default function SlideDescription({ filter, slide }) {
         }`}
       >
         <li className={styles.wrapper__item}>
-          {slide /* ?.attributes.users_permissions_user.data.attributes.name */}
+          {
+            description /* ?.attributes.users_permissions_user.data.attributes.name */
+          }
         </li>
         <li className={styles.wrapper__item}>
-          {slide /* ?.attributes.title */}
+          {description /* ?.attributes.title */}
         </li>
       </ul>
     </>

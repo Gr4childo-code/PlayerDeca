@@ -6,10 +6,11 @@ import SlideDescription from './SlideDescription';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({ children }, filter, data) {
+export default function Slider({ children }, filter, description) {
   const [activeSlide, setActiveSlide] = useState(0);
   const slideLength = children.length;
-  const slide = activeSlide[children.length];
+
+  const slide = activeSlide;
 
   const handlePrevSlide = () => {
     setActiveSlide(activeSlide === 0 ? activeSlide : children.length - 1);
@@ -24,9 +25,23 @@ export default function Slider({ children }, filter, data) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper__slides} /* id={slide?.id} */></div>
+      <div className={styles.wrapper__slides} /* id={slide?.id} */>
+        <img
+          width={946}
+          height={500}
+          src={
+            process.env.NEXT_PUBLIC_API_URL +
+            slide?.attributes?.poster?.data?.attributes?.url
+          }
+          className={styles.header__img}
+          alt={`image ${activeSlide}`}
+          /* onClick={() => {
+            router.push(`/playlist/${slide.id}`);
+          }} */
+        />
+      </div>
       <div className={styles.slide}>{children[activeSlide]}</div>
-      <SlideDescription filter={filter} slide={data} />
+      <SlideDescription filter={filter} description={description} />
       <Buttons prev={handlePrevSlide} next={handleNextSlide} />
       <Pagination
         currentDataSlide={slideLength}
@@ -35,19 +50,4 @@ export default function Slider({ children }, filter, data) {
       />
     </div>
   );
-}
-{
-  /* <img
-          width={946}
-          height={500}
-          src={
-            process.env.NEXT_PUBLIC_API_URL +
-            slide?.attributes?.poster?.data?.attributes?.url
-          }
-          className={styles.header__img}
-          alt={`image ${currentSlide}`}
-          onClick={() => {
-            router.push(`/playlist/${slide.id}`);
-          }} 
-        /> */
 }
