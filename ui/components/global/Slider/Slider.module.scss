@@ -127,7 +127,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .header {
     &__img {
       height: 300px;

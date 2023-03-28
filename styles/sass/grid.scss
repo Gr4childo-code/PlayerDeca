@@ -1,9 +1,10 @@
 $grid-breakpoints: (
-  'phone': 360px,
-  'tablet': 768px,
-  'SMdesktop': 980px,
-  'desktop': 1366px,
-  'LGdesktop': 1600px,
+  "Sphone": 320px,
+  "Lphone": 425px,
+  "tablet": 768px,
+  "SMdesktop": 1024px,
+  "desktop": 1366px,
+  "LGdesktop": 1600px,
 ) !default;
 
 @mixin mq($v) {

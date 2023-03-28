@@ -450,7 +450,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .playerBox {
     &__body {
       font-size: 13px;

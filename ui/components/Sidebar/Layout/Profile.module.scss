@@ -31,10 +31,17 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .userInfo {
     &__descr {
       font-size: 20px;
+    }
+  }
+}
+@include mq(Sphone) {
+  .userInfo {
+    &__descr {
+      font-size: 15px;
     }
   }
 }

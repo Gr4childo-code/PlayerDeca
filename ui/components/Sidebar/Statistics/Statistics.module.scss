@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   border-bottom: 10px solid var(--background);
 }
@@ -40,5 +42,19 @@
   }
   &__title {
     color: var(--ui-color-two);
+  }
+}
+
+@include mq(Sphone) {
+  .userStat {
+    &__list {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+    &__item {
+      span {
+        font-size: 40px;
+      }
+    }
   }
 }

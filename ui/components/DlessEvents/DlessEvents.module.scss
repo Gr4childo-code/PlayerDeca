@@ -120,7 +120,7 @@
     }
   }
 }
-@include mq(phone) {
+@include mq(Lphone) {
   .wrapper {
     flex-direction: column;
   }

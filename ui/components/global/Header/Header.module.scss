@@ -26,7 +26,7 @@
     align-items: center;
   }
 }
-@include mq(phone) {
+@include mq(Lphone) {
   .header {
     &__right {
       width: 40px;
