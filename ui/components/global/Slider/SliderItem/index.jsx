@@ -3,18 +3,23 @@ import Link from 'next/link';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function SliderItem({ data, title, link, filter, description }) {
+export default function SliderItem({ data, title, link, filter }) {
   console.log(data?.data);
-  const result = data?.data.map(({ id, attributes }) => (
-    <div>
+  const slideTitle = data?.data.map(({ id, attributes }) => (
+    <>
       <p>{attributes.title}</p>
-    </div>
+    </>
+  ));
+  const slidePlace = data?.data.map(({ id, attributes }) => (
+    <>
+      <p>{attributes.place}</p>
+    </>
   ));
 
   return (
     <>
       <Link href={`${link}`}>
-        <div className={styles.slide}>{result}</div>
+        <div className={styles.slide}>{title}</div>
       </Link>
       <>
         <ul
@@ -28,10 +33,8 @@ export default function SliderItem({ data, title, link, filter, description }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>{title}</li>
-          <li className={styles.wrapper__item}>
-            {description /* ?.attributes.title */}
-          </li>
+          <li className={styles.wrapper__item}>{slideTitle[1]} </li>
+          <li className={styles.wrapper__item}>{slidePlace[1]}</li>
         </ul>
       </>
     </>

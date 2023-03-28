@@ -89,14 +89,12 @@ export default function Home({ audioTop, playlists, events }) {
                 filter={'blur'}
                 data={events}
                 title={'События'}
-                description={'Описание слайда'}
                 link={'/events'}
               />
               <SliderItem
                 filter={'gradient'}
                 data={playlists}
                 title={'Плейлисты'}
-                description={'Описание слайда'}
                 link={'/profile/my-playlists'}
               />
             </Slider>
