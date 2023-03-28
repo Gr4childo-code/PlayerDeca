@@ -6,14 +6,10 @@ import styles from '@/ui/components/global/Slider/Slider.module.scss';
 export default function SliderItem({ data, title, link, filter }) {
   console.log(data?.data);
   const slideTitle = data?.data.map(({ id, attributes }) => (
-    <>
-      <p>{attributes.title}</p>
-    </>
+    <p>{attributes.title}</p>
   ));
   const slidePlace = data?.data.map(({ id, attributes }) => (
-    <>
-      <p>{attributes.place}</p>
-    </>
+    <p>{attributes.place}</p>
   ));
 
   return (
