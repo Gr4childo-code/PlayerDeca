@@ -21,7 +21,7 @@ export default function Slider({ children }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper__slides} /* id={slide?.id} */></div>
+      <div className={styles.wrapper__slides}></div>
       <div className={styles.slide}>{children[activeSlide]}</div>
       <Buttons prev={handlePrevSlide} next={handleNextSlide} />
       <Pagination
@@ -32,15 +32,3 @@ export default function Slider({ children }) {
     </div>
   );
 }
-/* <img
-          width={946}
-          height={500}
-          src={
-            process.env.NEXT_PUBLIC_API_URL +
-            slide?.attributes?.poster?.data?.attributes?.url
-          }
-          className={styles.header__img}
-          alt={`image ${activeSlide}`}
-          /* onClick={() => {
-            router.push(`/playlist/${slide.id}`);
-          }} /> */
