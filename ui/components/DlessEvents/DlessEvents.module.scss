@@ -114,19 +114,49 @@
   }
 }
 @include mq(tablet) {
+  .wrapper {
+    justify-content: start;
+  }
   .eventInfo {
     &__title {
       font-size: 20px;
     }
   }
 }
+
 @include mq(Lphone) {
   .wrapper {
-    flex-direction: column;
+    img {
+      width: 160px;
+      height: 140px;
+    }
+  }
+  .dataEvent {
+    &__number {
+      font-size: 40px;
+    }
   }
   .eventInfo {
+    text-align: center;
+    &__title {
+      font-size: 15px;
+      text-align: center;
+    }
+    &__place {
+      font-size: 12px;
+    }
+    &__author {
+      font-size: 12px;
+      text-align: center;
+      padding-top: 5px;
+      margin-bottom: 20px;
+    }
     &__left {
       flex-wrap: nowrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
       padding-top: 20px;
       width: 100%;
     }
@@ -136,8 +166,12 @@
       align-items: center;
     }
     &__texts {
+      align-items: center;
+
+      flex-direction: row;
+      position: relative;
       li {
-        padding-bottom: 0;
+        margin-right: 5px;
       }
     }
   }

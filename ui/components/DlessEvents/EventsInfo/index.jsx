@@ -51,10 +51,10 @@ export const EventInfo = ({ id, attributes, index }) => {
         <Link href={`/events/${id}`} className={styles.eventInfo__author}>
           {author}
         </Link>
+        <Link href='http://' className={styles.eventInfo__button}>
+          Купить билет
+        </Link>
       </div>
-      <Link href='http://' className={styles.eventInfo__button}>
-        Купить билет
-      </Link>
     </div>
   );
 };
