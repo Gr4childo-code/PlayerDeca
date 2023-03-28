@@ -114,9 +114,6 @@
   }
 }
 @include mq(tablet) {
-  .wrapper {
-    justify-content: start;
-  }
   .eventInfo {
     &__title {
       font-size: 20px;
@@ -174,5 +171,10 @@
         margin-right: 5px;
       }
     }
+  }
+}
+@include mq(Mphone) {
+  .wrapper {
+    display: block;
   }
 }
