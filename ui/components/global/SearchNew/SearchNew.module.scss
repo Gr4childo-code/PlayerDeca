@@ -1,10 +1,12 @@
+@import "@/styles/sass/grid.scss";
+
 .search {
   width: 100%;
   max-width: 300px;
   margin-left: 15px;
   position: relative;
-  strong{
-    color: var(--white-90)
+  strong {
+    color: var(--white-90);
   }
   &__fields {
     appearance: none;
@@ -54,9 +56,8 @@
     display: flex;
     align-items: center;
     color: var(--white-50);
-    &:hover{
+    &:hover {
       background: var(--white-10);
-
     }
     &__cover {
       width: 30px;
@@ -80,6 +81,26 @@
       text-overflow: ellipsis;
       box-sizing: border-box;
       padding-left: 10px;
+    }
+  }
+}
+
+@include mq(tablet) {
+  .search {
+    &__overflow {
+      &__active {
+        width: calc(100% + 200px);
+      }
+    }
+  }
+}
+@include mq(phone) {
+  .search {
+    &__overflow {
+      &__active {
+        transform: translateX(-140px);
+        width: calc(100% + 200px);
+      }
     }
   }
 }
