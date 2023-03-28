@@ -3,7 +3,7 @@ import { AudioInit, AudioTime } from './player';
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faMusic, faPlus, faArrowsSplitUpAndLeft, faRepeat } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
 
@@ -196,17 +196,28 @@ export default function Player({ audios }) {
                 </div>
               </div>
             </div>
-            <div
-              className={styles.playerVolume}
-              onMouseMove={(e) => volumeTrack(e, volumeMove)}
-              onMouseDown={(e) => volumeTrack(e, true)}
-              onMouseUp={(e) => volumeTrack(e, false)}
-              onMouseLeave={(e) => volumeTrack(e, false)}
-            >
+            <div className={styles.playerTools}>
               <div
-                className={styles.playerVolume__progress}
-                style={{ width: `${volume}%` }}
-              ></div>
+                className={styles.playerVolume}
+                onMouseMove={(e) => volumeTrack(e, volumeMove)}
+                onMouseDown={(e) => volumeTrack(e, true)}
+                onMouseUp={(e) => volumeTrack(e, false)}
+                onMouseLeave={(e) => volumeTrack(e, false)}
+              >
+                <div
+                  className={styles.playerVolume__progress}
+                  style={{ width: `${volume}%` }}
+                ></div>
+              </div>
+              <div hint="Добавить в мою музыку" className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faPlus} />
+              </div>
+              <div hint="Перемешать и воспроизвести" className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faArrowsSplitUpAndLeft} />
+              </div>
+              <div hint="Повторять" className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faRepeat} />
+              </div>
             </div>
           </div>
         </div>

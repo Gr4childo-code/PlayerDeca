@@ -191,7 +191,6 @@
   width: 100px;
   cursor: pointer;
   border-radius: 10px;
-  margin-left: 15px;
   position: relative;
   &:before {
     content: "";
@@ -369,6 +368,48 @@
     pointer-events: auto;
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.playerTools {
+  display: flex;
+  align-items: center;
+}
+
+.playerBtn {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-left: 17px;
+  position: relative;
+  color: var(--white-40);
+  transition: color .15s;
+  &:before {
+    content: attr(hint);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    background: var(--black-50);
+    opacity: 0;
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: var(--white);
+    transition: opacity .15s;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    color: var(--whtie);
+    &:before {
+      opacity: 1;
+    }
   }
 }
 
