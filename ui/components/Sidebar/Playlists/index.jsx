@@ -12,13 +12,7 @@ export default function Playlists({ playlistsData, img }) {
           return (
             <li key={id} className={styles.playlists__item}>
               <Link href={'/'}>
-                <Image
-                  className={styles.img}
-                  width={150}
-                  height={150}
-                  src={img}
-                  alt={'imgPlaylist'}
-                />
+                <img className={styles.img} src={img.src} alt={'imgPlaylist'} />
                 <p className={styles.playlists__descr}>Playlist: {id}</p>
               </Link>
             </li>

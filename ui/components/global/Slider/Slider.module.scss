@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   margin-top: 10px;
   position: relative;
@@ -129,5 +131,13 @@
 
   &__active {
     background: var(--ui-color-one);
+  }
+}
+
+@include mq(phone) {
+  .header {
+    &__img {
+      height: 300px;
+    }
   }
 }

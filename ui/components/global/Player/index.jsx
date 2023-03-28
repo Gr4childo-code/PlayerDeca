@@ -3,7 +3,14 @@ import { AudioInit, AudioTime } from './player';
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMusic,
+  faPlus,
+  faArrowsSplitUpAndLeft,
+  faRepeat,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
 
@@ -17,6 +24,8 @@ export default function Player({ audios }) {
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false);
   const [isPlayList, setIsPlayList] = useState(false);
+
+  const [isNav, setIsNav] = useState(false);
 
   const [track, setTrack] = useState({
     id: audios?.data[0]?.id,
@@ -145,7 +154,7 @@ export default function Player({ audios }) {
                 className={styles.playerBox__info}
                 onClick={() => setIsPlayList(!isPlayList)}
               >
-                <div>
+                <div className={styles.playerBox__info__description}>
                   <strong>{track.author}</strong> - {track.name}
                 </div>
                 <span>
@@ -197,16 +206,46 @@ export default function Player({ audios }) {
               </div>
             </div>
             <div
-              className={styles.playerVolume}
-              onMouseMove={(e) => volumeTrack(e, volumeMove)}
-              onMouseDown={(e) => volumeTrack(e, true)}
-              onMouseUp={(e) => volumeTrack(e, false)}
-              onMouseLeave={(e) => volumeTrack(e, false)}
+              className={
+                !isNav ? styles.playerTools : styles.playerToolsMob__active
+              }
             >
               <div
-                className={styles.playerVolume__progress}
-                style={{ width: `${volume}%` }}
-              ></div>
+                className={styles.playerVolume}
+                onMouseMove={(e) => volumeTrack(e, volumeMove)}
+                onMouseDown={(e) => volumeTrack(e, true)}
+                onMouseUp={(e) => volumeTrack(e, false)}
+                onMouseLeave={(e) => volumeTrack(e, false)}
+              >
+                <div
+                  className={styles.playerVolume__progress}
+                  style={{ width: `${volume}%` }}
+                ></div>
+              </div>
+
+              <div hint='Добавить в мою музыку' className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faPlus} />
+              </div>
+              <div
+                hint='Перемешать и воспроизвести'
+                className={styles.playerBtn}
+              >
+                <FontAwesomeIcon icon={faArrowsSplitUpAndLeft} />
+              </div>
+              <div hint='Повторять' className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faRepeat} />
+              </div>
+            </div>
+            <div className={styles.playerToolsMob}>
+              <div
+                className={styles.playerBtn}
+                hint={!isNav ? 'Открыть' : 'Закрыть'}
+              >
+                <FontAwesomeIcon
+                  icon={!isNav ? faBars : faTimes}
+                  onClick={() => setIsNav(!isNav)}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+@import "@/styles/sass/grid.scss";
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -96,5 +97,48 @@
   }
   img {
     margin-left: 20px;
+  }
+}
+
+@include mq(SMdesktop) {
+  .eventInfo {
+    &__left {
+      width: 500px;
+    }
+    &__right {
+      width: calc(100% - 200px);
+    }
+    &__title {
+      font-size: 20px;
+    }
+  }
+}
+@include mq(tablet) {
+  .eventInfo {
+    &__title {
+      font-size: 20px;
+    }
+  }
+}
+@include mq(phone) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .eventInfo {
+    &__left {
+      flex-wrap: nowrap;
+      padding-top: 20px;
+      width: 100%;
+    }
+    &__right {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    &__texts {
+      li {
+        padding-bottom: 0;
+      }
+    }
   }
 }

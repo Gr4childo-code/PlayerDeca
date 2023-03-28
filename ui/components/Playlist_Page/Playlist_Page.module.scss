@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   display: flex;
   padding-top: 20px;
@@ -17,28 +19,30 @@
       object-fit: cover;
     }
   }
-
-  .release {
-    margin: 10px 0;
-    color: var(--white-80);
-    font-size: 20px;
-
-    &__dates {
-      margin-left: 15px;
-      font-weight: bold;
+  &__description {
+    display: flex;
+    flex-direction: column;
+    .release {
+      margin: 10px 0;
+      color: var(--white-80);
       font-size: 20px;
-      color: var(--ui-color-one);
+      &__dates {
+        margin-left: 15px;
+        font-weight: bold;
+        font-size: 20px;
+        color: var(--ui-color-one);
+      }
     }
-  }
 
-  .rate {
-    margin-bottom: 10px;
-    color: var(--white-80);
-    font-size: 20px;
-    &__star {
-      margin-left: 15px;
-      color: var(--ui-color-one);
+    .rate {
+      margin-bottom: 10px;
+      color: var(--white-80);
       font-size: 20px;
+      &__star {
+        margin-left: 15px;
+        color: var(--ui-color-one);
+        font-size: 20px;
+      }
     }
   }
 }
@@ -68,7 +72,6 @@
 
   .hr {
     margin: 20px 0;
-
     border: 1px solid var(--ui-color-one);
   }
   .tracks{
@@ -80,5 +83,31 @@
     font-size: 40px;
     letter-spacing: 1.5px;
     color: var(--white-90);
+  }
+}
+@include mq(phone) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .side__bar {
+    flex-direction: row;
+    &__cover {
+      width: 100px;
+      height: 100px;
+    }
+    &__description {
+      margin-left: 20px;
+      justify-content: center;
+      .release {
+        font-size: 15px;
+      }
+      .rate {
+        font-size: 15px;
+      }
+    }
+  }
+  .content {
+    margin-top: 40px;
+    padding-left: 0;
   }
 }

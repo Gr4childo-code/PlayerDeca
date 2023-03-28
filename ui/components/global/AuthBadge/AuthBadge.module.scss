@@ -1,13 +1,14 @@
+@import "@/styles/sass/grid.scss";
 .authBadge {
   display: inline-flex;
   align-items: center;
-  transition: opacity .1s;
+  transition: opacity 0.1s;
   float: right;
   &__name {
     font-size: 14px;
     line-height: 1.3;
     white-space: nowrap;
-    width: calc(100% - 46px)
+    width: calc(100% - 46px);
   }
   &__ava {
     box-sizing: border-box;
@@ -20,7 +21,7 @@
     position: relative;
     &:before,
     &:after {
-      content: '';
+      content: "";
       border-radius: 100%;
       margin: auto;
       position: absolute;
@@ -44,6 +45,20 @@
     }
   }
   &:hover {
-    opacity: .7;
+    opacity: 0.7;
+  }
+}
+@include mq(desktop) {
+  .authBadge {
+    &__name {
+      display: flex;
+    }
+  }
+}
+@include mq(phone) {
+  .authBadge {
+    &__name {
+      display: none;
+    }
   }
 }

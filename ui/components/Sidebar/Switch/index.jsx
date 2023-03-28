@@ -10,10 +10,6 @@ export default function Switch() {
           <input type='checkbox' />
           <span className={styles.slider}></span>
         </label>
-        <label className={styles.switch}>
-          <input type='checkbox' />
-          <span className={styles.slider__round}></span>
-        </label>
       </div>
     </>
   );
