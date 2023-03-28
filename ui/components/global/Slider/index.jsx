@@ -3,9 +3,11 @@ import { useState } from 'react';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
 
+import styles from '@/ui/components/global/Slider/Slider.module.scss';
+
 export default function Slider({ children }) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const slideLength = children.length - 1;
+  const slideLength = children.length;
 
   const handlePrevSlide = () => {
     setActiveSlide(activeSlide === 0 ? activeSlide : children.length - 1);
@@ -15,11 +17,11 @@ export default function Slider({ children }) {
   };
 
   const currentLink = (index) => {
-    setCurrentSlide(index);
+    setActiveSlide(index);
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Buttons prev={handlePrevSlide} next={handleNextSlide} />
       {children}
       <Pagination
