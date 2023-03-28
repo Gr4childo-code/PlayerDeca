@@ -1,3 +1,4 @@
+@import "@/styles/sass/grid.scss";
 .profile {
   display: flex;
   justify-content: space-between;
@@ -38,5 +39,19 @@
     border: none;
     outline: none;
     box-shadow: none;
+  }
+}
+
+@include mq(phone) {
+  .profile {
+    flex-direction: column;
+    &__menu {
+      width: 100%;
+      height: 10vh;
+    }
+    &__content {
+      margin-top: 10px;
+      width: 100%;
+    }
   }
 }
