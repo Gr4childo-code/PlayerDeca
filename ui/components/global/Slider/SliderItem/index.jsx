@@ -1,67 +1,42 @@
 import React from 'react';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-
-import Buttons from '../Buttons';
-import Pagination from '../Pagination';
-import SlideDescription from '../SlideDescription';
+import Link from 'next/link';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function SliderItem({
-  title,
-  data,
-  pagination,
-  filter,
-  buttons,
-}) {
-  const [currentDataSlide] = useState(data);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const router = useRouter();
-  const slide = currentDataSlide[currentSlide];
+export default function SliderItem({ data, link, filter }) {
+  console.log(data.data);
+  const { place, poster, title, users_permissions_user } =
+    data.data[0].attributes;
+  console.log(place, poster.data.attributes, title, users_permissions_user);
 
-  const handlePrevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? currentSlide : currentSlide - 1);
-  };
-
-  const handleNextSlide = () => {
-    setCurrentSlide(currentSlide === data.length - 1 ? 0 : currentSlide + 1);
-  };
-
-  const currentLink = (index) => {
-    setCurrentSlide(index);
-  };
+  /*   const slideTitle = data?.data.map(({ id, attributes }) => (
+    <p>{attributes.title}</p>
+  ));
+  const slidePlace = data?.data.map(({ id, attributes }) => (
+    <p>{attributes ? attributes.place : attributes.title}</p>
+  )); */
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.header} id={slide?.id}>
-        <img
-          width={946}
-          height={500}
-          src={
-            process.env.NEXT_PUBLIC_API_URL +
-            slide?.attributes?.poster?.data?.attributes?.url
-          }
-          className={styles.header__img}
-          alt={`image ${currentSlide}`}
-          onClick={() => {
-            router.push(`/playlist/${slide.id}`);
-          }}
-        />
-      </div>
-
-      {/* Если есть данные - будет описание слайда (Песня, Автор и тд) */}
-      {data && <SlideDescription filter={filter} slide={slide} />}
-
-      {/*  Кнопки и пагинация */}
-      {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
-      {pagination && (
-        <Pagination
-          currentDataSlide={currentDataSlide}
-          currentSlide={currentSlide}
-          currentLink={currentLink}
-        />
-      )}
-    </div>
+    <>
+      <Link href={`${link}`}>
+        <div className={styles.slide}>{title}</div>
+      </Link>
+      <>
+        <ul
+          className={`${
+            filter == 'blur'
+              ? styles.wrapper__blur
+              : styles.wrapper__list && filter == 'gradient'
+              ? styles.wrapper__gradient
+              : styles.wrapper__list && filter == 'none'
+              ? styles.wrapper__none
+              : styles.wrapper__list
+          }`}
+        >
+          <li className={styles.wrapper__item}>{title} </li>
+          <li className={styles.wrapper__item}>{place}</li>
+        </ul>
+      </>
+    </>
   );
 }

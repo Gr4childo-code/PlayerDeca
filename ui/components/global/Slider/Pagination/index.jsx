@@ -4,20 +4,21 @@ import styles from '@/ui/components/global/Slider/Pagination/Pagination.module.s
 
 export default function Pagination({
   currentDataSlide,
-  currentSlide,
+  activeSlide,
   currentLink,
 }) {
   return (
     <>
       <div className={styles.links}>
         {currentDataSlide &&
-          [...new Array(currentDataSlide.length)].map((e, index) => (
+          [...new Array(currentDataSlide)].map((e, index) => (
             <div
               onMouseEnter={() => currentLink(index)}
               className={`${styles.links__points} ${
-                index === currentSlide ? styles.links__active : ''
+                index === activeSlide ? styles.links__active : ''
               }`}
-              key={index}></div>
+              key={index}
+            ></div>
           ))}
       </div>
     </>

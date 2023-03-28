@@ -84,20 +84,20 @@ export default function Home({ audioTop, playlists, events }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            {/* <Slider
-              data={dataSlider3}
-              pagination={true}
-              filter={'gradient'}
-              buttons={false}
-              title={'Новые плейлисты'}
-            /> */}
-
-            <Slider>
+            <Slider pagination={true} buttons={true} filter={true}>
+              <SliderItem filter={'blur'} data={events} link={'/events'} />
               <SliderItem
-                data={playlists.data}
-                pagination={true}
-                buttons={true}
-                filter={'blur'}
+                filter={'gradient'}
+                data={playlists}
+                link={'/profile/my-playlists'}
+              />
+            </Slider>
+            <Slider pagination={true} buttons={false} filter={false}>
+              <SliderItem filter={'blur'} data={playlists} link={'/events'} />
+              <SliderItem
+                filter={'gradient'}
+                data={playlists}
+                link={'/profile/my-playlists'}
               />
             </Slider>
             <EventsAll events={events} />
