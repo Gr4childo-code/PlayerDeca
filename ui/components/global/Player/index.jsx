@@ -3,7 +3,14 @@ import { AudioInit, AudioTime } from './player';
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic, faPlus, faArrowsSplitUpAndLeft, faRepeat } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMusic,
+  faPlus,
+  faArrowsSplitUpAndLeft,
+  faRepeat,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
 
@@ -17,6 +24,8 @@ export default function Player({ audios }) {
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false);
   const [isPlayList, setIsPlayList] = useState(false);
+
+  const [isNav, setIsNav] = useState(false);
 
   const [track, setTrack] = useState({
     id: audios?.data[0]?.id,
@@ -196,7 +205,11 @@ export default function Player({ audios }) {
                 </div>
               </div>
             </div>
-            <div className={styles.playerTools}>
+            <div
+              className={
+                !isNav ? styles.playerTools : styles.playerToolsMob__active
+              }
+            >
               <div
                 className={styles.playerVolume}
                 onMouseMove={(e) => volumeTrack(e, volumeMove)}
@@ -209,14 +222,29 @@ export default function Player({ audios }) {
                   style={{ width: `${volume}%` }}
                 ></div>
               </div>
-              <div hint="Добавить в мою музыку" className={styles.playerBtn}>
+
+              <div hint='Добавить в мою музыку' className={styles.playerBtn}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
-              <div hint="Перемешать и воспроизвести" className={styles.playerBtn}>
+              <div
+                hint='Перемешать и воспроизвести'
+                className={styles.playerBtn}
+              >
                 <FontAwesomeIcon icon={faArrowsSplitUpAndLeft} />
               </div>
-              <div hint="Повторять" className={styles.playerBtn}>
+              <div hint='Повторять' className={styles.playerBtn}>
                 <FontAwesomeIcon icon={faRepeat} />
+              </div>
+            </div>
+            <div className={styles.playerToolsMob}>
+              <div
+                className={styles.playerBtn}
+                hint={!isNav ? 'Открыть' : 'Закрыть'}
+              >
+                <FontAwesomeIcon
+                  icon={!isNav ? faBars : faTimes}
+                  onClick={() => setIsNav(!isNav)}
+                />
               </div>
             </div>
           </div>

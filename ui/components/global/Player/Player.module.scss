@@ -413,15 +413,40 @@
   }
 }
 
+.playerToolsMob {
+  display: none;
+  align-items: center;
+  position: relative;
+  &__active {
+    display: none;
+    align-items: center;
+    position: absolute;
+    background: var(--gray-90);
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+}
+
 @include mq(tablet) {
   .playerBox {
     &__body {
-      width: calc(100% - 45px);
+      width: calc(100% - 100px);
     }
   }
 
-  .playerVolume {
+  .playerTools {
     display: none;
+  }
+
+  .playerToolsMob {
+    display: flex;
+
+    &__active {
+      display: flex;
+      right: 0;
+      bottom: 70px;
+    }
   }
 }
 
@@ -429,7 +454,7 @@
   .playerBox {
     &__body {
       font-size: 13px;
-      width: calc(100% - 170px);
+      width: calc(100% - 100px);
     }
     &__info {
       width: calc(100% - 25px);
@@ -446,6 +471,13 @@
       max-height: calc(100vh - 250px);
     }
   }
+
+  // .playerToolsMob {
+  //   &__active {
+  //     right: 0;
+  //     bottom: 70px;
+  //   }
+  // }
 }
 
 @keyframes musicIcon {
