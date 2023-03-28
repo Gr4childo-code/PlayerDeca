@@ -46,7 +46,8 @@ export default function Home({ audioTop, playlists, events }) {
     setList([...list, toastItem]);
   };
 
-  const myArrSlider = ['audioTop', 'playlists', 'events'];
+  /* const dataSliders = [audioTop, playlists, events];
+  console.log(dataSliders[0]); */
 
   return (
     <>
@@ -98,9 +99,9 @@ export default function Home({ audioTop, playlists, events }) {
             /> */}
 
             <Slider pagination={true} buttons={true} filter={'blur'}>
-              {myArrSlider.map((text) => (
-                <SliderItem header={text} />
-              ))}
+              <SliderItem data={audioTop} title={'Топ-аудио'} />
+              <SliderItem data={playlists} title={'Плейлисты'} />
+              <SliderItem data={events} title={'События'} />
             </Slider>
             <EventsAll events={events} />
           </div>

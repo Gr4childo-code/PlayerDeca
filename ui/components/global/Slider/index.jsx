@@ -9,6 +9,7 @@ import styles from '@/ui/components/global/Slider/Slider.module.scss';
 export default function Slider({ children }, filter, data) {
   const [activeSlide, setActiveSlide] = useState(0);
   const slideLength = children.length;
+  const slide = activeSlide[children.length];
 
   const handlePrevSlide = () => {
     setActiveSlide(activeSlide === 0 ? activeSlide : children.length - 1);
@@ -23,8 +24,20 @@ export default function Slider({ children }, filter, data) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper__slides} /* id={slide?.id} */>
-        {/* <img
+      <div className={styles.wrapper__slides} /* id={slide?.id} */></div>
+      <div className={styles.slide}>{children[activeSlide]}</div>
+      <SlideDescription filter={filter} slide={data} />
+      <Buttons prev={handlePrevSlide} next={handleNextSlide} />
+      <Pagination
+        currentDataSlide={slideLength}
+        activeSlide={activeSlide}
+        currentLink={currentLink}
+      />
+    </div>
+  );
+}
+{
+  /* <img
           width={946}
           height={500}
           src={
@@ -36,16 +49,5 @@ export default function Slider({ children }, filter, data) {
           onClick={() => {
             router.push(`/playlist/${slide.id}`);
           }} 
-        /> */}
-      </div>
-      <div className={styles.slide}>{children[activeSlide]}</div>
-      <SlideDescription filter={filter} slide={data} />
-      <Buttons prev={handlePrevSlide} next={handleNextSlide} />
-      <Pagination
-        currentDataSlide={slideLength}
-        activeSlide={activeSlide}
-        currentLink={currentLink}
-      />
-    </div>
-  );
+        /> */
 }
