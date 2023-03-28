@@ -101,3 +101,14 @@
     }
   }
 }
+@include mq(Sphone) {
+  .track {
+    height: 70px;
+    &__music {
+      &__name,
+      &__author {
+        font-size: 10px;
+      }
+    }
+  }
+}
