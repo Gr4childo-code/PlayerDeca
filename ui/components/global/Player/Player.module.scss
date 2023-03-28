@@ -383,7 +383,7 @@
   margin-left: 17px;
   position: relative;
   color: var(--white-40);
-  transition: color .15s;
+  transition: color 0.15s;
   &:before {
     content: attr(hint);
     position: absolute;
@@ -399,7 +399,7 @@
     border-radius: 5px;
     margin-bottom: 5px;
     color: var(--white);
-    transition: opacity .15s;
+    transition: opacity 0.15s;
   }
   svg {
     width: 100%;
@@ -429,6 +429,7 @@
   .playerBox {
     &__body {
       font-size: 13px;
+      width: calc(100% - 170px);
     }
     &__info {
       width: calc(100% - 25px);
