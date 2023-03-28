@@ -4,12 +4,17 @@ import Link from 'next/link';
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function SliderItem({ data, title, link, filter, description }) {
-  console.log(data);
+  console.log(data?.data);
+  const result = data?.data.map(({ id, attributes }) => (
+    <div>
+      <p>{attributes.title}</p>
+    </div>
+  ));
 
   return (
     <>
       <Link href={`${link}`}>
-        <div className={styles.slide}>{title}</div>
+        <div className={styles.slide}>{result}</div>
       </Link>
       <>
         <ul
@@ -23,11 +28,7 @@ export default function SliderItem({ data, title, link, filter, description }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>
-            {
-              description /* ?.attributes.users_permissions_user.data.attributes.name */
-            }
-          </li>
+          <li className={styles.wrapper__item}>{title}</li>
           <li className={styles.wrapper__item}>
             {description /* ?.attributes.title */}
           </li>

@@ -9,10 +9,8 @@ export default function Slider({ children }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const slideLength = children.length;
 
-  const slide = activeSlide;
-
   const handlePrevSlide = () => {
-    setActiveSlide(activeSlide === 0 ? activeSlide : children.length - 1);
+    setActiveSlide(activeSlide === 0 ? activeSlide : activeSlide - 1);
   };
   const handleNextSlide = () => {
     setActiveSlide(activeSlide === children.length - 1 ? 0 : activeSlide + 1);
