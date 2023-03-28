@@ -7,7 +7,6 @@ import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function Slider({ children }) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const slideLength = children.length;
 
   const handlePrevSlide = () => {
     setActiveSlide(activeSlide === 0 ? activeSlide : activeSlide - 1);
@@ -26,7 +25,7 @@ export default function Slider({ children }) {
       <div className={styles.slide}>{children[activeSlide]}</div>
       <Buttons prev={handlePrevSlide} next={handleNextSlide} />
       <Pagination
-        currentDataSlide={slideLength}
+        currentDataSlide={children.length}
         activeSlide={activeSlide}
         currentLink={currentLink}
       />

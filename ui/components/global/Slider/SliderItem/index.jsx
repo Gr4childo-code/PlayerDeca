@@ -17,6 +17,12 @@ export default function SliderItem({ data, title, link, filter }) {
       <Link href={`${link}`}>
         <div className={styles.slide}>{title}</div>
       </Link>
+      {/* <img
+        src={
+          process.env.NEXT_PUBLIC_API_URL +
+          attributes.poster.data.attributes.url
+        }
+      /> */}
       <>
         <ul
           className={`${

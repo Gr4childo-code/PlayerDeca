@@ -11,7 +11,7 @@ export default function Pagination({
     <>
       <div className={styles.links}>
         {currentDataSlide &&
-          [...new Array(currentDataSlide.length)].map((e, index) => (
+          [...new Array(currentDataSlide)].map((e, index) => (
             <div
               onMouseEnter={() => currentLink(index)}
               className={`${styles.links__points} ${
