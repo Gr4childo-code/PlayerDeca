@@ -32,3 +32,10 @@
     }
   }
 }
+@include mq(Sphone) {
+  .wrapper {
+    a {
+      font-size: 12px;
+    }
+  }
+}
