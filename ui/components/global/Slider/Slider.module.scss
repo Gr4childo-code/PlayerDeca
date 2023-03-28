@@ -54,9 +54,11 @@
     border-radius: 5px;
   }
   &__item {
+    font-size: 20px;
     list-style-type: none;
     padding: 2px 0;
     &:last-child {
+      font-size: 15px;
       opacity: 0.6;
     }
   }

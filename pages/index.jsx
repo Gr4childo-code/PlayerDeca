@@ -15,9 +15,6 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
-//styles
-import styles from '@/ui/components/global/Slider/Slider.module.scss';
-
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await first10Resp.json();
@@ -45,9 +42,6 @@ export default function Home({ audioTop, playlists, events }) {
     };
     setList([...list, toastItem]);
   };
-
-  /* const dataSliders = [audioTop, playlists, events];
-  console.log(dataSliders[0]); */
 
   return (
     <>
@@ -92,12 +86,14 @@ export default function Home({ audioTop, playlists, events }) {
           <div className='layout__left'>
             <Slider pagination={true} buttons={true} filter={'blur'}>
               <SliderItem
+                filter={'blur'}
                 data={events}
                 title={'События'}
                 description={'Описание слайда'}
                 link={'/events'}
               />
               <SliderItem
+                filter={'gradient'}
                 data={playlists}
                 title={'Плейлисты'}
                 description={'Описание слайда'}
