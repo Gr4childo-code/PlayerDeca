@@ -4,20 +4,15 @@ import Link from 'next/link';
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function SliderItem({ data, link, filter }) {
-  console.log(data.data);
-  const { place, poster, title, users_permissions_user } =
-    data.data[0].attributes;
-  console.log(place, poster.data.attributes, title, users_permissions_user);
+  /* console.log(data.data); */
 
-  /*   const slideTitle = data?.data.map(({ id, attributes }) => (
-    <p>{attributes.title}</p>
-  ));
-  const slidePlace = data?.data.map(({ id, attributes }) => (
-    <p>{attributes ? attributes.place : attributes.title}</p>
-  )); */
+  const slideAtributes = data.data.map(({ attributes }) => attributes);
+  /*   console.log(allAtributes[0]);
+   */
+  const slideImage = slideAtributes[0].poster.data.attributes.url;
 
-  return (
-    <>
+  const slideInfo = slideAtributes.map(({ title, place, poster, author }) => (
+    <div>
       <Link href={`${link}`}>
         <div className={styles.slide}>{title}</div>
       </Link>
@@ -33,10 +28,12 @@ export default function SliderItem({ data, link, filter }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>{title} </li>
-          <li className={styles.wrapper__item}>{place}</li>
+          <li className={styles.wrapper__item}>{title || author || 'none'} </li>
+          <li className={styles.wrapper__item}>{place || author || 'none'}</li>
         </ul>
       </>
-    </>
-  );
+    </div>
+  ));
+
+  return <>{slideInfo}</>;
 }
