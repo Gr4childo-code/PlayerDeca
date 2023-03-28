@@ -18,9 +18,11 @@ export default function SlideDescription({ filter, slide }) {
         }`}
       >
         <li className={styles.wrapper__item}>
-          {slide?.attributes.users_permissions_user.data.attributes.name}
+          {slide /* ?.attributes.users_permissions_user.data.attributes.name */}
         </li>
-        <li className={styles.wrapper__item}>{slide?.attributes.title}</li>
+        <li className={styles.wrapper__item}>
+          {slide /* ?.attributes.title */}
+        </li>
       </ul>
     </>
   );
