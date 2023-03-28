@@ -3,26 +3,24 @@ import Link from 'next/link';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function SliderItem({ data, title, link, filter }) {
-  console.log(data?.data);
-  const slideTitle = data?.data.map(({ id, attributes }) => (
+export default function SliderItem({ data, link, filter }) {
+  console.log(data.data);
+  const { place, poster, title, users_permissions_user } =
+    data.data[0].attributes;
+  console.log(place, poster.data.attributes, title, users_permissions_user);
+
+  /*   const slideTitle = data?.data.map(({ id, attributes }) => (
     <p>{attributes.title}</p>
   ));
   const slidePlace = data?.data.map(({ id, attributes }) => (
-    <p>{attributes.place}</p>
-  ));
+    <p>{attributes ? attributes.place : attributes.title}</p>
+  )); */
 
   return (
     <>
       <Link href={`${link}`}>
         <div className={styles.slide}>{title}</div>
       </Link>
-      {/* <img
-        src={
-          process.env.NEXT_PUBLIC_API_URL +
-          attributes.poster.data.attributes.url
-        }
-      /> */}
       <>
         <ul
           className={`${
@@ -35,8 +33,8 @@ export default function SliderItem({ data, title, link, filter }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>{slideTitle[1]} </li>
-          <li className={styles.wrapper__item}>{slidePlace[1]}</li>
+          <li className={styles.wrapper__item}>{title} </li>
+          <li className={styles.wrapper__item}>{place}</li>
         </ul>
       </>
     </>

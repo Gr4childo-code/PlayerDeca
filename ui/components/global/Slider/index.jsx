@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function Slider({ children }) {
+export default function Slider({ children, buttons, pagination }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const handlePrevSlide = () => {
@@ -23,12 +23,14 @@ export default function Slider({ children }) {
     <div className={styles.wrapper}>
       <div className={styles.wrapper__slides}></div>
       <div className={styles.slide}>{children[activeSlide]}</div>
-      <Buttons prev={handlePrevSlide} next={handleNextSlide} />
-      <Pagination
-        currentDataSlide={children.length}
-        activeSlide={activeSlide}
-        currentLink={currentLink}
-      />
+      {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
+      {pagination && (
+        <Pagination
+          currentDataSlide={children.length}
+          activeSlide={activeSlide}
+          currentLink={currentLink}
+        />
+      )}
     </div>
   );
 }
