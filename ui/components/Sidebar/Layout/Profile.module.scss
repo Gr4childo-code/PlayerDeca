@@ -31,7 +31,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .userInfo {
     &__descr {
       font-size: 20px;

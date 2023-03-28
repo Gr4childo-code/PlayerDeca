@@ -42,7 +42,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .profile {
     flex-direction: column;
     &__menu {

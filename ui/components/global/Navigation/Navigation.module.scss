@@ -96,7 +96,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .nav {
     &__link {
       padding: 5px 0;

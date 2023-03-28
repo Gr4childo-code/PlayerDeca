@@ -77,7 +77,7 @@
     }
   }
 }
-@include mq(phone) {
+@include mq(Lphone) {
   .track {
     height: 60px;
     &__cover {
