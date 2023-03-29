@@ -146,14 +146,14 @@
 
 //playlists
 .playlists {
-  width: 350px;
-  min-height: 350px;
+  max-width: 250px;
+  min-height: 250px;
   border-radius: 5px;
   object-fit: cover;
   cursor: pointer;
   &__slides {
-    width: 350px;
-    min-height: 350px;
+    max-width: 250px;
+    min-height: 250px;
     border-radius: 5px;
     object-fit: cover;
     cursor: pointer;
@@ -163,18 +163,18 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    bottom: 7px;
+    bottom: 10px;
     left: 7px;
     right: 7px;
-    padding: 15px 20px;
+    padding: 5px 5px;
     border-radius: 5px;
     background: var(--black-80);
   }
   &__item {
-    font-size: 20px;
+    font-size: 15px;
     list-style-type: none;
     &:last-child {
-      font-size: 15px;
+      font-size: 12px;
       opacity: 0.6;
     }
   }

@@ -17,7 +17,7 @@ import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
 //styles
-import styles from '@/ui/components/global/Slider/SliderEvents.module.scss';
+import styles from '@/ui/components/global/Slider/SlidersAllStyles.module.scss';
 
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
