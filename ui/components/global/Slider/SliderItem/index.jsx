@@ -16,23 +16,27 @@ export default function SliderItem({ data, link, filter }) {
           src={process.env.NEXT_PUBLIC_API_URL + slideImage}
           alt={'slide'}
         />
+        <>
+          <ul
+            className={`${
+              filter == 'blur'
+                ? styles.wrapper__blur
+                : styles.wrapper__list && filter == 'gradient'
+                ? styles.wrapper__gradient
+                : styles.wrapper__list && filter == 'none'
+                ? styles.wrapper__none
+                : styles.wrapper__list
+            }`}
+          >
+            <li className={styles.wrapper__item}>
+              {title || author || 'none'}
+            </li>
+            <li className={styles.wrapper__item}>
+              {place || author || 'none'}
+            </li>
+          </ul>
+        </>
       </Link>
-      <>
-        <ul
-          className={`${
-            filter == 'blur'
-              ? styles.wrapper__blur
-              : styles.wrapper__list && filter == 'gradient'
-              ? styles.wrapper__gradient
-              : styles.wrapper__list && filter == 'none'
-              ? styles.wrapper__none
-              : styles.wrapper__list
-          }`}
-        >
-          <li className={styles.wrapper__item}>{title || author || 'none'}</li>
-          <li className={styles.wrapper__item}>{place || author || 'none'}</li>
-        </ul>
-      </>
     </>
   );
 }
