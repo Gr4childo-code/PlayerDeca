@@ -92,14 +92,6 @@ export default function Home({ audioTop, playlists, events }) {
                 link={'/profile/my-playlists'}
               />
             </Slider>
-            <Slider pagination={true} buttons={false} filter={false}>
-              <SliderItem filter={'blur'} data={playlists} link={'/events'} />
-              <SliderItem
-                filter={'gradient'}
-                data={playlists}
-                link={'/profile/my-playlists'}
-              />
-            </Slider>
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
