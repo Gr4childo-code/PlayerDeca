@@ -64,13 +64,8 @@
 @include mq(tablet) {
   .track {
     &__music {
-      &__name {
-        color: var(--white-90);
-        font-size: 15px;
-        padding-bottom: 3px;
-      }
+      &__name,
       &__author {
-        color: var(--white-50);
         font-size: 15px;
         padding-bottom: 3px;
       }
@@ -90,13 +85,21 @@
     }
 
     &__music {
-      &__name {
-        font-size: 13px;
-        padding-bottom: 3px;
-      }
+      &__name,
       &__author {
         font-size: 13px;
         padding-bottom: 3px;
+      }
+    }
+  }
+}
+@include mq(Sphone) {
+  .track {
+    height: 70px;
+    &__music {
+      &__name,
+      &__author {
+        font-size: 12px;
       }
     }
   }

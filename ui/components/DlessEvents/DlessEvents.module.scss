@@ -120,13 +120,47 @@
     }
   }
 }
+
 @include mq(Lphone) {
   .wrapper {
-    flex-direction: column;
+    img {
+      width: 160px;
+      height: 140px;
+    }
+  }
+  .dataEvent {
+    &__number {
+      font-size: 40px;
+    }
+    &__month {
+      transform: translateY(2px);
+    }
+    &__time,
+    &__year {
+      transform: translateY(5px);
+    }
   }
   .eventInfo {
+    text-align: center;
+    &__title {
+      font-size: 15px;
+      text-align: center;
+    }
+    &__place {
+      font-size: 12px;
+    }
+    &__author {
+      font-size: 12px;
+      text-align: center;
+      padding-top: 5px;
+      margin-bottom: 20px;
+    }
     &__left {
       flex-wrap: nowrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
       padding-top: 20px;
       width: 100%;
     }
@@ -136,9 +170,19 @@
       align-items: center;
     }
     &__texts {
+      align-items: center;
+
+      flex-direction: row;
+      position: relative;
       li {
+        margin-right: 5px;
         padding-bottom: 0;
       }
     }
+  }
+}
+@include mq(Mphone) {
+  .wrapper {
+    display: block;
   }
 }
