@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import Script from 'next/script';
+import Link from 'next/link';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
@@ -88,55 +89,82 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className={styles.wrapperMain}>
-              <h2>
-                Новинки от{' '}
-                {
-                  playlists.data[0].attributes.users_permissions_user.data
-                    .attributes.username
-                }
-              </h2>
+              <h2>События DLESS </h2>
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 <SliderItem>
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[0].attributes.title}</li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[0].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
+                  {console.log(
+                    events.data[1].attributes.poster.data.attributes.url
+                  )}
+                  <Link href={`/events`}>
+                    <img
+                      className={styles.wrapper__slides}
+                      src={
+                        process.env.NEXT_PUBLIC_API_URL +
+                        events.data[1].attributes.poster.data.attributes.url
+                      }
+                      alt={'image'}
+                    />
+                    {events.data?.map(({ id, attributes }, index) => (
+                      <div key={id} className={styles.wrapper__list}>
+                        <div className={styles.description}>
+                          <p className={styles.wrapper__item}>
+                            {events.data[1].attributes.title}
+                          </p>
+                          <p className={styles.wrapper__item}>
+                            {events.data[1].attributes.author}
+                          </p>
+                        </div>
+                        <div className={styles.description}>
+                          <p className={styles.description__date}>
+                            {events.data[1].attributes.date.slice(8, 10)} Марта
+                          </p>
+                          <p className={styles.description__time}>
+                            {events.data[1].attributes.time.slice(0, 5)}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </Link>
                 </SliderItem>
                 <SliderItem>
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[1].attributes.title}</li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[1].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
-                </SliderItem>
-                <SliderItem>
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[2].attributes.title}</li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[2].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
+                  {console.log(
+                    events.data[1].attributes.poster.data.attributes.url
+                  )}
+                  <Link href={`/events`}>
+                    <img
+                      className={styles.wrapper__slides}
+                      src={
+                        process.env.NEXT_PUBLIC_API_URL +
+                        events.data[0].attributes.poster.data.attributes.url
+                      }
+                      alt={'image'}
+                    />
+                    {events.data?.map(({ id, attributes }, index) => (
+                      <div key={id} className={styles.wrapper__list}>
+                        <div className={styles.description}>
+                          <p className={styles.wrapper__item}>
+                            {events.data[0].attributes.title}
+                          </p>
+                          <p className={styles.wrapper__item}>
+                            {events.data[0].attributes.author}
+                          </p>
+                        </div>
+                        <div className={styles.description}>
+                          <p className={styles.description__date}>
+                            {events.data[0].attributes.date.slice(8, 10)} Марта
+                          </p>
+                          <p className={styles.description__time}>
+                            {events.data[0].attributes.time.slice(0, 5)}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </Link>
                 </SliderItem>
               </Slider>
             </div>
+            {/* 						Готово не трогать
+             */}{' '}
             <div className={styles.wrapperMain}>
               <h2>
                 Новинки от{' '}
@@ -157,7 +185,9 @@ export default function Home({ audioTop, playlists, events }) {
                   />
                   {playlists.data?.map(({ id, attributes }) => (
                     <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[0].attributes.title}</li>
+                      <li className={styles.wrapper__item}>
+                        {playlists.data[0].attributes.title}
+                      </li>
                       <li className={styles.wrapper__item}>
                         {
                           playlists.data[0].attributes.users_permissions_user
@@ -178,7 +208,9 @@ export default function Home({ audioTop, playlists, events }) {
                   />
                   {playlists.data?.map(({ id, attributes }) => (
                     <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[1].attributes.title}</li>
+                      <li className={styles.wrapper__item}>
+                        {playlists.data[1].attributes.title}
+                      </li>
                       <li className={styles.wrapper__item}>
                         {
                           playlists.data[1].attributes.users_permissions_user
@@ -199,7 +231,9 @@ export default function Home({ audioTop, playlists, events }) {
                   />
                   {playlists.data?.map(({ id, attributes }) => (
                     <ul key={id} className={styles.wrapper__list}>
-                      <li>{playlists.data[2].attributes.title}</li>
+                      <li className={styles.wrapper__item}>
+                        {playlists.data[2].attributes.title}
+                      </li>
                       <li className={styles.wrapper__item}>
                         {
                           playlists.data[2].attributes.users_permissions_user
