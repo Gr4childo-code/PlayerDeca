@@ -3,12 +3,14 @@ import { signIn, useSession } from "next-auth/react"
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
+import Toast from '@/ui/components/global/Toast';
 
 export default function SignIn() {
   const { data: session, status } = useSession()
   const [login, setLogin] = useState('')
   const router = useRouter()
   const [passsword, setPassword] = useState('')
+  const [list, setList] = useState([]);
 
   const callbackUrl = '/profile'
 
@@ -25,6 +27,13 @@ export default function SignIn() {
 
     if ( result.ok && result.status === 200 ) {
       router.push(result.url)
+    } else {
+      setList([...list, {
+        id: Date.now(),
+        type: 'error',
+        title: `${result.status} ${result.error}`,
+        description: 'Ошибка авторизации'
+      }]);
     }
   }
 
@@ -48,6 +57,8 @@ export default function SignIn() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
+      <Toast toastlist={list} setList={setList} />
+
       <div className='container'>
         <h1 className='title'>Авторизация</h1>
         {status === 'loading' ?
@@ -59,7 +70,7 @@ export default function SignIn() {
               <button onClick={loginIn} className="btn">
                 Войти
               </button>
-              
+
               <div>
                 <br />
                 <Link href='/auth/registration'>
