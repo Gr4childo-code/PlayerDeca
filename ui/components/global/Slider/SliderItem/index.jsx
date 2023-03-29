@@ -1,19 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function SliderItem({ data, link, filter }) {
-  /* console.log(data.data); */
-
-  const slideAtributes = data.data.map(({ attributes }) => attributes);
-  console.log(slideAtributes[0]);
-
-  /*   const slideImage = slideAtributes[0].poster.data.attributes.url; */
+  const { title, place, author, poster } = data.data[1].attributes;
+  const slideImage = poster.data.attributes.url;
 
   return (
     <>
-      <Link href={`${link}`}></Link>
+      <Link href={`${link}`}>
+        <img
+          className={styles.wrapper__slides}
+          src={process.env.NEXT_PUBLIC_API_URL + slideImage}
+          alt={'slide'}
+        />
+      </Link>
       <>
         <ul
           className={`${
@@ -26,12 +29,8 @@ export default function SliderItem({ data, link, filter }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>
-            {slideAtributes[1].title || slideAtributes[1].author || 'none'}{' '}
-          </li>
-          <li className={styles.wrapper__item}>
-            {slideAtributes[1].place || slideAtributes[1].author || 'none'}
-          </li>
+          <li className={styles.wrapper__item}>{title || author || 'none'}</li>
+          <li className={styles.wrapper__item}>{place || author || 'none'}</li>
         </ul>
       </>
     </>

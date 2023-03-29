@@ -21,8 +21,7 @@ export default function Slider({ children, buttons, pagination }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper__slides}></div>
-      <div className={styles.slide}>{children[activeSlide]}</div>
+      <div className={styles.wrapper__slides}>{children[activeSlide]}</div>
       {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
       {pagination && (
         <Pagination
