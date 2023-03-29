@@ -4,13 +4,11 @@ import Image from 'next/image';
 
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
-export default function SliderItem({ data, link, filter }) {
-  const { title, place, author, poster } = data.data[1].attributes;
-  const slideImage = poster.data.attributes.url;
-
+export default function SliderItem({ children }) {
   return (
     <>
-      <Link href={`${link}`}>
+      {children}
+      {/* <Link href={`${link}`}>
         <img
           className={styles.wrapper__slides}
           src={process.env.NEXT_PUBLIC_API_URL + slideImage}
@@ -36,7 +34,7 @@ export default function SliderItem({ data, link, filter }) {
             </li>
           </ul>
         </>
-      </Link>
+      </Link> */}
     </>
   );
 }
