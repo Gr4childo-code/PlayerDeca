@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 
-import { SearchByAuthor } from '@/utils/api/QueryParams';
+import { SearchByAuthor, searchDefault } from '@/utils/api/QueryParams';
 import { fetchAPI } from '@/utils/api/fetch';
-import { debounceFunc } from '@/utils/api/debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '@/ui/components/global/AppContext';
@@ -28,10 +27,15 @@ const SearchNew = () => {
     setserchAudio(response);
   };
 
+  const getDefault = async () => {
+    const SearchResp = await fetchAPI(`/audios?${searchDefault()}`, 'get');
+    const response = await SearchResp.json();
+    setserchAudio(response);
+  };
+
   useEffect(() => {
     try {
-      if (inputValue.length) {
-        // debounceFunc(getSearch, 1000);
+      if (inputValue.length > 1) {
         getSearch();
       } else {
         setserchAudio([]);
@@ -50,13 +54,19 @@ const SearchNew = () => {
         value={inputValue}
         onChange={handleChangeFilter}
         id={'search'}
+        onClick={() => getDefault()}
       />
       <div
         className={`${styles.search__overflow} ${
-          !inputValue.length == 0 ? styles.search__overflow__active : ''
+          searchAudio?.meta?.pagination?.total == 0 ||
+          !searchAudio?.data?.length == 0
+            ? styles.search__overflow__active
+            : ''
         }`}
       >
         <div>
+          {searchAudio?.meta?.pagination?.total == 0 ? 'Треков нет' : ''}
+
           {searchAudio?.data?.map(({ id, attributes }) => (
             <div
               key={id}
