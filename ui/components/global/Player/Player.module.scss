@@ -432,6 +432,9 @@
   .playerVolume {
     display: none;
   }
+  .playlist {
+    width: calc(100% - 50px);
+  }
   .playerBox {
     &__body {
       width: calc(100% - 100px);

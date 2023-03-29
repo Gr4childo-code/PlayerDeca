@@ -40,7 +40,7 @@ const SearchNew = () => {
       console.log(error);
     }
   }, [inputValue]);
-
+  console.log(searchAudio);
   return (
     <div className={styles.search}>
       <input
@@ -52,34 +52,36 @@ const SearchNew = () => {
         id={'search'}
       />
       <div
-        className={
-          searchAudio.length == 0
-            ? styles.search__overflow
-            : styles.search__overflow__active
-        }
+        className={`${styles.search__overflow} ${
+          !inputValue.length == 0 ? styles.search__overflow__active : ''
+        }`}
       >
-        {searchAudio?.data?.map(({ id, attributes }) => (
-          <div
-            key={id}
-            className={styles.item}
-            onClick={() => {
-              setAudioContext(searchAudio);
-            }}
-          >
-            <div className={styles.item__cover}>
-              {attributes.posterPath ? (
-                <img
-                  src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath}
-                />
-              ) : (
-                <FontAwesomeIcon icon={faMusic} />
-              )}
+        <div>
+          {searchAudio?.data?.map(({ id, attributes }) => (
+            <div
+              key={id}
+              className={styles.item}
+              onClick={() => {
+                setAudioContext(searchAudio);
+              }}
+            >
+              <div className={styles.item__cover}>
+                {attributes.posterPath ? (
+                  <img
+                    src={
+                      process.env.NEXT_PUBLIC_API_URL + attributes.posterPath
+                    }
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={faMusic} />
+                )}
+              </div>
+              <div className={styles.item__info}>
+                <strong>{attributes.author}</strong> - {attributes.name}
+              </div>
             </div>
-            <div className={styles.item__info}>
-              <strong>{attributes.author}</strong> - {attributes.name}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
