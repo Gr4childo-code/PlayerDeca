@@ -104,31 +104,29 @@ export default function Home({ audioTop, playlists, events }) {
                       }
                       alt={'image'}
                     />
-                    {events.data?.map(({ id, attributes }, index) => (
-                      <div key={id} className={styles.wrapper__list}>
-                        <div className={styles.description}>
-                          <p className={styles.wrapper__item}>
-                            {events.data[1].attributes.title}
-                          </p>
-                          <p className={styles.wrapper__item}>
-                            {events.data[1].attributes.author}
-                          </p>
-                        </div>
-                        <div className={styles.description}>
-                          <p className={styles.description__date}>
-                            {events.data[1].attributes.date.slice(8, 10)} Марта
-                          </p>
-                          <p className={styles.description__time}>
-                            {events.data[1].attributes.time.slice(0, 5)}
-                          </p>
-                        </div>
+                    <div className={styles.wrapper__list}>
+                      <div className={styles.description}>
+                        <p className={styles.description__date}>
+                          {events.data[1].attributes.date.slice(8, 10)} Марта
+                        </p>
+                        <p className={styles.description__time}>
+                          {events.data[1].attributes.time.slice(0, 5)}
+                        </p>
                       </div>
-                    ))}
+                      <div className={styles.description}>
+                        <p className={styles.wrapper__item}>
+                          {events.data[1].attributes.title}
+                        </p>
+                        <p className={styles.wrapper__item}>
+                          {events.data[1].attributes.author}
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SliderItem>
                 <SliderItem>
                   {console.log(
-                    events.data[1].attributes.poster.data.attributes.url
+                    events.data[0].attributes.poster.data.attributes.url
                   )}
                   <Link href={`/events`}>
                     <img
@@ -139,26 +137,24 @@ export default function Home({ audioTop, playlists, events }) {
                       }
                       alt={'image'}
                     />
-                    {events.data?.map(({ id, attributes }, index) => (
-                      <div key={id} className={styles.wrapper__list}>
-                        <div className={styles.description}>
-                          <p className={styles.wrapper__item}>
-                            {events.data[0].attributes.title}
-                          </p>
-                          <p className={styles.wrapper__item}>
-                            {events.data[0].attributes.author}
-                          </p>
-                        </div>
-                        <div className={styles.description}>
-                          <p className={styles.description__date}>
-                            {events.data[0].attributes.date.slice(8, 10)} Марта
-                          </p>
-                          <p className={styles.description__time}>
-                            {events.data[0].attributes.time.slice(0, 5)}
-                          </p>
-                        </div>
+                    <div className={styles.wrapper__list}>
+                      <div className={styles.description}>
+                        <p className={styles.description__date}>
+                          {events.data[0].attributes.date.slice(8, 10)} Марта
+                        </p>
+                        <p className={styles.description__time}>
+                          {events.data[0].attributes.time.slice(0, 5)}
+                        </p>
                       </div>
-                    ))}
+                      <div className={styles.description}>
+                        <p className={styles.wrapper__item}>
+                          {events.data[0].attributes.title}
+                        </p>
+                        <p className={styles.wrapper__item}>
+                          {events.data[0].attributes.author}
+                        </p>
+                      </div>
+                    </div>
                   </Link>
                 </SliderItem>
               </Slider>

@@ -21,7 +21,7 @@
   &__list {
     position: absolute;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     bottom: 7px;
     left: 7px;
     right: 7px;
@@ -60,7 +60,6 @@
   &__item {
     font-size: 20px;
     list-style-type: none;
-    padding: 2px 0;
     &:last-child {
       font-size: 15px;
       opacity: 0.6;
@@ -71,13 +70,14 @@
 .description {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  justify-content: center;
+  padding: 2px 10px;
   &__date {
     font-size: 20px;
   }
   &__time {
     font-size: 15px;
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 
