@@ -31,7 +31,7 @@ export default function SignIn() {
     setLogin('')
     setPassword('')
 
-    router.push(url)
+    // router.push(url)
   }
 
   useEffect(() => {

@@ -4,10 +4,8 @@ import Link from 'next/link';
 import styles from '@/ui/components/global/Slider/Slider.module.scss';
 
 export default function SliderItem({ data, link, filter }) {
-  console.log(data.data);
   const { place, poster, title, users_permissions_user } =
     data.data[0].attributes;
-  console.log(place, poster.data.attributes, title, users_permissions_user);
 
   /*   const slideTitle = data?.data.map(({ id, attributes }) => (
     <p>{attributes.title}</p>

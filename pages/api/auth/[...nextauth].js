@@ -8,8 +8,8 @@ export const authOptions = {
       name: "Credentials",
 
       credentials: {
-        email: {
-          label: "Email",
+        identifier: {
+          label: "Identifier",
           type: "text"
         },
         password: {
@@ -25,40 +25,31 @@ export const authOptions = {
         })
 
         const data = await response.json();
-        const user = { ...data.user, jwt: data.jwt }
+        const user = { ...data.user, jwt: data.jwt, ...data.error }
 
         if (user) {
           return user
-        } else {
-          return null
         }
+
+        return null
       }
     })
   ],
 
   session: {
     jwt: true,
+    maxAge: 1 * 24 * 60 * 60
   },
 
-  secret: 'strapi',
-
   callbacks: {
-    session: async ({ session, token }) => {
-      session.id = token.id;
-      session.jwt = token.jwt;
-      session.user.username = token.username
-      session.blocked = token.blocked
+    async session({ session, token }) {
+      session = {...token, expires: session.expires}
       return Promise.resolve(session);
     },
-    jwt: async ({ token, user }) => {
-      if (user) {
-        token.id = user.id;
-        token.jwt = user.jwt;
-        token.username = user.username
-        token.blocked = user.blocked
-      }
+    async jwt({ token, user }) {
+      if (user) { token = {...user} }
       return Promise.resolve(token);
-    },
+    }
   },
 }
 
