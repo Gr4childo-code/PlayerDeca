@@ -17,7 +17,7 @@ import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
 //styles
-import styles from '@/ui/components/global/Slider/Slider.module.scss';
+import styles from '@/ui/components/global/Slider/SliderEvents.module.scss';
 
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
@@ -161,7 +161,7 @@ export default function Home({ audioTop, playlists, events }) {
             </div>
             {/* 						Готово не трогать
              */}{' '}
-            <div className={styles.wrapperMain}>
+            <div className={styles.playlists}>
               <h2>
                 Новинки от{' '}
                 {
@@ -172,72 +172,66 @@ export default function Home({ audioTop, playlists, events }) {
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 <SliderItem>
                   <img
-                    className={styles.wrapper__slides}
+                    className={styles.playlists__slides}
                     src={
                       process.env.NEXT_PUBLIC_API_URL +
                       playlists.data[0].attributes.poster.data.attributes.url
                     }
                     alt={'image'}
                   />
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li className={styles.wrapper__item}>
-                        {playlists.data[0].attributes.title}
-                      </li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[0].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
+                  <ul className={styles.playlists__list}>
+                    <li className={styles.playlists__item}>
+                      {playlists.data[0].attributes.title}
+                    </li>
+                    <li className={styles.playlists__item}>
+                      {
+                        playlists.data[0].attributes.users_permissions_user.data
+                          .attributes.username
+                      }
+                    </li>
+                  </ul>
                 </SliderItem>
                 <SliderItem>
                   <img
-                    className={styles.wrapper__slides}
+                    className={styles.playlists__slides}
                     src={
                       process.env.NEXT_PUBLIC_API_URL +
                       playlists.data[1].attributes.poster.data.attributes.url
                     }
                     alt={'image'}
                   />
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li className={styles.wrapper__item}>
-                        {playlists.data[1].attributes.title}
-                      </li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[1].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
+                  <ul className={styles.playlists__list}>
+                    <li className={styles.playlists__item}>
+                      {playlists.data[1].attributes.title}
+                    </li>
+                    <li className={styles.playlists__item}>
+                      {
+                        playlists.data[1].attributes.users_permissions_user.data
+                          .attributes.username
+                      }
+                    </li>
+                  </ul>
                 </SliderItem>
                 <SliderItem>
                   <img
-                    className={styles.wrapper__slides}
+                    className={styles.playlists__slides}
                     src={
                       process.env.NEXT_PUBLIC_API_URL +
                       playlists.data[2].attributes.poster.data.attributes.url
                     }
                     alt={'image'}
                   />
-                  {playlists.data?.map(({ id, attributes }) => (
-                    <ul key={id} className={styles.wrapper__list}>
-                      <li className={styles.wrapper__item}>
-                        {playlists.data[2].attributes.title}
-                      </li>
-                      <li className={styles.wrapper__item}>
-                        {
-                          playlists.data[2].attributes.users_permissions_user
-                            .data.attributes.username
-                        }
-                      </li>
-                    </ul>
-                  ))}
+                  <ul className={styles.playlists__list}>
+                    <li className={styles.playlists__item}>
+                      {playlists.data[2].attributes.title}
+                    </li>
+                    <li className={styles.playlists__item}>
+                      {
+                        playlists.data[2].attributes.users_permissions_user.data
+                          .attributes.username
+                      }
+                    </li>
+                  </ul>
                 </SliderItem>
               </Slider>
             </div>
