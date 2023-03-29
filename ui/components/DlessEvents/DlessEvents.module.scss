@@ -40,7 +40,6 @@
   align-items: center;
   &__left {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     width: 300px;
   }
@@ -65,7 +64,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     width: 150px;
     height: 35px;
     border-radius: 2px;
@@ -91,22 +89,16 @@
     filter: contrast(20%);
   }
   &__author {
-    padding-top: 20px;
+    padding: 10px 0;
     font-size: 15px;
     filter: contrast(20%);
-  }
-  img {
-    margin-left: 20px;
   }
 }
 
 @include mq(SMdesktop) {
   .eventInfo {
-    &__left {
-      width: 500px;
-    }
     &__right {
-      width: calc(100% - 200px);
+      width: 100%;
     }
     &__title {
       font-size: 20px;
@@ -114,7 +106,16 @@
   }
 }
 @include mq(tablet) {
+  .wrapper {
+    img {
+      width: 170px;
+      height: 160px;
+    }
+  }
   .eventInfo {
+    &__right {
+      width: 100%;
+    }
     &__title {
       font-size: 20px;
     }
@@ -124,8 +125,8 @@
 @include mq(Lphone) {
   .wrapper {
     img {
-      width: 160px;
-      height: 140px;
+      width: 150px;
+      height: 120px;
     }
   }
   .dataEvent {
