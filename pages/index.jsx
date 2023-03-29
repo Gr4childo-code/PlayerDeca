@@ -1,7 +1,6 @@
 //Next/React
 import Head from 'next/head';
 import { useState } from 'react';
-import Script from 'next/script';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
@@ -60,8 +59,8 @@ export default function Home({ audioTop, playlists, events }) {
           });
         }}>
         Error
-      </button>
-      <button
+      </button> */}
+      {/* <button
         onClick={() => {
           showToast({
             type: 'warn',
