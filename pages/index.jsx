@@ -89,16 +89,9 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className={styles.wrapperMain}>
-              {events.data?.map((item) => {
-                console.log(item);
-              })}
-
               <h2>События DLESS </h2>
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 <SliderItem>
-                  {console.log(
-                    events.data[1].attributes.poster.data.attributes.url
-                  )}
                   <Link href={`/events`}>
                     <img
                       className={styles.wrapper__slides}
@@ -109,29 +102,34 @@ export default function Home({ audioTop, playlists, events }) {
                       alt={'image'}
                     />
                     <div className={styles.wrapper__list}>
-                      <div className={styles.description}>
-                        <p className={styles.description__date}>
-                          {events.data[1].attributes.date.slice(8, 10)} Марта
-                        </p>
-                        <p className={styles.description__time}>
-                          {events.data[1].attributes.time.slice(0, 5)}
-                        </p>
-                      </div>
-                      <div className={styles.description}>
-                        <p className={styles.wrapper__item}>
-                          {events.data[1].attributes.title}
-                        </p>
-                        <p className={styles.wrapper__item}>
-                          {events.data[1].attributes.author}
-                        </p>
-                      </div>
+                      {events.data?.map(({ id, attributes }, index) =>
+                        index === 1 ? (
+                          <div key={id} index={index}>
+                            <div className={styles.description}>
+                              <p className={styles.description__date}>
+                                {attributes.date.slice(8, 10)} Марта
+                              </p>
+                              <p className={styles.description__time}>
+                                {attributes.time.slice(0, 5)}
+                              </p>
+                            </div>
+                            <div className={styles.description}>
+                              <p className={styles.wrapper__item}>
+                                {attributes.title}
+                              </p>
+                              <p className={styles.wrapper__item}>
+                                {attributes.author}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          ''
+                        )
+                      )}
                     </div>
                   </Link>
                 </SliderItem>
                 <SliderItem>
-                  {console.log(
-                    events.data[0].attributes.poster.data.attributes.url
-                  )}
                   <Link href={`/events`}>
                     <img
                       className={styles.wrapper__slides}
@@ -142,22 +140,30 @@ export default function Home({ audioTop, playlists, events }) {
                       alt={'image'}
                     />
                     <div className={styles.wrapper__list}>
-                      <div className={styles.description}>
-                        <p className={styles.description__date}>
-                          {events.data[0].attributes.date.slice(8, 10)} Марта
-                        </p>
-                        <p className={styles.description__time}>
-                          {events.data[0].attributes.time.slice(0, 5)}
-                        </p>
-                      </div>
-                      <div className={styles.description}>
-                        <p className={styles.wrapper__item}>
-                          {events.data[0].attributes.title}
-                        </p>
-                        <p className={styles.wrapper__item}>
-                          {events.data[0].attributes.author}
-                        </p>
-                      </div>
+                      {events.data?.map(({ id, attributes }, index) =>
+                        index === 0 ? (
+                          <div key={id} index={index}>
+                            <div className={styles.description}>
+                              <p className={styles.description__date}>
+                                {attributes.date.slice(8, 10)} Марта
+                              </p>
+                              <p className={styles.description__time}>
+                                {attributes.time.slice(0, 5)}
+                              </p>
+                            </div>
+                            <div className={styles.description}>
+                              <p className={styles.wrapper__item}>
+                                {attributes.title}
+                              </p>
+                              <p className={styles.wrapper__item}>
+                                {attributes.author}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          ''
+                        )
+                      )}
                     </div>
                   </Link>
                 </SliderItem>
