@@ -7,9 +7,10 @@
 .side__bar {
   display: flex;
   flex-direction: column;
+  width: 30%;
   &__cover {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     background: var(--black);
     border-radius: 5px;
     &__img {
@@ -74,7 +75,7 @@
     margin: 20px 0;
     border: 1px solid var(--ui-color-one);
   }
-  .tracks{
+  .tracks {
     display: flex;
     flex-direction: column;
   }
@@ -85,24 +86,37 @@
     color: var(--white-90);
   }
 }
-@include mq(phone) {
+
+// }
+@include mq(Lphone) {
   .wrapper {
     flex-direction: column;
   }
   .side__bar {
     flex-direction: row;
+    width: 100%;
     &__cover {
-      width: 100px;
-      height: 100px;
+      width: 50%;
     }
     &__description {
       margin-left: 20px;
       justify-content: center;
-      .release {
+      .release,
+      .rate {
+        margin-left: 0;
+        display: flex;
+        flex-direction: column;
         font-size: 15px;
       }
+      .release {
+        &__dates {
+          margin-left: 0;
+        }
+      }
       .rate {
-        font-size: 15px;
+        &__star {
+          margin-left: 0;
+        }
       }
     }
   }

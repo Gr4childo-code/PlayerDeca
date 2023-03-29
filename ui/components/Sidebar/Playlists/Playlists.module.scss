@@ -59,7 +59,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .playlists {
     &__descr {
       padding: 10px 0;
@@ -72,5 +72,25 @@
   .img {
     width: 100px;
     height: 100px;
+  }
+}
+
+@include mq(Sphone) {
+  .wrapper {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 5px;
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--black-10);
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--white-30);
+      border-radius: 20px;
+    }
+  }
+  .playlists {
   }
 }

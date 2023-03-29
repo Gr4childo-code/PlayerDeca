@@ -12,7 +12,7 @@ import styles from './SearchNew.module.scss';
 const SearchNew = () => {
   const { setAudioContext } = useContext(AppContext);
 
-  const [searchAudio, setserchAudio] = useState(null || []);
+  const [searchAudio, setserchAudio] = useState([]);
   const [inputValue, setinputValue] = useState('');
 
   const handleChangeFilter = (e) => {
@@ -30,8 +30,9 @@ const SearchNew = () => {
 
   useEffect(() => {
     try {
-      if (inputValue.length > 1) {
-        debounceFunc(getSearch, 1500);
+      if (inputValue.length) {
+        // debounceFunc(getSearch, 1000);
+        getSearch();
       } else {
         setserchAudio([]);
       }

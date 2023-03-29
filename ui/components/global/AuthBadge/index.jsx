@@ -7,12 +7,14 @@ import styles from './AuthBadge.module.scss'
 const AuthBadge = () => {
   const { data: session } = useSession()
 
+  console.log('session', session)
+
   const customLoader = () => {
     return `https://api.dless.ru${session?.user?.image}`
   }
 
   return (
-    <Link href={session ? '/profile' : '/signin'} className={styles.authBadge}>
+    <Link href={session ? '/profile' : '/auth/login'} className={styles.authBadge}>
       <div className={styles.authBadge__name}>
         {session ? session?.user?.name ? session?.user?.name : session?.user?.username : 'Авторизация' }
       </div>

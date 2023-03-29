@@ -429,6 +429,9 @@
 }
 
 @include mq(tablet) {
+  .playerVolume {
+    display: none;
+  }
   .playerBox {
     &__body {
       width: calc(100% - 100px);
@@ -450,7 +453,7 @@
   }
 }
 
-@include mq(phone) {
+@include mq(Lphone) {
   .playerBox {
     &__body {
       font-size: 13px;

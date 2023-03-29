@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from '@/ui/components/global/Toast/Toast.module.scss';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+
 const Toast = ({ toastlist, setList }) => {
   const deleteToast = (id) => {
     const toastListItem = toastlist.filter((e) => e.id !== id);
@@ -26,7 +30,9 @@ const Toast = ({ toastlist, setList }) => {
             <p className={styles.title}>{toast.title}</p>
             <p className={styles.description}>{toast.description}</p>
           </div>
-          <button onClick={() => deleteToast(toast.id)}>X</button>
+          <button onClick={() => deleteToast(toast.id)}>
+            <FontAwesomeIcon icon={faClose} />
+          </button>
         </div>
       ))}
     </div>

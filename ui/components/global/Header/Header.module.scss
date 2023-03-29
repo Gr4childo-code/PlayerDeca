@@ -26,13 +26,16 @@
     align-items: center;
   }
 }
-@include mq(phone) {
+@include mq(Lphone) {
   .header {
     &__right {
       width: 40px;
     }
     &__center {
       width: calc(100% - 120px);
+    }
+    &__left {
+      width: 20px;
     }
   }
 }
