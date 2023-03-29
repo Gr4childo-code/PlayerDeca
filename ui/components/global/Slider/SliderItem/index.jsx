@@ -7,15 +7,13 @@ export default function SliderItem({ data, link, filter }) {
   /* console.log(data.data); */
 
   const slideAtributes = data.data.map(({ attributes }) => attributes);
-  /*   console.log(allAtributes[0]);
-   */
-  const slideImage = slideAtributes[0].poster.data.attributes.url;
+  console.log(slideAtributes[0]);
 
-  const slideInfo = slideAtributes.map(({ title, place, poster, author }) => (
-    <div>
-      <Link href={`${link}`}>
-        <div className={styles.slide}>{title}</div>
-      </Link>
+  /*   const slideImage = slideAtributes[0].poster.data.attributes.url; */
+
+  return (
+    <>
+      <Link href={`${link}`}></Link>
       <>
         <ul
           className={`${
@@ -28,12 +26,14 @@ export default function SliderItem({ data, link, filter }) {
               : styles.wrapper__list
           }`}
         >
-          <li className={styles.wrapper__item}>{title || author || 'none'} </li>
-          <li className={styles.wrapper__item}>{place || author || 'none'}</li>
+          <li className={styles.wrapper__item}>
+            {slideAtributes[1].title || slideAtributes[1].author || 'none'}{' '}
+          </li>
+          <li className={styles.wrapper__item}>
+            {slideAtributes[1].place || slideAtributes[1].author || 'none'}
+          </li>
         </ul>
       </>
-    </div>
-  ));
-
-  return <>{slideInfo}</>;
+    </>
+  );
 }
