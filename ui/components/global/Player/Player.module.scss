@@ -429,6 +429,9 @@
 }
 
 @include mq(tablet) {
+  .playerVolume {
+    display: none;
+  }
   .playerBox {
     &__body {
       width: calc(100% - 100px);

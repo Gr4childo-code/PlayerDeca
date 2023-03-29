@@ -5,7 +5,8 @@
   margin-top: 10px;
 
   &__menu {
-    width: 220px;
+    max-width: 200px;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -41,12 +42,24 @@
     box-shadow: none;
   }
 }
+@include mq(tablet) {
+  .profile {
+    &__menu {
+      max-width: 170px;
+    }
+    &__content {
+      width: calc(100% - 200px);
+    }
+  }
+}
 
 @include mq(Lphone) {
   .profile {
     flex-direction: column;
+
     &__menu {
       width: 100%;
+      max-width: none;
       height: 10vh;
     }
     &__content {
