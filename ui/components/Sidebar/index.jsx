@@ -17,9 +17,11 @@ export default function Sidebar() {
       <ul className={styles.wrapper}>
         {menuItems.map(({ id, label, link }) => {
           return (
-            <Link key={id} href={link}>
-              {label}
-            </Link>
+            <li>
+              <Link key={id} href={link}>
+                {label}
+              </Link>
+            </li>
           );
         })}
       </ul>

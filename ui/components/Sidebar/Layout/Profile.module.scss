@@ -30,7 +30,6 @@
     font-size: 25px;
   }
 }
-
 @include mq(Lphone) {
   .userInfo {
     &__descr {
