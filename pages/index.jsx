@@ -89,6 +89,10 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className={styles.wrapperMain}>
+              {events.data?.map((item) => {
+                console.log(item);
+              })}
+
               <h2>События DLESS </h2>
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 <SliderItem>

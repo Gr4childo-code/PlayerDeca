@@ -21,7 +21,6 @@
   &__list {
     position: absolute;
     display: flex;
-    justify-content: start;
     bottom: 7px;
     left: 7px;
     right: 7px;
@@ -162,7 +161,6 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: start;
     bottom: 10px;
     left: 7px;
     right: 7px;
