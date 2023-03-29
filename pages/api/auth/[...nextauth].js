@@ -24,10 +24,9 @@ export const authOptions = {
           password: credentials.password,
         })
 
-        const data = await response.json();
-        const user = { ...data.user, jwt: data.jwt, ...data.error }
+        const user = await response.json();
 
-        if (user) {
+        if (response.ok && user) {
           return user
         }
 
@@ -41,7 +40,17 @@ export const authOptions = {
     maxAge: 1 * 24 * 60 * 60
   },
 
+  pages: {
+    signIn: '/auth/login'
+  },
+
   callbacks: {
+    // async redirect({ url, baseUrl }) {
+    //   console.log('url', url)
+    //   console.log('baseUrl', baseUrl)
+
+    //   return baseUrl
+    // },
     async session({ session, token }) {
       session = {...token, expires: session.expires}
       return Promise.resolve(session);
