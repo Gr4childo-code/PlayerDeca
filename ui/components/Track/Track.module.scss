@@ -7,16 +7,16 @@
   font-size: 15px;
   height: 60px;
   transition: background 0.15s;
+  justify-content: space-between;
   cursor: pointer;
   border-radius: 5px;
-
-  gap: 5px;
   &:hover {
     background: var(--gray-90);
     box-shadow: 0 10px 10px var(--black-10);
   }
 
   &__cover {
+    margin: 0 5px;
     width: 50px;
     height: 50px;
     color: var(--white-50);
@@ -35,24 +35,21 @@
   }
 
   &__number {
+    padding: 0 5px;
     position: relative;
     display: flex;
     align-items: center;
-    text-align: center;
     font-size: 20px;
     height: 100%;
     width: 30px;
-    padding-left: 5px;
     color: var(--white-760);
   }
-  // &__options {
-  //   display: flex;
-  //   align-items: center;
-  // }
+
   &__music {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    width: 50%;
     &__name {
       color: var(--white-90);
       font-size: 15px;
@@ -62,10 +59,15 @@
       font-size: 15px;
     }
   }
+  &__options {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+  }
 }
+
 @include mq(tablet) {
   .track {
-    gap: 20px;
     &__music {
       &__name,
       &__author {
