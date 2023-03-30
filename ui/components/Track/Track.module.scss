@@ -86,18 +86,27 @@
     }
   }
 }
-@include mq(Sphone) {
+@include mq(Mphone) {
   .track {
-    height: 70px;
-    gap: 10px;
     &__cover {
+      height: 70px;
       width: 40px;
       height: 40px;
+    }
+  }
+}
+@include mq(Sphone) {
+  .track {
+    height: 55px;
+    gap: 10px;
+    &__cover {
+      width: 35px;
+      height: 35px;
     }
     &__music {
       &__name,
       &__author {
-        font-size: 12px;
+        font-size: 10px;
       }
     }
   }
