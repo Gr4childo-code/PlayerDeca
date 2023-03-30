@@ -31,7 +31,22 @@ const first10 = () => {
     }
   );
   return queryFirst10;
-  // dsajda
+};
+const searchDefault = () => {
+  const querySearchDefault = qs.stringify(
+    {
+      fields: ['name', 'path', 'author', 'posterPath', 'likes'],
+      sort: ['likes:desc'],
+      pagination: {
+        start: 0,
+        limit: 5,
+      },
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
+    }
+  );
+  return querySearchDefault;
 };
 
 const playlistID = (query) => {
@@ -119,4 +134,5 @@ export {
   playlistNew,
   dataEvents,
   dataEventsId,
+  searchDefault,
 };
