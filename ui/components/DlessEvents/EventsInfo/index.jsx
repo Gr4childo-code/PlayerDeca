@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from '@/ui/components/DlessEvents/DlessEvents.module.scss';
 
@@ -35,10 +37,14 @@ export const EventInfo = ({ id, attributes, index }) => {
           <li className={styles.dataEvent__year}>{eventYear}</li>
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
         </ul>
-        <img
-          src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
-          alt='no image'
-        />
+        {attributes.poster ? (
+          <img
+            src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
+            alt='no image'
+          />
+        ) : (
+          <FontAwesomeIcon className='fa-xl' icon={faMusic} />
+        )}
       </div>
 
       <div className={styles.eventInfo__right}>
