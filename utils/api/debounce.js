@@ -1,5 +1,5 @@
 const debounceFunc = (func, sec) => {
-  const debounce = (callback, timeout = 300) => {
+  const debounce = (callback, timeout) => {
     let timer;
 
     return () => {

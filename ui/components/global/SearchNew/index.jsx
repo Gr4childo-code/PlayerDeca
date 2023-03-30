@@ -4,6 +4,7 @@ import { SearchByAuthor, searchDefault } from '@/utils/api/QueryParams';
 import { fetchAPI } from '@/utils/api/fetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { debounceFunc } from '@/utils/api/debounce';
 import AppContext from '@/ui/components/global/AppContext';
 
 import styles from './SearchNew.module.scss';
@@ -44,7 +45,6 @@ const SearchNew = () => {
       console.log(error);
     }
   }, [inputValue]);
-  console.log(searchAudio);
   return (
     <div className={styles.search}>
       <input
