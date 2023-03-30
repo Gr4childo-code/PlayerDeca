@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -108,22 +108,39 @@
 @include mq(tablet) {
   .wrapper {
     img {
-      width: 170px;
-      height: 160px;
+      width: 150px;
+      height: auto;
+    }
+  }
+  .dataEvent {
+    &__number {
+      font-size: 35px;
     }
   }
   .eventInfo {
+    &__texts {
+      &:first-child {
+        margin-right: 2px;
+      }
+    }
+    &__button {
+      width: 100%;
+    }
     &__right {
       width: 100%;
     }
     &__title {
-      font-size: 20px;
+      font-size: 15px;
+    }
+    &__place {
+      font-size: 15px;
     }
   }
 }
 
 @include mq(Lphone) {
   .wrapper {
+    display: block;
     img {
       width: 150px;
       height: 120px;
@@ -131,7 +148,7 @@
   }
   .dataEvent {
     &__number {
-      font-size: 40px;
+      font-size: 35px;
     }
     &__month {
       transform: translateY(2px);
@@ -143,6 +160,7 @@
   }
   .eventInfo {
     text-align: center;
+
     &__title {
       font-size: 15px;
       text-align: center;
@@ -180,10 +198,5 @@
         padding-bottom: 0;
       }
     }
-  }
-}
-@include mq(Mphone) {
-  .wrapper {
-    display: block;
   }
 }
