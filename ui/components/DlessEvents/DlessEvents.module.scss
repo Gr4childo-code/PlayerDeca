@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -182,6 +182,12 @@
     }
   }
 }
+
+.defaultImg {
+  width: 150px;
+  height: 150px;
+}
+
 @include mq(Mphone) {
   .wrapper {
     display: block;
