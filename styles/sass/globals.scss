@@ -77,6 +77,11 @@ body {
   &::-webkit-scrollbar-thumb {
     background: var(--white-30);
     border-radius: 20px;
+
+    &:hover,
+    &:active {
+      background: var(--white-50);
+    }
   }
 }
 
@@ -185,6 +190,17 @@ a {
     margin-bottom: 10px;
   }
 }
+
+@keyframes scrollbarHover {
+  0% {
+    background: var(--white-30);
+  }
+
+  100% {
+    background: var(--white-50);
+  }
+}
+
 @include mq(SMdesktop) {
   .layout {
     &__left {

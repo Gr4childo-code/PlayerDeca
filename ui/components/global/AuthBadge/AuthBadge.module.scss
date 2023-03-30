@@ -55,7 +55,7 @@
     }
   }
 }
-@include mq(phone) {
+@include mq(Lphone) {
   .authBadge {
     &__name {
       display: none;

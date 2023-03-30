@@ -64,8 +64,8 @@ export default function Home({ audioTop, playlists, events }) {
           });
         }}>
         Error
-      </button>
-      <button
+      </button> */}
+      {/* <button
         onClick={() => {
           showToast({
             type: 'warn',
