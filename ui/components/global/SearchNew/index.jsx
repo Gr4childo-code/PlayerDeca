@@ -4,7 +4,6 @@ import { SearchByAuthor, searchDefault } from '@/utils/api/QueryParams';
 import { fetchAPI } from '@/utils/api/fetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
-import { debounceFunc } from '@/utils/api/debounce';
 import AppContext from '@/ui/components/global/AppContext';
 
 import styles from './SearchNew.module.scss';
@@ -54,19 +53,19 @@ const SearchNew = () => {
         value={inputValue}
         onChange={handleChangeFilter}
         id={'search'}
-        onClick={() => getDefault()}
+        onFocus={() => {
+          getDefault();
+        }}
+        onBlur={() => {
+          setserchAudio([]);
+        }}
       />
       <div
-        className={`${styles.search__overflow} ${
-          searchAudio?.meta?.pagination?.total == 0 ||
-          !searchAudio?.data?.length == 0
-            ? styles.search__overflow__active
-            : ''
+        className={`${styles.search__overflow}  ${
+          !searchAudio?.data?.length == 0 ? styles.search__overflow__active : ''
         }`}
       >
         <div>
-          {searchAudio?.meta?.pagination?.total == 0 ? 'Треков нет' : ''}
-
           {searchAudio?.data?.map(({ id, attributes }) => (
             <div
               key={id}

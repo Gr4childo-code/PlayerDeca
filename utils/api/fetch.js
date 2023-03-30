@@ -13,7 +13,6 @@ const fetchAPI = async (url, request, parms = null) => {
         });
         return getResponse;
       case 'POST':
-        console.log(parms);
         const postResponse = await fetch(`${API_URL}/api${url}`, {
           method: 'POST',
           headers: {
