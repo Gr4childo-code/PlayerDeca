@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { fetchAPI } from '@/utils/api/fetch';
-import { signIn } from "next-auth/react"
+import { signIn, getSession } from "next-auth/react"
 import { useRouter } from 'next/router';
 // import Registration from '@/ui/components/Form/Registration';
+
+const callbackUrl = '/profile'
 
 export default function SignUp() {
   const router = useRouter()
@@ -33,7 +35,7 @@ export default function SignUp() {
         identifier: reg.username,
         password: reg.password,
         redirect: false,
-        callbackUrl: '/profile'
+        callbackUrl
       })
 
       router.push(url)
@@ -64,4 +66,19 @@ export default function SignUp() {
       </div>
     </>
   );
+}
+
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} }
 }

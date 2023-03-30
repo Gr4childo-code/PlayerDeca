@@ -2,7 +2,6 @@
 //Next/React
 import Head from 'next/head';
 import { useState } from 'react';
-import Script from 'next/script';
 import Link from 'next/link';
 
 //Components
@@ -90,7 +89,7 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className={styles.events}>
-              <h2>События DLESS </h2>
+              <div className='title'>События DLESS</div>
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 {events.data?.map(({ id, attributes }, index) => (
                   <SliderItem>
@@ -128,7 +127,7 @@ export default function Home({ audioTop, playlists, events }) {
               </Slider>
             </div>
             <div className={styles.playlists}>
-              <h2>Новинки от пользователей</h2>
+              <div className='title'>Новинки от пользователей</div>
               <div className={styles.wrapper}>
                 <div className={styles.playlists__wrapper}>
                   <Slider pagination={true} buttons={false} /* filter={true} */>

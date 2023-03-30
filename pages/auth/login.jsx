@@ -1,18 +1,18 @@
 import Head from 'next/head';
-import { signIn, useSession } from "next-auth/react"
-import { useEffect, useState } from 'react';
+import { signIn, useSession, getSession } from "next-auth/react"
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import Toast from '@/ui/components/global/Toast';
 
+const callbackUrl = '/profile'
+
 export default function SignIn() {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const [login, setLogin] = useState('')
   const router = useRouter()
   const [passsword, setPassword] = useState('')
   const [list, setList] = useState([]);
-
-  const callbackUrl = '/profile'
 
   const loginIn = async () => {
     const result = await signIn("credentials", {
@@ -36,17 +36,6 @@ export default function SignIn() {
       }]);
     }
   }
-
-  useEffect(() => {
-    console.log('session sign in', session)
-    console.log('status sign in', status)
-  }, [status])
-
-  useEffect(() => {
-    if (session) {
-      router.push(callbackUrl)
-    }
-  }, [session])
 
   return (
     <>
@@ -83,4 +72,19 @@ export default function SignIn() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} }
 }
