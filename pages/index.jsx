@@ -181,18 +181,18 @@ export default function Home({ audioTop, playlists, events }) {
                             playlists.data[1].attributes.users_permissions_user
                               .data.attributes.username
                           }
-                        </h2>
-                        <ul key={id} className={styles.playlists__list}>
-                          <li className={styles.playlists__item}>
-                            {attributes.title}
-                          </li>
-                          {/* <li className={styles.playlists__item}>
+                          <ul key={id} className={styles.playlists__list}>
+                            <li className={styles.playlists__item}>
+                              {attributes.title}
+                            </li>
+                            {/* <li className={styles.playlists__item}>
                         {
                           attributes.users_permissions_user.data.attributes
                             .username
                         }
                       </li> */}
-                        </ul>
+                          </ul>
+                        </h2>
                       </SliderItem>
                     ))}
                   </Slider>
