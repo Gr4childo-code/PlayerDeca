@@ -1,6 +1,12 @@
 @import '@/styles/sass/grid.scss';
 
-.wrapperMain {
+.test {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.wrapperEvents {
   margin: 20px 0;
 }
 
@@ -80,61 +86,6 @@
   }
 }
 
-.button {
-  display: flex;
-  justify-content: space-between;
-  font-size: 35px;
-  user-select: none;
-  &__left,
-  &__right {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    color: var(--slider-button-color);
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    width: 15px;
-    height: 15px;
-    border-top: 2px solid var(--white);
-    border-left: 2px solid var(--white);
-  }
-  &__left {
-    left: 20px;
-    transform: rotate(-45deg);
-  }
-  &__right {
-    right: 20px;
-    transform: rotate(135deg);
-  }
-}
-
-.links {
-  display: flex;
-  position: absolute;
-  margin-top: 5px;
-  top: 100%;
-  left: 0;
-  right: 0;
-  &__points {
-    flex: 1;
-    height: 6px;
-    background: var(--white-20);
-    margin-left: 6px;
-    border-radius: 2px;
-    transition: background 0.1s;
-    &:first-child {
-      margin-left: 0;
-    }
-  }
-
-  &__active {
-    background: var(--ui-color-one);
-  }
-}
-
 @include mq(phone) {
   .header {
     &__img {
@@ -145,13 +96,19 @@
 
 //playlists
 .playlists {
-  max-width: 250px;
-  min-height: 250px;
+  margin: 10px 10px;
+  max-width: 200px;
+  min-height: 200px;
   border-radius: 5px;
   object-fit: cover;
   cursor: pointer;
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
   &__slides {
-    max-width: 250px;
+    display: flex;
+    width: 100%;
     min-height: 250px;
     border-radius: 5px;
     object-fit: cover;
@@ -169,7 +126,7 @@
     background: var(--black-80);
   }
   &__item {
-    font-size: 15px;
+    font-size: 12px;
     list-style-type: none;
     &:last-child {
       font-size: 12px;
