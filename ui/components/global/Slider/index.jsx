@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
 
-import styles from '@/ui/components/global/Slider/Slider.module.scss';
-
 export default function Slider({ children, buttons, pagination }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -20,8 +18,8 @@ export default function Slider({ children, buttons, pagination }) {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.wrapper__slides}>{children[activeSlide]}</div>
+    <div>
+      {children[activeSlide]}
       {buttons && <Buttons prev={handlePrevSlide} next={handleNextSlide} />}
       {pagination && (
         <Pagination
