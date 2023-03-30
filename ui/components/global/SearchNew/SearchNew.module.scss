@@ -31,7 +31,6 @@
 
   &__overflow {
     pointer-events: none;
-    width: 100%;
     z-index: 1;
     transition: opacity 0.15s;
     opacity: 0;
@@ -91,6 +90,8 @@
 @include mq(tablet) {
   .search {
     &__overflow {
+      width: 100%;
+
       &__active {
         width: calc(100% - 200px);
       }
