@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Buttons from './Buttons';
 import Pagination from './Pagination';
 
+import styles from '@/ui/components/global/Slider/Slider.module.scss';
+
 export default function Slider({ children, buttons, pagination }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
