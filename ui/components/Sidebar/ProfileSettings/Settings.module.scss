@@ -1,7 +1,6 @@
 .wrapper {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
 }
 
 .title {
@@ -31,5 +30,11 @@
       transition: all 0.8s;
       opacity: 1;
     }
+  }
+  &__button {
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 0 10px;
   }
 }
