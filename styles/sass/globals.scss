@@ -231,6 +231,9 @@ a {
 }
 
 .events {
+  &__wrapper {
+    width: 100%;
+  }
   &__slides {
     width: 100%;
     max-height: 500px;
@@ -311,6 +314,9 @@ a {
 //playlists
 
 .playlists {
+  &__wrapper {
+    max-width: 200px;
+  }
   &__slides {
     max-width: 200px;
     min-height: 280px;

@@ -85,7 +85,7 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className='title'>События DLESS</div>
-            <div className='events__slides'>
+            <div className='events__wrapper'>
               <Slider pagination={true} buttons={true}>
                 {events.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
@@ -119,7 +119,7 @@ export default function Home({ audioTop, playlists, events }) {
               </Slider>
             </div>
             <div class='title'>Новинки от пользователей</div>
-            <div className='playlists__slides'>
+            <div className='playlists__wrapper'>
               <Slider pagination={true} buttons={false} /* filter={true} */>
                 {playlists.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
