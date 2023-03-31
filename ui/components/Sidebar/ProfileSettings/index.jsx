@@ -2,9 +2,9 @@ import { fetchAPI } from '@/utils/api/fetch';
 import styles from '../ProfileSettings/Settings.module.scss';
 import { useState } from 'react';
 
-export default function ProfileSettings() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+export default function ProfileSettings({ id, email, name }) {
+  const [newName, setName] = useState('');
+  const [newEmail, setEmail] = useState(email);
   const [password, setPassword] = useState('');
 
   const сhangeName = (e) => {
@@ -17,21 +17,20 @@ export default function ProfileSettings() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleChangePassword = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      'https://api.dless.ru/api/auth/change-password',
+      `https://api.dless.ru/api/auth/users/${id}/change-password`,
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: password }),
       }
     );
     const data = await response.json();
-    console.log(data);
+    /* console.log(data); */
   };
 
   return (
@@ -41,41 +40,52 @@ export default function ProfileSettings() {
       </h3>
       <div className={styles.wrapper}>
         <p>id пользователя : </p>
-        <form onSubmit={handleSubmit}>
-          <ul className={styles.settings__list}>
-            <li className={styles.settings__item}>
-              <input
-                type={'text'}
-                value={name}
-                placeholder='Изменить имя'
-                onChange={сhangeName}
-              />
-            </li>
-            <li className={styles.settings__item}>
-              <input
-                type={'email'}
-                value={email}
-                placeholder='Изменить емайл'
-                onChange={сhangeEmail}
-              />
-            </li>
-            <li className={styles.settings__item}>
-              <input
-                type={'password'}
-                value={password}
-                placeholder='Изменить пароль'
-                onChange={сhangePassword}
-              />
-            </li>
-          </ul>
-          <button className={styles.settings__button} type={'submit'}>
-            Изменить
-          </button>
-        </form>
+        <ul className={styles.settings__list}>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'text'}
+              value={newName}
+              placeholder='Изменить имя'
+              onChange={сhangeName}
+            />
+            <button className={styles.settings__button} type={'submit'}>
+              Изменить
+            </button>
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'email'}
+              value={newEmail}
+              placeholder='Изменить емайл'
+              onChange={сhangeEmail}
+            />
+            <button className={styles.settings__button} type={'submit'}>
+              Изменить
+            </button>
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'password'}
+              value={password}
+              placeholder='Изменить пароль'
+              onChange={сhangePassword}
+            />
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={handleChangePassword}
+            >
+              Изменить
+            </button>
+          </li>
+        </ul>
         <div>
           <ul className={styles.settings__list}>
-            <li>{name}</li>
-            <li>{email}</li>
+            <li>{newName}</li>
+            <li>{newEmail}</li>
             <li>{password}</li>
           </ul>
         </div>
@@ -83,3 +93,4 @@ export default function ProfileSettings() {
     </>
   );
 }
+/* PUT для изменения пароля /api/auth/change-password */
