@@ -6,6 +6,7 @@ import Link from 'next/link';
 //Components
 import Slider from '@/ui/components/global/Slider';
 import SliderItem from '@/ui/components/global/Slider/SliderItem';
+import SliderEvents from '@/ui/components/global/Slider/SliderEvents';
 
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
@@ -85,39 +86,8 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className='title'>События DLESS</div>
-            <div className='events__wrapper'>
-              <Slider pagination={true} buttons={true}>
-                {events.data?.map(({ id, attributes }, index) => (
-                  <SliderItem key={id}>
-                    <Link href={`/events`}>
-                      <img
-                        className='events__slides'
-                        src={
-                          process.env.NEXT_PUBLIC_API_URL +
-                          events.data[index].attributes.poster.data.attributes
-                            .url
-                        }
-                        alt={'image'}
-                      />
-                      <ul className='events__list'>
-                        <li className='events__description'>
-                          <p className='events__date'>
-                            {attributes.date.slice(8, 10)} Марта
-                          </p>
-                          <p className='events__time'>
-                            {attributes.time.slice(0, 5)}
-                          </p>
-                        </li>
-                        <li className='events__description'>
-                          <p className='events__item'>{attributes.title}</p>
-                          <p className='events__item'>{attributes.author}</p>
-                        </li>
-                      </ul>
-                    </Link>
-                  </SliderItem>
-                ))}
-              </Slider>
-            </div>
+            <SliderEvents data={events} />
+
             <div class='title'>Новинки от пользователей</div>
             <div className='playlists__wrapper'>
               <Slider pagination={true} buttons={false} /* filter={true} */>
@@ -147,7 +117,6 @@ export default function Home({ audioTop, playlists, events }) {
                 ))}
               </Slider>
             </div>
-
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
