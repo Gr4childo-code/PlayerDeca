@@ -45,15 +45,8 @@ export const authOptions = {
   },
 
   callbacks: {
-    // async redirect({ url, baseUrl }) {
-    //   console.log('url', url)
-    //   console.log('baseUrl', baseUrl)
-
-    //   return baseUrl
-    // },
     async session({ session, token }) {
-      session = {...token, expires: session.expires}
-      return Promise.resolve(session);
+      return Promise.resolve({...token, expires: session.expires});
     },
     async jwt({ token, user }) {
       if (user) { token = {...user} }

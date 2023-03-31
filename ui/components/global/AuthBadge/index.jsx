@@ -7,8 +7,6 @@ import styles from './AuthBadge.module.scss'
 const AuthBadge = () => {
   const { data: session } = useSession()
 
-  console.log('session', session)
-
   const customLoader = () => {
     return `https://api.dless.ru${session?.user?.image}`
   }

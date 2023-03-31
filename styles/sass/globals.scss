@@ -49,6 +49,7 @@
 
   // UI
   --ui-color-one: #fc581f;
+  --ui-color-one-rgb: 252, 88, 31;
   --ui-color-two: #ff8962;
 
   // Gradient
@@ -165,12 +166,13 @@ a {
   width: 100%;
   background: var(--gray-60);
   color: var(--white-50);
-  transition: background 0.15s;
+  transition: background 0.15s, box-shadow .15s;
   &:hover {
     background: var(--gray-80);
   }
   &:focus {
-    background: var(--gray);
+    background: var(--background);
+    box-shadow: 0 0 0 2px var(--ui-color-one), 0 0 0 4px rgba(var(--ui-color-one-rgb), .5)
   }
 }
 
