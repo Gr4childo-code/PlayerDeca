@@ -1,4 +1,3 @@
-
 //Next/React
 import Head from 'next/head';
 import { useState } from 'react';
@@ -92,7 +91,7 @@ export default function Home({ audioTop, playlists, events }) {
               <div className='title'>События DLESS</div>
               <Slider pagination={true} buttons={true} /* filter={true} */>
                 {events.data?.map(({ id, attributes }, index) => (
-                  <SliderItem>
+                  <SliderItem key={id}>
                     <Link href={`/events`}>
                       <img
                         className={styles.events__slides}
@@ -104,7 +103,7 @@ export default function Home({ audioTop, playlists, events }) {
                         alt={'image'}
                       />
                       <ul className={styles.events__list}>
-                        <li key={id} className={styles.description}>
+                        <li className={styles.description}>
                           <p className={styles.description__date}>
                             {attributes.date.slice(8, 10)} Марта
                           </p>
@@ -132,7 +131,7 @@ export default function Home({ audioTop, playlists, events }) {
                 <div className={styles.playlists__wrapper}>
                   <Slider pagination={true} buttons={false} /* filter={true} */>
                     {playlists.data?.map(({ id, attributes }, index) => (
-                      <SliderItem>
+                      <SliderItem key={id}>
                         <Link href={`/playlist/${id}`}>
                           <img
                             className={styles.playlists__slides}
@@ -150,7 +149,7 @@ export default function Home({ audioTop, playlists, events }) {
                               .data.attributes.username
                           }
                         </h2>
-                        <ul key={id} className={styles.playlists__list}>
+                        <ul className={styles.playlists__list}>
                           <li className={styles.playlists__item}>
                             {attributes.title}
                           </li>
@@ -168,7 +167,7 @@ export default function Home({ audioTop, playlists, events }) {
                 <div className={styles.playlists__wrapper}>
                   <Slider pagination={true} buttons={false} /* filter={true} */>
                     {playlists.data?.map(({ id, attributes }, index) => (
-                      <SliderItem>
+                      <SliderItem key={id}>
                         <Link href={`/playlist/${id}`}>
                           <img
                             className={styles.playlists__slides}
@@ -185,7 +184,7 @@ export default function Home({ audioTop, playlists, events }) {
                             playlists.data[1].attributes.users_permissions_user
                               .data.attributes.username
                           }
-                          <ul key={id} className={styles.playlists__list}>
+                          <ul className={styles.playlists__list}>
                             <li className={styles.playlists__item}>
                               {attributes.title}
                             </li>
