@@ -15,9 +15,6 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
-//styles
-import styles from '@/ui/components/global/Slider/SlidersMainPage.module.scss';
-
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
   const audioTop = await first10Resp.json();
@@ -87,14 +84,14 @@ export default function Home({ audioTop, playlists, events }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <div className={styles.events}>
-              <div className='title'>События DLESS</div>
-              <Slider pagination={true} buttons={true} /* filter={true} */>
+            <div className='title'>События DLESS</div>
+            <div className='events__slides'>
+              <Slider pagination={true} buttons={true}>
                 {events.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
                     <Link href={`/events`}>
                       <img
-                        className={styles.events__slides}
+                        className='events__slides'
                         src={
                           process.env.NEXT_PUBLIC_API_URL +
                           events.data[index].attributes.poster.data.attributes
@@ -102,22 +99,18 @@ export default function Home({ audioTop, playlists, events }) {
                         }
                         alt={'image'}
                       />
-                      <ul className={styles.events__list}>
-                        <li className={styles.description}>
-                          <p className={styles.description__date}>
+                      <ul className='events__list'>
+                        <li className='events__description'>
+                          <p className='events__date'>
                             {attributes.date.slice(8, 10)} Марта
                           </p>
-                          <p className={styles.description__time}>
+                          <p className='events__time'>
                             {attributes.time.slice(0, 5)}
                           </p>
                         </li>
-                        <li className={styles.description}>
-                          <p className={styles.events__item}>
-                            {attributes.title}
-                          </p>
-                          <p className={styles.events__item}>
-                            {attributes.author}
-                          </p>
+                        <li className='events__description'>
+                          <p className='events__item'>{attributes.title}</p>
+                          <p className='events__item'>{attributes.author}</p>
                         </li>
                       </ul>
                     </Link>
@@ -125,83 +118,36 @@ export default function Home({ audioTop, playlists, events }) {
                 ))}
               </Slider>
             </div>
-            <div className={styles.playlists}>
-              <div className='title'>Новинки от пользователей</div>
-              <div className={styles.wrapper}>
-                <div className={styles.playlists__wrapper}>
-                  <Slider pagination={true} buttons={false} /* filter={true} */>
-                    {playlists.data?.map(({ id, attributes }, index) => (
-                      <SliderItem key={id}>
-                        <Link href={`/playlist/${id}`}>
-                          <img
-                            className={styles.playlists__slides}
-                            src={
-                              process.env.NEXT_PUBLIC_API_URL +
-                              playlists.data[index].attributes.poster.data
-                                .attributes.url
-                            }
-                            alt={'image'}
-                          />
-                        </Link>
-                        <h2 className={styles.playlists__descr}>
-                          {
-                            playlists.data[1].attributes.users_permissions_user
-                              .data.attributes.username
-                          }
-                        </h2>
-                        <ul className={styles.playlists__list}>
-                          <li className={styles.playlists__item}>
-                            {attributes.title}
-                          </li>
-                          {/* <li className={styles.playlists__item}>
-                        {
-                          attributes.users_permissions_user.data.attributes
-                            .username
+            <div class='title'>Новинки от пользователей</div>
+            <div className='playlists__slides'>
+              <Slider pagination={true} buttons={false} /* filter={true} */>
+                {playlists.data?.map(({ id, attributes }, index) => (
+                  <SliderItem key={id}>
+                    <Link href={`/playlist/${id}`}>
+                      <img
+                        className='playlists__slides'
+                        src={
+                          process.env.NEXT_PUBLIC_API_URL +
+                          playlists.data[index].attributes.poster.data
+                            .attributes.url
                         }
-                      </li> */}
-                        </ul>
-                      </SliderItem>
-                    ))}
-                  </Slider>
-                </div>
-                <div className={styles.playlists__wrapper}>
-                  <Slider pagination={true} buttons={false} /* filter={true} */>
-                    {playlists.data?.map(({ id, attributes }, index) => (
-                      <SliderItem key={id}>
-                        <Link href={`/playlist/${id}`}>
-                          <img
-                            className={styles.playlists__slides}
-                            src={
-                              process.env.NEXT_PUBLIC_API_URL +
-                              playlists.data[index].attributes.poster.data
-                                .attributes.url
-                            }
-                            alt={'image'}
-                          />
-                        </Link>
-                        <h2 className={styles.playlists__descr}>
-                          {
-                            playlists.data[1].attributes.users_permissions_user
-                              .data.attributes.username
-                          }
-                          <ul className={styles.playlists__list}>
-                            <li className={styles.playlists__item}>
-                              {attributes.title}
-                            </li>
-                            {/* <li className={styles.playlists__item}>
-                        {
-                          attributes.users_permissions_user.data.attributes
-                            .username
-                        }
-                      </li> */}
-                          </ul>
-                        </h2>
-                      </SliderItem>
-                    ))}
-                  </Slider>
-                </div>
-              </div>
+                        alt={'image'}
+                      />
+                    </Link>
+                    <h2 className='playlists__descr'>
+                      {
+                        playlists.data[1].attributes.users_permissions_user.data
+                          .attributes.username
+                      }
+                    </h2>
+                    <ul className='playlists__list'>
+                      <li className='playlists__item'>{attributes.title}</li>
+                    </ul>
+                  </SliderItem>
+                ))}
+              </Slider>
             </div>
+
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
