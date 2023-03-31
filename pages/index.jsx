@@ -4,9 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 //Components
-import Slider from '@/ui/components/global/Slider';
-import SliderItem from '@/ui/components/global/Slider/SliderItem';
 import SliderEvents from '@/ui/components/global/Slider/SliderEvents';
+import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
 import Toast from '@/ui/components/global/Toast';
@@ -86,37 +85,13 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className='title'>События DLESS</div>
-            <SliderEvents data={events} />
-
+            <SliderEvents events={events} buttons={true} pagination={true} />
             <div class='title'>Новинки от пользователей</div>
-            <div className='playlists__wrapper'>
-              <Slider pagination={true} buttons={false} /* filter={true} */>
-                {playlists.data?.map(({ id, attributes }, index) => (
-                  <SliderItem key={id}>
-                    <Link href={`/playlist/${id}`}>
-                      <img
-                        className='playlists__slides'
-                        src={
-                          process.env.NEXT_PUBLIC_API_URL +
-                          playlists.data[index].attributes.poster.data
-                            .attributes.url
-                        }
-                        alt={'image'}
-                      />
-                    </Link>
-                    <h2 className='playlists__descr'>
-                      {
-                        playlists.data[1].attributes.users_permissions_user.data
-                          .attributes.username
-                      }
-                    </h2>
-                    <ul className='playlists__list'>
-                      <li className='playlists__item'>{attributes.title}</li>
-                    </ul>
-                  </SliderItem>
-                ))}
-              </Slider>
-            </div>
+            <SliderPlaylists
+              playlists={playlists}
+              buttons={false}
+              pagination={true}
+            />
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>

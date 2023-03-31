@@ -3,43 +3,35 @@ import Slider from '..';
 import SliderItem from '../SliderItem';
 import Link from 'next/link';
 
-import { fetchAPI } from '@/utils/api/fetch';
-import { dataEvents } from '@/utils/api/QueryParams';
+import styles from './SliderEvents.module.scss';
 
-export const getServerSideProps = async () => {
-  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
-  const events = await responceEvents.json();
-
-  return {
-    props: { events },
-  };
-};
-
-export default function SliderEvents({ data }) {
+export default function SliderEvents({ events, buttons, pagination }) {
   return (
-    <div className='events__wrapper'>
-      <Slider pagination={true} buttons={true}>
-        {data.data?.map(({ id, attributes }, index) => (
+    <div className={styles.events__wrapper}>
+      <Slider buttons={buttons} pagination={pagination}>
+        {events.data?.map(({ id, attributes }, index) => (
           <SliderItem key={id}>
             <Link href={`/events`}>
               <img
-                className='events__slides'
+                className={styles.events__slides}
                 src={
                   process.env.NEXT_PUBLIC_API_URL +
-                  data.data[index].attributes.poster.data.attributes.url
+                  events.data[index].attributes.poster.data.attributes.url
                 }
                 alt={'image'}
               />
-              <ul className='events__list'>
-                <li className='events__description'>
-                  <p className='events__date'>
+              <ul className={styles.events__list}>
+                <li className={styles.events__description}>
+                  <p className={styles.events__date}>
                     {attributes.date.slice(8, 10)} Марта
                   </p>
-                  <p className='events__time'>{attributes.time.slice(0, 5)}</p>
+                  <p className={styles.events__time}>
+                    {attributes.time.slice(0, 5)}
+                  </p>
                 </li>
-                <li className='events__description'>
-                  <p className='events__item'>{attributes.title}</p>
-                  <p className='events__item'>{attributes.author}</p>
+                <li className={styles.events__description}>
+                  <p className={styles.events__item}>{attributes.title}</p>
+                  <p className={styles.events__item}>{attributes.author}</p>
                 </li>
               </ul>
             </Link>
