@@ -133,15 +133,17 @@ export default function Home({ audioTop, playlists, events }) {
                   <Slider pagination={true} buttons={false} /* filter={true} */>
                     {playlists.data?.map(({ id, attributes }, index) => (
                       <SliderItem>
-                        <img
-                          className={styles.playlists__slides}
-                          src={
-                            process.env.NEXT_PUBLIC_API_URL +
-                            playlists.data[index].attributes.poster.data
-                              .attributes.url
-                          }
-                          alt={'image'}
-                        />
+                        <Link href={`/playlist/${id}`}>
+                          <img
+                            className={styles.playlists__slides}
+                            src={
+                              process.env.NEXT_PUBLIC_API_URL +
+                              playlists.data[index].attributes.poster.data
+                                .attributes.url
+                            }
+                            alt={'image'}
+                          />
+                        </Link>
                         <h2 className={styles.playlists__descr}>
                           {
                             playlists.data[1].attributes.users_permissions_user
@@ -167,15 +169,17 @@ export default function Home({ audioTop, playlists, events }) {
                   <Slider pagination={true} buttons={false} /* filter={true} */>
                     {playlists.data?.map(({ id, attributes }, index) => (
                       <SliderItem>
-                        <img
-                          className={styles.playlists__slides}
-                          src={
-                            process.env.NEXT_PUBLIC_API_URL +
-                            playlists.data[index].attributes.poster.data
-                              .attributes.url
-                          }
-                          alt={'image'}
-                        />
+                        <Link href={`/playlist/${id}`}>
+                          <img
+                            className={styles.playlists__slides}
+                            src={
+                              process.env.NEXT_PUBLIC_API_URL +
+                              playlists.data[index].attributes.poster.data
+                                .attributes.url
+                            }
+                            alt={'image'}
+                          />
+                        </Link>
                         <h2 className={styles.playlists__descr}>
                           {
                             playlists.data[1].attributes.users_permissions_user
