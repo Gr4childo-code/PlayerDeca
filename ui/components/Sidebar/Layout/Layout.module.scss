@@ -6,8 +6,9 @@
 
   &__menu {
     max-width: 200px;
+    max-height: 50vh;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -56,11 +57,10 @@
 @include mq(Lphone) {
   .profile {
     flex-direction: column;
-
     &__menu {
       width: 100%;
       max-width: none;
-      height: 10vh;
+      height: 15vh;
     }
     &__content {
       margin-top: 10px;

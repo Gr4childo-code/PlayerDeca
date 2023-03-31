@@ -1,16 +1,10 @@
-import { signOut, getSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { getSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 
 import styles from '../../ui/components/Sidebar/Layout/Profile.module.scss';
 
 const profile = ({ session }) => {
-  const router = useRouter();
   const user = session.user;
-  const customLoader = () => {
-    return `https://api.dless.ru${user?.image}`;
-  };
 
   return (
     <Layout>
@@ -18,14 +12,7 @@ const profile = ({ session }) => {
         <ul className={styles.userInfo}>
           <li className={styles.userInfo__item}>
             {user?.image && (
-              <Image
-                src='profilePic.webp'
-                width={300}
-                height={300}
-                alt='User profile picture'
-                quality={10}
-                loader={customLoader}
-              />
+              <img src={process.env.NEXT_PUBLIC_API_URL + user?.image} />
             )}
           </li>
           <li className={styles.userInfo__item}>
