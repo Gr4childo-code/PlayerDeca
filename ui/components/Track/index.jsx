@@ -22,9 +22,9 @@ const Track = ({ id, index, attributes }) => {
 
         <p className={styles.track__music__author}>{attributes.author}</p>
       </div>
-      {/* <div className={styles.track__options}>
+      <div className={styles.track__options}>
         <FontAwesomeIcon icon={faHeart} />
-      </div> */}
+      </div>
     </div>
   );
 };
