@@ -16,15 +16,6 @@
   }
   &__item {
     margin-top: 10px;
-    button {
-      cursor: pointer;
-      width: 100px;
-      height: 40px;
-      outline: none;
-      border: 1px solid var(--ui-color-one);
-      background: var(--gray-10);
-      color: var(--white);
-    }
   }
   &__descr {
     font-size: 25px;

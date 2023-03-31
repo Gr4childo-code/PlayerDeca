@@ -4,12 +4,13 @@
   flex-direction: column;
   width: 100%;
   opacity: 1;
-  height: 100vh;
   border-radius: 5px;
   padding: 10px 10px;
+  position: relative;
 
   li {
     display: flex;
+    flex-direction: column;
     a {
       width: calc(100% - 5px);
       padding: 10px 10px;
@@ -20,6 +21,21 @@
         background: var(--ui-color-one);
         transition: all 0.8s;
         opacity: 1;
+      }
+    }
+
+    button {
+      cursor: pointer;
+      width: 100%;
+      height: 40px;
+      outline: none;
+      border: 1px solid var(--ui-color-one);
+      background: var(--gray-10);
+      color: var(--white);
+      transition: background 1s;
+      &:hover,
+      &:active {
+        background-color: var(--ui-color-one);
       }
     }
   }

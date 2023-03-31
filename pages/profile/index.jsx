@@ -11,15 +11,7 @@ const profile = ({ session }) => {
   const customLoader = () => {
     return `https://api.dless.ru${user?.image}`;
   };
-  const signOutHandle = async () => {
-    const { url } = await signOut({
-      redirect: false,
-      callbackUrl: '/auth/login',
-    });
 
-    router.push(url);
-  };
-  console.log(user);
   return (
     <Layout>
       <div className={styles.wrapper}>
@@ -38,7 +30,7 @@ const profile = ({ session }) => {
           </li>
           <li className={styles.userInfo__item}>
             <p className={styles.userInfo__title}>Name:</p>
-            <p className={styles.userInfo__descr}></p>
+            <p className={styles.userInfo__descr}>{user?.name}</p>
           </li>
 
           <li className={styles.userInfo__item}>
@@ -48,9 +40,6 @@ const profile = ({ session }) => {
           <li className={styles.userInfo__item}>
             <p className={styles.userInfo__title}>Email:</p>
             <p className={styles.userInfo__descr}>{user?.email}</p>
-          </li>
-          <li className={styles.userInfo__item}>
-            <button onClick={signOutHandle}>Log out</button>
           </li>
         </ul>
       </div>
