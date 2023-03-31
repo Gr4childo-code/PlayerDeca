@@ -7,13 +7,13 @@ export default function ProfileSettings() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChangeName = (e) => {
+  const сhangeName = (e) => {
     setName(e.target.value);
   };
-  const handleChangeEmail = (e) => {
+  const сhangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handleChangePassword = (e) => {
+  const сhangePassword = (e) => {
     setPassword(e.target.value);
   };
 
@@ -24,6 +24,7 @@ export default function ProfileSettings() {
       {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
           'Content-type': 'application/json',
         },
         body: JSON.stringify({ password }),
@@ -39,51 +40,45 @@ export default function ProfileSettings() {
         <span>S</span>ettings
       </h3>
       <div className={styles.wrapper}>
+        <p>id пользователя : </p>
         <form onSubmit={handleSubmit}>
           <ul className={styles.settings__list}>
-            <li>
-              <p>Изменить имя</p>
+            <li className={styles.settings__item}>
               <input
                 type={'text'}
                 value={name}
-                placeholder='имя'
-                onChange={handleChangeName}
+                placeholder='Изменить имя'
+                onChange={сhangeName}
               />
-              <button type={'submit'} className={styles.settings__button}>
-                Изменить
-              </button>
             </li>
-            <li>
-              <p>Изменить емайл</p>
+            <li className={styles.settings__item}>
               <input
                 type={'email'}
                 value={email}
-                placeholder='емайл'
-                onChange={handleChangeEmail}
+                placeholder='Изменить емайл'
+                onChange={сhangeEmail}
               />
-              <button type={'submit'} className={styles.settings__button}>
-                Изменить
-              </button>
             </li>
-            <li>
-              <p>Изменить пароль</p>
+            <li className={styles.settings__item}>
               <input
                 type={'password'}
                 value={password}
-                placeholder='пароль'
-                onChange={handleChangePassword}
+                placeholder='Изменить пароль'
+                onChange={сhangePassword}
               />
-              <button type={'submit'} className={styles.settings__button}>
-                Изменить
-              </button>
             </li>
           </ul>
+          <button className={styles.settings__button} type={'submit'}>
+            Изменить
+          </button>
+        </form>
+        <div>
           <ul className={styles.settings__list}>
             <li>{name}</li>
             <li>{email}</li>
             <li>{password}</li>
           </ul>
-        </form>
+        </div>
       </div>
     </>
   );
