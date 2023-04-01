@@ -65,9 +65,13 @@ export default function Player({ audios }) {
   const rewind = (e, active) => {
     setIsPlayMove(active);
 
+    const rect = e.target.getBoundingClientRect();
+    const pageX = e.pageX;
+
+    e.target.children[0].style.width = `${(pageX / rect.width) * 100}%`
+    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
+
     if (active) {
-      const rect = e.target.getBoundingClientRect();
-      const pageX = e.pageX;
       const rewind = (pageX / rect.width) * audio.duration;
 
       audio.currentTime = rewind;
@@ -76,15 +80,6 @@ export default function Player({ audios }) {
     }
 
     audio.muted = false;
-  };
-
-  const rewindMove = (e) => {
-    const elem = document.querySelector('#player');
-    const rect = elem.getBoundingClientRect();
-    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
-    elem.children[0].children[0].style.width = `${
-      (e.pageX / rect.width) * 100
-    }%`;
   };
 
   const volumeTrack = (e, active) => {
@@ -114,7 +109,7 @@ export default function Player({ audios }) {
         <title>{_title}</title>
       </Head>
 
-      <div className={styles.player} id='player' onMouseMove={rewindMove}>
+      <div className={styles.player}>
         <div
           className={styles.playerBar}
           onMouseMove={(e) => rewind(e, isPlayMove)}
