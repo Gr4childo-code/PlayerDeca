@@ -6,7 +6,6 @@ import styles from '../../../ui/components/Sidebar/ProfileSettings/Settings.modu
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const user = session.user;
-
   if (!user) {
     return {
       notFound: true,
@@ -19,19 +18,28 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function ProfileSettings({ user }) {
-  const { id, email } = user;
-  console.log(id, email);
-  const [newName, setNewName] = useState('');
+  const { id, name, email } = user;
+
+  console.log(id, name, email);
+  const [newName, setNewName] = useState(name);
   const [newEmail, setNewEmail] = useState(email);
   const [newPassword, setNewPassword] = useState('');
 
-  const сhangeEmail = (e) => {
-    setNewEmail(e.target.value);
+  const handleChangeName = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      `https://api.dless.ru/api/auth/users/${id}/change-password`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ password: newPassword }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
   };
-  const сhangePassword = (e) => {
-    setNewPassword(e.target.value);
-  };
-
   const handleChangePassword = async (e) => {
     e.preventDefault();
     const response = await fetch(
@@ -79,7 +87,11 @@ export default function ProfileSettings({ user }) {
               placeholder='Изменить имя'
               onChange={(e) => setNewName(e.target.value)}
             />
-            <button className={styles.settings__button} type={'submit'}>
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={handleChangeName}
+            >
               Изменить
             </button>
           </li>
@@ -89,7 +101,7 @@ export default function ProfileSettings({ user }) {
               type={'email'}
               value={newEmail}
               placeholder='Изменить емайл'
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={(e) => setNewEmail(e.target.value)}
             />
             <button
               className={styles.settings__button}
@@ -105,7 +117,7 @@ export default function ProfileSettings({ user }) {
               type={'password'}
               value={newPassword}
               placeholder='Изменить пароль'
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
             <button
               className={styles.settings__button}
