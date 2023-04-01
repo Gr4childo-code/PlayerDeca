@@ -18,58 +18,19 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function ProfileSettings({ user }) {
-  const { id, name, email } = user;
+  const { id, name, email, password } = user;
 
   console.log(id, name, email);
-  const [newName, setNewName] = useState(name);
-  const [newEmail, setNewEmail] = useState(email);
+  const [newName, setNewName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [сurrentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  const handleChangeName = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `https://api.dless.ru/api/auth/users/${id}/change-password`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ password: newPassword }),
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-  const handleChangePassword = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `https://api.dless.ru/api/auth/users/${id}/change-password`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ password: newPassword }),
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-  const handleChangeEmail = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `https://api.dless.ru/api/auth/users/${id}/change-email`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ email: newEmail }),
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-  };
+  if (newName === name) {
+    console.log('Имя совпадает, введите другое имя');
+  } else {
+    console.log('Всё ок');
+  }
 
   return (
     <Layout>
@@ -77,7 +38,7 @@ export default function ProfileSettings({ user }) {
         <span>S</span>ettings
       </h3>
       <div className={styles.wrapper}>
-        <p>id пользователя : </p>
+        <p>id пользователя : {id}</p>
         <ul className={styles.settings__list}>
           <li className={styles.settings__item}>
             <input
@@ -88,9 +49,9 @@ export default function ProfileSettings({ user }) {
               onChange={(e) => setNewName(e.target.value)}
             />
             <button
-              className={styles.settings__button}
+              /*               onClick={handleChangeName}
+               */ className={styles.settings__button}
               type={'submit'}
-              onClick={handleChangeName}
             >
               Изменить
             </button>
@@ -103,11 +64,7 @@ export default function ProfileSettings({ user }) {
               placeholder='Изменить емайл'
               onChange={(e) => setNewEmail(e.target.value)}
             />
-            <button
-              className={styles.settings__button}
-              type={'submit'}
-              onClick={handleChangeEmail}
-            >
+            <button className={styles.settings__button} type={'submit'}>
               Изменить
             </button>
           </li>
@@ -120,9 +77,9 @@ export default function ProfileSettings({ user }) {
               onChange={(e) => setNewPassword(e.target.value)}
             />
             <button
-              className={styles.settings__button}
+              /*               onClick={handleChangePassword}
+               */ className={styles.settings__button}
               type={'submit'}
-              onClick={handleChangePassword}
             >
               Изменить
             </button>
@@ -141,3 +98,48 @@ export default function ProfileSettings({ user }) {
 }
 
 /* PUT для изменения пароля /api/auth/change-password */
+/* const handleChangeName = async (e) => {
+	e.preventDefault();
+	const response = await fetch(
+		`https://api.dless.ru/api/auth/users/${id}/change-password`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify({ password: newPassword }),
+		}
+	);
+	const data = await response.json();
+	console.log(data);
+};
+const handleChangePassword = async (e) => {
+	e.preventDefault();
+	const response = await fetch(
+		`https://api.dless.ru/api/auth/users/${id}/change-password`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify({ password: newPassword }),
+		}
+	);
+	const data = await response.json();
+	console.log(data);
+};
+const handleChangeEmail = async (e) => {
+	e.preventDefault();
+	const response = await fetch(
+		`https://api.dless.ru/api/auth/users/${id}/change-email`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify({ email: newEmail }),
+		}
+	);
+	const data = await response.json();
+	console.log(data);
+}; */
