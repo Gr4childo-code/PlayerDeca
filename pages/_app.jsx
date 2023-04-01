@@ -7,6 +7,7 @@ import { fetchAPI } from '@/utils/api/fetch'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
+import NextNProgress from 'nextjs-progressbar';
 
 import { SessionProvider } from 'next-auth/react'
 
@@ -37,6 +38,11 @@ export default function App({
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
         <div className={roboto.className}>
           <Layout menu={menu}>
+            <NextNProgress
+              color="#fc581f"
+              height={3}
+              showOnShallow={false}
+            />
             <Component {...pageProps} />
           </Layout>
 
