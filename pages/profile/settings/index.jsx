@@ -23,14 +23,8 @@ export default function ProfileSettings({ user }) {
   console.log(id, name, email);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [сurrentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-
-  if (newName === name) {
-    console.log('Имя совпадает, введите другое имя');
-  } else {
-    console.log('Всё ок');
-  }
+  /*   const [сurrentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState(''); */
 
   return (
     <Layout>
@@ -68,7 +62,7 @@ export default function ProfileSettings({ user }) {
               Изменить
             </button>
           </li>
-          <li className={styles.settings__item}>
+          {/* <li className={styles.settings__item}>
             <input
               className={styles.settings__input}
               type={'password'}
@@ -77,19 +71,19 @@ export default function ProfileSettings({ user }) {
               onChange={(e) => setNewPassword(e.target.value)}
             />
             <button
-              /*               onClick={handleChangePassword}
-               */ className={styles.settings__button}
+              onClick={handleChangePassword}
+              className={styles.settings__button}
               type={'submit'}
             >
               Изменить
             </button>
-          </li>
+          </li> */}
         </ul>
         <div>
           <ul className={styles.settings__list}>
             <li>{newName}</li>
             <li>{newEmail}</li>
-            <li>{newPassword}</li>
+            {/* <li>{newPassword}</li> */}
           </ul>
         </div>
       </div>
