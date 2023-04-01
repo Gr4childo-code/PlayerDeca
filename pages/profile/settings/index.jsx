@@ -32,7 +32,11 @@ export default function ProfileSettings({ user }) {
         <span>S</span>ettings
       </h3>
       <div className={styles.wrapper}>
-        <p>id пользователя : {id}</p>
+        <div className={styles.user}>
+          <p>id пользователя : {id}</p>
+          <p>Имя пользователя : {name}</p>
+          <p>Емайл пользователя : {email}</p>
+        </div>
         <ul className={styles.settings__list}>
           <li className={styles.settings__item}>
             <input

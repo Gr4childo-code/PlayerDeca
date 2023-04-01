@@ -9,23 +9,27 @@
     color: var(--ui-color-one);
   }
 }
+.user {
+  margin: 0 10px;
+}
 
 .settings {
   &__list {
     display: flex;
     flex-direction: column;
-    margin: 0 10px;
+    margin: 10px 10px;
     font-size: 15px;
   }
 
   &__item {
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
   }
   &__button {
-    margin: 20px 10px;
+    margin: 0 5px;
     width: 100px;
-    height: 35px;
+    height: 32px;
     border-radius: 5px;
   }
   &__input {
