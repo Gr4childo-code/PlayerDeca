@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import styles from '../../../ui/components/Sidebar/ProfileSettings/Settings.module.scss';
+import { fetchAPI } from '@/utils/api/fetch';
+import { dataUserId } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
@@ -12,20 +14,29 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
+  const response = await fetchAPI(`/users?${dataUserId}`);
+  const dataUsersId = await response.json();
+
   return {
-    props: { user },
+    props: { user, dataUsersId },
   };
 };
 
-export default function ProfileSettings({ user }) {
-  const { id, name, email } = user;
+//Запроси в кверипарамс юзера и выведи значения, у тебя уже там есть параметры и сравни с теми значения что в сессии
 
-  console.log(id, name, email);
+// Получить объект юзер от сессии +
+// Создать кнопку с запросом на изменение
+// Передать его в функции
+
+export default function ProfileSettings({ user, dataUsersId }) {
+  const { id, name, email } = user;
+  const [currentUser, setNewUser] = useState(user);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   /*   const [сurrentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState(''); */
-
+  console.log(dataUsersId);
+  console.log(currentUser);
   return (
     <Layout>
       <h3 className={styles.title}>

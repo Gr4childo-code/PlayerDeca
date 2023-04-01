@@ -134,7 +134,7 @@ const dataUserId = (query) => {
 				$eq: query,
 			}
 		},
-		fields: ['title', 'place', 'date', 'author', 'time'],
+		fields: ['title', 'name', 'email', 'password'],
 	})
 	return userId
 }
