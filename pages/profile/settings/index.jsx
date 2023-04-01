@@ -1,41 +1,131 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
-import Settings from '@/ui/components/Sidebar/ProfileSettings';
-import { fetchAPI } from '@/utils/api/fetch';
-import { dataUserId } from '@/utils/api/QueryParams';
+import styles from '../../../ui/components/Sidebar/ProfileSettings/Settings.module.scss';
 
-const editProfile = ({ session }) => {
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
   const user = session.user;
+
+  if (!user) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { user },
+  };
+};
+
+export default function ProfileSettings({ user }) {
+  const { id, email } = user;
+  console.log(id, email);
+  const [newName, setNewName] = useState('');
+  const [newEmail, setNewEmail] = useState(email);
+  const [newPassword, setNewPassword] = useState('');
+
+  const сhangeEmail = (e) => {
+    setNewEmail(e.target.value);
+  };
+  const сhangePassword = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      `https://api.dless.ru/api/auth/users/${id}/change-password`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ password: newPassword }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  const handleChangeEmail = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      `https://api.dless.ru/api/auth/users/${id}/change-email`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ email: newEmail }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 
   return (
     <Layout>
-      <div>
-        {user.name}
-        {user.email}
+      <h3 className={styles.title}>
+        <span>S</span>ettings
+      </h3>
+      <div className={styles.wrapper}>
+        <p>id пользователя : </p>
+        <ul className={styles.settings__list}>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'text'}
+              value={newName}
+              placeholder='Изменить имя'
+              onChange={(e) => setNewName(e.target.value)}
+            />
+            <button className={styles.settings__button} type={'submit'}>
+              Изменить
+            </button>
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'email'}
+              value={newEmail}
+              placeholder='Изменить емайл'
+              onChange={(e) => setNewName(e.target.value)}
+            />
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={handleChangeEmail}
+            >
+              Изменить
+            </button>
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'password'}
+              value={newPassword}
+              placeholder='Изменить пароль'
+              onChange={(e) => setNewName(e.target.value)}
+            />
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={handleChangePassword}
+            >
+              Изменить
+            </button>
+          </li>
+        </ul>
+        <div>
+          <ul className={styles.settings__list}>
+            <li>{newName}</li>
+            <li>{newEmail}</li>
+            <li>{newPassword}</li>
+          </ul>
+        </div>
       </div>
     </Layout>
   );
-};
-export default editProfile;
-
-/* export const getServerSideProps = async () => {
-  const response = await fetchAPI(`/users?${dataUserId}`);
-  const data = await response.json();
-  return { props: { data } };
-};
- */
-/* export default function ProfileSettings({ data }) {
-  const { id, email, name } = data[2];
-    console.log(data);
-   console.log(id);
-  console.log(email);
-
-  return (
-    <Layout>
-      <Settings id={id} email={email} name={name} />
-    </Layout>
-  );
-} */
+}
 
 /* PUT для изменения пароля /api/auth/change-password */
