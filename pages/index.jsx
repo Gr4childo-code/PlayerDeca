@@ -1,13 +1,11 @@
 //Next/React
 import Head from 'next/head';
-import { useState } from 'react';
 
 //Components
 import SliderEvents from '@/ui/components/global/Slider/SliderEvents';
 import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
-import Toast from '@/ui/components/global/Toast';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
@@ -29,19 +27,6 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ audioTop, playlists, events }) {
-  const [list, setList] = useState([]);
-  let toastItem = null;
-
-  const showToast = ({ type, title, description }) => {
-    toastItem = {
-      id: list.length + 1,
-      type,
-      title,
-      description,
-    };
-    setList([...list, toastItem]);
-  };
-
   return (
     <>
       <Head>
@@ -49,7 +34,6 @@ export default function Home({ audioTop, playlists, events }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Toast toastlist={list} setList={setList} />
 
       <div className='container'>
         <div className='layout'>
