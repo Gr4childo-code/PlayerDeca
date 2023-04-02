@@ -37,7 +37,11 @@ export const authOptions = {
 
   session: {
     jwt: true,
-    maxAge: 1 * 24 * 60 * 60
+    maxAge: 1 * 60 * 60,
+  },
+
+  jwt: {
+    maxAge: 1 * 60 * 60,
   },
 
   pages: {
