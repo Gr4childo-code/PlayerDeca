@@ -1,10 +1,15 @@
+@import "@/styles/sass/grid.scss";
+
 .playlists {
   &__wrapper {
     max-width: 200px;
+    align-items: center;
+    display: flex;
   }
   &__slides {
     max-width: 200px;
     min-height: 280px;
+    height: 280px;
     border-radius: 5px;
     object-fit: cover;
     cursor: pointer;
@@ -31,5 +36,15 @@
   }
   &__descr {
     margin-top: 5px;
+  }
+}
+@include mq(Sphone) {
+  .playlists {
+    &__wrapper {
+      max-width: 100%;
+    }
+    &__slides {
+      max-width: 100%;
+    }
   }
 }

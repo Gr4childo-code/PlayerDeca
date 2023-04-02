@@ -31,14 +31,16 @@ export default function SignUp() {
     e.preventDefault()
 
     fetchAPI(`/auth/local/register`, 'POST', reg).then(async resp => {
-      const { url } = await signIn("credentials", {
-        identifier: reg.username,
-        password: reg.password,
-        redirect: false,
-        callbackUrl
-      })
-
-      router.push(url)
+      if ( resp.ok ) {
+        const { url } = await signIn("credentials", {
+          identifier: reg.username,
+          password: reg.password,
+          redirect: false,
+          callbackUrl
+        })
+  
+        router?.push(url)
+      }
 
       setReg({
         username: '',

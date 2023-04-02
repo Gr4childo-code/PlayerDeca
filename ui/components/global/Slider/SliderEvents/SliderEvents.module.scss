@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .events {
   &__wrapper {
     width: 100%;
@@ -5,6 +7,7 @@
   &__slides {
     width: 100%;
     max-height: 500px;
+    height: 500px;
     border-radius: 5px;
     object-fit: cover;
     cursor: pointer;
@@ -67,6 +70,33 @@
     &__time {
       font-size: 15px;
       opacity: 0.6;
+    }
+  }
+}
+
+@include mq(Lphone) {
+  .events {
+    &__slides {
+      max-height: 300px;
+      height: 300px;
+    }
+    &__list {
+      padding: 5px 0px;
+    }
+  }
+}
+
+@include mq(Sphone) {
+  .events {
+    &__slides {
+      max-height: 300px;
+      height: 300px;
+    }
+    &__list {
+      padding: 5px 0px;
+    }
+    &__item {
+      font-size: 15px;
     }
   }
 }
