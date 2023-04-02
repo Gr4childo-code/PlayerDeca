@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 // Light theme
 :root {
   // Default
@@ -165,13 +165,14 @@ a {
   width: 100%;
   background: var(--gray-60);
   color: var(--white-50);
-  transition: background 0.15s, box-shadow .15s;
+  transition: background 0.15s, box-shadow 0.15s;
   &:hover {
     background: var(--gray-80);
   }
   &:focus {
     background: var(--background);
-    box-shadow: 0 0 0 2px var(--ui-color-one), 0 0 0 4px rgba(var(--ui-color-one-rgb), .5)
+    box-shadow: 0 0 0 2px var(--ui-color-one),
+      0 0 0 4px rgba(var(--ui-color-one-rgb), 0.5);
   }
 }
 
@@ -224,6 +225,14 @@ a {
 
     &__right {
       width: 100%;
+    }
+  }
+}
+
+@include mq(phone) {
+  .header {
+    &__img {
+      height: 300px;
     }
   }
 }
