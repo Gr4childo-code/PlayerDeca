@@ -4,12 +4,13 @@
   flex-direction: column;
   width: 100%;
   opacity: 1;
-  height: 100vh;
   border-radius: 5px;
   padding: 10px 10px;
+  position: relative;
 
   li {
     display: flex;
+    flex-direction: column;
     a {
       width: calc(100% - 5px);
       padding: 10px 10px;
@@ -22,20 +23,40 @@
         opacity: 1;
       }
     }
+
+    button {
+      margin-top: 10px;
+      cursor: pointer;
+      width: 100%;
+      height: 40px;
+      outline: none;
+      border: 1px solid var(--ui-color-one);
+      background: var(--gray-10);
+      color: var(--white);
+      transition: background 1s;
+      &:hover,
+      &:active {
+        background-color: var(--ui-color-one);
+      }
+    }
   }
 }
 @include mq(Lphone) {
   .wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding: 0 10px;
-    width: 100%;
-    align-items: center;
+    padding: 10px;
     li {
+      flex-direction: row;
+      justify-content: space-around;
+      button {
+        height: 20px;
+        margin: 5px 0;
+      }
       a {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
         padding: 0 5px;
-        font-size: 15px;
+        font-size: 17px;
       }
     }
   }
