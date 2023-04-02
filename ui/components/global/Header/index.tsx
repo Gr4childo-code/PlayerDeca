@@ -9,30 +9,22 @@ import styles from './Header.module.scss';
 
 const Header = ({ menu }) => {
   return (
-    <>
-      <div className={styles.headerInfo}>
-        <div className='container'>
-          Учебный проект стажеров decathlon
-        </div>
-      </div>
-
-      <header className={styles.header}>
-        <div className='container'>
-          <div className={styles.header__box}>
-            <div className={styles.header__left}>
-              <Logo />
-            </div>
-            <div className={styles.header__center}>
-              <Navigation menu={menu} />
-              <SearchNew />
-            </div>
-            <div className={styles.header__right}>
-              <AuthBadge />
-            </div>
+    <header className={styles.header}>
+      <div className='container'>
+        <div className={styles.header__box}>
+          <div className={styles.header__left}>
+            <Logo />
+          </div>
+          <div className={styles.header__center}>
+            <Navigation menu={menu} />
+            <SearchNew />
+          </div>
+          <div className={styles.header__right}>
+            <AuthBadge />
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
 
