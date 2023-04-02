@@ -3,7 +3,6 @@ import { getSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import styles from '../../../ui/components/Sidebar/ProfileSettings/Settings.module.scss';
 import { fetchAPI } from '@/utils/api/fetch';
-import { dataUserId } from '@/utils/api/QueryParams';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
@@ -14,29 +13,37 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const response = await fetchAPI(`/users?${dataUserId}`);
-  const dataUsersId = await response.json();
-
   return {
-    props: { user, dataUsersId },
+    props: { user },
   };
 };
 
-//Запроси в кверипарамс юзера и выведи значения, у тебя уже там есть параметры и сравни с теми значения что в сессии
-
-// Получить объект юзер от сессии +
-// Создать кнопку с запросом на изменение
-// Передать его в функции
-
-export default function ProfileSettings({ user, dataUsersId }) {
+export default function ProfileSettings({ user }) {
   const { id, name, email } = user;
   const [currentUser, setNewUser] = useState(user);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  /*   const [сurrentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState(''); */
-  console.log(dataUsersId);
+  const [сurrentPassword, setCurrentPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   console.log(currentUser);
+
+  const updatePassword = async () => {
+    const response = await fetchAPI(`/auth/user/change-password/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: password,
+        passwordConfirmation: passwordConfirmation,
+      }),
+    });
+    const data = response.json();
+    console.log(data);
+  };
+
   return (
     <Layout>
       <h3 className={styles.title}>
@@ -77,28 +84,38 @@ export default function ProfileSettings({ user, dataUsersId }) {
               Изменить
             </button>
           </li>
-          {/* <li className={styles.settings__item}>
+          <li className={styles.settings__item}>
             <input
               className={styles.settings__input}
               type={'password'}
-              value={newPassword}
-              placeholder='Изменить пароль'
-              onChange={(e) => setNewPassword(e.target.value)}
+              value={password}
+              placeholder='Введите новый пароль'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'password'}
+              value={passwordConfirmation}
+              placeholder='Подтвердите новый пароль'
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
             <button
-              onClick={handleChangePassword}
+              onClick={updatePassword}
               className={styles.settings__button}
               type={'submit'}
             >
               Изменить
             </button>
-          </li> */}
+          </li>
         </ul>
         <div>
           <ul className={styles.settings__list}>
             <li>{newName}</li>
-            <li>{newEmail}</li>
-            {/* <li>{newPassword}</li> */}
+            {/* <li>{newEmail}</li> */}
+            <li>{password}</li>
+            <li>{passwordConfirmation}</li>
           </ul>
         </div>
       </div>
