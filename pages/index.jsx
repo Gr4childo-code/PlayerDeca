@@ -56,33 +56,3 @@ export default function Home({ audioTop, playlists, events }) {
     </>
   );
 }
-//  <button
-//   onClick={() => {
-//     showToast({
-//       type: 'error',
-//       title: 'Error',
-//       description: 'API has been deleted',
-//     });
-//   }}>
-//   Error
-// </button> */}
-//  <button
-//   onClick={() => {
-//     showToast({
-//       type: 'warn',
-//       title: 'Warn',
-//       description: 'Type password',
-//     });
-//   }}>
-//   Warn
-// </button>
-// <button
-//   onClick={() => {
-//     showToast({
-//       type: 'success',
-//       title: 'Success',
-//       description: 'Complete',
-//     });
-//   }}>
-//   Success
-// </button>
