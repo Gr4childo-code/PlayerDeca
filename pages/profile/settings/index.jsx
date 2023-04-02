@@ -29,16 +29,10 @@ export default function ProfileSettings({ user }) {
   console.log(currentUser);
 
   const updatePassword = async () => {
-    const response = await fetchAPI(`/auth/user/change-password/`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        password: password,
-        passwordConfirmation: passwordConfirmation,
-      }),
+    const response = await fetchAPI(`/auth/change-password`, 'POST', {
+      currentPassword: сurrentPassword,
+      password: password,
+      passwordConfirmation: password,
     });
     const data = response.json();
     console.log(data);
@@ -83,6 +77,15 @@ export default function ProfileSettings({ user }) {
             <button className={styles.settings__button} type={'submit'}>
               Изменить
             </button>
+          </li>
+          <li className={styles.settings__item}>
+            <input
+              className={styles.settings__input}
+              type={'password'}
+              value={сurrentPassword}
+              placeholder='Введите текущий пароль'
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
           </li>
           <li className={styles.settings__item}>
             <input
