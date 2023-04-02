@@ -34,7 +34,7 @@ export default function Sidebar() {
           );
         })}
         <li>
-          <button onClick={signOutHandle}>Log out</button>
+          <button onClick={signOutHandle}>Выйти</button>
         </li>
       </ul>
     </>
