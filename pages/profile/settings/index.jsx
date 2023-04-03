@@ -20,7 +20,7 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function ProfileSettings({ user, jwtToken }) {
-  const { id, name, email } = user;
+  const { id, username, name, email } = user;
   const [currentUser, setNewUser] = useState(user);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
@@ -60,6 +60,7 @@ export default function ProfileSettings({ user, jwtToken }) {
       <div className={styles.wrapper}>
         <div className={styles.user}>
           <p>id пользователя : {id}</p>
+          <p>Никнейм пользователя : {username}</p>
           <p>Имя пользователя : {name || 'Нет имени'}</p>
           <p>Емайл пользователя : {email}</p>
         </div>
@@ -72,7 +73,11 @@ export default function ProfileSettings({ user, jwtToken }) {
               placeholder='Изменить имя'
               onChange={(e) => setNewName(e.target.value)}
             />
-            <button className={styles.settings__button} type={'submit'}>
+            <button
+              /* onClick={updateName} */
+              className={styles.settings__button}
+              type={'submit'}
+            >
               Изменить
             </button>
           </li>
@@ -136,14 +141,4 @@ export default function ProfileSettings({ user, jwtToken }) {
   );
 }
 
-/*
-Отправить пароль по-другому
-const updatePassword = async () => {
-    const response = await fetchAPI(`/auth/change-password`, 'POST', {
-      currentPassword: currentPassword,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
-    });
-    const data = await response.json();
-    console.log(data);
-  }; */
+/* {"id":5,"username":"akosou94","email":"aleksey.kosourov@decathlon.com","provider":"local","confirmed":true,"blocked":false,"name":null,"image"} */
