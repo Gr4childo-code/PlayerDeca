@@ -1,13 +1,17 @@
 .title {
   font-size: 30px;
   text-align: center;
-  span {
-    color: var(--ui-color-one);
-  }
 }
 .user,
 .info {
   margin: 0 10px;
+}
+
+.info {
+  font-size: 30px;
+  .descr {
+    font-size: 18px;
+  }
 }
 
 .subTitle {

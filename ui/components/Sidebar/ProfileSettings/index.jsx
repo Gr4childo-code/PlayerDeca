@@ -51,24 +51,23 @@ export default function ProfileSettings({ user, token }) {
 
   return (
     <div>
-      <h3 className={styles.title}>
-        <span>S</span>ettings
-      </h3>
       <div className={styles.wrapper}>
         <div className={styles.info}>
           <h3 className={styles.subTitle}>Информация о профиле</h3>
           <ul className={styles.settings__list}>
             <li className={styles.settings__item}>
-              <p>{`Id: ${id}`}</p>
+              <p className={styles.descr}>{`Id: ${id}`}</p>
             </li>
             <li className={styles.settings__item}>
-              <p>{`Username: ${username}`}</p>
+              <p className={styles.descr}>{`Username: ${username}`}</p>
             </li>
             <li className={styles.settings__item}>
-              <p>{`Имя пользователя: ${name || 'отсутствует'}`}</p>
+              <p className={styles.descr}>{`Имя пользователя: ${
+                name || 'отсутствует'
+              }`}</p>
             </li>
             <li className={styles.settings__item}>
-              <p>{`Email: ${email}`}</p>
+              <p className={styles.descr}>{`Email: ${email}`}</p>
             </li>
           </ul>
         </div>
