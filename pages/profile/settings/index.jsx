@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import styles from '../../../ui/components/Sidebar/ProfileSettings/Settings.module.scss';
+import { fetchAPI } from '@/utils/api/fetch';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const user = session.user;
+  const jwtToken = session.jwt;
   if (!user) {
     return {
       notFound: true,
@@ -13,36 +15,28 @@ export const getServerSideProps = async (ctx) => {
   }
 
   return {
-    props: { user },
+    props: { user, jwtToken },
   };
 };
 
-export default function ProfileSettings({ user }) {
+export default function ProfileSettings({ user, jwtToken }) {
   const { id, name, email } = user;
   const [currentUser, setNewUser] = useState(user);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   console.log(currentUser);
+  console.log(jwtToken);
 
-  const updatePassword = async (ctx) => {
-    const session = await getSession(ctx);
-
-    const { oldPassword, newPassword, confirmPassword } = session.user;
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/change-password`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ oldPassword, newPassword }),
-      }
-    );
-    const data = response.json();
+  const updatePassword = async () => {
+    const response = await fetchAPI(`/auth/change-password`, 'POST', {
+      currentPassword: currentPassword,
+      password: password,
+      passwordConfirmation: passwordConfirmation,
+    });
+    const data = await response.json();
     console.log(data);
   };
 
@@ -66,11 +60,7 @@ export default function ProfileSettings({ user }) {
               placeholder='Изменить имя'
               onChange={(e) => setNewName(e.target.value)}
             />
-            <button
-              /*               onClick={handleChangeName}
-               */ className={styles.settings__button}
-              type={'submit'}
-            >
+            <button className={styles.settings__button} type={'submit'}>
               Изменить
             </button>
           </li>
@@ -90,9 +80,9 @@ export default function ProfileSettings({ user }) {
             <input
               className={styles.settings__input}
               type={'password'}
-              value={oldPassword}
+              value={currentPassword}
               placeholder='Старый пароль'
-              onChange={(e) => setOldPassword(e.target.value)}
+              onChange={(e) => setCurrentPassword(e.target.value)}
             />
           </li>
           <li className={styles.settings__item}>
@@ -133,3 +123,15 @@ export default function ProfileSettings({ user }) {
     </Layout>
   );
 }
+
+/*
+Отправить пароль по-другому
+const updatePassword = async () => {
+    const response = await fetchAPI(`/auth/change-password`, 'POST', {
+      currentPassword: currentPassword,
+      password: password,
+      passwordConfirmation: passwordConfirmation,
+    });
+    const data = await response.json();
+    console.log(data);
+  }; */

@@ -18,8 +18,7 @@ const fetchAPI = async (url, request, parms = null) => {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
-/* 						Authorization: `Bearer ${API_TOKEN}`,
- */					},
+					},
 					body: JSON.stringify(parms),
 				});
 				return postResponse;
