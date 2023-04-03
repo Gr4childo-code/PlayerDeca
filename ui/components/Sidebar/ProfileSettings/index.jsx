@@ -40,9 +40,19 @@ export default function ProfileSettings({ user, token }) {
     /*     const data = await response.json();
     console.log(data); */
   };
+  const clearInput = () => {
+    if (updatePasswordHandle) {
+      setNewName('');
+      setNewEmail('');
+      setCurrentPassword('');
+      setPassword('');
+      setPasswordConfirmation('');
+    }
+  };
 
   const updatePasswordHandle = () => {
     if (validatePassword(password) && changePassword()) {
+      clearInput();
       alert('Password is change');
     } else {
       alert('Password is not changed');
