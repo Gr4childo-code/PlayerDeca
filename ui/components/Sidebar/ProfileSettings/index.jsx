@@ -13,7 +13,16 @@ export default function ProfileSettings({ user, token }) {
   /*   console.log(currentUser);
   console.log(token); */
 
-  const updatePassword = async () => {
+  const validatePassword = (password) => {
+    const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
+    if (password === passwordConfirmation && password !== currentPassword) {
+      console.log('Password is valid');
+      return passwordRegEx.test(password);
+    } else {
+      alert('Password is invalid or matches');
+    }
+  };
+  const changePassword = async () => {
     const response = await fetch(
       'https://api.dless.ru/api/auth/change-password',
       {
@@ -31,8 +40,16 @@ export default function ProfileSettings({ user, token }) {
         }),
       }
     );
-    const data = await response.json();
-    console.log(data);
+    /*     const data = await response.json();
+    console.log(data); */
+  };
+
+  const updatePasswordHandle = () => {
+    if (validatePassword(password) && changePassword()) {
+      alert('Password is change');
+    } else {
+      alert('Password is not changed');
+    }
   };
 
   return (
@@ -118,7 +135,7 @@ export default function ProfileSettings({ user, token }) {
                   onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
                 <button
-                  onClick={updatePassword}
+                  onClick={updatePasswordHandle}
                   className={styles.settings__button}
                   type={'submit'}
                 >
