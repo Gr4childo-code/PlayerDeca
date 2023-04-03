@@ -41,7 +41,7 @@ export default function ProfileSettings({ user, token }) {
         <span>S</span>ettings
       </h3>
       <div className={styles.wrapper}>
-        <div className={styles.user}>
+        <div className={styles.info}>
           <h3>Информация о профиле</h3>
           <ul className={styles.settings__list}>
             <li className={styles.settings__item}>id: {id}</li>
@@ -52,82 +52,81 @@ export default function ProfileSettings({ user, token }) {
             <li className={styles.settings__item}>Email: {email}</li>
           </ul>
         </div>
-        <ul className={styles.settings__list}>
-          <li className={styles.settings__item}>
-            <input
-              className={styles.settings__input}
-              type={'text'}
-              value={newName}
-              placeholder='Изменить имя'
-              onChange={(e) => setNewName(e.target.value)}
-            />
-            {/* <button
-              onClick={updateName}
-              className={styles.settings__button}
-              type={'submit'}
-            >
-              Изменить
-            </button> */}
-          </li>
-          <li className={styles.settings__item}>
-            <input
-              className={styles.settings__input}
-              type={'email'}
-              value={newEmail}
-              placeholder='Изменить емайл'
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-            {/* <button className={styles.settings__button} type={'submit'}>
-              Изменить
-            </button> */}
-          </li>
-        </ul>
-        <div className={styles.password}>
-          <h3>Изменить пароль</h3>
-          <ul className={styles.settings__list}>
-            <li className={styles.settings__item}>
-              <input
-                className={styles.settings__input}
-                type={'password'}
-                value={currentPassword}
-                placeholder='Старый пароль'
-                onChange={(e) => setCurrentPassword(e.target.value)}
-              />
-            </li>
-            <li className={styles.settings__item}>
-              <input
-                className={styles.settings__input}
-                type={'password'}
-                value={password}
-                placeholder='Новый пароль'
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </li>
-            <li className={styles.settings__item}>
-              <input
-                className={styles.settings__input}
-                type={'password'}
-                value={passwordConfirmation}
-                placeholder='Подтвердите новый пароль'
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
-              />
-              <button
-                onClick={updatePassword}
-                className={styles.settings__button}
-                type={'submit'}
-              >
-                Изменить
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <ul className={styles.settings__list}>
-            <li>{newName}</li>
-            {/* <li>{newEmail}</li> */}
-            <li>{password}</li>
-            <li>{passwordConfirmation}</li>
-          </ul>
+        <div className={styles.settings}>
+          <div className={styles.user}>
+            <h3>Изменить имя</h3>
+            <ul className={styles.settings__list}>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'text'}
+                  value={newName}
+                  placeholder='Изменить имя'
+                  onChange={(e) => setNewName(e.target.value)}
+                />
+                <button className={styles.settings__button} type={'submit'}>
+                  Изменить
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.user}>
+            <h3>Изменить email</h3>
+            <ul className={styles.settings__list}>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'email'}
+                  value={newEmail}
+                  placeholder='Изменить емайл'
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
+                <button className={styles.settings__button} type={'submit'}>
+                  Изменить
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.user}>
+            <h3>Изменить пароль</h3>
+            <ul className={styles.settings__list}>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'password'}
+                  value={currentPassword}
+                  placeholder='Старый пароль'
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </li>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'password'}
+                  value={password}
+                  placeholder='Новый пароль'
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </li>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'password'}
+                  value={passwordConfirmation}
+                  placeholder='Подтвердите новый пароль'
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
+                />
+                <button
+                  onClick={updatePassword}
+                  className={styles.settings__button}
+                  type={'submit'}
+                >
+                  Изменить
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
