@@ -4,14 +4,11 @@ import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
 export default function ProfileSettings({ user, token }) {
   const { id, username, name, email } = user;
-  const [currentUser, setNewUser] = useState(user);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  /*   console.log(currentUser);
-  console.log(token); */
 
   const validatePassword = (password) => {
     const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
@@ -59,19 +56,25 @@ export default function ProfileSettings({ user, token }) {
       </h3>
       <div className={styles.wrapper}>
         <div className={styles.info}>
-          <h3>Информация о профиле</h3>
+          <h3 className={styles.subTitle}>Информация о профиле</h3>
           <ul className={styles.settings__list}>
-            <li className={styles.settings__item}>id: {id}</li>
-            <li className={styles.settings__item}>Никнейм: {username}</li>
             <li className={styles.settings__item}>
-              Имя: {name || 'Нет имени'}
+              <p>{`Id: ${id}`}</p>
             </li>
-            <li className={styles.settings__item}>Email: {email}</li>
+            <li className={styles.settings__item}>
+              <p>{`Username: ${username}`}</p>
+            </li>
+            <li className={styles.settings__item}>
+              <p>{`Имя пользователя: ${name || 'отсутствует'}`}</p>
+            </li>
+            <li className={styles.settings__item}>
+              <p>{`Email: ${email}`}</p>
+            </li>
           </ul>
         </div>
         <div className={styles.settings}>
           <div className={styles.user}>
-            <h3>Изменить имя</h3>
+            <h3 className={styles.subTitle}>Изменить имя</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
@@ -88,7 +91,7 @@ export default function ProfileSettings({ user, token }) {
             </ul>
           </div>
           <div className={styles.user}>
-            <h3>Изменить email</h3>
+            <h3 className={styles.subTitle}>Изменить email</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
@@ -106,7 +109,7 @@ export default function ProfileSettings({ user, token }) {
           </div>
 
           <div className={styles.user}>
-            <h3>Изменить пароль</h3>
+            <h3 className={styles.subTitle}>Изменить пароль</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
