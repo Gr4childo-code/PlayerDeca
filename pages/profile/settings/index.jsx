@@ -31,11 +31,23 @@ export default function ProfileSettings({ user, jwtToken }) {
   console.log(jwtToken);
 
   const updatePassword = async () => {
-    const response = await fetchAPI(`/auth/change-password`, 'POST', {
-      currentPassword: currentPassword,
-      password: password,
-      passwordConfirmation: passwordConfirmation,
-    });
+    const response = await fetch(
+      'https://api.dless.ru/api/auth/change-password',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwtToken}
+`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          currentPassword: currentPassword,
+          password: password,
+          passwordConfirmation: passwordConfirmation,
+        }),
+      }
+    );
     const data = await response.json();
     console.log(data);
   };
