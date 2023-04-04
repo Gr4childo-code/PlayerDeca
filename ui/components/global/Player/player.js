@@ -1,7 +1,7 @@
 function AudioInit (e) {
   if (e) {
     const audio = new Audio()
-          audio.src = `${process.env.NEXT_PUBLIC_API_URL}${e.path}`
+          audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${e?.src}.mp3`
           audio.preload = "auto"
     return audio
   }
