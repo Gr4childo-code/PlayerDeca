@@ -1,8 +1,10 @@
 //Next/React
 import Head from 'next/head';
+import Link from 'next/link';
 
 //Components
-import SliderEvents from '@/ui/components/global/Slider/SliderEvents';
+import Slider from '@/ui/components/global/Slider';
+import SliderItem from '@/ui/components/global/Slider/SliderItem';
 import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
@@ -39,13 +41,48 @@ export default function Home({ audioTop, playlists, events }) {
         <div className='layout'>
           <div className='layout__left'>
             <div className='title'>События DLESS</div>
-            <SliderEvents events={events} buttons={true} pagination={true} />
+
+            <div className='slider'>
+              <Slider buttons={true} pagination={true}>
+                {events.data?.map(({ id, attributes }, index) => (
+                  <SliderItem key={id}>
+                    <Link href={`/events`}>
+                      <img
+                        className='slides'
+                        src={
+                          process.env.NEXT_PUBLIC_API_URL +
+                          events.data[index].attributes.poster.data.attributes
+                            .url
+                        }
+                        alt={'image'}
+                      />
+                      <ul className='slides__list'>
+                        <li className='slides__description'>
+                          <p className='slides__date'>
+                            {attributes.date.slice(8, 10)} Марта
+                          </p>
+                          <p className='slides__time'>
+                            {attributes.time.slice(0, 5)}
+                          </p>
+                        </li>
+                        <li className='slides__description'>
+                          <p className='slides__item'>{attributes.title}</p>
+                          <p className='slides__item'>{attributes.author}</p>
+                        </li>
+                      </ul>
+                    </Link>
+                  </SliderItem>
+                ))}
+              </Slider>
+            </div>
+
+            {/* <SliderEvents events={events} buttons={true} pagination={true} />
             <div className='title'>Новинки от пользователей</div>
             <SliderPlaylists
               playlists={playlists}
               buttons={false}
               pagination={true}
-            />
+            /> */}
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
