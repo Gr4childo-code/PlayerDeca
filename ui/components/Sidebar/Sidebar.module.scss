@@ -7,6 +7,9 @@
   border-radius: 5px;
   padding: 10px 10px;
   position: relative;
+  .mobile {
+    display: none;
+  }
 
   li {
     display: flex;
@@ -44,28 +47,31 @@
 @include mq(Lphone) {
   .wrapper {
     padding: 10px;
-    li {
-      flex-direction: row;
-      justify-content: space-around;
-      button {
-        height: 20px;
-        margin: 5px 0;
-      }
-      a {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        padding: 0 5px;
-        font-size: 17px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    .mobile {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+        background: var(--ui-color-one);
+        transition: all 0.8s;
+        opacity: 1;
+        border-radius: 5px;
       }
     }
-  }
-}
-@include mq(Sphone) {
-  .wrapper {
+
     li {
+      button {
+        display: none;
+      }
       a {
-        font-size: 12px;
+        padding: 0 5px;
+        p {
+          display: none;
+        }
       }
     }
   }
