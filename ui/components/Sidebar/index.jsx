@@ -55,19 +55,21 @@ export default function Sidebar() {
       <ul className={styles.wrapper}>
         {menuItems.map(({ id, label, link, icon }) => {
           return (
-            <li key={id}>
+            <li key={id} className={styles.item}>
               <Link href={link}>
-                <p>{label}</p>
+                <p className={styles.item__label}>{label}</p>
                 <div className={styles.mobile}>{icon}</div>
               </Link>
             </li>
           );
         })}
-        <li>
+        <li className={styles.item}>
           <div className={styles.mobile}>
             <FontAwesomeIcon icon={faRightFromBracket} />
           </div>
-          <button onClick={signOutHandle}>Выйти</button>
+          <button className={styles.logout} onClick={signOutHandle}>
+            Выйти
+          </button>
         </li>
       </ul>
     </>
