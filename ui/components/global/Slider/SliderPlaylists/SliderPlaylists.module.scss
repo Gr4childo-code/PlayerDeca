@@ -3,6 +3,7 @@
 .playlists {
   &__wrapper {
     max-width: 200px;
+    width: 200px;
     align-items: center;
     display: flex;
   }
@@ -29,10 +30,6 @@
     min-height: 15px;
     font-size: 12px;
     list-style-type: none;
-    /* &:last-child {
-      font-size: 12px;
-      opacity: 0.6;
-    } */
   }
   &__descr {
     margin-top: 5px;
