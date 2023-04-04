@@ -68,6 +68,7 @@ export default function ProfileSettings({ user, token }) {
   };
   const clearInput = () => {
     if (updatePasswordHandle) {
+      setCurrentPassword('');
       setPassword('');
       setPasswordConfirmation('');
     }
