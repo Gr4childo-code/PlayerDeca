@@ -7,11 +7,6 @@ export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const user = session.user;
   const jwtToken = session.jwt;
-  if (!user) {
-    return {
-      notFound: true,
-    };
-  }
 
   return {
     props: { user, jwtToken },
@@ -27,5 +22,3 @@ export default function SettingsPage({ user, jwtToken }) {
     </>
   );
 }
-
-/* {"id":5,"username":"akosou94","email":"aleksey.kosourov@decathlon.com","provider":"local","confirmed":true,"blocked":false,"name":null,"image"} */

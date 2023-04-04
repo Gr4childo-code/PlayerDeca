@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
 export default function ProfileSettings({ user, token }) {
+  const [list, setList] = useState([]);
   const { id, username, name, email } = user;
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
@@ -12,13 +14,29 @@ export default function ProfileSettings({ user, token }) {
 
   const validatePassword = (password) => {
     const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
-    if (password === passwordConfirmation && password !== currentPassword) {
-      console.log('Password is valid');
-      return passwordRegEx.test(password);
+    if (password !== passwordConfirmation) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Пароли не совпадают',
+        },
+      ]);
+    } else if (password === currentPassword) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Пароль совпадает со старым',
+        },
+      ]);
     } else {
-      alert('Password is invalid or matches');
+      return passwordRegEx.test(password);
     }
   };
+
   const changePassword = async () => {
     const response = await fetch(
       'https://api.dless.ru/api/auth/change-password',
@@ -37,8 +55,25 @@ export default function ProfileSettings({ user, token }) {
         }),
       }
     );
-    /*     const data = await response.json();
-    console.log(data); */
+    if (response.ok && response.status === 200) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Пароль успешно обновлён',
+        },
+      ]);
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Ошибка смены пароля',
+        },
+      ]);
+    }
   };
   const clearInput = () => {
     if (updatePasswordHandle) {
@@ -53,14 +88,12 @@ export default function ProfileSettings({ user, token }) {
   const updatePasswordHandle = () => {
     if (validatePassword(password) && changePassword()) {
       clearInput();
-      alert('Password is change');
-    } else {
-      console.log('Password is not changed');
     }
   };
 
   return (
     <div>
+      <Toast toastlist={list} setList={setList} />
       <div className={styles.wrapper}>
         <div className={styles.info}>
           <h3 className={styles.subTitle}>Информация о профиле</h3>
