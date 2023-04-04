@@ -104,9 +104,9 @@
       background: var(--black-50);
     }
     img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     svg {
       opacity: 0.3;
@@ -265,8 +265,9 @@
     align-items: center;
     justify-content: center;
     img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 5px;
     }
     svg {
