@@ -10,28 +10,25 @@ export const getServerSideProps = async (ctx) => {
   const userId = session.user.id;
   const token = session.jwt;
 
-  const playlistsUser = await fetch(
-    `https://api.dless.ru/api/playlists?${userId}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const playlist = await playlistsUser.json();
+  const playlistsUser = await fetch(`https://api.dless.ru/api/playlists?`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const playlists = await playlistsUser.json();
 
   return {
-    props: { userId, token, playlist },
+    props: { userId, token, playlists },
   };
 };
 
-export default function MyPlaylists({ userId, playlist }) {
-  console.log(playlist);
+export default function MyPlaylists({ userId, playlists }) {
+  console.log(playlists);
   return (
     <Layout>
-      <Playlists userId={userId} />
+      <h3>Моя коллекция</h3>
       <ProfileUpload />
+      <Playlists userId={userId} playlists={playlists} />
     </Layout>
   );
 }

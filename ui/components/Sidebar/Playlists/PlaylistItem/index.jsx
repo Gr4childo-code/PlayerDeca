@@ -6,14 +6,15 @@ export default function PlaylistItem({ id, attributes, index }) {
 
   return (
     <div className={styles.playlists__list}>
-      {/* <div>
-        <ul key={id}>
-          PlaylistItem {id}
-          <li>Название плейлиста: {title}</li>
-          <li>Дата создания: {createdAt.slice(0, 10)}</li>
-          <li>Плейлист обновлён: {updatedAt.slice(0, 10)}</li>
-        </ul>
-      </div> */}
+      <ul key={id} className={styles.playlists__item}>
+        <li className={styles.playlists__descr}>{title || 'Без названия'}</li>
+        <li className={styles.playlists__descr}>
+          Дата создания: {createdAt.slice(0, 10)}
+        </li>
+        {/*           <li className={styles.playlists__descr}>
+            Плейлист обновлён: {updatedAt.slice(0, 10)}
+          </li> */}
+      </ul>
     </div>
   );
 }

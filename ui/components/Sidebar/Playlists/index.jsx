@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlaylistItem from './PlaylistItem';
 
-export default function Playlists({ userId }) {
+export default function Playlists({ userId, playlists }) {
   const [playlist, setPlaylist] = useState([]);
   return (
     <div>
-      <h3>Моя коллекция</h3>
-      {userId}
-      {/* {playlists.data?.map(({ id, attributes }, index) => (
+      {playlists.data?.map(({ id, attributes }, index) => (
         <PlaylistItem key={id} id={id} attributes={attributes} index={index} />
-      ))} */}
+      ))}
     </div>
   );
 }
