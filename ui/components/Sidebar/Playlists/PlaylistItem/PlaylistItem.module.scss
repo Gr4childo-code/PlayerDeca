@@ -1,12 +1,6 @@
 @import '@/styles/sass/grid.scss';
 
-.wrapper {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* .title {
+.title {
   font-size: 30px;
   text-align: center;
   span {
@@ -17,14 +11,11 @@
 .playlists {
   &__list {
     display: flex;
-    flex-wrap: wrap;
     margin-top: 20px;
-    justify-content: center;
   }
 
   &__item {
     display: flex;
-
     flex-direction: column;
     justify-content: space-between;
     margin: 0 10px;
@@ -92,4 +83,3 @@
     }
   }
 }
- */

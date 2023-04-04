@@ -18,11 +18,6 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function MyPlaylists({ user, playlists }) {
-  console.log(/* user, */ playlists);
-
-  const { data } = playlists;
-  console.log(data);
-
   return (
     <Layout>
       <Playlists playlists={playlists} />

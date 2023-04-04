@@ -1,8 +1,15 @@
 import React from 'react';
-import ProfileUpload from '../ProfileUpload';
+import PlaylistItem from './PlaylistItem';
 
-import styles from '../Playlists/Playlists.module.scss';
+export default function Playlists({ playlists }) {
+  console.log(playlists.data);
 
-export default function Playlists() {
-  return <div>Моя коллекция</div>;
+  return (
+    <div>
+      <h3>Моя коллекция</h3>
+      {playlists.data?.map(({ id, attributes }, index) => (
+        <PlaylistItem id={id} attributes={attributes} index={index} />
+      ))}
+    </div>
+  );
 }
