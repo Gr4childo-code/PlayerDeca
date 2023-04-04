@@ -269,14 +269,13 @@ a {
 }
 
 .playlists {
-  display: block;
-  margin: 60px 0 80px;
+  margin: 60px 0 100px;
   width: 250px;
-  height: 250px;
+  height: 300px;
   border-radius: 5px;
   &__image {
     width: 250px;
-    height: 250px;
+    height: 300px;
     object-fit: cover;
     cursor: pointer;
     border-radius: 5px;
