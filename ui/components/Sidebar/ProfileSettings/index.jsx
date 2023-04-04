@@ -55,7 +55,7 @@ export default function ProfileSettings({ user, token }) {
       clearInput();
       alert('Password is change');
     } else {
-      alert('Password is not changed');
+      console.log('Password is not changed');
     }
   };
 
@@ -137,6 +137,12 @@ export default function ProfileSettings({ user, token }) {
                   placeholder='Новый пароль'
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {password && (
+                  <label className={styles.label}>
+                    {' '}
+                    Буквы и цифры. Не менее 6 символов.{' '}
+                  </label>
+                )}
               </li>
               <li className={styles.settings__item}>
                 <input
@@ -146,15 +152,15 @@ export default function ProfileSettings({ user, token }) {
                   placeholder='Подтвердите новый пароль'
                   onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
-                <button
-                  onClick={updatePasswordHandle}
-                  className={styles.settings__button}
-                  type={'submit'}
-                >
-                  Изменить
-                </button>
               </li>
             </ul>
+            <button
+              onClick={updatePasswordHandle}
+              className={styles.settings__button}
+              type={'submit'}
+            >
+              Изменить
+            </button>
           </div>
         </div>
       </div>
