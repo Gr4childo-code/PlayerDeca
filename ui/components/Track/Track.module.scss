@@ -15,6 +15,27 @@
     box-shadow: 0 10px 10px var(--black-10);
   }
 
+  &:hover {
+    .track {
+      &__hoverState {
+        opacity: 1;
+      }
+      &__cover {
+        img,
+        &__font {
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+  &__hoverState {
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--ui-color-one);
+    position: absolute;
+  }
   &__cover {
     margin: 0 5px;
     width: 50px;
