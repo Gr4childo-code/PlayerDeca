@@ -77,18 +77,15 @@ export default function ProfileSettings({ user, token }) {
   };
   const clearInput = () => {
     if (updatePasswordHandle) {
-      setNewName('');
-      setNewEmail('');
-      setCurrentPassword('');
       setPassword('');
       setPasswordConfirmation('');
     }
   };
 
   const updatePasswordHandle = () => {
-    if (validatePassword(password) && changePassword()) {
-      clearInput();
-    }
+    validatePassword(password) && changePassword()
+      ? clearInput()
+      : clearInput();
   };
 
   return (
