@@ -14,26 +14,17 @@ export default function ProfileSettings({ user, token }) {
 
   const validatePassword = (password) => {
     const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
-    if (password !== passwordConfirmation) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Пароли не совпадают',
-        },
-      ]);
-    } else if (password === currentPassword) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Пароль совпадает со старым',
-        },
-      ]);
-    } else {
+    if (password === passwordConfirmation && password !== currentPassword) {
       return passwordRegEx.test(password);
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректный пароль',
+        },
+      ]);
     }
   };
 
