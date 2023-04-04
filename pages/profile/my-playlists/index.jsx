@@ -7,28 +7,30 @@ import { fetchAPI } from '@/utils/api/fetch';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
-  const user = session.user;
+  const userId = session.user.id;
   const token = session.jwt;
 
   const playlistsUser = await fetch(
-    `https://api.dless.ru/api/playlists/${user.id}`,
+    `https://api.dless.ru/api/playlists?${userId}`,
     {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-  const playlists = await playlistsUser.json();
+  const playlist = await playlistsUser.json();
 
   return {
-    props: { user, playlists, token },
+    props: { userId, token, playlist },
   };
 };
 
-export default function MyPlaylists({ user, playlists }) {
+export default function MyPlaylists({ userId, playlist }) {
+  console.log(playlist);
   return (
     <Layout>
-      <Playlists playlists={playlists} />
+      <Playlists userId={userId} />
       <ProfileUpload />
     </Layout>
   );
