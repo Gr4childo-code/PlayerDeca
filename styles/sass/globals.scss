@@ -268,6 +268,21 @@ a {
   }
 }
 
+.playlists {
+  display: block;
+  margin: 60px 0 80px;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  &__image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+}
+
 @include mq(Lphone) {
   .events {
     &__slides {

@@ -40,9 +40,8 @@ export default function Home({ audioTop, playlists, events }) {
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            <div className='title'>События DLESS</div>
-
             <div className='slider'>
+              <div className='title'>События DLESS</div>
               <Slider buttons={true} pagination={true}>
                 {events.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
@@ -75,14 +74,37 @@ export default function Home({ audioTop, playlists, events }) {
                 ))}
               </Slider>
             </div>
-
-            {/* <SliderEvents events={events} buttons={true} pagination={true} />
-            <div className='title'>Новинки от пользователей</div>
-            <SliderPlaylists
-              playlists={playlists}
-              buttons={false}
-              pagination={true}
-            /> */}
+            <div className='playlists'>
+              <div className='slider'>
+                <div className='title'>Новинки от пользователей</div>
+                <Slider buttons={true} pagination={true}>
+                  {playlists.data?.map(({ id, attributes }, index) => (
+                    <SliderItem key={id}>
+                      <Link href={`/playlist/${id}`}>
+                        <img
+                          className='playlists__image'
+                          src={
+                            process.env.NEXT_PUBLIC_API_URL +
+                            playlists.data[index].attributes.poster.data
+                              .attributes.url
+                          }
+                          alt={'image'}
+                        />
+                        <ul className='slides__list'>
+                          <h2 className='slides__description'>
+                            {
+                              playlists.data[index].attributes
+                                .users_permissions_user.data.attributes.username
+                            }
+                          </h2>
+                          <li className='slides__item'>{attributes.title}</li>
+                        </ul>
+                      </Link>
+                    </SliderItem>
+                  ))}
+                </Slider>
+              </div>
+            </div>
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>
