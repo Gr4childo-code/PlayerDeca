@@ -8,12 +8,20 @@ import { fetchAPI } from '@/utils/api/fetch';
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const user = session.user;
+  const token = session.jwt;
 
-  const playlistsUser = await fetchAPI(`/playlists?${user.username}`);
+  const playlistsUser = await fetch(
+    `https://api.dless.ru/api/playlists/${user.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   const playlists = await playlistsUser.json();
 
   return {
-    props: { user, playlists },
+    props: { user, playlists, token },
   };
 };
 

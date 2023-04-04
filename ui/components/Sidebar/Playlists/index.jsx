@@ -7,9 +7,9 @@ export default function Playlists({ playlists }) {
   return (
     <div>
       <h3>Моя коллекция</h3>
-      {playlists.data?.map(({ id, attributes }, index) => (
-        <PlaylistItem id={id} attributes={attributes} index={index} />
-      ))}
+      {/* {playlists.data?.map(({ id, attributes }, index) => (
+        <PlaylistItem key={id} id={id} attributes={attributes} index={index} />
+      ))} */}
     </div>
   );
 }
