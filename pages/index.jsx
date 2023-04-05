@@ -39,10 +39,6 @@ export default function Home({ audioTop, playlists, events }) {
   const [loader, setLoader] = useState(true)
   const { data: session } = useSession()
 
-  useEffect(() => {
-    getAudios().then(resp => console.log('front', resp))
-  }, [])
-
   const uploads = async (e) => {
     e.preventDefault()
 
