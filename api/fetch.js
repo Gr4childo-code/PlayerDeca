@@ -3,11 +3,11 @@ const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
 const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) => {
   try {
-    const form = new FormData()
-
-    console.log('form', form)
+    let  body = null
 
     if ( params ) {
+      const form = new FormData()
+
       form.append('data', JSON.stringify(params.data))
 
       if ('files' in params) {
@@ -15,6 +15,8 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
           form.append(`files.${file}`, params.files[file])
         }
       }
+
+      body = form
     }
 
     const resp = await fetch(`${API_URL}/api/${url}`, {
@@ -22,7 +24,7 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
       headers: {
         Authorization: `Bearer ${token}`
       },
-      body: params ? form : null
+      body
     })
 
     console.info("success", { ok: resp.ok, status: resp.status })
