@@ -86,7 +86,7 @@ export default function ProfileSettings({ user, token }) {
       <div className={styles.wrapper}>
         <div className={styles.settings}>
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить имя</h3>
+            <h3>Изменить имя</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
@@ -103,7 +103,7 @@ export default function ProfileSettings({ user, token }) {
             </ul>
           </div>
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить email</h3>
+            <h3>Изменить email</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
@@ -121,7 +121,7 @@ export default function ProfileSettings({ user, token }) {
           </div>
 
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить пароль</h3>
+            <h3>Изменить пароль</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
