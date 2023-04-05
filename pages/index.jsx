@@ -16,7 +16,7 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
 
-import { createAudios } from '@/api'
+import { getAudios, createAudios } from '@/api'
 import { useSession } from 'next-auth/react';
 
 export const getServerSideProps = async () => {
@@ -38,6 +38,10 @@ export default function Home({ audioTop, playlists, events }) {
   const poster = useRef(null)
   const [loader, setLoader] = useState(true)
   const { data: session } = useSession()
+
+  useEffect(() => {
+    getAudios().then(resp => console.log('front', resp))
+  }, [])
 
   const uploads = async (e) => {
     e.preventDefault()
