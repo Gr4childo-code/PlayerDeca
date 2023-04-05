@@ -33,8 +33,6 @@ export default function App({
 }) {
   const [audioContext, setAudioContext] = useState(audios);
 
-  console.log('audios', audios)
-
   return (
     <SessionProvider session={pageProps?.session}>
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
