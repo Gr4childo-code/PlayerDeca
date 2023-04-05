@@ -8,6 +8,16 @@ export default function ProfileUpload() {
       <div className={styles.wrapper}>
         <input type={'file'} />
       </div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
+      <div>Загруженные треки</div>
     </>
   );
 }

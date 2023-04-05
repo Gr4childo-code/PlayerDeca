@@ -11,9 +11,6 @@ export default function PlaylistItem({ id, attributes, index }) {
         <li className={styles.playlists__descr}>
           Дата создания: {createdAt.slice(0, 10)}
         </li>
-        {/*           <li className={styles.playlists__descr}>
-            Плейлист обновлён: {updatedAt.slice(0, 10)}
-          </li> */}
       </ul>
     </div>
   );

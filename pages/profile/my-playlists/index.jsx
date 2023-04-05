@@ -27,8 +27,14 @@ export default function MyPlaylists({ userId, playlists }) {
   return (
     <Layout>
       <h3>Моя коллекция</h3>
-      <ProfileUpload />
-      <Playlists userId={userId} playlists={playlists} />
+      <div className='collectionPlaylists'>
+        <div>
+          <ProfileUpload />
+        </div>
+        <div>
+          <Playlists userId={userId} playlists={playlists} />
+        </div>
+      </div>
     </Layout>
   );
 }
