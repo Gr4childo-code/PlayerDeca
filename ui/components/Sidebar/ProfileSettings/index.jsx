@@ -84,25 +84,6 @@ export default function ProfileSettings({ user, token }) {
     <div>
       <Toast toastlist={list} setList={setList} />
       <div className={styles.wrapper}>
-        <div className={styles.info}>
-          <h3 className={styles.subTitle}>Информация о профиле</h3>
-          <ul className={styles.settings__list}>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Id: ${id}`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Username: ${username}`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Имя пользователя: ${
-                name || 'отсутствует'
-              }`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Email: ${email}`}</p>
-            </li>
-          </ul>
-        </div>
         <div className={styles.settings}>
           <div className={styles.user}>
             <h3 className={styles.subTitle}>Изменить имя</h3>
@@ -112,7 +93,7 @@ export default function ProfileSettings({ user, token }) {
                   className={styles.settings__input}
                   type={'text'}
                   value={newName}
-                  placeholder='Изменить имя'
+                  placeholder={name}
                   onChange={(e) => setNewName(e.target.value)}
                 />
                 <button className={styles.settings__button} type={'submit'}>
@@ -129,7 +110,7 @@ export default function ProfileSettings({ user, token }) {
                   className={styles.settings__input}
                   type={'email'}
                   value={newEmail}
-                  placeholder='Изменить емайл'
+                  placeholder={email}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
                 <button className={styles.settings__button} type={'submit'}>

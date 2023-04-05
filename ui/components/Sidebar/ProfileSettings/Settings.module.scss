@@ -2,16 +2,8 @@
   font-size: 30px;
   text-align: center;
 }
-.user,
-.info {
+.user {
   margin: 0 10px;
-}
-
-.info {
-  font-size: 30px;
-  .descr {
-    font-size: 18px;
-  }
 }
 
 .subTitle {
@@ -20,7 +12,6 @@
 .settings {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   &__list,
   .user {
     display: flex;
