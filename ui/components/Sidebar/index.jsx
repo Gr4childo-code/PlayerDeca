@@ -1,10 +1,17 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
 import { signOut } from 'next-auth/react';
 
 import styles from './Sidebar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import {
+  faHouse,
+  faSliders,
+  faRightFromBracket,
+  faTrophy,
+  faHeart,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -18,23 +25,51 @@ export default function Sidebar() {
     router.push(url);
   };
   const menuItems = [
-    { id: 1, label: 'Общие', link: '/profile' },
-    { id: 2, label: 'Статистика', link: '/profile/account' },
-    { id: 3, label: 'Моя коллекция', link: '/profile/my-playlists' },
-    { id: 4, label: 'Настройки', link: '/profile/settings' },
+    {
+      id: 1,
+      label: 'Общие',
+      icon: <FontAwesomeIcon icon={faHouse} />,
+      link: '/profile',
+    },
+    {
+      id: 2,
+      label: 'Статистика',
+      icon: <FontAwesomeIcon icon={faTrophy} />,
+      link: '/profile/account',
+    },
+    {
+      id: 3,
+      label: 'Моя коллекция',
+      icon: <FontAwesomeIcon icon={faHeart} />,
+      link: '/profile/my-playlists',
+    },
+    {
+      id: 4,
+      label: 'Настройки',
+      icon: <FontAwesomeIcon icon={faSliders} />,
+      link: '/profile/settings',
+    },
   ];
   return (
     <>
       <ul className={styles.wrapper}>
-        {menuItems.map(({ id, label, link }) => {
+        {menuItems.map(({ id, label, link, icon }) => {
           return (
-            <li key={id}>
-              <Link href={link}>{label}</Link>
+            <li key={id} className={styles.item}>
+              <Link href={link}>
+                <p className={styles.item__label}>{label}</p>
+                <div className={styles.mobile}>{icon}</div>
+              </Link>
             </li>
           );
         })}
-        <li>
-          <button onClick={signOutHandle}>Выйти</button>
+        <li className={styles.item}>
+          <div className={styles.mobile}>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+          </div>
+          <button className={styles.logout} onClick={signOutHandle}>
+            Выйти
+          </button>
         </li>
       </ul>
     </>

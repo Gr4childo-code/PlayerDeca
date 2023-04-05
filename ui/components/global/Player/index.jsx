@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { AudioInit, AudioTime } from './player';
 import Head from 'next/head';
 
@@ -27,14 +27,17 @@ export default function Player({ audios }) {
 
   const [isNav, setIsNav] = useState(false);
 
-  const [track, setTrack] = useState({
+  const track = useRef({
     id: audios?.data[0]?.id,
     ...audios?.data[0]?.attributes,
-  });
+    src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url
+  })
+
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    setAudio(AudioInit(track));
+    setAudio(AudioInit(track.current));
   }, []);
 
   useEffect(() => {
@@ -96,17 +99,24 @@ export default function Player({ audios }) {
   };
 
   const nextTrack = (id, attributes) => {
-    setTrack({ id, ...attributes });
-    audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`;
+    track.current = {
+      id,
+      ...attributes,
+      src: attributes?.src?.data[0]?.attributes?.hash,
+      poster: attributes?.poster?.data?.attributes?.url
+    }
+
+    audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
   };
 
-  const _title = `${track.author} - ${track.name}`;
+  const _title = `${track.current?.author} - ${track.current?.name}`;
 
   return (
     <>
       <Head>
         <title>{_title}</title>
+        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_API_URL}${track.current?.poster}`} />
       </Head>
 
       <div className={styles.player}>
@@ -130,9 +140,9 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {track?.posterPath ? (
+              {track.current?.poster ? (
                 <img
-                  src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath}
+                  src={process.env.NEXT_PUBLIC_API_URL + track.current?.poster}
                 />
               ) : (
                 <FontAwesomeIcon icon={faMusic} />
@@ -150,7 +160,7 @@ export default function Player({ audios }) {
                 onClick={() => setIsPlayList(!isPlayList)}
               >
                 <div className={styles.playerBox__info__description}>
-                  <strong>{track.author}</strong> - {track.name}
+                  <strong>{track.current?.author}</strong> - {track.current?.name}
                 </div>
                 <span>
                   {currentTime} / {fullTime}
@@ -166,7 +176,7 @@ export default function Player({ audios }) {
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${
-                          track.id === id ? styles.playlist__item_active : ''
+                          track.current?.id === id ? styles.playlist__item_active : ''
                         }`}
                         key={id}
                         onClick={() => {
@@ -175,11 +185,11 @@ export default function Player({ audios }) {
                         }}
                       >
                         <div className={styles.playlist__cover}>
-                          {attributes.posterPath ? (
+                          {attributes?.poster?.data?.attributes?.url ? (
                             <img
                               src={
                                 process.env.NEXT_PUBLIC_API_URL +
-                                attributes.posterPath
+                                attributes?.poster?.data?.attributes?.url
                               }
                             />
                           ) : (
