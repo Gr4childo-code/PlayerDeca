@@ -20,6 +20,7 @@ export const getAudios = async () => {
     },
     { encodeValuesOnly: true }
   )
-
   return await Api(`audios?${qyery}`)
 }
+
+export const createAudios = async (params, token) => Api('audios', 'POST', params, token)
