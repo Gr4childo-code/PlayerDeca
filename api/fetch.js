@@ -5,6 +5,8 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
   try {
     const form = new FormData()
 
+    console.log('form', form)
+
     if ( params ) {
       form.append('data', JSON.stringify(params.data))
 
