@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 //Next/React
 import Head from 'next/head';
 import Link from 'next/link';
@@ -7,7 +5,6 @@ import Link from 'next/link';
 //Components
 import Slider from '@/ui/components/global/Slider';
 import SliderItem from '@/ui/components/global/Slider/SliderItem';
-import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
