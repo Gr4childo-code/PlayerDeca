@@ -5,7 +5,7 @@ import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
-  const { id, username, name, email } = user;
+  const { name, email } = user;
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
