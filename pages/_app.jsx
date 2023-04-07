@@ -1,13 +1,15 @@
 
 
 import AppContext from '@/ui/components/global/AppContext';
-import { useState, createContext } from 'react';
+import { useState } from 'react';
 import { Roboto } from '@next/font/google'
-import { SessionProvider } from 'next-auth/react'
-import { fetchAPI } from '@/utils/api/fetch'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
+import NextNProgress from 'nextjs-progressbar';
+
+import { SessionProvider } from 'next-auth/react'
+import { getAudios, getStyles } from '@/api'
 
 import Player from '@/ui/components/global/Player'
 
@@ -25,17 +27,22 @@ import Layout from '../ui/components/global/Layout';
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps,
   audios,
   menu,
 }) {
   const [audioContext, setAudioContext] = useState(audios);
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps?.session}>
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
         <div className={roboto.className}>
           <Layout menu={menu}>
+            <NextNProgress
+              color="#fc581f"
+              height={3}
+              showOnShallow={false}
+            />
             <Component {...pageProps} />
           </Layout>
 
@@ -47,13 +54,8 @@ export default function App({
 }
 
 App.getInitialProps = async () => {
-  const audiosResp = await fetchAPI(
-    '/audios?fields=name,path,author,posterPath&sort=id:desc'
-  ); // /audios?sort=id:desc&pagination[limit]=25
-  const audios = await audiosResp.json();
-
-  const menuResp = await fetchAPI('/styles?fields=name&pagination[limit]=100');
-  const menu = await menuResp.json();
+  const audios = await getAudios()
+  const menu = await getStyles()
 
   return { audios, menu };
 };

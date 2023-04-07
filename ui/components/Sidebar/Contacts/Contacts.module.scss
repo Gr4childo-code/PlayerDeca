@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   margin-top: 20px;
 }
@@ -26,6 +28,21 @@
   &__links {
     img {
       margin: 5px 0 0 20px;
+    }
+  }
+}
+@include mq(Sphone) {
+  .title {
+    font-size: 20px;
+  }
+  .account {
+    &__descr {
+      font-size: 20px;
+    }
+    &__subTitle {
+      color: var(--ui-color-two);
+      font-size: 10px;
+      margin: 10px 10px 0;
     }
   }
 }

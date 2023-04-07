@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   margin-top: 20px;
   display: flex;
@@ -15,12 +17,14 @@
 .playlists {
   &__list {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
     justify-content: center;
   }
 
   &__item {
     display: flex;
+
     flex-direction: column;
     justify-content: space-between;
     margin: 0 10px;
@@ -44,7 +48,49 @@
 
 .img {
   object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
 
-/* backdrop-filter: blur(50px);
-background: rgba(0, 0, 0, 0.5); */
+@include mq(tablet) {
+  .img {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@include mq(Lphone) {
+  .playlists {
+    &__descr {
+      padding: 10px 0;
+      font-size: 15px;
+    }
+    &__item {
+      padding: 10px;
+    }
+  }
+  .img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@include mq(Sphone) {
+  .wrapper {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 5px;
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--black-10);
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--white-30);
+      border-radius: 20px;
+    }
+  }
+  .playlists {
+  }
+}

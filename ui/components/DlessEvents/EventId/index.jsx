@@ -7,8 +7,6 @@ export default function EventId({ events }) {
 
   const { data } = poster;
 
-  console.log(data);
-
   const months = {
     0: 'Января',
     1: 'Февраля',

@@ -1,9 +1,16 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { AudioInit, AudioTime } from './player';
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMusic,
+  faPlus,
+  faArrowsSplitUpAndLeft,
+  faRepeat,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
 
@@ -18,14 +25,19 @@ export default function Player({ audios }) {
   const [volumeMove, setVolumeMove] = useState(false);
   const [isPlayList, setIsPlayList] = useState(false);
 
-  const [track, setTrack] = useState({
+  const [isNav, setIsNav] = useState(false);
+
+  const track = useRef({
     id: audios?.data[0]?.id,
     ...audios?.data[0]?.attributes,
-  });
+    src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url
+  })
+
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    setAudio(AudioInit(track));
+    setAudio(AudioInit(track.current));
   }, []);
 
   useEffect(() => {
@@ -56,9 +68,13 @@ export default function Player({ audios }) {
   const rewind = (e, active) => {
     setIsPlayMove(active);
 
+    const rect = e.target.getBoundingClientRect();
+    const pageX = e.pageX;
+
+    e.target.children[0].style.width = `${(pageX / rect.width) * 100}%`
+    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
+
     if (active) {
-      const rect = e.target.getBoundingClientRect();
-      const pageX = e.pageX;
       const rewind = (pageX / rect.width) * audio.duration;
 
       audio.currentTime = rewind;
@@ -67,15 +83,6 @@ export default function Player({ audios }) {
     }
 
     audio.muted = false;
-  };
-
-  const rewindMove = (e) => {
-    const elem = document.querySelector('#player');
-    const rect = elem.getBoundingClientRect();
-    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
-    elem.children[0].children[0].style.width = `${
-      (e.pageX / rect.width) * 100
-    }%`;
   };
 
   const volumeTrack = (e, active) => {
@@ -92,20 +99,27 @@ export default function Player({ audios }) {
   };
 
   const nextTrack = (id, attributes) => {
-    setTrack({ id, ...attributes });
-    audio.src = `${process.env.NEXT_PUBLIC_API_URL}${attributes?.path}`;
+    track.current = {
+      id,
+      ...attributes,
+      src: attributes?.src?.data[0]?.attributes?.hash,
+      poster: attributes?.poster?.data?.attributes?.url
+    }
+
+    audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
   };
 
-  const _title = `${track.author} - ${track.name}`;
+  const _title = `${track.current?.author} - ${track.current?.name}`;
 
   return (
     <>
       <Head>
         <title>{_title}</title>
+        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_API_URL}${track.current?.poster}`} />
       </Head>
 
-      <div className={styles.player} id='player' onMouseMove={rewindMove}>
+      <div className={styles.player}>
         <div
           className={styles.playerBar}
           onMouseMove={(e) => rewind(e, isPlayMove)}
@@ -126,9 +140,9 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {track?.posterPath ? (
+              {track.current?.poster ? (
                 <img
-                  src={process.env.NEXT_PUBLIC_API_URL + track?.posterPath}
+                  src={process.env.NEXT_PUBLIC_API_URL + track.current?.poster}
                 />
               ) : (
                 <FontAwesomeIcon icon={faMusic} />
@@ -145,8 +159,8 @@ export default function Player({ audios }) {
                 className={styles.playerBox__info}
                 onClick={() => setIsPlayList(!isPlayList)}
               >
-                <div>
-                  <strong>{track.author}</strong> - {track.name}
+                <div className={styles.playerBox__info__description}>
+                  <strong>{track.current?.author}</strong> - {track.current?.name}
                 </div>
                 <span>
                   {currentTime} / {fullTime}
@@ -162,7 +176,7 @@ export default function Player({ audios }) {
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${
-                          track.id === id ? styles.playlist__item_active : ''
+                          track.current?.id === id ? styles.playlist__item_active : ''
                         }`}
                         key={id}
                         onClick={() => {
@@ -171,11 +185,11 @@ export default function Player({ audios }) {
                         }}
                       >
                         <div className={styles.playlist__cover}>
-                          {attributes.posterPath ? (
+                          {attributes?.poster?.data?.attributes?.url ? (
                             <img
                               src={
                                 process.env.NEXT_PUBLIC_API_URL +
-                                attributes.posterPath
+                                attributes?.poster?.data?.attributes?.url
                               }
                             />
                           ) : (
@@ -197,16 +211,46 @@ export default function Player({ audios }) {
               </div>
             </div>
             <div
-              className={styles.playerVolume}
-              onMouseMove={(e) => volumeTrack(e, volumeMove)}
-              onMouseDown={(e) => volumeTrack(e, true)}
-              onMouseUp={(e) => volumeTrack(e, false)}
-              onMouseLeave={(e) => volumeTrack(e, false)}
+              className={
+                !isNav ? styles.playerTools : styles.playerToolsMob__active
+              }
             >
               <div
-                className={styles.playerVolume__progress}
-                style={{ width: `${volume}%` }}
-              ></div>
+                className={styles.playerVolume}
+                onMouseMove={(e) => volumeTrack(e, volumeMove)}
+                onMouseDown={(e) => volumeTrack(e, true)}
+                onMouseUp={(e) => volumeTrack(e, false)}
+                onMouseLeave={(e) => volumeTrack(e, false)}
+              >
+                <div
+                  className={styles.playerVolume__progress}
+                  style={{ width: `${volume}%` }}
+                ></div>
+              </div>
+
+              <div hint='Добавить в мою музыку' className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faPlus} />
+              </div>
+              <div
+                hint='Перемешать и воспроизвести'
+                className={styles.playerBtn}
+              >
+                <FontAwesomeIcon icon={faArrowsSplitUpAndLeft} />
+              </div>
+              <div hint='Повторять' className={styles.playerBtn}>
+                <FontAwesomeIcon icon={faRepeat} />
+              </div>
+            </div>
+            <div className={styles.playerToolsMob}>
+              <div
+                className={styles.playerBtn}
+                hint={!isNav ? 'Открыть' : 'Закрыть'}
+              >
+                <FontAwesomeIcon
+                  icon={!isNav ? faBars : faTimes}
+                  onClick={() => setIsNav(!isNav)}
+                />
+              </div>
             </div>
           </div>
         </div>

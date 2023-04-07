@@ -1,19 +1,23 @@
+import { useEffect, useRef, useState } from 'react'
+
 //Next/React
 import Head from 'next/head';
-import { useState } from 'react';
-import Script from 'next/script';
+import Link from 'next/link';
 
 //Components
 import Slider from '@/ui/components/global/Slider';
 import SliderItem from '@/ui/components/global/Slider/SliderItem';
+import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
-import Toast from '@/ui/components/global/Toast';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
+
+import { getAudios, createAudios } from '@/api'
+import { useSession } from 'next-auth/react';
 
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
@@ -30,18 +34,29 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ audioTop, playlists, events }) {
-  const [list, setList] = useState([]);
-  let toastItem = null;
+  const music = useRef(null)
+  const poster = useRef(null)
+  const [loader, setLoader] = useState(true)
+  const { data: session } = useSession()
 
-  const showToast = ({ type, title, description }) => {
-    toastItem = {
-      id: list.length + 1,
-      type,
-      title,
-      description,
-    };
-    setList([...list, toastItem]);
-  };
+  const uploads = async (e) => {
+    e.preventDefault()
+
+    if ( session ) {
+      setLoader(false)
+
+      createAudios({
+        data: {
+          name: 'test',
+          author: 'author',
+        },
+        files: {
+          src: music.current,
+          poster: poster.current
+        }
+      }, session?.jwt).then(() => setLoader(true))
+    }
+  }
 
   return (
     <>
@@ -50,56 +65,90 @@ export default function Home({ audioTop, playlists, events }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Toast toastlist={list} setList={setList} />
-      {/* <button
-        onClick={() => {
-          showToast({
-            type: 'error',
-            title: 'Error',
-            description: 'API has been deleted',
-          });
-        }}>
-        Error
-      </button>
-      <button
-        onClick={() => {
-          showToast({
-            type: 'warn',
-            title: 'Warn',
-            description: 'Type password',
-          });
-        }}>
-        Warn
-      </button>
-      <button
-        onClick={() => {
-          showToast({
-            type: 'success',
-            title: 'Success',
-            description: 'Complete',
-          });
-        }}>
-        Success
-      </button> */}
+
+      {
+        loader ? (
+          <form onSubmit={uploads}>
+            <input type="file" onChange={(e) => music.current = e.target.files[0]} />
+            <input type="file" onChange={(e) => poster.current = e.target.files[0]} />
+            <button>
+              Upload
+            </button>
+          </form>
+        ) : (
+          <div>Loader...</div>
+        )
+      }
+
+
       <div className='container'>
         <div className='layout'>
           <div className='layout__left'>
-            {/* <Slider
-              data={dataSlider3}
-              pagination={true}
-              filter={'gradient'}
-              buttons={false}
-              title={'Новые плейлисты'}
-            /> */}
-
-            <Slider>
-              <SliderItem
-                data={playlists.data}
-                pagination={true}
-                buttons={true}
-                filter={'blur'}
-              />
-            </Slider>
+            <div className='slider'>
+              <div className='title'>События DLESS</div>
+              <Slider buttons={true} pagination={true}>
+                {events.data?.map(({ id, attributes }, index) => (
+                  <SliderItem key={id}>
+                    <Link href={`/events`}>
+                      <img
+                        className='slides'
+                        src={
+                          process.env.NEXT_PUBLIC_API_URL +
+                          events.data[index].attributes.poster.data.attributes
+                            .url
+                        }
+                        alt={'image'}
+                      />
+                      <ul className='slides__list'>
+                        <li className='slides__description'>
+                          <p className='slides__date'>
+                            {attributes.date.slice(8, 10)} Марта
+                          </p>
+                          <p className='slides__time'>
+                            {attributes.time.slice(0, 5)}
+                          </p>
+                        </li>
+                        <li className='slides__description'>
+                          <p className='slides__item'>{attributes.title}</p>
+                          <p className='slides__item'>{attributes.author}</p>
+                        </li>
+                      </ul>
+                    </Link>
+                  </SliderItem>
+                ))}
+              </Slider>
+            </div>
+            <div className='playlists'>
+              <div className='slider'>
+                <div className='title'>Новинки от пользователей</div>
+                <Slider buttons={true} pagination={true}>
+                  {playlists.data?.map(({ id, attributes }, index) => (
+                    <SliderItem key={id}>
+                      <Link href={`/playlist/${id}`}>
+                        <img
+                          className='playlists__image'
+                          src={
+                            process.env.NEXT_PUBLIC_API_URL +
+                            playlists.data[index].attributes.poster.data
+                              .attributes.url
+                          }
+                          alt={'image'}
+                        />
+                        <ul className='slides__list'>
+                          <h2 className='slides__description'>
+                            {
+                              playlists.data[index].attributes
+                                .users_permissions_user.data.attributes.username
+                            }
+                          </h2>
+                          <li className='slides__item'>{attributes.title}</li>
+                        </ul>
+                      </Link>
+                    </SliderItem>
+                  ))}
+                </Slider>
+              </div>
+            </div>
             <EventsAll events={events} />
           </div>
           <div className='layout__right'>

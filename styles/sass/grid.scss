@@ -1,7 +1,9 @@
 $grid-breakpoints: (
-  'phone': 360px,
+  'Sphone': 320px,
+  'Mphone': 375px,
+  'Lphone': 425px,
   'tablet': 768px,
-  'SMdesktop': 980px,
+  'SMdesktop': 1024px,
   'desktop': 1366px,
   'LGdesktop': 1600px,
 ) !default;

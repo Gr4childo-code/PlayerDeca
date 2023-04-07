@@ -21,14 +21,16 @@ const Playlist_Page = ({ playlist }) => {
             />
           )}
         </div>
-        <div className={styles.release}>
-          Release:
-          <span className={styles.release__dates}>
-            {playlist[0].attributes.createdAt.slice(0, 10)}
-          </span>
-        </div>
-        <div className={styles.rate}>
-          Rating:<span className={styles.rate__star}>******</span>
+        <div className={styles.side__bar__description}>
+          <div className={styles.release}>
+            Release:
+            <span className={styles.release__dates}>
+              {playlist[0].attributes.createdAt.slice(0, 10)}
+            </span>
+          </div>
+          <div className={styles.rate}>
+            Rating:<span className={styles.rate__star}>******</span>
+          </div>
         </div>
       </div>
 

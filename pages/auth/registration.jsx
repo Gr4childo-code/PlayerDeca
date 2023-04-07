@@ -1,29 +1,10 @@
-import { authOptions } from 'pages/api/auth/[...nextauth]'
-import { getServerSession } from "next-auth/next"
 import { useState } from 'react'
 import { fetchAPI } from '@/utils/api/fetch';
-import { signIn } from "next-auth/react"
+import { signIn, getSession } from "next-auth/react"
 import { useRouter } from 'next/router';
 // import Registration from '@/ui/components/Form/Registration';
 
-export const getServerSideProps = async ({ req, res }) => {
-  const sessionServer = await getServerSession(req, res, authOptions)
-
-  if (sessionServer) {
-    return {
-      redirect: {
-        destination: '/profile',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      sessionServer
-    }
-  }
-}
+const callbackUrl = '/profile'
 
 export default function SignUp() {
   const router = useRouter()
@@ -50,14 +31,16 @@ export default function SignUp() {
     e.preventDefault()
 
     fetchAPI(`/auth/local/register`, 'POST', reg).then(async resp => {
-      const { url } = await signIn("credentials", {
-        identifier: reg.username,
-        password: reg.password,
-        redirect: false,
-        callbackUrl: '/profile'
-      })
-
-      router.push(url)
+      if ( resp.ok ) {
+        const { url } = await signIn("credentials", {
+          identifier: reg.username,
+          password: reg.password,
+          redirect: false,
+          callbackUrl
+        })
+  
+        router?.push(url)
+      }
 
       setReg({
         username: '',
@@ -85,4 +68,19 @@ export default function SignUp() {
       </div>
     </>
   );
+}
+
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} }
 }

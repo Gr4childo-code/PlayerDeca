@@ -1,3 +1,5 @@
+@import "@/styles/sass/grid.scss";
+
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -45,7 +47,6 @@
   }
   &__right {
     width: calc(100% - 420px);
-    padding: 10px;
   }
   &__texts {
     margin: 0 40px;
@@ -90,5 +91,44 @@
     border: none;
     border-radius: 5px;
     color: var(--whtie);
+  }
+}
+
+@include mq(Lphone) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .dataEvent {
+    &__number {
+      font-size: 40px;
+    }
+    &__month {
+      font-size: 22px;
+    }
+    &__year,
+    &__time {
+      font-size: 15px;
+    }
+  }
+  .eventInfo {
+    &__texts {
+      margin: 0;
+      display: flex;
+      align-items: center;
+
+      li {
+        padding-bottom: 0;
+        margin-left: 10px;
+      }
+    }
+    &__left {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 100%;
+      align-items: center;
+    }
+    &__right {
+      width: 100%;
+    }
   }
 }

@@ -1,8 +1,4 @@
-.headerInfo {
-  background: var(--gradient);
-  padding: 7px 0;
-  font-size: 14px;
-}
+@import "@/styles/sass/grid.scss";
 
 .header {
   padding: 14px 0;
@@ -23,5 +19,18 @@
     width: calc(100% - 265px);
     display: flex;
     align-items: center;
+  }
+}
+@include mq(Lphone) {
+  .header {
+    &__right {
+      width: 40px;
+    }
+    &__center {
+      width: calc(100% - 120px);
+    }
+    &__left {
+      width: 20px;
+    }
   }
 }
