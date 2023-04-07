@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import UploadedUsersSongs from '../ProfileUserMusic';
 
 import { createAudios } from '@/api';
 
 import styles from '../ProfileUpload/Dropzone.module.scss';
 
-export default function ProfileUpload({ audios }) {
+export default function ProfileUpload() {
   const music = useRef(null);
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
@@ -71,7 +70,6 @@ export default function ProfileUpload({ audios }) {
       ) : (
         <div>Loading...</div>
       )}
-      <UploadedUsersSongs audios={audios} />
     </>
   );
 }
