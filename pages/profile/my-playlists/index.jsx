@@ -2,19 +2,23 @@ import React from 'react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import ProfileUpload from '@/ui/components/Sidebar/ProfileUpload';
 import { getSession } from 'next-auth/react';
-import { getAudios } from '@/api';
+import { getAudios, getAudiosForUser } from '@/api';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
   const userId = session.user.id;
+  const username = session.user.username;
   const token = session.jwt;
 
+  const test = await getAudiosForUser(username);
+
   return {
-    props: { userId, token },
+    props: { userId, token, username, test },
   };
 };
 
-export default function MyPlaylists() {
+export default function MyPlaylists({ username, test }) {
+  console.log(username, test);
   return (
     <Layout>
       <h3>Моя коллекция</h3>
