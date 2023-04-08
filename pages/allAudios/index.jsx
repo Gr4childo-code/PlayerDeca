@@ -4,7 +4,6 @@ import AllAudios_Page from '@/ui/components/AllAudios_Page';
 import { getAudiosAll } from '@/api';
 
 const allAudios = ({ audios }) => {
-  console.log(audios);
   return (
     <>
       <Head>
