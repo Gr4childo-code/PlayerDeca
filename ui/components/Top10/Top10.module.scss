@@ -2,3 +2,13 @@
   display: flex;
   flex-direction: column;
 }
+.link {
+  display: inline-flex;
+  color: var(--ui-color-one);
+  font-weight: bold;
+  a {
+    &:hover {
+      border-bottom: 2px solid var(--ui-color-one);
+    }
+  }
+}
