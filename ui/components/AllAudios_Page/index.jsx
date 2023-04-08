@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Track from '@/ui/components/Track';
 import styles from '@/ui/components/AllAudios_Page/AllAudios_Page.module.scss';
 const AllAudios_Page = ({ audios }) => {
-  const [visible, setVisibale] = useState(5);
+  const [visible, setVisibale] = useState(10);
   const showMoreTrack = () => {
     setVisibale((prevValue) => prevValue + 5);
   };
