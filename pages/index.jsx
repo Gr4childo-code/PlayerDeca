@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
-
 //Next/React
 import Head from 'next/head';
 import Link from 'next/link';
@@ -7,7 +5,6 @@ import Link from 'next/link';
 //Components
 import Slider from '@/ui/components/global/Slider';
 import SliderItem from '@/ui/components/global/Slider/SliderItem';
-import SliderPlaylists from '@/ui/components/global/Slider/SliderPlaylists';
 
 import Top10 from '@/ui/components/Top10';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
@@ -15,9 +12,6 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
-
-import { getAudios, createAudios } from '@/api'
-import { useSession } from 'next-auth/react';
 
 export const getServerSideProps = async () => {
   const first10Resp = await fetchAPI(`/audios?${first10()}`);
