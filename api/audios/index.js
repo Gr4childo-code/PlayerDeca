@@ -20,7 +20,7 @@ export const getAudios = async () => {
   return await Api(`audios?${qyery}`);
 };
 
-export const getTopAudios = async () => {
+export const getAudiosTop = async () => {
   const query = stringify(
     {
       fields: ['name', 'author', 'likes'],

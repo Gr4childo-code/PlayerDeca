@@ -12,9 +12,10 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
 import { dataEvents } from '@/utils/api/QueryParams';
+import { getAudiosTop, getPlaylistNew } from '@/api';
 
 export const getServerSideProps = async () => {
-  const audioTop = await getTopAudios();
+  const audioTop = await getAudiosTop();
   const playlistsNew = await getPlaylistNew();
 
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
@@ -25,7 +26,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-export default function Home({ audioTop, playlists, events }) {
+export default function Home({ audioTop, playlistsNew, events }) {
   return (
     <>
       <Head>
