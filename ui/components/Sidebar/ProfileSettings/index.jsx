@@ -4,6 +4,7 @@ import Toast from '@/ui/components/global/Toast/index';
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
 import { postPassword } from '@/api';
+import { validatePassword } from '@/utils/validators';
 
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
@@ -14,34 +15,6 @@ export default function ProfileSettings({ user, token }) {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const validatePassword = (password) => {
-    const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
-    if (password === passwordConfirmation && password !== currentPassword) {
-      return passwordRegEx.test(password);
-    } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный пароль',
-        },
-      ]);
-    }
-  };
-
-  const changePassword = async () => {
-    await postPassword(
-      {
-        json: {
-          currentPassword: currentPassword,
-          password: password,
-          passwordConfirmation: passwordConfirmation,
-        },
-      },
-      token
-    );
-  };
   const clearInput = () => {
     if (updatePasswordHandle) {
       setCurrentPassword('');
@@ -51,7 +24,27 @@ export default function ProfileSettings({ user, token }) {
   };
 
   const updatePasswordHandle = () => {
-    if (validatePassword(password) && changePassword()) {
+    if (!validatePassword(currentPassword, password, passwordConfirmation)) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректный пароль',
+        },
+      ]);
+      clearInput();
+    } else {
+      postPassword(
+        {
+          json: {
+            currentPassword: currentPassword,
+            password: password,
+            passwordConfirmation: passwordConfirmation,
+          },
+        },
+        token
+      );
       setList([
         ...list,
         {
@@ -61,15 +54,6 @@ export default function ProfileSettings({ user, token }) {
         },
       ]);
       clearInput();
-    } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Ошибка смены пароля',
-        },
-      ]);
     }
   };
 
