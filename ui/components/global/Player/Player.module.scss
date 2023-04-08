@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   box-sizing: border-box;
-  background: var(--gray-90);
+  background: var(--gray-10);
   font-family: Arial, sans-serif;
   user-select: none;
   &:hover {
@@ -22,7 +22,7 @@
   left: 0;
   right: 0;
   background: var(--gray-60);
-  height: 3px;
+  height: 2px;
   transition: height 0.1s;
   cursor: pointer;
   &:before {
@@ -48,7 +48,7 @@
     pointer-events: none;
   }
   &__progress {
-    background: var(--ui-color-one);
+    background: var(--gradient);
   }
   &__progressMove {
     background: var(--black-10);
