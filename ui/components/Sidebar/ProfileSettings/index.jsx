@@ -3,6 +3,8 @@ import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
+import { postPassword } from '@/api';
+
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
   const { name, email } = user;
@@ -29,42 +31,16 @@ export default function ProfileSettings({ user, token }) {
   };
 
   const changePassword = async () => {
-    const response = await fetch(
-      'https://api.dless.ru/api/auth/change-password',
+    await postPassword(
       {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}
-`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+        json: {
           currentPassword: currentPassword,
           password: password,
           passwordConfirmation: passwordConfirmation,
-        }),
-      }
+        },
+      },
+      token
     );
-    if (response.ok && response.status === 200) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Пароль успешно обновлён',
-        },
-      ]);
-    } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Ошибка смены пароля',
-        },
-      ]);
-    }
   };
   const clearInput = () => {
     if (updatePasswordHandle) {
@@ -75,9 +51,26 @@ export default function ProfileSettings({ user, token }) {
   };
 
   const updatePasswordHandle = () => {
-    validatePassword(password) && changePassword()
-      ? clearInput()
-      : clearInput();
+    if (validatePassword(password) && changePassword()) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Пароль успешно обновлён',
+        },
+      ]);
+      clearInput();
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Ошибка смены пароля',
+        },
+      ]);
+    }
   };
 
   return (
