@@ -11,23 +11,22 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
+import { dataEvents } from '@/utils/api/QueryParams';
+import { getAudiosTop, getPlaylistNew } from '@/api';
 
 export const getServerSideProps = async () => {
-  const first10Resp = await fetchAPI(`/audios?${first10()}`);
-  const audioTop = await first10Resp.json();
+  const audioTop = await getAudiosTop();
+  const playlistsNew = await getPlaylistNew();
 
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
   const events = await responceEvents.json();
 
-  const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
-  const playlists = await playlistNewResp.json();
   return {
-    props: { audioTop, playlists, events },
+    props: { audioTop, playlistsNew, events },
   };
 };
 
-export default function Home({ audioTop, playlists, events }) {
+export default function Home({ audioTop, playlistsNew, events }) {
   return (
     <>
       <Head>
@@ -77,14 +76,14 @@ export default function Home({ audioTop, playlists, events }) {
               <div className='slider'>
                 <div className='title'>Новинки от пользователей</div>
                 <Slider buttons={true} pagination={true}>
-                  {playlists.data?.map(({ id, attributes }, index) => (
+                  {playlistsNew.data?.map(({ id, attributes }, index) => (
                     <SliderItem key={id}>
                       <Link href={`/playlist/${id}`}>
                         <img
                           className='playlists__image'
                           src={
                             process.env.NEXT_PUBLIC_API_URL +
-                            playlists.data[index].attributes.poster.data
+                            playlistsNew.data[index].attributes.poster.data
                               .attributes.url
                           }
                           alt={'image'}
@@ -92,7 +91,7 @@ export default function Home({ audioTop, playlists, events }) {
                         <ul className='slides__list'>
                           <h2 className='slides__description'>
                             {
-                              playlists.data[index].attributes
+                              playlistsNew.data[index].attributes
                                 .users_permissions_user.data.attributes.username
                             }
                           </h2>

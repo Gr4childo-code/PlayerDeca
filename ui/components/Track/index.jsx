@@ -12,8 +12,13 @@ const Track = ({ id, index, attributes }) => {
       <div className={styles.track__number}>{index}</div>
 
       <div className={styles.track__cover}>
-        {attributes.posterPath ? (
-          <img src={process.env.NEXT_PUBLIC_API_URL + attributes.posterPath} />
+        {attributes.poster.data?.attributes ? (
+          <img
+            src={
+              process.env.NEXT_PUBLIC_API_URL +
+              attributes.poster.data?.attributes.url
+            }
+          />
         ) : (
           <div className={styles.track__cover__font}>
             <FontAwesomeIcon icon={faMusic} />
