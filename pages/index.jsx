@@ -10,16 +10,12 @@ import Top10 from '@/ui/components/Top10';
 import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
-import { fetchAPI } from '@/utils/api/fetch';
-import { dataEvents } from '@/utils/api/QueryParams';
-import { getAudiosTop, getPlaylistNew } from '@/api';
+import { getAudiosTop, getPlaylistNew, getEvents } from '@/api';
 
 export const getServerSideProps = async () => {
   const audioTop = await getAudiosTop();
   const playlistsNew = await getPlaylistNew();
-
-  const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
-  const events = await responceEvents.json();
+  const events = await getEvents();
 
   return {
     props: { audioTop, playlistsNew, events },
