@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Track from '@/ui/components/Track';
 import styles from '@/ui/components/AllAudios_Page/AllAudios_Page.module.scss';
+import Options from '@/ui/components/Options';
 const AllAudios_Page = ({ audios }) => {
   const [visible, setVisibale] = useState(10);
   const showMoreTrack = () => {
@@ -10,6 +11,9 @@ const AllAudios_Page = ({ audios }) => {
   return (
     <div className={styles.wrapper}>
       <div className={'title'}>Все треки</div>
+      <div className={styles.options}>
+        <Options play={true} like={true} queue={true} size={'lg'} />
+      </div>
       {audios ? (
         audios &&
         audios?.data
@@ -20,7 +24,7 @@ const AllAudios_Page = ({ audios }) => {
       ) : (
         <div className={styles.nonTrack}>Треков нет</div>
       )}
-      {audios?.data?.length > visible ? (
+      {audios?.data?.length > visible && (
         <a href='#showMoreTrack'>
           <button
             name='showMoreTrack'
@@ -31,8 +35,6 @@ const AllAudios_Page = ({ audios }) => {
             Показать еще
           </button>
         </a>
-      ) : (
-        ''
       )}
     </div>
   );

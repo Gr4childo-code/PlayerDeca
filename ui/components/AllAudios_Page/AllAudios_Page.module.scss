@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.options {
+  padding-bottom: 10px;
+}
 .showMoreTrack {
   width: 100%;
   background: var(--gradient);
