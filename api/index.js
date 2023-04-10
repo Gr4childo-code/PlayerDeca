@@ -4,4 +4,5 @@ export { Api }
 
 export * from './audios'
 export * from './styles'
-export * from './password'
+export * from './profile/password'
+export * from './profile/email'

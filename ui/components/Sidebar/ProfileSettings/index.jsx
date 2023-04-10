@@ -3,7 +3,7 @@ import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
-import { postPassword } from '@/api';
+import { postPassword, postEmail } from '@/api';
 import { validatePassword } from '@/utils/validators';
 
 export default function ProfileSettings({ user, token }) {
@@ -11,6 +11,7 @@ export default function ProfileSettings({ user, token }) {
   const { name, email } = user;
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [newEmailConfirmation, setNewEmailConfirmation] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -57,6 +58,19 @@ export default function ProfileSettings({ user, token }) {
     }
   };
 
+  const updateEmailHandle = () => {
+    postEmail(
+      {
+        json: {
+          email: email,
+          newEmail: newEmail,
+          newEmailConfirmation: newEmailConfirmation,
+        },
+      },
+      token
+    );
+  };
+
   return (
     <div>
       <Toast toastlist={list} setList={setList} />
@@ -73,11 +87,11 @@ export default function ProfileSettings({ user, token }) {
                   placeholder={name}
                   onChange={(e) => setNewName(e.target.value)}
                 />
-                <button className={styles.settings__button} type={'submit'}>
-                  Изменить
-                </button>
               </li>
             </ul>
+            <button className={styles.settings__button} type={'submit'}>
+              Изменить
+            </button>
           </div>
           <div className={styles.user}>
             <h3>Изменить email</h3>
@@ -86,15 +100,37 @@ export default function ProfileSettings({ user, token }) {
                 <input
                   className={styles.settings__input}
                   type={'email'}
-                  value={newEmail}
+                  value={email}
                   placeholder={email}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
-                <button className={styles.settings__button} type={'submit'}>
-                  Изменить
-                </button>
+              </li>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'email'}
+                  value={newEmail}
+                  placeholder={'New Email'}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
+              </li>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'email'}
+                  value={newEmailConfirmation}
+                  placeholder={'New Email Confirm'}
+                  onChange={(e) => setNewEmailConfirmation(e.target.value)}
+                />
               </li>
             </ul>
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={updateEmailHandle}
+            >
+              Изменить
+            </button>
           </div>
 
           <div className={styles.user}>
