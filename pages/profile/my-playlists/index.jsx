@@ -10,7 +10,7 @@ export const getServerSideProps = async (ctx) => {
   const username = session.user.username;
   const token = session.jwt;
 
-  const test = await getAudiosForUser(username);
+  const test = await getAudios();
 
   return {
     props: { userId, token, username, test },
@@ -21,12 +21,11 @@ export default function MyPlaylists({ username, test }) {
   console.log(username, test);
   return (
     <Layout>
-      <h3>Моя коллекция</h3>
       <div className='collectionPlaylists'>
         <div>
           <ProfileUpload />
         </div>
-        <div>Сюда нужно плейлисты пользователя</div>
+        <div>{/* Сюда нужно плейлисты пользователя */}</div>
       </div>
     </Layout>
   );

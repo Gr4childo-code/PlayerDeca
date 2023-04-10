@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 
 import { createAudios } from '@/api';
@@ -11,6 +11,8 @@ export default function ProfileUpload() {
   const [loader, setLoader] = useState(true);
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState(null);
   const { data: session } = useSession();
 
   const uploads = async (e) => {
@@ -18,7 +20,6 @@ export default function ProfileUpload() {
 
     if (session) {
       setLoader(false);
-
       createAudios(
         {
           data: {
@@ -35,36 +36,59 @@ export default function ProfileUpload() {
     }
   };
 
+  useEffect(() => {
+    if (file) {
+      setFileName(file.name);
+    }
+  }, [file]);
+
   return (
     <>
+      <h3>Добавить песню</h3>
       {loader ? (
         <form onSubmit={uploads}>
           <div className={styles.wrapper}>
-            <label>Название трека</label>
             <input
+              required
               type='text'
               className={styles.input}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              placeholder='Название'
             />
-            <label>Имя автора</label>
             <input
+              required
               type='text'
               className={styles.input}
-              onChange={(e) => setAuthor(e.target.value)}
+              onChange={(e) => {
+                setAuthor(e.target.value);
+              }}
+              placeholder='Автор'
             />
-            <label>Добавьте песню</label>
+            <label>Выберите песню</label>
             <input
+              required
               className={styles.input}
               type={'file'}
-              onChange={(e) => (music.current = e.target.files[0])}
+              onChange={(e) => {
+                music.current = e.target.files[0];
+                setFile(music.current);
+              }}
+              accept='audio/mp3'
             />
-            <label>Добавьте обложку</label>
+            {fileName && <span className={styles.info}>{fileName}</span>}
+            <label>Выберите обложку</label>
             <input
+              required
               className={styles.input}
               type={'file'}
-              onChange={(e) => (poster.current = e.target.files[0])}
+              onChange={(e) => {
+                poster.current = e.target.files[0];
+              }}
+              accept='image/jpeg, image/jpg, image/png, image/webp'
             />
-            <button className={styles.button}>upload</button>
+            <button className={styles.button}>Загрузить</button>
           </div>
         </form>
       ) : (

@@ -11,15 +11,15 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  width: 300px;
-  border-radius: 5px;
-  padding: 15px;
+  max-width: 250px;
   font-size: 15px;
+  margin-top: 5px;
+  padding: 15px;
   border: 2px dashed var(--ui-color-two);
+  border-radius: 5px;
   opacity: 0.8;
-  &:hover {
-    border: 2px dashed var(--ui-color-one);
+  &:hover,
+  &:active {
     opacity: 1;
     transition: all 0.5s;
   }
@@ -33,28 +33,57 @@
   }
 
   &__item {
-    margin: 10px 10px 0;
-    padding: 10px;
     background: var(--gray-50);
     border-radius: 5px;
-    &:hover {
-      background: var(--ui-color-one);
-      transition: all 0.8s;
-      opacity: 1;
-    }
   }
 }
 
 .input {
-  height: 30px;
+  height: 35px;
+  padding: 5px;
   margin-bottom: 5px;
   font-size: 15px;
+  border-radius: 5px;
+  background: var(--gray-60);
+  color: var(--white-50);
+  transition: background 0.15s, box-shadow 0.15s;
+  outline: none;
+  &:hover {
+    background: var(--gray-80);
+  }
+  &:focus {
+    background: var(--background);
+    box-shadow: 0 0 0 2px var(--ui-color-one),
+      0 0 0 4px rgba(var(--ui-color-one-rgb), 0.5);
+  }
+  &:valid {
+    border: 2px solid lightgreen;
+  }
+  &:invalid {
+    border: 1px solid var(--gray-50);
+  }
+}
+
+.info {
+  margin-bottom: 15px;
+  font-size: 12px;
 }
 
 .button {
-  margin: 0 auto;
-  width: 80px;
-  height: 30px;
+  margin: 10px auto 0;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid var(--ui-color-one);
+  background: var(--gray-10);
+  color: var(--white);
+  transition: background 0.5s;
+  &:hover,
+  &:active {
+    background-color: var(--ui-color-one);
+  }
 }
 
 @include mq(Sphone) {
