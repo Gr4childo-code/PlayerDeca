@@ -1,40 +1,5 @@
-import Api from "../fetch";
+import { Api } from '@/api';
 import { stringify } from 'qs';
-
-export const getPlaylistId = async (queryId) => {
-  const query = stringify(
-    {
-      fields: ['title', 'createdAt', 'id'],
-
-      filters: {
-        id: {
-          $eq: queryId,
-        },
-      },
-      populate: {
-        poster: {
-          fields: ['url'],
-        },
-        audio: {
-          fields: ['name', 'author', 'id'],
-          populate: {
-            src: ['hash']
-          },
-          poster: {
-            fields: ['url']
-          }
-        }
-      },
-      users_permissions_user: {
-        fields: ['name'],
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
-  return await Api(`playlists?${query}`);
-}
 
 export const getPlaylistNew = async () => {
   const query = stringify(
@@ -52,8 +17,45 @@ export const getPlaylistNew = async () => {
       //   sort: ['createdAt:desc'],
     },
     {
-      encodeValuesOnly: true, // prettify URL
+      encodeValuesOnly: true,
     }
-  )
-  return await Api(`playlists?${query}`)
-}
+  );
+  return await Api(`playlists?${query}`);
+};
+
+export const getPlaylistByID = async (queryID) => {
+  const query = stringify(
+    {
+      fields: ['title', 'createdAt', 'id'],
+
+      filters: {
+        id: {
+          $eq: queryID,
+        },
+      },
+      populate: {
+        poster: {
+          fields: ['url'],
+        },
+        audio: {
+          fields: ['name', 'author', 'id'],
+          populate: {
+            src: {
+              fields: ['hash'],
+            },
+            poster: {
+              fields: ['url'],
+            },
+          },
+        },
+        users_permissions_user: {
+          fields: ['name'],
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  return await Api(`playlists?${query}`);
+};

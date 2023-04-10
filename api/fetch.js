@@ -1,38 +1,43 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
-const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) => {
+const Api = async (
+  url = '',
+  method = 'GET',
+  params = null,
+  token = API_TOKEN
+) => {
   try {
-    let  body = null
+    let body = null;
 
-    if ( params ) {
-      const form = new FormData()
+    if (params) {
+      const form = new FormData();
 
-      form.append('data', JSON.stringify(params.data))
+      form.append('data', JSON.stringify(params.data));
 
       if ('files' in params) {
-        for ( const file in params.files ) {
-          form.append(`files.${file}`, params.files[file])
+        for (const file in params.files) {
+          form.append(`files.${file}`, params.files[file]);
         }
       }
 
-      body = form
+      body = form;
     }
 
     const resp = await fetch(`${API_URL}/api/${url}`, {
       method,
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body
-    })
+      body,
+    });
 
-    console.info("success", { ok: resp.ok, status: resp.status })
+    console.info('success', { ok: resp.ok, status: resp.status });
 
-    return await resp.json()
-  } catch(err) {
-    console.error(err)
+    return await resp.json();
+  } catch (err) {
+    console.error(err);
   }
-}
+};
 
-export default Api
+export default Api;

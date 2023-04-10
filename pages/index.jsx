@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-
 //Next/React
 import Head from 'next/head';
 import Link from 'next/link';
@@ -13,53 +11,22 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
 import { fetchAPI } from '@/utils/api/fetch';
-import { first10, playlistNew, dataEvents } from '@/utils/api/QueryParams';
-
-import { getAudios, createAudios } from '@/api';
-import { useSession } from 'next-auth/react';
+import { dataEvents } from '@/utils/api/QueryParams';
+import { getAudiosTop, getPlaylistNew } from '@/api';
 
 export const getServerSideProps = async () => {
-  const first10Resp = await fetchAPI(`/audios?${first10()}`);
-  const audioTop = await first10Resp.json();
+  const audioTop = await getAudiosTop();
+  const playlistsNew = await getPlaylistNew();
 
   const responceEvents = await fetchAPI(`/events?${dataEvents()}`);
   const events = await responceEvents.json();
 
-  const playlistNewResp = await fetchAPI(`/playlists?${playlistNew()}`);
-  const playlists = await playlistNewResp.json();
   return {
-    props: { audioTop, playlists, events },
+    props: { audioTop, playlistsNew, events },
   };
 };
 
-export default function Home({ audioTop, playlists, events }) {
-  const music = useRef(null);
-  const poster = useRef(null);
-  const [loader, setLoader] = useState(true);
-  const { data: session } = useSession();
-
-  const uploads = async (e) => {
-    e.preventDefault();
-
-    if (session) {
-      setLoader(false);
-
-      createAudios(
-        {
-          data: {
-            name: 'test',
-            author: 'author',
-          },
-          files: {
-            src: music.current,
-            poster: poster.current,
-          },
-        },
-        session?.jwt
-      ).then(() => setLoader(true));
-    }
-  };
-
+export default function Home({ audioTop, playlistsNew, events }) {
   return (
     <>
       <Head>
@@ -67,22 +34,6 @@ export default function Home({ audioTop, playlists, events }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
-      {loader ? (
-        <form onSubmit={uploads}>
-          <input
-            type='file'
-            onChange={(e) => (music.current = e.target.files[0])}
-          />
-          <input
-            type='file'
-            onChange={(e) => (poster.current = e.target.files[0])}
-          />
-          <button>Upload</button>
-        </form>
-      ) : (
-        <div>Loader...</div>
-      )}
 
       <div className='container'>
         <div className='layout'>
@@ -125,14 +76,14 @@ export default function Home({ audioTop, playlists, events }) {
               <div className='slider'>
                 <div className='title'>Новинки от пользователей</div>
                 <Slider buttons={true} pagination={true}>
-                  {playlists.data?.map(({ id, attributes }, index) => (
+                  {playlistsNew.data?.map(({ id, attributes }, index) => (
                     <SliderItem key={id}>
                       <Link href={`/playlist/${id}`}>
                         <img
                           className='playlists__image'
                           src={
                             process.env.NEXT_PUBLIC_API_URL +
-                            playlists.data[index].attributes.poster.data
+                            playlistsNew.data[index].attributes.poster.data
                               .attributes.url
                           }
                           alt={'image'}
@@ -140,7 +91,7 @@ export default function Home({ audioTop, playlists, events }) {
                         <ul className='slides__list'>
                           <h2 className='slides__description'>
                             {
-                              playlists.data[index].attributes
+                              playlistsNew.data[index].attributes
                                 .users_permissions_user.data.attributes.username
                             }
                           </h2>

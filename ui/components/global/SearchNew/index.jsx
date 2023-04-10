@@ -1,11 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-
-import { SearchByAuthor, searchDefault } from '@/utils/api/QueryParams';
-import { fetchAPI } from '@/utils/api/fetch';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { getSearchByAuthor, getSearchDefault } from '@/api';
 import AppContext from '@/ui/components/global/AppContext';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import styles from './SearchNew.module.scss';
 
 const SearchNew = () => {
@@ -19,18 +17,13 @@ const SearchNew = () => {
   };
 
   const getSearch = async () => {
-    const SearchResp = await fetchAPI(
-      `/audios?${SearchByAuthor(inputValue)}`,
-      'get'
-    );
-    const response = await SearchResp.json();
-    setserchAudio(response);
+    const SearchResp = await getSearchByAuthor(inputValue);
+    setserchAudio(SearchResp);
   };
 
   const getDefault = async () => {
-    const SearchResp = await fetchAPI(`/audios?${searchDefault()}`, 'get');
-    const response = await SearchResp.json();
-    setserchAudio(response);
+    const SearchResp = await getSearchDefault();
+    setserchAudio(SearchResp);
   };
 
   useEffect(() => {
@@ -75,10 +68,11 @@ const SearchNew = () => {
               }}
             >
               <div className={styles.item__cover}>
-                {attributes.posterPath ? (
+                {attributes.poster?.data?.attributes ? (
                   <img
                     src={
-                      process.env.NEXT_PUBLIC_API_URL + attributes.posterPath
+                      process.env.NEXT_PUBLIC_API_URL +
+                      attributes.poster.data?.attributes.url
                     }
                   />
                 ) : (
