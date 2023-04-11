@@ -19,7 +19,13 @@ const AllAudios_Page = ({ audios }) => {
         audios?.data
           .slice(0, visible)
           .map(({ id, attributes }, index) => (
-            <Track key={id} id={id} index={index + 1} attributes={attributes} />
+            <Track
+              key={id}
+              id={id}
+              index={index + 1}
+              attributes={attributes}
+              size={'lg'}
+            />
           ))
       ) : (
         <div className={styles.nonTrack}>Треков нет</div>

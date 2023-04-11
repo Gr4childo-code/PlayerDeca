@@ -4,7 +4,7 @@ import styles from '@/ui/components/Track/Track.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import Options from '@/ui/components/Options';
-const Track = ({ id, index, attributes }) => {
+const Track = ({ id, index, attributes, size = 'sm' }) => {
   const [isPlay, setIsPlay] = useState(false);
   return (
     <div className={styles.track} key={id}>
@@ -30,7 +30,7 @@ const Track = ({ id, index, attributes }) => {
             setIsPlay(!isPlay);
           }}
         >
-          <Options play={true} size={'lg'} />
+          <Options play={true} size={size} />
         </div>
       </div>
 
@@ -40,7 +40,7 @@ const Track = ({ id, index, attributes }) => {
         <p className={styles.track__music__author}>{attributes.author}</p>
       </div>
       <div className={styles.track__options}>
-        <Options like={true} queue={true} size={'mg'} />
+        <Options like={true} queue={true} size={size} />
       </div>
     </div>
   );
