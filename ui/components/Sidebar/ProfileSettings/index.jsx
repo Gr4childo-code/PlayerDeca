@@ -3,8 +3,8 @@ import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
-import { postPassword, postEmail } from '@/api';
-import { validatePassword } from '@/utils/validators';
+import { postPassword, putEmail } from '@/api';
+import { validatePassword, validateEmail } from '@/utils/validators';
 
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
@@ -19,6 +19,7 @@ export default function ProfileSettings({ user, token }) {
       setCurrentPassword('');
       setPassword('');
       setPasswordConfirmation('');
+      setNewEmail('');
     }
   };
 
@@ -56,19 +57,65 @@ export default function ProfileSettings({ user, token }) {
     }
   };
 
-  const updateUserEmail = async (id, newEmail) => {
-    const user = await fetch(`https://api.dless.ru/api/users/5`, {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'akkkmmm@icloud.com',
-      }),
-    });
-    return user;
+  const updateUserEmail = async () => {
+    if (validateEmail(email)) {
+      putEmail(
+        {
+          json: {
+            email: newEmail,
+          },
+        },
+        token,
+        id
+      );
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Email успешно обновлён',
+        },
+      ]);
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректный email',
+        },
+      ]);
+    }
+  };
+  const updateUserName = async () => {
+    if (name) {
+      postName(
+        {
+          json: {
+            name: newName,
+          },
+        },
+        token,
+        id
+      );
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Email успешно обновлён',
+        },
+      ]);
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректный email',
+        },
+      ]);
+    }
   };
 
   return (
@@ -81,6 +128,7 @@ export default function ProfileSettings({ user, token }) {
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
+                  autoComplete='off'
                   className={styles.settings__input}
                   type={'text'}
                   value={newName}
@@ -89,7 +137,11 @@ export default function ProfileSettings({ user, token }) {
                 />
               </li>
             </ul>
-            <button className={styles.settings__button} type={'submit'}>
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={updateUserName}
+            >
               Изменить
             </button>
           </div>
@@ -110,7 +162,7 @@ export default function ProfileSettings({ user, token }) {
                   className={styles.settings__input}
                   type={'email'}
                   value={newEmail}
-                  placeholder={'New Email'}
+                  placeholder={'New email'}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
               </li>

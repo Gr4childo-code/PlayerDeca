@@ -6,3 +6,8 @@ export const validatePassword = (currentPassword, password, passwordConfirmation
     return ''
   }
 }
+
+export const validateEmail = (email) => {
+  const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegEx.test(email)
+}

@@ -1,6 +1,6 @@
 import { Api } from '@/api'
 
-export const postEmail = async (params, token) => Api('auth/change-email', 'POST', params, token)
+export const putEmail = async (params, token, id) => Api(`users/${id}`, 'PUT', params, token)
 
 /* 
 /api/users/:id */
