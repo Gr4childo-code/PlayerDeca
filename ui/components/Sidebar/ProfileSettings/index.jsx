@@ -3,7 +3,7 @@ import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
-import { postPassword, putEmail } from '@/api';
+import { postPassword, putEmail, putName } from '@/api';
 import { validatePassword, validateEmail } from '@/utils/validators';
 
 export default function ProfileSettings({ user, token }) {
@@ -20,6 +20,68 @@ export default function ProfileSettings({ user, token }) {
       setPassword('');
       setPasswordConfirmation('');
       setNewEmail('');
+    }
+  };
+
+  const updateUserName = async () => {
+    if (newName) {
+      putName(
+        {
+          json: {
+            name: newName,
+          },
+        },
+        token,
+        id
+      );
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Имя обновлено',
+        },
+      ]);
+    } else {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректное имя',
+        },
+      ]);
+    }
+  };
+
+  const updateUserEmail = async () => {
+    if (!validateEmail(newEmail)) {
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'error',
+          description: 'Введите корректный email',
+        },
+      ]);
+    } else {
+      putEmail(
+        {
+          json: {
+            email: newEmail,
+          },
+        },
+        token,
+        id
+      );
+      setList([
+        ...list,
+        {
+          id: Date.now(),
+          type: 'success',
+          description: 'Email успешно обновлён',
+        },
+      ]);
     }
   };
 
@@ -57,67 +119,6 @@ export default function ProfileSettings({ user, token }) {
     }
   };
 
-  const updateUserEmail = async () => {
-    if (validateEmail(email)) {
-      putEmail(
-        {
-          json: {
-            email: newEmail,
-          },
-        },
-        token,
-        id
-      );
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Email успешно обновлён',
-        },
-      ]);
-    } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный email',
-        },
-      ]);
-    }
-  };
-  const updateUserName = async () => {
-    if (name) {
-      postName(
-        {
-          json: {
-            name: newName,
-          },
-        },
-        token,
-        id
-      );
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Email успешно обновлён',
-        },
-      ]);
-    } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный email',
-        },
-      ]);
-    }
-  };
-
   return (
     <div>
       <Toast toastlist={list} setList={setList} />
@@ -135,6 +136,9 @@ export default function ProfileSettings({ user, token }) {
                   placeholder={name}
                   onChange={(e) => setNewName(e.target.value)}
                 />
+                {newName && (
+                  <label className={styles.label}> Не менее 6 символов </label>
+                )}
               </li>
             </ul>
             <button
@@ -199,7 +203,7 @@ export default function ProfileSettings({ user, token }) {
                 {password && (
                   <label className={styles.label}>
                     {' '}
-                    Буквы и цифры. Не менее 6 символов.{' '}
+                    Буквы и цифры. Не менее 6 символов{' '}
                   </label>
                 )}
               </li>

@@ -3,11 +3,15 @@ export const validatePassword = (currentPassword, password, passwordConfirmation
   if (password === passwordConfirmation && password !== currentPassword) {
     return passwordRegEx.test(password);
   } else {
-    return ''
+    return false
   }
 }
 
 export const validateEmail = (email) => {
   const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegEx.test(email)
+  if (email) {
+    return emailRegEx.test(email)
+  } else {
+    return false
+  }
 }
