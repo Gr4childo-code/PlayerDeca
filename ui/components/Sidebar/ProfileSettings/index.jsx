@@ -8,14 +8,12 @@ import { validatePassword } from '@/utils/validators';
 
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
-  const { name, email } = user;
+  const { name, email, id } = user;
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [newEmailConfirmation, setNewEmailConfirmation] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
   const clearInput = () => {
     if (updatePasswordHandle) {
       setCurrentPassword('');
@@ -58,17 +56,19 @@ export default function ProfileSettings({ user, token }) {
     }
   };
 
-  const updateEmailHandle = () => {
-    postEmail(
-      {
-        json: {
-          email: email,
-          newEmail: newEmail,
-          newEmailConfirmation: newEmailConfirmation,
-        },
+  const updateUserEmail = async (id, newEmail) => {
+    const user = await fetch(`https://api.dless.ru/api/users/5`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-      token
-    );
+      body: JSON.stringify({
+        email: 'akkkmmm@icloud.com',
+      }),
+    });
+    return user;
   };
 
   return (
@@ -114,20 +114,11 @@ export default function ProfileSettings({ user, token }) {
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
               </li>
-              <li className={styles.settings__item}>
-                <input
-                  className={styles.settings__input}
-                  type={'email'}
-                  value={newEmailConfirmation}
-                  placeholder={'New Email Confirm'}
-                  onChange={(e) => setNewEmailConfirmation(e.target.value)}
-                />
-              </li>
             </ul>
             <button
               className={styles.settings__button}
               type={'submit'}
-              onClick={updateEmailHandle}
+              onClick={updateUserEmail}
             >
               Изменить
             </button>
