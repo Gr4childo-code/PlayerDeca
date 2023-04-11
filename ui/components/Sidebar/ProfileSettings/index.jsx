@@ -14,17 +14,40 @@ export default function ProfileSettings({ user, token }) {
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const clearInput = () => {
-    if (updatePasswordHandle) {
-      setCurrentPassword('');
-      setPassword('');
-      setPasswordConfirmation('');
-      setNewEmail('');
-    }
+
+  const successNotify = () => {
+    setList([
+      ...list,
+      {
+        id: Date.now(),
+        type: 'success',
+        description: 'Успешно',
+      },
+    ]);
+    clearInput();
+  };
+  const errorNotify = () => {
+    setList([
+      ...list,
+      {
+        id: Date.now(),
+        type: 'error',
+        description: 'Ошибка, проверьте корректность данных',
+      },
+    ]);
+    clearInput();
   };
 
-  const updateUserName = async () => {
-    if (newName) {
+  const clearInput = () => {
+    setNewName('');
+    setNewEmail('');
+    setCurrentPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
+  };
+
+  const updateUserName = () => {
+    if (newName.length >= 6) {
       putName(
         {
           json: {
@@ -34,36 +57,15 @@ export default function ProfileSettings({ user, token }) {
         token,
         id
       );
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Имя обновлено',
-        },
-      ]);
+      successNotify();
     } else {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректное имя',
-        },
-      ]);
+      errorNotify();
     }
   };
 
-  const updateUserEmail = async () => {
+  const updateUserEmail = () => {
     if (!validateEmail(newEmail)) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный email',
-        },
-      ]);
+      errorNotify();
     } else {
       putEmail(
         {
@@ -74,28 +76,13 @@ export default function ProfileSettings({ user, token }) {
         token,
         id
       );
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Email успешно обновлён',
-        },
-      ]);
+      successNotify();
     }
   };
 
   const updatePasswordHandle = () => {
     if (!validatePassword(currentPassword, password, passwordConfirmation)) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный пароль',
-        },
-      ]);
-      clearInput();
+      errorNotify();
     } else {
       postPassword(
         {
@@ -107,15 +94,7 @@ export default function ProfileSettings({ user, token }) {
         },
         token
       );
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Пароль успешно обновлён',
-        },
-      ]);
-      clearInput();
+      successNotify();
     }
   };
 
