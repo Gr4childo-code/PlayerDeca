@@ -39,7 +39,7 @@ export default function Home({ audioTop, playlistsNew, events }) {
               <Slider buttons={true} pagination={true}>
                 {events.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
-                    <Link href={`/events`}>
+                    <Link href={`/events/${id}`}>
                       <img
                         className='slides'
                         src={

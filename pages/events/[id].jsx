@@ -4,14 +4,12 @@ import Script from 'next/script';
 import EventId from '@/ui/components/DlessEvents/EventId';
 
 //utils
-import { fetchAPI } from '@/utils/api/fetch';
-import { dataEventsId } from '@/utils/api/QueryParams';
+import { getEventsId } from '@/api';
 
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
 
-  const responce = await fetchAPI(`/events?${dataEventsId(id)}`);
-  const events = await responce.json();
+  const events = await getEventsId(id);
 
   return {
     props: { events },

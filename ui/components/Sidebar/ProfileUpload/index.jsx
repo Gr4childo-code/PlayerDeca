@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import Preloader from '../../global/Preloader';
 
 import { createAudios } from '@/api';
 
@@ -34,6 +35,7 @@ export default function ProfileUpload() {
         session?.jwt
       ).then(() => setLoader(true));
     }
+    setFileName('');
   };
 
   useEffect(() => {
@@ -66,33 +68,35 @@ export default function ProfileUpload() {
               }}
               placeholder='Автор'
             />
-            <label>Выберите песню</label>
-            <input
-              required
-              className={styles.input}
-              type={'file'}
-              onChange={(e) => {
-                music.current = e.target.files[0];
-                setFile(music.current);
-              }}
-              accept='audio/mp3'
-            />
-            {fileName && <span className={styles.info}>{fileName}</span>}
-            <label>Выберите обложку</label>
-            <input
-              required
-              className={styles.input}
-              type={'file'}
-              onChange={(e) => {
-                poster.current = e.target.files[0];
-              }}
-              accept='image/jpeg, image/jpg, image/png, image/webp'
-            />
+            <div className={styles.files}>
+              <label>Выберите песню</label>
+              <input
+                required
+                className={styles.input}
+                type={'file'}
+                onChange={(e) => {
+                  music.current = e.target.files[0];
+                  setFile(music.current);
+                }}
+                accept='audio/mp3'
+              />
+              {fileName && <span className={styles.info}>{fileName}</span>}
+              <label>Выберите обложку</label>
+              <input
+                required
+                className={styles.input}
+                type={'file'}
+                onChange={(e) => {
+                  poster.current = e.target.files[0];
+                }}
+                accept='image/jpeg, image/jpg, image/png, image/webp'
+              />
+            </div>
             <button className={styles.button}>Загрузить</button>
           </div>
         </form>
       ) : (
-        <div>Loading...</div>
+        <Preloader />
       )}
     </>
   );
