@@ -61,11 +61,14 @@
     box-shadow: 0 0 0 2px var(--ui-color-one),
       0 0 0 4px rgba(var(--ui-color-one-rgb), 0.5);
   }
-  &:valid {
-    border: 2px solid var(--success);
-  }
-  &:invalid {
-    border: 1px solid var(--warn);
+  &:required {
+    border: 2px solid var(--gray-80);
+    &:valid {
+      border: 2px solid var(--success);
+    }
+    &:invalid {
+      border: 2px solid var(--warn);
+    }
   }
 }
 
