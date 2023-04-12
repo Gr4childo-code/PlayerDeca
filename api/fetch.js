@@ -9,15 +9,7 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
     }
 
     if (params) {
-      if (params.json) {
-        headers = {
-          ...headers,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-        body = JSON.stringify(params.json)
-      }
-    } else {
+
       const form = new FormData()
 
       form.append('data', JSON.stringify(params.data))
@@ -29,6 +21,15 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
       }
 
       body = form
+
+      if (params.json) {
+        headers = {
+          ...headers,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+        body = JSON.stringify(params.json)
+      }
     }
 
     const resp = await fetch(`${API_URL}/api/${url}`, {
