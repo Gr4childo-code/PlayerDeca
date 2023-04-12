@@ -69,7 +69,10 @@ export default function ProfileUpload() {
               placeholder='Автор'
             />
             <div className={styles.files}>
-              <label>Выберите песню</label>
+              <label className={styles.subTitle}>Выберите песню</label>
+              <p>
+                {fileName && <span className={styles.info}>{fileName}</span>}
+              </p>
               <input
                 required
                 className={styles.input}
@@ -80,8 +83,7 @@ export default function ProfileUpload() {
                 }}
                 accept='audio/mp3'
               />
-              {fileName && <span className={styles.info}>{fileName}</span>}
-              <label>Выберите обложку</label>
+              <label className={styles.subTitle}>Выберите обложку</label>
               <input
                 required
                 className={styles.input}

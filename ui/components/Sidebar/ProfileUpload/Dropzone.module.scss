@@ -62,16 +62,20 @@
       0 0 0 4px rgba(var(--ui-color-one-rgb), 0.5);
   }
   &:valid {
-    border: 2px solid lightgreen;
+    border: 2px solid var(--success);
   }
   &:invalid {
-    border: 1px solid var(--gray-50);
+    border: 1px solid var(--warn);
   }
 }
 
 .info {
   margin-bottom: 15px;
-  font-size: 12px;
+  font-size: 15px;
+}
+
+.subTitle {
+  font-size: 20px;
 }
 
 .button {
