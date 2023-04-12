@@ -1,7 +1,12 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
-const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) => {
+const Api = async (
+  url = '',
+  method = 'GET',
+  params = null,
+  token = API_TOKEN
+) => {
   try {
     let body = null
     let headers = {
@@ -12,7 +17,7 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
 
       const form = new FormData()
 
-      form.append('data', JSON.stringify(params.data))
+      form.append('data', JSON.stringify(params.data));
 
       if ('files' in params) {
         for (const file in params.files) {
@@ -38,12 +43,12 @@ const Api = async (url = '', method = 'GET', params = null, token = API_TOKEN) =
       body
     })
 
-    console.info("success", { ok: resp.ok, status: resp.status })
+    console.info('success', { ok: resp.ok, status: resp.status });
 
     return await resp.json()
   } catch (err) {
     console.error(err)
   }
-}
+};
 
-export default Api
+export default Api;

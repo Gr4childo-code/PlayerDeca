@@ -2,25 +2,26 @@ import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import Playlist_Page from '@/ui/components/Playlist_Page';
-import { fetchAPI } from '@/utils/api/fetch';
-import { playlistID } from '@/utils/api/QueryParams';
+
+import { getPlaylistByID } from '@/api';
 
 export const getServerSideProps = async (context) => {
   const { id } = context.params;
-  const response = await fetchAPI(`/playlists?${playlistID(id)}`);
-  const list = await response.json();
-  if (list.data.length == 0) {
+  const response = await getPlaylistByID(id);
+
+  if (response.data.length == 0) {
     return {
       notFound: true,
     };
   }
+
   return {
-    props: { list },
+    props: { response },
   };
 };
 
-const Details = ({ list }) => {
-  const { data } = list;
+const Details = ({ response }) => {
+  const { data } = response;
 
   return (
     <>
