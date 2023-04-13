@@ -9,7 +9,7 @@ export default function MyPlaylists() {
         <div>
           <ProfileUpload />
         </div>
-        <div>{/* Сюда нужно плейлисты пользователя */}</div>
+        <div>Сюда нужно плейлисты пользователя</div>
       </div>
     </Layout>
   );
