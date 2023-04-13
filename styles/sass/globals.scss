@@ -53,8 +53,13 @@
   --ui-color-three: #2a8af6;
 
   // Gradient
-  --gradient: linear-gradient(-90deg, var(--ui-color-one), var(--ui-color-two), var(--ui-color-three));
-  --gradient-text: linear-gradient(180deg,#fff,#aaa),#fff;
+  --gradient: linear-gradient(
+    -90deg,
+    var(--ui-color-one),
+    var(--ui-color-two),
+    var(--ui-color-three)
+  );
+  --gradient-text: linear-gradient(180deg, #fff, #aaa), #fff;
 }
 
 * {
@@ -352,9 +357,4 @@ a {
       height: 300px;
     }
   }
-}
-
-.collectionPlaylists {
-  display: flex;
-  justify-content: space-between;
 }

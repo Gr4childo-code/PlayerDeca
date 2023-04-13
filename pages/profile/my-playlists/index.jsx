@@ -5,12 +5,10 @@ import ProfileUpload from '@/ui/components/Sidebar/ProfileUpload';
 export default function MyPlaylists() {
   return (
     <Layout>
-      <div className='collectionPlaylists'>
-        <div>
-          <ProfileUpload />
-        </div>
-        <div>Сюда нужно плейлисты пользователя</div>
+      <div>
+        <ProfileUpload />
       </div>
+      <div>{/* Сюда нужно плейлисты пользователя */}</div>
     </Layout>
   );
 }

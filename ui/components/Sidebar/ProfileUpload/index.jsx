@@ -7,7 +7,6 @@ import { createAudios } from '@/api';
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function ProfileUpload() {
-  const music = useRef(null);
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
   const { data: session } = useSession();
@@ -83,36 +82,32 @@ export default function ProfileUpload() {
       <h3>Добавить песню</h3>
       {loader ? (
         <form onDragEnter={handleDrag} onSubmit={upload}>
-          <div
-            className={styles.wrapper}
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          >
-            <label className={styles.subTitle}>Выберите обложку</label>
-            <input
-              required
-              className={styles.input}
-              type={'file'}
-              onChange={(e) => {
-                poster.current = e.target.files[0];
-              }}
-              accept='image/jpeg, image/jpg, image/png, image/webp'
-            />
-            <label className={styles.subTitle}>
-              Выберите или перетащите песню
-            </label>
-            <input
-              required
-              className={styles.input}
-              type={'file'}
-              onChange={(e) => {
-                music.current = e.target.files[0];
-              }}
-              accept='audio/mp3'
-            />
-            <button className={styles.button}>Загрузить</button>
+          <div className={styles.wrapper}>
+            <div className={styles.wrapper__zone}>
+              <label className={styles.subTitle}>
+                Выберите обложку <br />
+              </label>
+              <input
+                required
+                className={styles.input}
+                type={'file'}
+                onChange={(e) => {
+                  poster.current = e.target.files[0];
+                }}
+                accept='image/jpeg, image/jpg, image/png, image/webp'
+              />
+            </div>
+            <div
+              className={styles.wrapper__zone}
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
+            >
+              <label className={styles.subTitle}>
+                Перетащите песню в mp3 формате
+              </label>
+            </div>
           </div>
         </form>
       ) : (
