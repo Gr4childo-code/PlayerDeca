@@ -38,7 +38,7 @@ export default function Player({ audios }) {
 
   useEffect(() => {
     setAudio(AudioInit(track.current));
-  }, [AudioInit]);
+  }, []);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
