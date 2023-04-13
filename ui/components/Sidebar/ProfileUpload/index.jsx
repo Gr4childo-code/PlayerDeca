@@ -7,6 +7,7 @@ import { createAudios } from '@/api';
 import styles from '../ProfileUpload/Dropzone.module.scss';
 
 export default function ProfileUpload() {
+  const [dragActive, setDragActive] = useState(false);
   const music = useRef(null);
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
@@ -15,6 +16,17 @@ export default function ProfileUpload() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const { data: session } = useSession();
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setDragActive(false);
+    }
+  };
 
   const uploads = async (e) => {
     e.preventDefault();
@@ -38,6 +50,35 @@ export default function ProfileUpload() {
     setFileName('');
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const test = e.dataTransfer.files[0].name.split('.mp3', [1]);
+      const audioInfo = {
+        name: test[0].split(' - ')[1],
+        author: test[0].split(' - ')[0],
+        src: e.dataTransfer.files[0],
+      };
+      createAudios(
+        {
+          data: {
+            name: audioInfo.name,
+            author: audioInfo.author,
+          },
+          files: {
+            src: audioInfo.src,
+            poster: poster.current,
+          },
+        },
+        session?.jwt
+      ).then(() => setLoader(true));
+    }
+    setFileName('');
+  };
+
   useEffect(() => {
     if (file) {
       setFileName(file.name);
@@ -48,9 +89,15 @@ export default function ProfileUpload() {
     <>
       <h3>Добавить песню</h3>
       {loader ? (
-        <form onSubmit={uploads}>
-          <div className={styles.wrapper}>
-            <input
+        <form /* onSubmit={uploads}  */ onDragEnter={handleDrag}>
+          <div
+            className={styles.wrapper}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+          >
+            {/* <input
               required
               type='text'
               className={styles.input}
@@ -67,7 +114,7 @@ export default function ProfileUpload() {
                 setAuthor(e.target.value);
               }}
               placeholder='Автор'
-            />
+            /> */}
             <div className={styles.files}>
               <label className={styles.subTitle}>Выберите песню</label>
               <input
@@ -92,7 +139,7 @@ export default function ProfileUpload() {
                 accept='image/jpeg, image/jpg, image/png, image/webp'
               />
             </div>
-            <button className={styles.button}>Загрузить</button>
+            {/* <button className={styles.button}>Загрузить</button> */}
           </div>
         </form>
       ) : (

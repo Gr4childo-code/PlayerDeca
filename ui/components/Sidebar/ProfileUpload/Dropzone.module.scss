@@ -24,6 +24,9 @@
     transition: all 0.5s;
   }
 }
+.active {
+  border: 2px dashed var(--ui-color-one);
+}
 
 .file {
   &__list {
