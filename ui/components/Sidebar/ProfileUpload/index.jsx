@@ -7,7 +7,11 @@ import { createAudios } from '@/api';
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function ProfileUpload() {
+  const music = useRef(null);
   const poster = useRef(null);
+  const [name, setName] = useState('');
+  const [author, setAuthor] = useState('');
+  const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(true);
   const { data: session } = useSession();
 
@@ -24,7 +28,7 @@ export default function ProfileUpload() {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setLoader(false);
+    /* setLoader(false); */
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
@@ -33,7 +37,8 @@ export default function ProfileUpload() {
         author: audioData[0].split(' - ')[0],
         src: e.dataTransfer.files[0],
       };
-      createAudios(
+      setFile(`${audio.author} - ${audio.name}`);
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -45,14 +50,14 @@ export default function ProfileUpload() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      ).then(() => setLoader(true)); */
     }
   };
 
   const upload = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setLoader(false);
+    /* setLoader(false); */
 
     if (e.target.files && e.target.files[0]) {
       const audioData = e.target.files[0].name.split('.mp3', [1]);
@@ -104,10 +109,37 @@ export default function ProfileUpload() {
               onDragOver={handleDrag}
               onDrop={handleDrop}
             >
+              <label className={styles.subTitle}>Введите название</label>
+              <input
+                required
+                type='text'
+                className={styles.input}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                placeholder='Название'
+              />
+              <input
+                required
+                type='text'
+                className={styles.input}
+                onChange={(e) => {
+                  setAuthor(e.target.value);
+                }}
+                placeholder='Автор'
+              />
+              <p>или</p>
               <label className={styles.subTitle}>
-                Перетащите песню в mp3 формате
+                {!file
+                  ? 'Перетащите песню в mp3 формате'
+                  : `Вы добавили : ${file}`}
               </label>
             </div>
+            {file && poster ? (
+              <button className={styles.button}>Загрузить</button>
+            ) : (
+              ''
+            )}
           </div>
         </form>
       ) : (
