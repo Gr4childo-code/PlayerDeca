@@ -25,10 +25,6 @@
   }
 }
 
-.files {
-  margin-top: 30px;
-}
-
 .file {
   &__list {
     display: flex;
@@ -47,7 +43,7 @@
   width: 100%;
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 5px;
   background: var(--gray-60);
   color: var(--white-50);
@@ -66,19 +62,16 @@
     &:valid {
       border: 2px solid var(--success);
     }
-    &:invalid {
-      border: 2px solid var(--warn);
-    }
   }
+}
+.files {
+  margin-top: 30px;
+  font-size: 20px;
 }
 
 .info {
   margin-bottom: 15px;
   font-size: 15px;
-}
-
-.subTitle {
-  font-size: 20px;
 }
 
 .button {
