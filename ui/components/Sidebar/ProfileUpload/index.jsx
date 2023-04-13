@@ -50,11 +50,39 @@ export default function ProfileUpload() {
     }
   };
 
+  const upload = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLoader(false);
+
+    if (e.target.files && e.target.files[0]) {
+      const audioData = e.target.files[0].name.split('.mp3', [1]);
+      const audio = {
+        name: audioData[0].split(' - ')[1],
+        author: audioData[0].split(' - ')[0],
+        src: e.target.files[0],
+      };
+      createAudios(
+        {
+          data: {
+            name: audio.name,
+            author: audio.author,
+          },
+          files: {
+            src: audio.src,
+            poster: poster.current,
+          },
+        },
+        session?.jwt
+      ).then(() => setLoader(true));
+    }
+  };
+
   return (
     <>
       <h3>Добавить песню</h3>
       {loader ? (
-        <form onDragEnter={handleDrag}>
+        <form onDragEnter={handleDrag} onSubmit={upload}>
           <div
             className={styles.wrapper}
             onDragEnter={handleDrag}
@@ -84,6 +112,7 @@ export default function ProfileUpload() {
               }}
               accept='audio/mp3'
             />
+            <button className={styles.button}>Загрузить</button>
           </div>
         </form>
       ) : (
