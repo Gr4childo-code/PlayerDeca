@@ -31,14 +31,14 @@ export default function Player({ audios }) {
     id: audios?.data[0]?.id,
     ...audios?.data[0]?.attributes,
     src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url
-  })
+    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+  });
 
   const _indexTrach = useRef(0);
 
   useEffect(() => {
     setAudio(AudioInit(track.current));
-  }, []);
+  }, [AudioInit]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
@@ -71,7 +71,7 @@ export default function Player({ audios }) {
     const rect = e.target.getBoundingClientRect();
     const pageX = e.pageX;
 
-    e.target.children[0].style.width = `${(pageX / rect.width) * 100}%`
+    e.target.children[0].style.width = `${(pageX / rect.width) * 100}%`;
     setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
 
     if (active) {
@@ -103,8 +103,8 @@ export default function Player({ audios }) {
       id,
       ...attributes,
       src: attributes?.src?.data[0]?.attributes?.hash,
-      poster: attributes?.poster?.data?.attributes?.url
-    }
+      poster: attributes?.poster?.data?.attributes?.url,
+    };
 
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
@@ -116,7 +116,10 @@ export default function Player({ audios }) {
     <>
       <Head>
         <title>{_title}</title>
-        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_API_URL}${track.current?.poster}`} />
+        <link
+          rel='apple-touch-icon'
+          href={`${process.env.NEXT_PUBLIC_API_URL}${track.current?.poster}`}
+        />
       </Head>
 
       <div className={styles.player}>
@@ -160,7 +163,8 @@ export default function Player({ audios }) {
                 onClick={() => setIsPlayList(!isPlayList)}
               >
                 <div className={styles.playerBox__info__description}>
-                  <strong>{track.current?.author}</strong> - {track.current?.name}
+                  <strong>{track.current?.author}</strong> -{' '}
+                  {track.current?.name}
                 </div>
                 <span>
                   {currentTime} / {fullTime}
@@ -176,7 +180,9 @@ export default function Player({ audios }) {
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${
-                          track.current?.id === id ? styles.playlist__item_active : ''
+                          track.current?.id === id
+                            ? styles.playlist__item_active
+                            : ''
                         }`}
                         key={id}
                         onClick={() => {

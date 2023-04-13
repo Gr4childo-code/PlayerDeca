@@ -7,16 +7,15 @@
 }
 .showMoreTrack {
   width: 100%;
-  background: var(--gradient);
-  border: none;
-  outline: none;
-  height: 40px;
-  cursor: pointer;
-  color: var(--white);
-  font-size: 20px;
 
+  cursor: pointer;
+  padding: 5px;
+  outline: none;
+  border: 1px solid var(--ui-color-one);
+  background: var(--gray-10);
+  color: var(--white);
+  transition: background 1s;
   &:hover {
-    border: 2px solid var(--white);
+    background: var(--ui-color-one);
   }
-  transition: all 2s ease;
 }

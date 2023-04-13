@@ -3,10 +3,12 @@
   flex-direction: column;
 }
 .link {
-  display: inline-flex;
+  display: inline;
   padding-top: 10px;
   color: var(--ui-color-one);
   font-weight: bold;
+  border: 0;
+
   a {
     &:hover {
       border-bottom: 2px solid var(--ui-color-one);

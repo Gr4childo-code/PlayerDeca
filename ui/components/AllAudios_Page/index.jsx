@@ -12,7 +12,7 @@ const AllAudios_Page = ({ audios }) => {
     <div className={styles.wrapper}>
       <div className={'title'}>Все треки</div>
       <div className={styles.options}>
-        <Options play={true} like={true} queue={true} size={'lg'} />
+        <Options play={true} queue={true} size={'lg'} />
       </div>
       {audios ? (
         audios &&
@@ -30,7 +30,7 @@ const AllAudios_Page = ({ audios }) => {
       ) : (
         <div className={styles.nonTrack}>Треков нет</div>
       )}
-      {audios?.data?.length > visible && (
+      {audios && audios?.data?.length > visible && (
         <a href='#showMoreTrack'>
           <button
             name='showMoreTrack'
