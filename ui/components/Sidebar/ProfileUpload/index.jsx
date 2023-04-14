@@ -81,10 +81,20 @@ export default function DragAndDrop() {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.wrapper__right}>
+        <p className={styles.title}>Загружено: </p>
+        <ul className={styles.list}>
+          {file.map(({ name, author }, index) => (
+            <li key={index} className={styles.item}>
+              {index + 1}. {author} - {name}
+            </li>
+          ))}
+        </ul>
+      </div>
       {loader ? (
         <form onDragEnter={handleDrag}>
           <div className={styles.wrapper__left}>
-            <h2>Добавить песню</h2>
+            <p className={styles.title}>Добавить песню</p>
             <div className={styles.wrapper__dropzone}>
               <label className={styles.subTitle}>
                 Выберите обложку <br />
@@ -123,18 +133,6 @@ export default function DragAndDrop() {
       ) : (
         <Preloader />
       )}
-      <div className={styles.wrapper__right}>
-        <p>Загружено: </p>
-        {file.map(({ name, author }, id) => (
-          <ul key={id}>
-            <li>
-              <p>
-                {author} - {name}
-              </p>
-            </li>
-          </ul>
-        ))}
-      </div>
     </div>
   );
 }
