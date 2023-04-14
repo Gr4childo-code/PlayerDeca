@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+.options {
+  margin: 0 5px;
+  cursor: pointer;
+  &:hover {
+    color: var(--ui-color-one);
+  }
+}
