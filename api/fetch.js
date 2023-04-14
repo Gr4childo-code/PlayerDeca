@@ -8,35 +8,46 @@ const Api = async (
   token = API_TOKEN
 ) => {
   try {
-    let body = null;
+    let body = null
+    let headers = {
+      Authorization: `Bearer ${token}`,
+    }
 
     if (params) {
-      const form = new FormData();
+
+      const form = new FormData()
 
       form.append('data', JSON.stringify(params.data));
 
       if ('files' in params) {
         for (const file in params.files) {
-          form.append(`files.${file}`, params.files[file]);
+          form.append(`files.${file}`, params.files[file])
         }
       }
 
-      body = form;
+      body = form
+
+      if (params.json) {
+        headers = {
+          ...headers,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+        body = JSON.stringify(params.json)
+      }
     }
 
     const resp = await fetch(`${API_URL}/api/${url}`, {
       method,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body,
-    });
+      headers,
+      body
+    })
 
     console.info('success', { ok: resp.ok, status: resp.status });
 
-    return await resp.json();
+    return await resp.json()
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 };
 
