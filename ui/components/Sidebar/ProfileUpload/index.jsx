@@ -30,40 +30,34 @@ export default function DragAndDrop() {
     setLoader(false);
 
     if (e.dataTransfer) {
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
-        const audio = {
-          name: audioData[0].split(' - ')[1],
-          author: audioData[0].split(' - ')[0],
-          src: e.dataTransfer.files[0],
-        };
-        setFile([...file, audio]);
-        console.log(file);
-        createAudios(
-          {
-            data: {
-              name: audio.name,
-              author: audio.author,
-            },
-            files: {
-              src: audio.src,
-              poster: poster.current,
-            },
+      const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
+      const audio = {
+        name: audioData[0].split(' - ')[1],
+        author: audioData[0].split(' - ')[0],
+        src: e.dataTransfer.files[0],
+      };
+      setFile([...file, audio]);
+      createAudios(
+        {
+          data: {
+            name: audio.name,
+            author: audio.author,
           },
-          session?.jwt
-        ).then(() => setLoader(true));
-      }
+          files: {
+            src: audio.src,
+            poster: poster.current,
+          },
+        },
+        session?.jwt
+      ).then(() => setLoader(true));
     } else if (e.target.files) {
-      const audioData = e.target.files[0].name.split('.mp3' && '_' && ' (', [
-        1,
-      ]);
+      const audioData = e.target.files[0].name.split('.mp3', [1]);
       const audio = {
         name: audioData[0].split(' - ')[1],
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
       setFile([...file, audio]);
-      console.log(file);
       createAudios(
         {
           data: {
