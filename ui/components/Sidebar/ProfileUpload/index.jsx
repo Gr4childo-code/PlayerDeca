@@ -11,7 +11,6 @@ export default function ProfileUpload() {
   const poster = useRef(null);
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
-  const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(true);
   const { data: session } = useSession();
 
@@ -23,34 +22,6 @@ export default function ProfileUpload() {
       setLoader(true);
     } else if (e.type === 'dragleave') {
       setLoader(false);
-    }
-  };
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setLoader(false);
-
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
-      const audio = {
-        name: audioData[0].split(' - ')[1],
-        author: audioData[0].split(' - ')[0],
-        src: e.dataTransfer.files[0],
-      };
-      /* setFile(`${audio.author} - ${audio.name}`); */
-      /* createAudios(
-        {
-          data: {
-            name: audio.name,
-            author: audio.author,
-          },
-          files: {
-            src: audio.src,
-            poster: poster.current,
-          },
-        },
-        session?.jwt
-      ).then(() => setLoader(true)); */
     }
   };
 
@@ -87,8 +58,9 @@ export default function ProfileUpload() {
           author: audioData[0].split(' - ')[0],
           src: e.dataTransfer.files[0],
         };
-        setFile(`${audio.author} - ${audio.name}`);
-        createAudios(
+        console.log(audio);
+
+        /* createAudios(
           {
             data: {
               name: audio.name,
@@ -100,7 +72,7 @@ export default function ProfileUpload() {
             },
           },
           session?.jwt
-        ).then(() => setLoader(true));
+        ).then(() => setLoader(true)); */
       }
     } else if (e.target.files) {
       console.log(e.target.files[0].name);
@@ -111,7 +83,7 @@ export default function ProfileUpload() {
         src: e.target.files[0],
       };
       console.log(audio);
-      createAudios(
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -123,7 +95,7 @@ export default function ProfileUpload() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      ).then(() => setLoader(true)); */
     }
   };
 
@@ -155,30 +127,8 @@ export default function ProfileUpload() {
               onDrop={handleSelectFile}
             >
               <label className={styles.subTitle}>
-                {!file
-                  ? 'Перетащите песню в mp3 формате'
-                  : `Вы добавили : ${file}`}
+                Перенесите песню в формате mp3 <br /> или <br /> выберите её
               </label>
-
-              <label className={styles.subTitle}>или</label>
-              <input
-                required
-                type='text'
-                className={styles.input}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                placeholder='Название'
-              />
-              <input
-                required
-                type='text'
-                className={styles.input}
-                onChange={(e) => {
-                  setAuthor(e.target.value);
-                }}
-                placeholder='Автор'
-              />
               <input
                 required
                 type='file'
@@ -188,11 +138,6 @@ export default function ProfileUpload() {
                 accept='audio/mp3'
               />
             </div>
-            {poster && (author || file) ? (
-              <button className={styles.button}>Загрузить</button>
-            ) : (
-              ''
-            )}
           </div>
         </form>
       ) : (
