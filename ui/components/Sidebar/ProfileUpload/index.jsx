@@ -77,13 +77,53 @@ export default function ProfileUpload() {
   const handleSelectFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setLoader(false);
 
     if (e.dataTransfer) {
-      setFile(e.dataTransfer.files[0].name);
-      console.log(e.dataTransfer.files[0].name);
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
+        const audio = {
+          name: audioData[0].split(' - ')[1],
+          author: audioData[0].split(' - ')[0],
+          src: e.dataTransfer.files[0],
+        };
+        setFile(`${audio.author} - ${audio.name}`);
+        createAudios(
+          {
+            data: {
+              name: audio.name,
+              author: audio.author,
+            },
+            files: {
+              src: audio.src,
+              poster: poster.current,
+            },
+          },
+          session?.jwt
+        ).then(() => setLoader(true));
+      }
     } else if (e.target.files) {
-      setFile(e.target.files[0].name);
       console.log(e.target.files[0].name);
+      const audioData = e.target.files[0].name.split('.mp3', [1]);
+      const audio = {
+        name: audioData[0].split(' - ')[1],
+        author: audioData[0].split(' - ')[0],
+        src: e.target.files[0],
+      };
+      console.log(audio);
+      createAudios(
+        {
+          data: {
+            name: audio.name,
+            author: audio.author,
+          },
+          files: {
+            src: e.target.files[0],
+            poster: poster.current,
+          },
+        },
+        session?.jwt
+      ).then(() => setLoader(true));
     }
   };
 
