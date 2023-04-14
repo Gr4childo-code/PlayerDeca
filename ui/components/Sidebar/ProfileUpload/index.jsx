@@ -38,7 +38,7 @@ export default function ProfileUpload() {
         src: e.dataTransfer.files[0],
       };
       /* setFile(`${audio.author} - ${audio.name}`); */
-      createAudios(
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -50,7 +50,7 @@ export default function ProfileUpload() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      ).then(() => setLoader(true)); */
     }
   };
 
@@ -72,6 +72,19 @@ export default function ProfileUpload() {
       },
       session?.jwt
     ).then(() => setLoader(true));
+  };
+
+  const handleSelectFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.dataTransfer) {
+      setFile(e.dataTransfer.files[0].name);
+      console.log(e.dataTransfer.files[0].name);
+    } else if (e.target.files) {
+      setFile(e.target.files[0].name);
+      console.log(e.target.files[0].name);
+    }
   };
 
   return (
@@ -99,7 +112,7 @@ export default function ProfileUpload() {
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
-              onDrop={handleDrop}
+              onDrop={handleSelectFile}
             >
               <label className={styles.subTitle}>
                 {!file
@@ -130,9 +143,7 @@ export default function ProfileUpload() {
                 required
                 type='file'
                 className={styles.input}
-                onChange={(e) => {
-                  music.current = e.target.files[0];
-                }}
+                onChange={handleSelectFile}
                 placeholder='Автор'
                 accept='audio/mp3'
               />
