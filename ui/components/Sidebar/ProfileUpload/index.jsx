@@ -7,10 +7,7 @@ import { createAudios } from '@/api';
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function ProfileUpload() {
-  const music = useRef(null);
   const poster = useRef(null);
-  const [name, setName] = useState('');
-  const [author, setAuthor] = useState('');
   const [loader, setLoader] = useState(true);
   const { data: session } = useSession();
 
@@ -23,26 +20,6 @@ export default function ProfileUpload() {
     } else if (e.type === 'dragleave') {
       setLoader(false);
     }
-  };
-
-  const upload = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setLoader(false);
-
-    createAudios(
-      {
-        data: {
-          name: name,
-          author: author,
-        },
-        files: {
-          src: music.current,
-          poster: poster.current,
-        },
-      },
-      session?.jwt
-    ).then(() => setLoader(true));
   };
 
   const handleSelectFile = (e) => {
@@ -58,9 +35,7 @@ export default function ProfileUpload() {
           author: audioData[0].split(' - ')[0],
           src: e.dataTransfer.files[0],
         };
-        console.log(audio);
-
-        /* createAudios(
+        createAudios(
           {
             data: {
               name: audio.name,
@@ -72,18 +47,18 @@ export default function ProfileUpload() {
             },
           },
           session?.jwt
-        ).then(() => setLoader(true)); */
+        ).then(() => setLoader(true));
       }
     } else if (e.target.files) {
-      console.log(e.target.files[0].name);
-      const audioData = e.target.files[0].name.split('.mp3', [1]);
+      const audioData = e.target.files[0].name.split('.mp3' && '_' && ' (', [
+        1,
+      ]);
       const audio = {
         name: audioData[0].split(' - ')[1],
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
-      console.log(audio);
-      /* createAudios(
+      createAudios(
         {
           data: {
             name: audio.name,
@@ -95,7 +70,7 @@ export default function ProfileUpload() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true)); */
+      ).then(() => setLoader(true));
     }
   };
 
@@ -103,7 +78,7 @@ export default function ProfileUpload() {
     <>
       <h3>Добавить песню</h3>
       {loader ? (
-        <form onDragEnter={handleDrag} onSubmit={upload}>
+        <form onDragEnter={handleDrag}>
           <div className={styles.wrapper}>
             <div className={styles.wrapper__zone}>
               <label className={styles.subTitle}>
