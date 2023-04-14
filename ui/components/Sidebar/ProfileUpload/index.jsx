@@ -27,7 +27,7 @@ export default function DragAndDrop() {
   const handleSelectFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    /* setLoader(false); */
+    setLoader(false);
 
     if (e.dataTransfer) {
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
@@ -39,7 +39,7 @@ export default function DragAndDrop() {
         };
         setFile([...file, audio]);
         console.log(file);
-        /* createAudios(
+        createAudios(
           {
             data: {
               name: audio.name,
@@ -51,7 +51,7 @@ export default function DragAndDrop() {
             },
           },
           session?.jwt
-        ).then(() => setLoader(true)); */
+        ).then(() => setLoader(true));
       }
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3' && '_' && ' (', [
@@ -64,7 +64,7 @@ export default function DragAndDrop() {
       };
       setFile([...file, audio]);
       console.log(file);
-      /* createAudios(
+      createAudios(
         {
           data: {
             name: audio.name,
@@ -76,7 +76,7 @@ export default function DragAndDrop() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true)); */
+      ).then(() => setLoader(true));
     }
   };
   return (
@@ -102,7 +102,8 @@ export default function DragAndDrop() {
             <div className={styles.wrapper__left}>
               <div className={styles.wrapper__dropzone}>
                 <label className={styles.subTitle}>
-                  Выберите обложку <br />
+                  1. Выберите обложку в формате <br /> ( jpeg, jpg, png, webp ){' '}
+                  <br />
                 </label>
                 <input
                   required
@@ -122,7 +123,8 @@ export default function DragAndDrop() {
                 onDrop={handleSelectFile}
               >
                 <label className={styles.subTitle}>
-                  Перенесите песню в формате mp3 <br /> или <br /> выберите её
+                  2. Перенесите песню в формате mp3 <br /> или <br /> выберите
+                  её
                 </label>
                 <input
                   required
