@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '@/ui/components/Sidebar/Layout';
-import ProfileUpload from '@/ui/components/Sidebar/ProfileUpload';
+import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
 
-export default function MyPlaylists() {
+export default function UserCollection() {
   return (
     <Layout>
       <div>
-        <ProfileUpload />
+        <DragAndDrop />
       </div>
       <div>{/* Сюда нужно плейлисты пользователя */}</div>
     </Layout>

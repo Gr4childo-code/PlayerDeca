@@ -6,7 +6,7 @@ import { createAudios } from '@/api';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
-export default function ProfileUpload() {
+export default function DragAndDrop() {
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
   const [file, setFile] = useState([]);
@@ -80,12 +80,12 @@ export default function ProfileUpload() {
   };
 
   return (
-    <>
-      <h3>Добавить песню</h3>
+    <div className={styles.wrapper}>
       {loader ? (
         <form onDragEnter={handleDrag}>
-          <div className={styles.wrapper}>
-            <div className={styles.wrapper__zone}>
+          <div className={styles.wrapper__left}>
+            <h2>Добавить песню</h2>
+            <div className={styles.wrapper__dropzone}>
               <label className={styles.subTitle}>
                 Выберите обложку <br />
               </label>
@@ -100,7 +100,7 @@ export default function ProfileUpload() {
               />
             </div>
             <div
-              className={styles.wrapper__zone}
+              className={styles.wrapper__dropzone}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
@@ -123,19 +123,18 @@ export default function ProfileUpload() {
       ) : (
         <Preloader />
       )}
-      <div>
+      <div className={styles.wrapper__right}>
         <p>Загружено: </p>
         {file.map(({ name, author }, id) => (
           <ul key={id}>
             <li>
               <p>
                 {author} - {name}
-                <button>+</button>
               </p>
             </li>
           </ul>
         ))}
       </div>
-    </>
+    </div>
   );
 }
