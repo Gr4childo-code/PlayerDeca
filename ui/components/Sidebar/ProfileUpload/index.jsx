@@ -11,6 +11,7 @@ export default function DragAndDrop() {
   const [loader, setLoader] = useState(true);
   const [file, setFile] = useState([]);
   const { data: session } = useSession();
+  const [playlist, setPlaylist] = useState([]);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -78,61 +79,67 @@ export default function DragAndDrop() {
       ).then(() => setLoader(true)); */
     }
   };
-
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.wrapper__right}>
-        <p className={styles.title}>Загружено: </p>
-        <ul className={styles.list}>
-          {file.map(({ name, author }, index) => (
-            <li key={index} className={styles.item}>
-              {index + 1}. {author} - {name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      {loader ? (
-        <form onDragEnter={handleDrag}>
-          <div className={styles.wrapper__left}>
+    <div>
+      <div className={styles.wrapper}>
+        <div className={styles.wrapper__right}>
+          <p className={styles.title}>Загруженные</p>
+          <ul className={styles.list}>
+            {file.map(({ name, author }, index) => (
+              <li key={index} className={styles.item} draggable>
+                {index + 1}. {author} - {name}
+                <div>
+                  <button className={styles.button}>+</button>
+                  <button className={styles.button}>-</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {loader ? (
+          <form onDragEnter={handleDrag}>
             <p className={styles.title}>Добавить песню</p>
-            <div className={styles.wrapper__dropzone}>
-              <label className={styles.subTitle}>
-                Выберите обложку <br />
-              </label>
-              <input
-                required
-                className={styles.input}
-                type={'file'}
-                onChange={(e) => {
-                  poster.current = e.target.files[0];
-                }}
-                accept='image/jpeg, image/jpg, image/png, image/webp'
-              />
+            <div className={styles.wrapper__left}>
+              <div className={styles.wrapper__dropzone}>
+                <label className={styles.subTitle}>
+                  Выберите обложку <br />
+                </label>
+                <input
+                  required
+                  className={styles.input}
+                  type={'file'}
+                  onChange={(e) => {
+                    poster.current = e.target.files[0];
+                  }}
+                  accept='image/jpeg, image/jpg, image/png, image/webp'
+                />
+              </div>
+              <div
+                className={styles.wrapper__dropzone}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleSelectFile}
+              >
+                <label className={styles.subTitle}>
+                  Перенесите песню в формате mp3 <br /> или <br /> выберите её
+                </label>
+                <input
+                  required
+                  type='file'
+                  className={styles.input}
+                  onChange={handleSelectFile}
+                  placeholder='Автор'
+                  accept='audio/mp3'
+                />
+              </div>
             </div>
-            <div
-              className={styles.wrapper__dropzone}
-              onDragEnter={handleDrag}
-              onDragLeave={handleDrag}
-              onDragOver={handleDrag}
-              onDrop={handleSelectFile}
-            >
-              <label className={styles.subTitle}>
-                Перенесите песню в формате mp3 <br /> или <br /> выберите её
-              </label>
-              <input
-                required
-                type='file'
-                className={styles.input}
-                onChange={handleSelectFile}
-                placeholder='Автор'
-                accept='audio/mp3'
-              />
-            </div>
-          </div>
-        </form>
-      ) : (
-        <Preloader />
-      )}
+          </form>
+        ) : (
+          <Preloader />
+        )}
+      </div>
+      <div>Создать плейлист: {playlist}</div>
     </div>
   );
 }
