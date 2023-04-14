@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, use } from 'react';
 import { useSession } from 'next-auth/react';
 import Preloader from '@/ui/components/global/Preloader';
 
@@ -9,6 +9,7 @@ import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 export default function ProfileUpload() {
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
+  const [file, setFile] = useState([]);
   const { data: session } = useSession();
 
   const handleDrag = (e) => {
@@ -25,7 +26,7 @@ export default function ProfileUpload() {
   const handleSelectFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setLoader(false);
+    /* setLoader(false); */
 
     if (e.dataTransfer) {
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
@@ -35,7 +36,9 @@ export default function ProfileUpload() {
           author: audioData[0].split(' - ')[0],
           src: e.dataTransfer.files[0],
         };
-        createAudios(
+        setFile([...file, audio]);
+        console.log(file);
+        /* createAudios(
           {
             data: {
               name: audio.name,
@@ -47,7 +50,7 @@ export default function ProfileUpload() {
             },
           },
           session?.jwt
-        ).then(() => setLoader(true));
+        ).then(() => setLoader(true)); */
       }
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3' && '_' && ' (', [
@@ -58,7 +61,9 @@ export default function ProfileUpload() {
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
-      createAudios(
+      setFile([...file, audio]);
+      console.log(file);
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -70,7 +75,7 @@ export default function ProfileUpload() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      ).then(() => setLoader(true)); */
     }
   };
 
@@ -118,6 +123,19 @@ export default function ProfileUpload() {
       ) : (
         <Preloader />
       )}
+      <div>
+        <p>Загружено: </p>
+        {file.map(({ name, author }, id) => (
+          <ul key={id}>
+            <li>
+              <p>
+                {author} - {name}
+                <button>+</button>
+              </p>
+            </li>
+          </ul>
+        ))}
+      </div>
     </>
   );
 }
