@@ -27,7 +27,7 @@ export default function DragAndDrop() {
   const handleSelectFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setLoader(false);
+    /* setLoader(false); */
 
     if (e.dataTransfer) {
       const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
@@ -36,7 +36,7 @@ export default function DragAndDrop() {
         author: audioData[0].split(' - ')[0],
         src: e.dataTransfer.files[0],
       };
-      createAudios(
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -50,7 +50,9 @@ export default function DragAndDrop() {
         session?.jwt
       )
         .then(() => setLoader(true))
-        .then(() => setFile([...file, audio]));
+        .then(() => setFile([...file, audio])); */
+      setFile([...file, audio]); // потом удалить
+      console.log(file);
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3', [1]);
       const audio = {
@@ -58,7 +60,7 @@ export default function DragAndDrop() {
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
-      createAudios(
+      /* createAudios(
         {
           data: {
             name: audio.name,
@@ -72,7 +74,8 @@ export default function DragAndDrop() {
         session?.jwt
       )
         .then(() => setLoader(true))
-        .then(() => setFile([...file, audio]));
+        .then(() => setFile([...file, audio])); */
+      setFile([...file, audio]); //потом удалить
     }
   };
   return (
