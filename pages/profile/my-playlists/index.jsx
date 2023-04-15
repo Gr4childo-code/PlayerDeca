@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
+import CreatePlaylist from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
 
 import { createAudios } from '@/api';
 
@@ -78,6 +79,13 @@ export default function UserCollection() {
     }
   };
 
+  const handleAddSongPlaylist = () => {
+    setPlaylist([...file, file]);
+  };
+  const handleDeleteSongPlaylist = () => {
+    setPlaylist(['']);
+  };
+
   return (
     <Layout>
       <div>
@@ -87,11 +95,12 @@ export default function UserCollection() {
           poster={poster}
           handleDrag={handleDrag}
           handleSelectFile={handleSelectFile}
+          handleAddSongPlaylist={handleAddSongPlaylist}
+          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
         />
       </div>
       <div>
-        Создать плейлист
-        <p>{playlist}</p>
+        <CreatePlaylist playlist={playlist} />
       </div>
     </Layout>
   );

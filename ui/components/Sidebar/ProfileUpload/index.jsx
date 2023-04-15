@@ -4,11 +4,13 @@ import Preloader from '@/ui/components/global/Preloader';
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function DragAndDrop({
-  handleDrag,
-  handleSelectFile,
+  file,
   loader,
   poster,
-  file,
+  handleDrag,
+  handleSelectFile,
+  handleAddSongPlaylist,
+  handleDeleteSongPlaylist,
 }) {
   return (
     <div>
@@ -20,8 +22,18 @@ export default function DragAndDrop({
               <li key={index} className={styles.item} draggable>
                 {index + 1}. {author} - {name}
                 <div>
-                  <button className={styles.button}>+</button>
-                  <button className={styles.button}>-</button>
+                  <button
+                    className={styles.button}
+                    onClick={handleAddSongPlaylist}
+                  >
+                    +
+                  </button>
+                  <button
+                    className={styles.button}
+                    onClick={handleDeleteSongPlaylist}
+                  >
+                    -
+                  </button>
                 </div>
               </li>
             ))}
