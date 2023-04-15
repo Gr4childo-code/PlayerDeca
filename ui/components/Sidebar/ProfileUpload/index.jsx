@@ -36,7 +36,6 @@ export default function DragAndDrop() {
         author: audioData[0].split(' - ')[0],
         src: e.dataTransfer.files[0],
       };
-      setFile([...file, audio]);
       createAudios(
         {
           data: {
@@ -49,7 +48,9 @@ export default function DragAndDrop() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      )
+        .then(() => setLoader(true))
+        .then(() => setFile([...file, audio]));
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3', [1]);
       const audio = {
@@ -57,7 +58,6 @@ export default function DragAndDrop() {
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
-      setFile([...file, audio]);
       createAudios(
         {
           data: {
@@ -70,7 +70,9 @@ export default function DragAndDrop() {
           },
         },
         session?.jwt
-      ).then(() => setLoader(true));
+      )
+        .then(() => setLoader(true))
+        .then(() => setFile([...file, audio]));
     }
   };
   return (
