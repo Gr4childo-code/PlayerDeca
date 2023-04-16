@@ -59,3 +59,5 @@ export const getPlaylistByID = async (queryID) => {
   );
   return await Api(`playlists?${query}`);
 };
+
+export const postPlaylist = async (params, token) => Api('playlists', 'POST', params, token)

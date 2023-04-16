@@ -4,7 +4,7 @@ import Layout from '@/ui/components/Sidebar/Layout';
 import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
 import CreatePlaylist from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
 
-import { createAudios } from '@/api';
+import { createAudios, postPlaylist } from '@/api';
 
 export default function UserCollection() {
   const [playlist, setPlaylist] = useState([]);
@@ -83,7 +83,26 @@ export default function UserCollection() {
     setPlaylist([...playlist, files[index]]);
   };
   const handleDeleteSongPlaylist = () => {
-    setPlaylist(['']);
+    setPlaylist(null);
+  };
+
+  const uploadPlaylist = () => {
+    /*  setLoader(false);
+    postPlaylist(
+      {
+        data: {
+          title: 'У тебя получилось',
+          user_id: session?.user.id,
+        },
+        files: {
+          src: { ...playlist },
+        },
+      },
+      session?.jwt
+    )
+      .then(() => setLoader(true))
+      .then(() => setPlaylist([''])); */
+    console.log('Загруженный плейлист: ', playlist);
   };
 
   return (
@@ -100,7 +119,7 @@ export default function UserCollection() {
         />
       </div>
       <div>
-        <CreatePlaylist playlist={playlist} />
+        <CreatePlaylist playlist={playlist} uploadPlaylist={uploadPlaylist} />
       </div>
     </Layout>
   );
