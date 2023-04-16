@@ -79,20 +79,20 @@
   width: 100%;
   min-height: 150px;
   padding: 10px;
-  border: 2px solid var(--ui-color-one);
   border-radius: 5px;
 
   .item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     min-height: 40px;
     margin: 5px 0;
     padding: 10px;
-    border: 2px solid var(--black-50);
+    border: 2px solid var(--gray-80);
     border-radius: 5px;
     &:hover {
       transition: 0.5s;
-      border: 2px solid var(--white-20);
+      border: 2px solid var(--white-50);
       cursor: pointer;
     }
   }
@@ -116,6 +116,35 @@
 }
 
 .playlists {
+  border-top: 2px solid var(--ui-color-one);
+  margin-top: 50px;
+  &__title {
+    font-size: 20px;
+    padding: 10px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    margin: 5px 0;
+    padding: 10px;
+    border: 2px solid var(--gray-80);
+    border-radius: 5px;
+    &:hover {
+      transition: 0.5s;
+      border: 2px solid var(--white-50);
+      cursor: pointer;
+    }
+  }
   &__button {
     margin: 20px auto 0;
     width: 120px;

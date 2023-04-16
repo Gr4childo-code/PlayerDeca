@@ -10,17 +10,17 @@ export default function CreatePlaylist({
   handleDeleteSongPlaylist,
 }) {
   return (
-    <div>
-      <p className={styles.title}>Создать плейлист</p>
-      <ul className={styles.list}>
+    <div className={styles.playlists}>
+      <p className={styles.playlists__title}>Создать подборку</p>
+      <ul className={styles.playlists__list}>
         <input
           className={styles.input__playlistName}
           value={playlistName}
-          placeholder='Придумайте название плейлиста...'
+          placeholder='Придумайте название...'
           onChange={(e) => handlePlaylistName(e)}
         />
         {playlist.map(({ name, author }, index) => (
-          <li key={index} className={styles.item}>
+          <li key={index} className={styles.playlists__item}>
             {index + 1}. {author} - {name}
             <div>
               <button
