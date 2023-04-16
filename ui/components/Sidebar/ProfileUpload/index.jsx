@@ -4,7 +4,7 @@ import Preloader from '@/ui/components/global/Preloader';
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function DragAndDrop({
-  file,
+  files,
   loader,
   poster,
   handleDrag,
@@ -18,13 +18,13 @@ export default function DragAndDrop({
         <div className={styles.wrapper__right}>
           <p className={styles.title}>Загруженные</p>
           <ul className={styles.list}>
-            {file.map(({ name, author }, index) => (
+            {files.map(({ name, author }, index) => (
               <li key={index} className={styles.item} draggable>
                 {index + 1}. {author} - {name}
                 <div>
                   <button
                     className={styles.button}
-                    onClick={handleAddSongPlaylist}
+                    onClick={() => handleAddSongPlaylist(index)}
                   >
                     +
                   </button>

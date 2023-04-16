@@ -12,6 +12,7 @@ export default function CreatePlaylist({ playlist }) {
             {index + 1}. {author} - {name}
           </li>
         ))}
+        <button className={styles.playlists__button}>Загрузить</button>
       </ul>
     </div>
   );

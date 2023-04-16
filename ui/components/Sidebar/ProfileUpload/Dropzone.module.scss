@@ -104,6 +104,24 @@
   }
 }
 
+.playlists {
+  &__button {
+    margin: 10px auto;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--ui-color-one);
+    background: var(--gray-10);
+    color: var(--white);
+    transition: background 0.5s;
+    &:hover,
+    &:active {
+      background-color: var(--ui-color-one);
+    }
+  }
+}
 @include mq(Sphone) {
   .wrapper {
     margin-top: 10px;

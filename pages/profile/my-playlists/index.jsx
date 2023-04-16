@@ -10,7 +10,7 @@ export default function UserCollection() {
   const [playlist, setPlaylist] = useState([]);
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
-  const [file, setFile] = useState([] || null);
+  const [files, setFiles] = useState([] || null);
   const { data: session } = useSession();
 
   const handleDrag = (e) => {
@@ -50,9 +50,9 @@ export default function UserCollection() {
         session?.jwt
       )
         .then(() => setLoader(true))
-        .then(() => setFile([...file, audio])); */
-      setFile([...file, audio]); // потом удалить
-      console.log(file);
+        .then(() => setFiles([...files, audio])); */
+      setFiles([...files, audio]); // потом удалить
+      console.log(files);
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3', [1]);
       const audio = {
@@ -74,13 +74,13 @@ export default function UserCollection() {
         session?.jwt
       )
         .then(() => setLoader(true))
-        .then(() => setFile([...file, audio])); */
-      setFile([...file, audio]); //потом удалить
+        .then(() => setFiles([...files, audio])); */
+      setFiles([...files, audio]); //потом удалить
     }
   };
 
-  const handleAddSongPlaylist = () => {
-    setPlaylist([...file, file]);
+  const handleAddSongPlaylist = (index) => {
+    setPlaylist([...playlist, files[index]]);
   };
   const handleDeleteSongPlaylist = () => {
     setPlaylist(['']);
@@ -90,7 +90,7 @@ export default function UserCollection() {
     <Layout>
       <div>
         <DragAndDrop
-          file={file}
+          files={files}
           loader={loader}
           poster={poster}
           handleDrag={handleDrag}
