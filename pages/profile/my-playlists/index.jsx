@@ -8,6 +8,7 @@ import { createAudios, postPlaylist } from '@/api';
 
 export default function UserCollection() {
   const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setPlaylistName] = useState('');
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
   const [files, setFiles] = useState([] || null);
@@ -18,9 +19,9 @@ export default function UserCollection() {
     e.stopPropagation();
 
     if (e.type === 'dragenter' || e.type === 'dragover') {
-      setLoader(true);
+      /* setLoader(true); */
     } else if (e.type === 'dragleave') {
-      setLoader(false);
+      /* setLoader(false); */
     }
   };
 
@@ -81,28 +82,36 @@ export default function UserCollection() {
 
   const handleAddSongPlaylist = (index) => {
     setPlaylist([...playlist, files[index]]);
+    console.log('Добавил песню: ', files[index]);
   };
   const handleDeleteSongPlaylist = (index) => {
     setPlaylist([...playlist.slice(0, index), ...playlist.slice(index + 1)]);
+    console.log('Удалил песню: ', files[index]);
   };
 
+  console.log('Твой плейлист', playlist);
+
   const uploadPlaylist = () => {
-    /*  setLoader(false);
+    setLoader(false);
     postPlaylist(
       {
         data: {
-          title: 'У тебя получилось',
+          title: playlistName,
           user_id: session?.user.id,
         },
         files: {
-          src: { ...playlist },
+          src: playlist,
         },
       },
       session?.jwt
     )
       .then(() => setLoader(true))
-      .then(() => setPlaylist([''])); */
+      .then(() => setPlaylist([]));
     console.log('Загруженный плейлист: ', playlist);
+  };
+
+  const handlePlaylistName = (e) => {
+    setPlaylistName(e.target.value);
   };
 
   return (
@@ -121,7 +130,9 @@ export default function UserCollection() {
       <div>
         <CreatePlaylist
           playlist={playlist}
+          playlistName={playlistName}
           uploadPlaylist={uploadPlaylist}
+          handlePlaylistName={handlePlaylistName}
           handleDeleteSongPlaylist={handleDeleteSongPlaylist}
         />
       </div>

@@ -10,7 +10,6 @@ export default function DragAndDrop({
   handleDrag,
   handleSelectFile,
   handleAddSongPlaylist,
-  handleDeleteSongPlaylist,
 }) {
   return (
     <div>
@@ -19,7 +18,7 @@ export default function DragAndDrop({
           <p className={styles.title}>Загруженные</p>
           <ul className={styles.list}>
             {files.map(({ name, author }, index) => (
-              <li key={index} className={styles.item} draggable>
+              <li key={index} className={styles.item}>
                 {index + 1}. {author} - {name}
                 <div>
                   <button
