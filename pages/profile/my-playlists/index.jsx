@@ -82,8 +82,8 @@ export default function UserCollection() {
   const handleAddSongPlaylist = (index) => {
     setPlaylist([...playlist, files[index]]);
   };
-  const handleDeleteSongPlaylist = () => {
-    setPlaylist(null);
+  const handleDeleteSongPlaylist = (index) => {
+    setPlaylist([...playlist.slice(0, index), ...playlist.slice(index + 1)]);
   };
 
   const uploadPlaylist = () => {
@@ -119,7 +119,11 @@ export default function UserCollection() {
         />
       </div>
       <div>
-        <CreatePlaylist playlist={playlist} uploadPlaylist={uploadPlaylist} />
+        <CreatePlaylist
+          playlist={playlist}
+          uploadPlaylist={uploadPlaylist}
+          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
+        />
       </div>
     </Layout>
   );

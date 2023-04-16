@@ -28,12 +28,6 @@ export default function DragAndDrop({
                   >
                     +
                   </button>
-                  <button
-                    className={styles.button}
-                    onClick={handleDeleteSongPlaylist}
-                  >
-                    -
-                  </button>
                 </div>
               </li>
             ))}

@@ -2,7 +2,11 @@ import React from 'react';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
-export default function CreatePlaylist({ playlist, uploadPlaylist }) {
+export default function CreatePlaylist({
+  playlist,
+  uploadPlaylist,
+  handleDeleteSongPlaylist,
+}) {
   return (
     <div>
       <p className={styles.title}>Создать плейлист</p>
@@ -16,6 +20,14 @@ export default function CreatePlaylist({ playlist, uploadPlaylist }) {
         {playlist.map(({ name, author }, index) => (
           <li key={index} className={styles.item}>
             {index + 1}. {author} - {name}
+            <div>
+              <button
+                className={styles.button}
+                onClick={() => handleDeleteSongPlaylist(index)}
+              >
+                -
+              </button>
+            </div>
           </li>
         ))}
       </ul>
