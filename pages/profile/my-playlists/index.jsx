@@ -11,7 +11,7 @@ export default function UserCollection() {
   const [playlistName, setPlaylistName] = useState('');
   const poster = useRef(null);
   const [loader, setLoader] = useState(true);
-  const [files, setFiles] = useState([] || null);
+  const [files, setFiles] = useState([] || '');
   const { data: session } = useSession();
 
   const handleDrag = (e) => {
@@ -37,6 +37,8 @@ export default function UserCollection() {
         author: audioData[0].split(' - ')[0],
         src: e.dataTransfer.files[0],
       };
+      setFiles([...files, audio]);
+      console.log(files);
       /* createAudios(
         {
           data: {
@@ -52,8 +54,8 @@ export default function UserCollection() {
       )
         .then(() => setLoader(true))
         .then(() => setFiles([...files, audio])); */
-      setFiles([...files, audio]); // потом удалить
-      console.log(files);
+
+      /* setFiles([...files, audio]); */ // потом удалить
     } else if (e.target.files) {
       const audioData = e.target.files[0].name.split('.mp3', [1]);
       const audio = {
@@ -61,6 +63,8 @@ export default function UserCollection() {
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
       };
+      setFiles([...files, audio]);
+      console.log(files);
       /* createAudios(
         {
           data: {
@@ -76,7 +80,7 @@ export default function UserCollection() {
       )
         .then(() => setLoader(true))
         .then(() => setFiles([...files, audio])); */
-      setFiles([...files, audio]); //потом удалить
+      /* setFiles([...files, audio]); //потом удалить */
     }
   };
 
@@ -106,8 +110,25 @@ export default function UserCollection() {
       session?.jwt
     )
       .then(() => setLoader(true))
+      .then(() => setPlaylistName(''))
       .then(() => setPlaylist([]));
     console.log('Загруженный плейлист: ', playlist);
+  };
+
+  const upload = (index) => {
+    createAudios(
+      {
+        data: {
+          name: files[index].name,
+          author: files[index].author,
+        },
+        files: {
+          src: files[index].src,
+          poster: poster.current,
+        },
+      },
+      session?.jwt
+    ).then(() => setLoader(true));
   };
 
   const handlePlaylistName = (e) => {
@@ -118,6 +139,7 @@ export default function UserCollection() {
     <Layout>
       <div>
         <DragAndDrop
+          upload={upload}
           files={files}
           loader={loader}
           poster={poster}

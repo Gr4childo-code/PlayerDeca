@@ -10,12 +10,13 @@ export default function DragAndDrop({
   handleDrag,
   handleSelectFile,
   handleAddSongPlaylist,
+  upload,
 }) {
   return (
     <div>
       <div className={styles.wrapper}>
         <div className={styles.wrapper__right}>
-          <p className={styles.title}>Загруженные</p>
+          <p className={styles.title}>Добавленные</p>
           <ul className={styles.list}>
             {files.map(({ name, author }, index) => (
               <li key={index} className={styles.item}>
@@ -26,6 +27,12 @@ export default function DragAndDrop({
                     onClick={() => handleAddSongPlaylist(index)}
                   >
                     +
+                  </button>
+                  <button
+                    className={styles.button__upload}
+                    onClick={() => upload(index)}
+                  >
+                    Загрузить
                   </button>
                 </div>
               </li>

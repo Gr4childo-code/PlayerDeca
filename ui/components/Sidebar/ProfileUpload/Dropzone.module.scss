@@ -113,6 +113,22 @@
   &:active {
     background-color: var(--ui-color-one);
   }
+  &__upload {
+    width: 100px;
+    margin: 0 4px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--ui-color-one);
+    background: var(--gray-10);
+    color: var(--white);
+    transition: background 0.5s;
+    &:hover,
+    &:active {
+      background-color: var(--ui-color-one);
+    }
+  }
 }
 
 .playlists {
@@ -120,7 +136,7 @@
   margin-top: 50px;
   &__title {
     font-size: 20px;
-    padding: 10px;
+    padding-top: 10px;
   }
   &__list {
     display: flex;
