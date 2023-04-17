@@ -2,25 +2,12 @@
   font-size: 30px;
   text-align: center;
 }
-.user,
-.info {
+.user {
   margin: 0 10px;
-}
-
-.info {
-  font-size: 30px;
-  .descr {
-    font-size: 18px;
-  }
-}
-
-.subTitle {
-  color: var(--ui-color-one);
 }
 .settings {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   &__list,
   .user {
     display: flex;
@@ -36,7 +23,7 @@
   }
 
   &__button {
-    margin: 0 5px;
+    margin: 0 5px 20px;
     width: 100px;
     height: 40px;
     border-radius: 5px;

@@ -30,7 +30,6 @@ const Details = ({ response }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Script src='https://kit.fontawesome.com/fb72704844.js' />
       <div className='container'>
         <Playlist_Page playlist={data} />
       </div>
