@@ -9,16 +9,14 @@ const Top10 = ({ audioTop }) => {
   const { setAudioContext } = useContext(AppContext);
 
   return (
-    <div className='container'>
-      <div className={styles.wrapper} onClick={() => setAudioContext(audioTop)}>
-        <div className='title'>Топ 10</div>
-        {audioTop.data?.map(({ id, attributes }, index) => (
-          <Track key={id} id={id} index={index + 1} attributes={attributes} />
-        ))}
-        <span className={styles.link}>
-          <Link href={'/allAudios'}>Посмотреть все треки</Link>
-        </span>
-      </div>
+    <div className={styles.wrapper} onClick={() => setAudioContext(audioTop)}>
+      <div className='title'>Топ 10</div>
+      {audioTop.data?.map(({ id, attributes }, index) => (
+        <Track key={id} id={id} index={index + 1} attributes={attributes} />
+      ))}
+      <span className={styles.link}>
+        <Link href={'/allAudios'}>Посмотреть все треки</Link>
+      </span>
     </div>
   );
 };

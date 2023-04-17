@@ -39,6 +39,7 @@
   background: var(--gray-10);
   color: var(--white);
   transition: background 1s;
+  border-radius: 5px;
   &:hover,
   &:active {
     background-color: var(--ui-color-one);

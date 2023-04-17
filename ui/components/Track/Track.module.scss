@@ -138,3 +138,9 @@
     }
   }
 }
+@include mq(XSphone) {
+  .track {
+    height: 80px;
+    gap: 5px;
+  }
+}

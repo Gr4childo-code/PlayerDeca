@@ -5,6 +5,11 @@ export const getPlaylistNew = async () => {
   const query = stringify(
     {
       fields: ['title', 'createdAt'],
+      sort: ['createdAt:desc'],
+      pagination: {
+        start: 0,
+        limit: 5,
+      },
       populate: {
         poster: {
           fields: ['url'],
@@ -14,7 +19,6 @@ export const getPlaylistNew = async () => {
         },
         sort: ['name'],
       },
-      //   sort: ['createdAt:desc'],
     },
     {
       encodeValuesOnly: true,
@@ -60,4 +64,5 @@ export const getPlaylistByID = async (queryID) => {
   return await Api(`playlists?${query}`);
 };
 
-export const postPlaylist = async (params, token) => Api('playlists', 'POST', params, token)
+export const postPlaylist = async (params, token) =>
+  Api('playlists', 'POST', params, token);
