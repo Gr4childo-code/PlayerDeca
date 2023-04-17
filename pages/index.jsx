@@ -11,6 +11,8 @@ import EventsAll from '@/ui/components/DlessEvents/EventsAll';
 
 //Utils
 import { getAudiosTop, getPlaylistNew, getEvents } from '@/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMusic, faCalendar } from '@fortawesome/free-solid-svg-icons';
 
 export const getServerSideProps = async () => {
   const audioTop = await getAudiosTop();
@@ -37,18 +39,25 @@ export default function Home({ audioTop, playlistsNew, events }) {
             <div className='slider'>
               <div className='title'>События DLESS</div>
               <Slider buttons={true} pagination={true}>
-                {events.data?.map(({ id, attributes }, index) => (
+                {events.data?.map(({ id, attributes }) => (
                   <SliderItem key={id}>
                     <Link href={`/events/${id}`}>
-                      <img
-                        className='slides'
-                        src={
-                          process.env.NEXT_PUBLIC_API_URL +
-                          events.data[index].attributes.poster.data.attributes
-                            .url
-                        }
-                        alt={'image'}
-                      />
+                      {attributes.poster?.data?.attributes?.url ? (
+                        <img
+                          className='slides'
+                          src={
+                            process.env.NEXT_PUBLIC_API_URL +
+                            attributes?.poster?.data?.attributes?.url
+                          }
+                          alt={'image'}
+                        />
+                      ) : (
+                        <div className='slides'>
+                          <div className='noImage'>
+                            <FontAwesomeIcon icon={faCalendar} size='10x' />{' '}
+                          </div>
+                        </div>
+                      )}
                       <ul className='slides__list'>
                         <li className='slides__description'>
                           <p className='slides__date'>
@@ -75,23 +84,31 @@ export default function Home({ audioTop, playlistsNew, events }) {
                 {playlistsNew.data?.map(({ id, attributes }, index) => (
                   <SliderItem key={id}>
                     <Link href={`/playlist/${id}`}>
-                      <img
-                        className='slides'
-                        src={
-                          process.env.NEXT_PUBLIC_API_URL +
-                          playlistsNew.data[index].attributes.poster.data
-                            .attributes.url
-                        }
-                        alt={'image'}
-                      />
+                      {attributes.poster?.data?.attributes?.url ? (
+                        <img
+                          className='slides'
+                          src={
+                            process.env.NEXT_PUBLIC_API_URL +
+                            attributes?.poster?.data?.attributes?.url
+                          }
+                          alt={'image'}
+                        />
+                      ) : (
+                        <div className='slides'>
+                          <div className='noImage'>
+                            <FontAwesomeIcon icon={faMusic} size='10x' />{' '}
+                          </div>
+                        </div>
+                      )}
+
                       <ul className='slides__list'>
                         <h2 className='slides__description'>
                           {
-                            playlistsNew.data[index].attributes
-                              .users_permissions_user.data.attributes.username
+                            attributes.users_permissions_user.data.attributes
+                              .username
                           }
                         </h2>
-                        <li className='slides__item'>{attributes.title}</li>
+                        <li className='slides__item'>{attributes.title} </li>
                       </ul>
                     </Link>
                   </SliderItem>

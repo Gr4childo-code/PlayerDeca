@@ -89,8 +89,7 @@
 @include mq(tablet) {
   .search {
     &__overflow {
-      width: 100%;
-
+      width: auto;
       &__active {
         width: calc(100% - 200px);
       }

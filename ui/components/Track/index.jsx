@@ -20,7 +20,7 @@ const Track = ({ id, index, attributes, size = 'sm' }) => {
           />
         ) : (
           <div className={styles.track__cover__font}>
-            <FontAwesomeIcon icon={faMusic} />
+            <FontAwesomeIcon icon={faMusic} size={'xl'} />
           </div>
         )}
 
