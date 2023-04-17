@@ -9,7 +9,6 @@ import {
   faHouse,
   faSliders,
   faRightFromBracket,
-  faTrophy,
   faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,12 +29,6 @@ export default function Sidebar() {
       label: 'Общие',
       icon: <FontAwesomeIcon icon={faHouse} />,
       link: '/profile',
-    },
-    {
-      id: 2,
-      label: 'Статистика',
-      icon: <FontAwesomeIcon icon={faTrophy} />,
-      link: '/profile/account',
     },
     {
       id: 3,
