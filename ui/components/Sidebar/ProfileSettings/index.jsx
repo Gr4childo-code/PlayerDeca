@@ -3,143 +3,164 @@ import Toast from '@/ui/components/global/Toast/index';
 
 import styles from '../../Sidebar/ProfileSettings/Settings.module.scss';
 
+import { postPassword, putEmail, putName } from '@/api';
+import { validatePassword, validateEmail } from '@/utils/validators';
+
 export default function ProfileSettings({ user, token }) {
   const [list, setList] = useState([]);
-  const { id, username, name, email } = user;
+  const { name, email, id } = user;
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const validatePassword = (password) => {
-    const passwordRegEx = /(?=.*[0-9])[0-9a-zA-Z!@#$%^&*]{6,20}/g;
-    if (password === passwordConfirmation && password !== currentPassword) {
-      return passwordRegEx.test(password);
-    } else {
-      setList([
-        ...list,
+  const successNotify = () => {
+    setList([
+      ...list,
+      {
+        id: Date.now(),
+        type: 'success',
+        description: 'Успешно',
+      },
+    ]);
+    clearInput();
+  };
+  const errorNotify = () => {
+    setList([
+      ...list,
+      {
+        id: Date.now(),
+        type: 'error',
+        description: 'Ошибка, проверьте корректность данных',
+      },
+    ]);
+    clearInput();
+  };
+
+  const clearInput = () => {
+    setNewName('');
+    setNewEmail('');
+    setCurrentPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
+  };
+
+  const updateUserName = () => {
+    if (newName.length >= 6) {
+      putName(
         {
-          id: Date.now(),
-          type: 'error',
-          description: 'Введите корректный пароль',
+          json: {
+            name: newName,
+          },
         },
-      ]);
+        token,
+        id
+      );
+      successNotify();
+    } else {
+      errorNotify();
     }
   };
 
-  const changePassword = async () => {
-    const response = await fetch(
-      'https://api.dless.ru/api/auth/change-password',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}
-`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          currentPassword: currentPassword,
-          password: password,
-          passwordConfirmation: passwordConfirmation,
-        }),
-      }
-    );
-    if (response.ok && response.status === 200) {
-      setList([
-        ...list,
-        {
-          id: Date.now(),
-          type: 'success',
-          description: 'Пароль успешно обновлён',
-        },
-      ]);
+  const updateUserEmail = () => {
+    if (!validateEmail(newEmail)) {
+      errorNotify();
     } else {
-      setList([
-        ...list,
+      putEmail(
         {
-          id: Date.now(),
-          type: 'error',
-          description: 'Ошибка смены пароля',
+          json: {
+            email: newEmail,
+          },
         },
-      ]);
-    }
-  };
-  const clearInput = () => {
-    if (updatePasswordHandle) {
-      setPassword('');
-      setPasswordConfirmation('');
+        token,
+        id
+      );
+      successNotify();
     }
   };
 
   const updatePasswordHandle = () => {
-    validatePassword(password) && changePassword()
-      ? clearInput()
-      : clearInput();
+    if (!validatePassword(currentPassword, password, passwordConfirmation)) {
+      errorNotify();
+    } else {
+      postPassword(
+        {
+          json: {
+            currentPassword: currentPassword,
+            password: password,
+            passwordConfirmation: passwordConfirmation,
+          },
+        },
+        token
+      );
+      successNotify();
+    }
   };
 
   return (
     <div>
       <Toast toastlist={list} setList={setList} />
       <div className={styles.wrapper}>
-        <div className={styles.info}>
-          <h3 className={styles.subTitle}>Информация о профиле</h3>
-          <ul className={styles.settings__list}>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Id: ${id}`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Username: ${username}`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Имя пользователя: ${
-                name || 'отсутствует'
-              }`}</p>
-            </li>
-            <li className={styles.settings__item}>
-              <p className={styles.descr}>{`Email: ${email}`}</p>
-            </li>
-          </ul>
-        </div>
         <div className={styles.settings}>
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить имя</h3>
+            <h3>Изменить имя</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
+                  autoComplete='off'
                   className={styles.settings__input}
                   type={'text'}
                   value={newName}
-                  placeholder='Изменить имя'
+                  placeholder={name}
                   onChange={(e) => setNewName(e.target.value)}
                 />
-                <button className={styles.settings__button} type={'submit'}>
-                  Изменить
-                </button>
+                {newName && (
+                  <label className={styles.label}> Не менее 6 символов </label>
+                )}
               </li>
             </ul>
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={updateUserName}
+            >
+              Изменить
+            </button>
           </div>
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить email</h3>
+            <h3>Изменить email</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
                   className={styles.settings__input}
                   type={'email'}
-                  value={newEmail}
-                  placeholder='Изменить емайл'
+                  value={email}
+                  placeholder={email}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
-                <button className={styles.settings__button} type={'submit'}>
-                  Изменить
-                </button>
+              </li>
+              <li className={styles.settings__item}>
+                <input
+                  className={styles.settings__input}
+                  type={'email'}
+                  value={newEmail}
+                  placeholder={'New email'}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
               </li>
             </ul>
+            <button
+              className={styles.settings__button}
+              type={'submit'}
+              onClick={updateUserEmail}
+            >
+              Изменить
+            </button>
           </div>
 
           <div className={styles.user}>
-            <h3 className={styles.subTitle}>Изменить пароль</h3>
+            <h3>Изменить пароль</h3>
             <ul className={styles.settings__list}>
               <li className={styles.settings__item}>
                 <input
@@ -161,7 +182,7 @@ export default function ProfileSettings({ user, token }) {
                 {password && (
                   <label className={styles.label}>
                     {' '}
-                    Буквы и цифры. Не менее 6 символов.{' '}
+                    Буквы и цифры. Не менее 6 символов{' '}
                   </label>
                 )}
               </li>
