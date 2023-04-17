@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .wrapper {
   display: flex;
@@ -42,11 +42,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 400px;
+    width: 50%;
     padding: 10px;
   }
   &__right {
-    width: calc(100% - 420px);
+    width: 50%;
   }
   &__texts {
     margin: 0 40px;
@@ -94,7 +94,7 @@
   }
 }
 
-@include mq(Lphone) {
+@include mq(tablet) {
   .wrapper {
     flex-direction: column;
   }
@@ -129,6 +129,16 @@
     }
     &__right {
       width: 100%;
+    }
+  }
+}
+@include mq(XSphone) {
+  .eventInfo {
+    &__texts {
+      flex-direction: column;
+    }
+    &__title {
+      font-size: 20px;
     }
   }
 }

@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .search {
   width: 100%;
@@ -104,6 +104,13 @@
       &__active {
         width: calc(100% - 100px);
       }
+    }
+  }
+}
+@include mq(Mphone) {
+  .search {
+    .item {
+      font-size: 12px;
     }
   }
 }

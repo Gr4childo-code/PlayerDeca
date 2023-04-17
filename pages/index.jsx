@@ -68,36 +68,35 @@ export default function Home({ audioTop, playlistsNew, events }) {
                 ))}
               </Slider>
             </div>
-            <div className='playlists'>
-              <div className='slider'>
-                <div className='title'>Новинки от пользователей</div>
-                <Slider buttons={true} pagination={true}>
-                  {playlistsNew.data?.map(({ id, attributes }, index) => (
-                    <SliderItem key={id}>
-                      <Link href={`/playlist/${id}`}>
-                        <img
-                          className='playlists__image'
-                          src={
-                            process.env.NEXT_PUBLIC_API_URL +
-                            playlistsNew.data[index].attributes.poster.data
-                              .attributes.url
+
+            <div className='slider'>
+              <div className='title'>Новинки от пользователей</div>
+              <Slider buttons={true} pagination={true}>
+                {playlistsNew.data?.map(({ id, attributes }, index) => (
+                  <SliderItem key={id}>
+                    <Link href={`/playlist/${id}`}>
+                      <img
+                        className='slides'
+                        src={
+                          process.env.NEXT_PUBLIC_API_URL +
+                          playlistsNew.data[index].attributes.poster.data
+                            .attributes.url
+                        }
+                        alt={'image'}
+                      />
+                      <ul className='slides__list'>
+                        <h2 className='slides__description'>
+                          {
+                            playlistsNew.data[index].attributes
+                              .users_permissions_user.data.attributes.username
                           }
-                          alt={'image'}
-                        />
-                        <ul className='slides__list'>
-                          <h2 className='slides__description'>
-                            {
-                              playlistsNew.data[index].attributes
-                                .users_permissions_user.data.attributes.username
-                            }
-                          </h2>
-                          <li className='slides__item'>{attributes.title}</li>
-                        </ul>
-                      </Link>
-                    </SliderItem>
-                  ))}
-                </Slider>
-              </div>
+                        </h2>
+                        <li className='slides__item'>{attributes.title}</li>
+                      </ul>
+                    </Link>
+                  </SliderItem>
+                ))}
+              </Slider>
             </div>
             <EventsAll events={events} />
           </div>

@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@
   background: var(--gray-10);
   color: var(--white);
   transition: background 1s;
+  border-radius: 5px;
   &:hover,
   &:active {
     background-color: var(--ui-color-one);
@@ -59,9 +60,10 @@
     cursor: pointer;
     padding: 5px;
 
-    color: var(--gray-60);
+    color: var(--white-80);
     &:hover {
       color: var(--white);
+
       background: var(--ui-color-one);
       transition: all 0.8s;
       opacity: 1;

@@ -126,3 +126,20 @@
     padding-left: 0;
   }
 }
+
+@include mq(XSphone) {
+  .side__bar {
+    &__description {
+      .release {
+        &__dates {
+          font-size: 15px;
+        }
+      }
+      .rate {
+        &__star {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
