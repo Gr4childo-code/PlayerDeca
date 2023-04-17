@@ -296,6 +296,14 @@ a {
       &__time {
         font-size: 15px;
       }
+      &__item {
+        font-size: 10px;
+
+        &:last-child {
+          font-size: 10px;
+          opacity: 0.6;
+        }
+      }
     }
   }
 }
