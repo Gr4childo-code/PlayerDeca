@@ -1,9 +1,9 @@
 import Header from '@/ui/components/global/Header';
 
-export default function Layout({ menu, children }) {
+export default function Layout({ children }) {
   return (
     <main>
-      <Header menu={menu} />
+      <Header />
       {children}
     </main>
   );
