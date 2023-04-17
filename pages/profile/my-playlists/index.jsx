@@ -87,35 +87,37 @@ export default function UserCollection() {
       });
   };
 
-  const upload = (index) => {
-    setDragLoader(false);
-    createAudios(
-      {
-        data: {
-          name: files[index].name,
-          author: files[index].author,
-        },
-        files: {
-          src: files[index].src,
-          poster: poster.current,
-        },
-      },
-      session?.jwt
-    )
-      .then(() => setDragLoader(true))
-      .then(() =>
-        setList([
-          ...list,
-          {
-            id: Date.now(),
-            type: 'success',
-            description: 'Успешно загружено',
+  const uploadAll = (files) => {
+    files.forEach((element) => {
+      setDragLoader(false);
+      createAudios(
+        {
+          data: {
+            name: element.name,
+            author: element.author,
           },
-        ])
+          files: {
+            src: element.src,
+            poster: poster.current,
+          },
+        },
+        session?.jwt
       )
-      .catch((error) => {
-        throw error;
-      });
+        .then(() => setDragLoader(true))
+        .then(() =>
+          setList([
+            ...list,
+            {
+              id: Date.now(),
+              type: 'success',
+              description: 'Успешно загружено',
+            },
+          ])
+        )
+        .catch((error) => {
+          throw error;
+        });
+    });
   };
 
   const handlePlaylistName = (e) => {
@@ -129,7 +131,7 @@ export default function UserCollection() {
         <div className='uploaded__left'>
           <Uploaded
             files={files}
-            upload={upload}
+            uploadAll={uploadAll}
             handleDeleteSong={handleDeleteSong}
             handleAddSongPlaylist={handleAddSongPlaylist}
           />
@@ -139,7 +141,6 @@ export default function UserCollection() {
             files={files}
             dragLoader={dragLoader}
             poster={poster}
-            upload={upload}
             handleDrag={handleDrag}
             handleSelectFile={handleSelectFile}
             handleAddSongPlaylist={handleAddSongPlaylist}

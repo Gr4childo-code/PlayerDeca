@@ -5,6 +5,7 @@ import styles from '@/ui/components/Sidebar/ProfileUpload/Uploaded/Uploaded.modu
 export default function Uploaded({
   files,
   upload,
+  uploadAll,
   handleAddSongPlaylist,
   handleDeleteSong,
 }) {
@@ -31,11 +32,10 @@ export default function Uploaded({
             </div>
           </li>
         ))}
-
         {files.length >= 2 ? (
           <button
             className={styles.buttons__upload}
-            /* onClick={() => upload(index)} */
+            onClick={() => uploadAll(files)}
           >
             Загрузить все песни
           </button>
