@@ -23,14 +23,14 @@ import '@/styles/sass/grid.scss';
 
 import Layout from '../ui/components/global/Layout';
 
-export default function App({ Component, pageProps, audios, menu }) {
+export default function App({ Component, pageProps, audios }) {
   const [audioContext, setAudioContext] = useState(audios);
 
   return (
     <SessionProvider session={pageProps?.session}>
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
         <div className={roboto.className}>
-          <Layout menu={menu}>
+          <Layout>
             <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
             <Component {...pageProps} />
           </Layout>
@@ -44,7 +44,6 @@ export default function App({ Component, pageProps, audios, menu }) {
 
 App.getInitialProps = async () => {
   const audios = await getAudios();
-  const menu = await getStyles();
 
-  return { audios, menu };
+  return { audios };
 };

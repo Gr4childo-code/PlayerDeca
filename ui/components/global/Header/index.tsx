@@ -3,11 +3,11 @@ import React from 'react';
 import Logo from '@/ui/components/global/Logo';
 import Navigation from '@/ui/components/global/Navigation';
 import AuthBadge from '@/ui/components/global/AuthBadge';
-import SearchNew from '@/ui/components/global/SearchNew'
+import SearchNew from '@/ui/components/global/SearchNew';
 
 import styles from './Header.module.scss';
 
-const Header = ({ menu }) => {
+const Header = () => {
   return (
     <header className={styles.header}>
       <div className='container'>
@@ -16,7 +16,6 @@ const Header = ({ menu }) => {
             <Logo />
           </div>
           <div className={styles.header__center}>
-            <Navigation menu={menu} />
             <SearchNew />
           </div>
           <div className={styles.header__right}>
@@ -26,6 +25,6 @@ const Header = ({ menu }) => {
       </div>
     </header>
   );
-}
+};
 
-export default Header
+export default Header;
