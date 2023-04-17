@@ -61,6 +61,10 @@ export default function UserCollection() {
     setPlaylist([...playlist.slice(0, index), ...playlist.slice(index + 1)]);
   };
 
+  const handleDeleteSong = (index) => {
+    setFiles([...files.slice(0, index), ...files.slice(index + 1)]);
+  };
+
   const uploadPlaylist = () => {
     setLoader(false);
     postPlaylist(
@@ -126,6 +130,7 @@ export default function UserCollection() {
           <Uploaded
             files={files}
             upload={upload}
+            handleDeleteSong={handleDeleteSong}
             handleAddSongPlaylist={handleAddSongPlaylist}
           />
         </div>

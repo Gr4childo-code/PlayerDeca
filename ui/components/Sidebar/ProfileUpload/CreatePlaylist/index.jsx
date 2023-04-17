@@ -31,8 +31,6 @@ export default function CreatePlaylist({
             <li key={index} className={styles.playlists__item}>
               {index + 1}. {author} - {name}
               <div>
-                {/* <button className={styles.button}>&#8593;</button>
-              <button className={styles.button}>&#8595;</button> */}
                 <button
                   className={styles.button__remove}
                   onClick={() => handleDeleteSongPlaylist(index)}

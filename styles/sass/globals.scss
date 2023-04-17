@@ -293,8 +293,6 @@ a {
   justify-content: space-between;
   min-height: 400px;
   &__right {
-    display: flex;
-    justify-content: flex-end;
     max-width: 400px;
   }
   &__left {

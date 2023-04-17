@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, use } from 'react';
+import React from 'react';
 import Preloader from '@/ui/components/global/Preloader';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
@@ -10,19 +10,19 @@ export default function DragAndDrop({
   handleSelectFile,
 }) {
   return (
-    <div>
+    <div className={styles.dropzone}>
       {dragLoader ? (
         <form onDragEnter={handleDrag}>
-          <p className={styles.title}>Добавить песню</p>
-          <div className={styles.wrapper__left}>
-            <div className={styles.wrapper__dropzone}>
-              <label className={styles.subTitle}>
+          <p className={styles.dropzone__title}>Добавить песню</p>
+          <div>
+            <div className={styles.dropzone__wrapper}>
+              <label className={styles.dropzone__info}>
                 1. Выберите обложку в формате <br /> ( jpeg, jpg, png, webp ){' '}
                 <br />
               </label>
               <input
                 required
-                className={styles.input}
+                className={styles.dropzone__input}
                 type={'file'}
                 onChange={(e) => {
                   poster.current = e.target.files[0];
@@ -31,19 +31,19 @@ export default function DragAndDrop({
               />
             </div>
             <div
-              className={styles.wrapper__dropzone}
+              className={styles.dropzone__wrapper}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleSelectFile}
             >
-              <label className={styles.subTitle}>
+              <label className={styles.dropzone__info}>
                 2. Перенесите песню в формате mp3 <br /> или <br /> выберите её
               </label>
               <input
                 required
                 type='file'
-                className={styles.input}
+                className={styles.dropzone__input}
                 onChange={handleSelectFile}
                 placeholder='Автор'
                 accept='audio/mp3'
