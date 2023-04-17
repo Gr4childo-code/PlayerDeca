@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import AppContext from '@/ui/components/global/AppContext';
 
 import styles from '@/ui/components/Playlist_Page/Playlist_Page.module.scss';
-import Track from '../Track';
+import Track from '@/ui/components/Track';
+import Options from '@/ui/components/Options';
 
 const Playlist_Page = ({ playlist }) => {
   const { setAudioContext } = useContext(AppContext);
@@ -45,6 +46,9 @@ const Playlist_Page = ({ playlist }) => {
           </div>
         </div>
         <hr className={styles.hr} />
+        <div className={styles.options}>
+          <Options play={true} like={true} queue={true} size={'lg'} />
+        </div>
         <div
           className={styles.tracks}
           onClick={() => {

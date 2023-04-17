@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .wrapper {
   display: flex;
@@ -70,7 +70,9 @@
       font-weight: bold;
     }
   }
-
+  .options {
+    padding: 10px 0;
+  }
   .hr {
     margin: 20px 0;
     border: 1px solid var(--ui-color-one);
@@ -87,7 +89,6 @@
   }
 }
 
-// }
 @include mq(Lphone) {
   .wrapper {
     flex-direction: column;

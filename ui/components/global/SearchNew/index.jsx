@@ -44,6 +44,7 @@ const SearchNew = () => {
         className={styles.search__fields}
         placeholder='Поиск'
         value={inputValue}
+        autoComplete='off'
         onChange={handleChangeFilter}
         id={'search'}
         onFocus={() => {

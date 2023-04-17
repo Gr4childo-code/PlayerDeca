@@ -1,4 +1,4 @@
-import styles from '@/ui/components/global/preloader/Preloader.module.scss';
+import styles from '@/ui/components/global/Preloader/Preloader.module.scss';
 
 export default function Preloader() {
   return (

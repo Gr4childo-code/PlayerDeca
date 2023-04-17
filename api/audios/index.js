@@ -42,6 +42,28 @@ export const getAudiosTop = async () => {
   );
   return await Api(`audios?${query}`);
 };
+export const getAudiosAll = async () => {
+  const query = stringify(
+    {
+      fields: ['name', 'author', 'likes'],
+      sort: ['likes:desc'],
+      pagination: {
+        start: 0,
+        limit: 50,
+      },
+      populate: {
+        src: {
+          fields: ['hash'],
+        },
+        poster: {
+          fields: ['url'],
+        },
+      },
+    },
+    { encodeValuesOnly: true }
+  );
+  return await Api(`audios?${query}`);
+};
 
 export const createAudios = async (params, token) =>
   Api('audios', 'POST', params, token);
