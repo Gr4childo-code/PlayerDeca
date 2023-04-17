@@ -1,8 +1,19 @@
 @import '@/styles/sass/grid.scss';
 
+.title {
+  font-size: 25px;
+  color: var(--ui-color-two);
+}
+
+.subTitle {
+  margin-top: 10px;
+  font-size: 15px;
+  text-align: center;
+}
 .wrapper {
   display: flex;
   justify-content: space-between;
+  min-height: 400px;
   &__left {
     display: flex;
     flex-direction: column;
@@ -35,16 +46,6 @@
   }
 }
 
-.title {
-  font-size: 20px;
-}
-
-.subTitle {
-  margin-top: 10px;
-  font-size: 15px;
-  text-align: center;
-}
-
 .input {
   margin-top: 10px;
   width: 100%;
@@ -59,63 +60,41 @@
   &:valid {
     border: 2px solid var(--success);
   }
-  &__playlistName {
-    margin: 10px;
-    max-width: 500px;
-    height: 35px;
-    padding: 5px;
-    font-size: 20px;
-    background-color: transparent;
-    color: var(--ui-color-one);
-    outline: none;
-    border: none;
-  }
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 100%;
-  min-height: 150px;
-  padding: 10px;
+  min-height: 120px;
+  padding: 0 10px;
   border-radius: 5px;
 
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 40px;
+    max-height: 50px;
     margin: 5px 0;
     padding: 10px;
     border: 2px solid var(--gray-80);
     border-radius: 5px;
     &:hover {
       transition: 0.5s;
+      background-color: var(--gray-20);
       border: 2px solid var(--white-50);
       cursor: pointer;
     }
   }
 }
 
-.button {
-  margin: 0 4px;
-  width: 30px;
-  height: 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-  border: 1px solid var(--ui-color-one);
-  background: var(--gray-10);
-  color: var(--white);
-  transition: background 0.5s;
-  &:hover,
-  &:active {
-    background-color: var(--ui-color-one);
-  }
-  &__upload {
-    width: 100px;
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  &__add {
     margin: 0 4px;
+    width: 30px;
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
@@ -129,55 +108,24 @@
       background-color: var(--ui-color-one);
     }
   }
-}
-
-.playlists {
-  border-top: 2px solid var(--ui-color-one);
-  margin-top: 50px;
-  &__title {
-    font-size: 20px;
-    padding-top: 10px;
-  }
-  &__list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 150px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  &__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 40px;
-    margin: 5px 0;
-    padding: 10px;
-    border: 2px solid var(--gray-80);
-    border-radius: 5px;
-    &:hover {
-      transition: 0.5s;
-      border: 2px solid var(--white-50);
-      cursor: pointer;
-    }
-  }
-  &__button {
-    margin: 20px auto 0;
-    width: 120px;
-    height: 40px;
+  &__upload {
+    width: 100px;
+    margin: 0 4px;
+    height: 30px;
     border-radius: 5px;
     cursor: pointer;
     outline: none;
-    border: 1px solid var(--ui-color-one);
+    border: 1px solid var(--ui-color-two);
     background: var(--gray-10);
     color: var(--white);
     transition: background 0.5s;
     &:hover,
     &:active {
-      background-color: var(--ui-color-one);
+      background-color: var(--ui-color-two);
     }
   }
 }
+
 @include mq(Sphone) {
   .wrapper {
     margin-top: 10px;

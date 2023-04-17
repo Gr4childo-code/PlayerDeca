@@ -5,31 +5,31 @@ import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
 export default function DragAndDrop({
   files,
-  loader,
   poster,
+  upload,
   handleDrag,
+  dragLoader,
   handleSelectFile,
   handleAddSongPlaylist,
-  upload,
 }) {
   return (
     <div>
       <div className={styles.wrapper}>
         <div className={styles.wrapper__right}>
-          <p className={styles.title}>Добавленные</p>
+          <p className={styles.title}>Готовы к загрузке</p>
           <ul className={styles.list}>
             {files.map(({ name, author }, index) => (
               <li key={index} className={styles.item}>
                 {index + 1}. {author} - {name}
-                <div>
+                <div className={styles.buttons}>
                   <button
-                    className={styles.button}
+                    className={styles.buttons__add}
                     onClick={() => handleAddSongPlaylist(index)}
                   >
                     +
                   </button>
                   <button
-                    className={styles.button__upload}
+                    className={styles.buttons__upload}
                     onClick={() => upload(index)}
                   >
                     Загрузить
@@ -39,7 +39,7 @@ export default function DragAndDrop({
             ))}
           </ul>
         </div>
-        {loader ? (
+        {dragLoader ? (
           <form onDragEnter={handleDrag}>
             <p className={styles.title}>Добавить песню</p>
             <div className={styles.wrapper__left}>

@@ -1,0 +1,80 @@
+.playlists {
+  border-top: 2px solid var(--gray-50);
+  margin-top: 50px;
+  &__title {
+    padding-top: 10px;
+    font-size: 25px;
+    text-align: center;
+    color: var(--ui-color-two);
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 400px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    margin: 5px 0;
+    padding: 10px;
+    border: 2px solid var(--gray-80);
+    border-radius: 5px;
+    &:hover {
+      transition: 0.5s;
+      background-color: var(--gray-20);
+      border: 2px solid var(--white-50);
+      cursor: pointer;
+    }
+  }
+  &__button {
+    margin: 20px auto 0;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--ui-color-one);
+    background: var(--gray-10);
+    color: var(--white);
+    transition: background 0.5s;
+    &:hover,
+    &:active {
+      background-color: var(--ui-color-one);
+    }
+  }
+  &__name {
+    margin: 10px;
+    height: 35px;
+    padding: 5px;
+    font-size: 20px;
+    background-color: transparent;
+    color: var(--ui-color-one);
+    outline: none;
+    border: none;
+  }
+}
+
+.button {
+  &__remove {
+    margin: 0 4px;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--ui-color-one);
+    background: var(--gray-10);
+    color: var(--white);
+    transition: background 0.5s;
+    &:hover,
+    &:active {
+      background-color: var(--ui-color-one);
+    }
+  }
+}

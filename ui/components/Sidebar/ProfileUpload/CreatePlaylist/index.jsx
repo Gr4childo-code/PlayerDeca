@@ -1,8 +1,11 @@
 import React from 'react';
 
-import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
+import Preloader from '@/ui/components/global/Preloader';
+
+import styles from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist/CreatePlaylists.module.scss';
 
 export default function CreatePlaylist({
+  loader,
   playlist,
   playlistName,
   uploadPlaylist,
@@ -11,38 +14,48 @@ export default function CreatePlaylist({
 }) {
   return (
     <div className={styles.playlists}>
-      <p className={styles.playlists__title}>Создать подборку</p>
-      <ul className={styles.playlists__list}>
-        <input
-          className={styles.input__playlistName}
-          value={playlistName}
-          placeholder='Придумайте название...'
-          onChange={(e) => handlePlaylistName(e)}
-        />
-        {playlist.map(({ name, author }, index) => (
-          <li key={index} className={styles.playlists__item}>
-            {index + 1}. {author} - {name}
+      {loader ? (
+        <ul className={styles.playlists__list}>
+          {playlist.length !== 0 && (
             <div>
-              <button
-                className={styles.button}
-                onClick={() => handleDeleteSongPlaylist(index)}
-              >
-                -
-              </button>
+              <p className={styles.playlists__title}>Создать подборку</p>
+              <input
+                className={styles.playlists__name}
+                value={playlistName}
+                placeholder='Введите название...'
+                onChange={(e) => handlePlaylistName(e)}
+              />
             </div>
-          </li>
-        ))}
-        {playlist.length !== 0 ? (
-          <button
-            className={styles.playlists__button}
-            onClick={() => uploadPlaylist()}
-          >
-            Загрузить
-          </button>
-        ) : (
-          ''
-        )}
-      </ul>
+          )}
+          {playlist.map(({ name, author }, index) => (
+            <li key={index} className={styles.playlists__item}>
+              {index + 1}. {author} - {name}
+              <div>
+                {/* <button className={styles.button}>&#8593;</button>
+              <button className={styles.button}>&#8595;</button> */}
+                <button
+                  className={styles.button__remove}
+                  onClick={() => handleDeleteSongPlaylist(index)}
+                >
+                  &mdash;
+                </button>
+              </div>
+            </li>
+          ))}
+          {playlist.length !== 0 ? (
+            <button
+              className={styles.playlists__button}
+              onClick={() => uploadPlaylist()}
+            >
+              Загрузить
+            </button>
+          ) : (
+            ''
+          )}
+        </ul>
+      ) : (
+        <Preloader />
+      )}
     </div>
   );
 }

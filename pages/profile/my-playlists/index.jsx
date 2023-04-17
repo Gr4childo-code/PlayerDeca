@@ -13,6 +13,7 @@ export default function UserCollection() {
   const [list, setList] = useState([]);
   const { data: session } = useSession();
   const [loader, setLoader] = useState(true);
+  const [dragLoader, setDragLoader] = useState(true);
   const [playlist, setPlaylist] = useState([]);
   const [files, setFiles] = useState([] || '');
   const [playlistName, setPlaylistName] = useState('');
@@ -46,6 +47,7 @@ export default function UserCollection() {
         name: audioData[0].split(' - ')[1],
         author: audioData[0].split(' - ')[0],
         src: e.target.files[0],
+        poster: poster.current,
       };
       setFiles([...files, audio]);
     }
@@ -74,11 +76,14 @@ export default function UserCollection() {
     )
       .then(() => setLoader(true))
       .then(() => setPlaylistName(''))
-      .then(() => setPlaylist([]));
+      .then(() => setPlaylist([]))
+      .catch((error) => {
+        throw error;
+      });
   };
 
   const upload = (index) => {
-    setLoader(false);
+    setDragLoader(false);
     createAudios(
       {
         data: {
@@ -92,7 +97,7 @@ export default function UserCollection() {
       },
       session?.jwt
     )
-      .then(() => setLoader(true))
+      .then(() => setDragLoader(true))
       .then(() =>
         setList([
           ...list,
@@ -117,10 +122,10 @@ export default function UserCollection() {
       <Toast toastlist={list} setList={setList} />
       <div>
         <DragAndDrop
-          upload={upload}
           files={files}
-          loader={loader}
+          dragLoader={dragLoader}
           poster={poster}
+          upload={upload}
           handleDrag={handleDrag}
           handleSelectFile={handleSelectFile}
           handleAddSongPlaylist={handleAddSongPlaylist}
@@ -129,6 +134,7 @@ export default function UserCollection() {
       </div>
       <div>
         <CreatePlaylist
+          loader={loader}
           playlist={playlist}
           playlistName={playlistName}
           uploadPlaylist={uploadPlaylist}
