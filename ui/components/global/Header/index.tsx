@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Logo from '@/ui/components/global/Logo';
-import Navigation from '@/ui/components/global/Navigation';
 import AuthBadge from '@/ui/components/global/AuthBadge';
 import SearchNew from '@/ui/components/global/SearchNew';
 

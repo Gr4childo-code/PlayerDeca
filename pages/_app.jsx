@@ -7,7 +7,7 @@ config.autoAddCss = false;
 import NextNProgress from 'nextjs-progressbar';
 
 import { SessionProvider } from 'next-auth/react';
-import { getAudios, getStyles } from '@/api';
+import { getAudios } from '@/api';
 
 import Player from '@/ui/components/global/Player';
 
