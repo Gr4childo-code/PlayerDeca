@@ -9,13 +9,23 @@ import Toast from '@/ui/components/global/Toast';
 
 import { createAudios, postPlaylist, getAudiosAll } from '@/api';
 
-export default function UserCollection() {
+export const getServerSideProps = async () => {
+  const audios = await getAudiosAll();
+
+  return {
+    props: { audios },
+  };
+};
+
+export default function UserCollection({ audios }) {
+  const { data } = audios;
+
   const poster = useRef(null);
   const [list, setList] = useState([]);
   const { data: session } = useSession();
   const [loader, setLoader] = useState(true);
   const [dragLoader, setDragLoader] = useState(true);
-  const [playlist, setPlaylist] = useState([]);
+  const [playlist, setPlaylist] = useState(data);
   const [files, setFiles] = useState([] || '');
   const [playlistName, setPlaylistName] = useState('');
 

@@ -4,9 +4,8 @@ import styles from '@/ui/components/Sidebar/ProfileUpload/Uploaded/Uploaded.modu
 
 export default function Uploaded({
   files,
-  upload,
   uploadAll,
-  handleAddSongPlaylist,
+  /* handleAddSongPlaylist, */
   handleDeleteSong,
 }) {
   return (
@@ -17,12 +16,12 @@ export default function Uploaded({
           <li key={index} className={styles.uploaded__item}>
             {index + 1}. {author} - {name}
             <div className={styles.buttons}>
-              <button
+              {/* <button
                 className={styles.buttons__add}
                 onClick={() => handleAddSongPlaylist(index)}
               >
                 +
-              </button>
+              </button> */}
               <button
                 className={styles.buttons__add}
                 onClick={() => handleDeleteSong(index)}

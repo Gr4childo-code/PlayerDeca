@@ -10,24 +10,38 @@ export default function CreatePlaylist({
   playlistName,
   uploadPlaylist,
   handlePlaylistName,
-  handleDeleteSongPlaylist,
+  /* handleDeleteSongPlaylist, */
 }) {
   return (
     <div className={styles.playlists}>
+      <p className={styles.playlists__info}>
+        Всего загружено: {playlist.length} песен
+      </p>
       {loader ? (
         <ul className={styles.playlists__list}>
-          {playlist.length !== 0 && (
-            <div>
-              <p className={styles.playlists__title}>Создать подборку</p>
-              <input
-                className={styles.playlists__name}
-                value={playlistName}
-                placeholder='Введите название...'
-                onChange={(e) => handlePlaylistName(e)}
-              />
-            </div>
-          )}
-          {playlist.map(({ name, author }, index) => (
+          <p className={styles.playlists__title}>Создать подборку</p>
+          <div className={styles.playlists__create}>
+            <input
+              className={styles.playlists__name}
+              value={playlistName}
+              placeholder='Введите название...'
+              onChange={(e) => handlePlaylistName(e)}
+            />
+          </div>
+          <div>
+            <select className={styles.select}>
+              <option>Выберите песню</option>
+              {playlist.map((element) => {
+                return (
+                  <option key={element.id} value={element.attributes.name}>
+                    {element.attributes.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          {/* {playlist.map(({ name, author }, index) => (
             <li key={index} className={styles.playlists__item}>
               {index + 1}. {author} - {name}
               <div>
@@ -39,7 +53,8 @@ export default function CreatePlaylist({
                 </button>
               </div>
             </li>
-          ))}
+          ))} */}
+
           {playlist.length !== 0 ? (
             <button
               className={styles.playlists__button}
