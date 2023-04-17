@@ -288,6 +288,25 @@ a {
   }
 }
 
+.uploaded {
+  display: flex;
+  justify-content: space-between;
+  min-height: 400px;
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 400px;
+  }
+  &__left {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 420px);
+    min-height: 300px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+}
+
 @include mq(Lphone) {
   .events {
     &__slides {

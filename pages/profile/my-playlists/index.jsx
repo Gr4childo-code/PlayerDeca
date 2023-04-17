@@ -3,10 +3,11 @@ import { useSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
 import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
 import CreatePlaylist from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
+import Uploaded from '@/ui/components/Sidebar/ProfileUpload/Uploaded';
 
 import Toast from '@/ui/components/global/Toast';
 
-import { createAudios, postPlaylist } from '@/api';
+import { createAudios, postPlaylist, getAudiosAll } from '@/api';
 
 export default function UserCollection() {
   const poster = useRef(null);
@@ -120,17 +121,27 @@ export default function UserCollection() {
   return (
     <Layout>
       <Toast toastlist={list} setList={setList} />
-      <div>
-        <DragAndDrop
-          files={files}
-          dragLoader={dragLoader}
-          poster={poster}
-          upload={upload}
-          handleDrag={handleDrag}
-          handleSelectFile={handleSelectFile}
-          handleAddSongPlaylist={handleAddSongPlaylist}
-          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
-        />
+      <div className='uploaded'>
+        <div className='uploaded__left'>
+          <Uploaded
+            files={files}
+            upload={upload}
+            handleAddSongPlaylist={handleAddSongPlaylist}
+          />
+        </div>
+        <div className='uploaded__right'>
+          <DragAndDrop
+            files={files}
+            dragLoader={dragLoader}
+            poster={poster}
+            upload={upload}
+            handleDrag={handleDrag}
+            handleSelectFile={handleSelectFile}
+            handleAddSongPlaylist={handleAddSongPlaylist}
+            handleDeleteSongPlaylist={handleDeleteSongPlaylist}
+            getAudiosAll={getAudiosAll}
+          />
+        </div>
       </div>
       <div>
         <CreatePlaylist
