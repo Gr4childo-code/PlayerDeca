@@ -75,7 +75,7 @@ export default function UserCollection({ audios }) {
     setFiles([...files.slice(0, index), ...files.slice(index + 1)]);
   };
 
-  const uploadPlaylist = () => {
+  const uploadPlaylist = (playlist) => {
     setLoader(false);
     postPlaylist(
       {
@@ -84,14 +84,13 @@ export default function UserCollection({ audios }) {
           user_id: session?.user.id,
         },
         files: {
-          src: playlist,
+          src: playlist[0],
         },
       },
       session?.jwt
     )
       .then(() => setLoader(true))
       .then(() => setPlaylistName(''))
-      .then(() => setPlaylist([]))
       .catch((error) => {
         throw error;
       });
