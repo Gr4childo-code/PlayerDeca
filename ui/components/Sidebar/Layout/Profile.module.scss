@@ -1,8 +1,7 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .wrapper {
   display: flex;
-  padding: 10px;
 }
 
 .userInfo {
@@ -17,6 +16,7 @@
   }
   &__title {
     font-size: 15px;
+
     color: var(--ui-color-two);
   }
   &__item {
