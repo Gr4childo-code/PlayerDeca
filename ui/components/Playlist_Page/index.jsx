@@ -4,6 +4,7 @@ import Options from '@/ui/components/Options';
 
 const Playlist_Page = ({ playlist }) => {
   const { audio, poster, users_permissions_user } = playlist[0].attributes;
+  console.log(audio.data[0]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.side__bar}>
@@ -45,7 +46,7 @@ const Playlist_Page = ({ playlist }) => {
           <Options
             play={true}
             like={true}
-            queue={[true, [...playlist]]}
+            queue={[true, [...audio.data]]}
             size={'lg'}
           />
         </div>
