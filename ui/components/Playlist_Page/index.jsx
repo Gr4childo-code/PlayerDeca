@@ -1,13 +1,8 @@
-import { useContext } from 'react';
-import AppContext from '@/ui/components/global/AppContext';
-
 import styles from '@/ui/components/Playlist_Page/Playlist_Page.module.scss';
 import Track from '@/ui/components/Track';
 import Options from '@/ui/components/Options';
 
 const Playlist_Page = ({ playlist }) => {
-  const { setAudioContext } = useContext(AppContext);
-
   const { audio, poster, users_permissions_user } = playlist[0].attributes;
   return (
     <div className={styles.wrapper}>
@@ -16,7 +11,7 @@ const Playlist_Page = ({ playlist }) => {
           {poster.data?.attributes?.url && (
             <img
               src={
-                process.env.NEXT_PUBLIC_API_URL + poster.data.attributes?.url
+                process.env.NEXT_PUBLIC_API_URL + poster?.data?.attributes?.url
               }
               className={styles.side__bar__cover__img}
             />
@@ -42,19 +37,19 @@ const Playlist_Page = ({ playlist }) => {
             {playlist[0].attributes.title}
           </div>
           <div className={styles.title__author}>
-            {users_permissions_user.data.attributes.name}
+            {users_permissions_user?.data?.attributes?.name}
           </div>
         </div>
         <hr className={styles.hr} />
         <div className={styles.options}>
-          <Options play={true} like={true} queue={true} size={'lg'} />
+          <Options
+            play={true}
+            like={true}
+            queue={[true, [...playlist]]}
+            size={'lg'}
+          />
         </div>
-        <div
-          className={styles.tracks}
-          onClick={() => {
-            setAudioContext(audio);
-          }}
-        >
+        <div className={styles.tracks}>
           {audio ? (
             audio &&
             audio?.data.map(({ id, attributes }, index) => (

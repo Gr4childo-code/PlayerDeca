@@ -1,21 +1,22 @@
 import { useState } from 'react';
-import styles from '@/ui/components/Track/Track.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import Options from '@/ui/components/Options';
-const Track = ({ id, index, attributes, size = 'sm' }) => {
+import styles from '@/ui/components/Track/Track.module.scss';
+
+const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
   const [isPlay, setIsPlay] = useState(false);
   return (
     <div className={styles.track} key={id}>
       <div className={styles.track__number}>{index}</div>
 
       <div className={styles.track__cover}>
-        {attributes.poster.data?.attributes ? (
+        {attributes?.poster.data?.attributes ? (
           <img
             src={
               process.env.NEXT_PUBLIC_API_URL +
-              attributes.poster.data?.attributes.url
+              attributes?.poster.data?.attributes.url
             }
           />
         ) : (
@@ -35,12 +36,12 @@ const Track = ({ id, index, attributes, size = 'sm' }) => {
       </div>
 
       <div className={styles.track__music}>
-        <p className={styles.track__music__name}>{attributes.name}</p>
+        <p className={styles.track__music__name}>{attributes?.name}</p>
 
-        <p className={styles.track__music__author}>{attributes.author}</p>
+        <p className={styles.track__music__author}>{attributes?.author}</p>
       </div>
       <div className={styles.track__options}>
-        <Options like={true} queue={true} size={size} />
+        <Options like={true} queue={[true, [{ id, attributes }]]} size={size} />
       </div>
     </div>
   );

@@ -26,7 +26,6 @@ export default function Player({ audios }) {
   const [isPlayList, setIsPlayList] = useState(false);
 
   const [isNav, setIsNav] = useState(false);
-
   const track = useRef({
     id: audios?.data[0]?.id,
     ...audios?.data[0]?.attributes,
@@ -208,8 +207,8 @@ export default function Player({ audios }) {
                           </div>
                         </div>
                         <div className={styles.playlist__info}>
-                          <strong>{attributes.author}</strong> -{' '}
-                          {attributes.name}
+                          <strong>{attributes?.author}</strong> -
+                          {attributes?.name}
                         </div>
                       </div>
                     ))}

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from '@/ui/components/Options/Options.module.scss';
+import AppContext from '@/ui/components/global/AppContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
@@ -11,7 +12,17 @@ const Options = ({
   size = 'xs',
 }) => {
   const [isPlay, setIsPlay] = useState(false);
-
+  const { setAudioContext, audioContext } = useContext(AppContext);
+  console.log();
+  const addInQueue = (musicItem) => {
+    if (musicItem !== undefined && musicItem.id !== audioContext.data) {
+      setAudioContext({
+        data: [...audioContext.data, ...musicItem],
+      });
+    } else {
+      console.log('Одинаковые Id');
+    }
+  };
   return (
     <div className={styles.wrapper}>
       {play && (
@@ -36,7 +47,11 @@ const Options = ({
       )}
       {queue && (
         <div className={styles.options}>
-          <FontAwesomeIcon icon={faPlus} size={size} />
+          <FontAwesomeIcon
+            icon={faPlus}
+            size={size}
+            onClick={() => addInQueue(queue[1])}
+          />
         </div>
       )}
     </div>
