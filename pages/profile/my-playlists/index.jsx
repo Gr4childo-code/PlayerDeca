@@ -20,85 +20,28 @@ export const getServerSideProps = async () => {
 export default function UserCollection({ audios }) {
   const { data } = audios;
 
-  const poster = useRef(null);
+  const [loader, setLoader] = useState(true);
   const [list, setList] = useState([]);
   const { data: session } = useSession();
-  const [loader, setLoader] = useState(true);
-  const [dragLoader, setDragLoader] = useState(true);
-  const [playlist, setPlaylist] = useState(data);
   const [files, setFiles] = useState([] || '');
+  const [playlist, setPlaylist] = useState(data);
   const [playlistName, setPlaylistName] = useState('');
+  const [fileId, setSongsId] = useState([] || null);
+  const [newUserPlaylist, setNewUserPlaylist] = useState([]);
 
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setLoader(true);
-    } else if (e.type === 'dragleave') {
-      setLoader(false);
-    }
-  };
-
-  const handleSelectFile = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.dataTransfer) {
-      const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
-      const audio = {
-        name: audioData[0].split(' - ')[1],
-        author: audioData[0].split(' - ')[0],
-        src: e.dataTransfer.files[0],
-      };
-      setFiles([...files, audio]);
-    } else if (e.target.files) {
-      const audioData = e.target.files[0].name.split('.mp3', [1]);
-      const audio = {
-        name: audioData[0].split(' - ')[1],
-        author: audioData[0].split(' - ')[0],
-        src: e.target.files[0],
-        poster: poster.current,
-      };
-      setFiles([...files, audio]);
-    }
-  };
-
-  const handleAddSongPlaylist = (index) => {
-    setPlaylist([...playlist, files[index]]);
-  };
-  const handleDeleteSongPlaylist = (index) => {
-    setPlaylist([...playlist.slice(0, index), ...playlist.slice(index + 1)]);
+  const handleFilesToUpload = (file) => {
+    setFiles([...files, file]);
   };
 
   const handleDeleteSong = (index) => {
     setFiles([...files.slice(0, index), ...files.slice(index + 1)]);
   };
 
-  const uploadPlaylist = (playlist) => {
-    setLoader(false);
-    postPlaylist(
-      {
-        data: {
-          title: playlistName,
-          user_id: session?.user.id,
-        },
-        files: {
-          src: playlist[0],
-        },
-      },
-      session?.jwt
-    )
-      .then(() => setLoader(true))
-      .then(() => setPlaylistName(''))
-      .catch((error) => {
-        throw error;
-      });
-  };
-
-  const uploadAll = (files) => {
+  const uploadNewSongs = (files) => {
+    console.log('Передано файлов: ', files);
     files.forEach((element) => {
-      setDragLoader(false);
+      console.log('Каждый элемент: ', element);
+      setLoader(false);
       createAudios(
         {
           data: {
@@ -107,12 +50,13 @@ export default function UserCollection({ audios }) {
           },
           files: {
             src: element.src,
-            poster: poster.current,
+            poster: element.poster,
           },
         },
         session?.jwt
       )
-        .then(() => setDragLoader(true))
+        .then(() => setLoader(true))
+        .then(() => setFiles([]))
         .then(() =>
           setList([
             ...list,
@@ -129,8 +73,56 @@ export default function UserCollection({ audios }) {
     });
   };
 
+  const handleSelectOption = (e) => {
+    setSongsId([...fileId, Number(e.target.value)]);
+    console.log(fileId);
+  };
+
   const handlePlaylistName = (e) => {
     setPlaylistName(e.target.value);
+  };
+
+  const handleRemoveFile = (index) => {
+    setNewUserPlaylist([
+      ...newUserPlaylist.slice(0, index),
+      ...newUserPlaylist.slice(index + 1),
+    ]);
+    setSongsId([...fileId.slice(0, index), ...fileId.slice(index + 1)]);
+    console.log(fileId);
+  };
+
+  const handleNewUserPlaylist = (attr) => {
+    setNewUserPlaylist([
+      ...newUserPlaylist,
+      { author: attr.author, name: attr.name },
+    ]);
+  };
+
+  const uploadPlaylist = (fileId) => {
+    console.log('Upload');
+    setPlaylistName('');
+    setLoader(false);
+    postPlaylist(
+      {
+        json: {
+          data: {
+            title: playlistName,
+            user_id: session?.user.id,
+            audio: {
+              connect: fileId,
+            },
+            /* poster: poster.current, */
+          },
+        },
+      },
+      session?.jwt
+    )
+      .then(() => setLoader(true))
+      .then(() => setNewUserPlaylist([]))
+      .then(() => setPlaylistName(''))
+      .catch((error) => {
+        throw error;
+      });
   };
 
   return (
@@ -140,32 +132,28 @@ export default function UserCollection({ audios }) {
         <div className='uploaded__left'>
           <Uploaded
             files={files}
-            uploadAll={uploadAll}
+            uploadNewSongs={uploadNewSongs}
             handleDeleteSong={handleDeleteSong}
-            handleAddSongPlaylist={handleAddSongPlaylist}
           />
         </div>
         <div className='uploaded__right'>
           <DragAndDrop
-            files={files}
-            dragLoader={dragLoader}
-            poster={poster}
-            handleDrag={handleDrag}
-            handleSelectFile={handleSelectFile}
-            handleAddSongPlaylist={handleAddSongPlaylist}
-            handleDeleteSongPlaylist={handleDeleteSongPlaylist}
-            getAudiosAll={getAudiosAll}
+            loader={loader}
+            handleFilesToUpload={handleFilesToUpload}
           />
         </div>
       </div>
       <div>
         <CreatePlaylist
-          loader={loader}
           playlist={playlist}
+          fileId={fileId}
           playlistName={playlistName}
+          newUserPlaylist={newUserPlaylist}
           uploadPlaylist={uploadPlaylist}
+          handleNewUserPlaylist={handleNewUserPlaylist}
+          handleSelectOption={handleSelectOption}
+          handleRemoveFile={handleRemoveFile}
           handlePlaylistName={handlePlaylistName}
-          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
         />
       </div>
     </Layout>

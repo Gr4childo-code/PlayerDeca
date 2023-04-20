@@ -79,16 +79,17 @@ export default function Home({ audioTop, playlistsNew, events }) {
                           className='playlists__image'
                           src={
                             process.env.NEXT_PUBLIC_API_URL +
-                            playlistsNew.data[index].attributes.poster.data
-                              .attributes.url
+                            playlistsNew?.data[index].attributes?.poster?.data
+                              ?.attributes?.url
                           }
                           alt={'image'}
                         />
                         <ul className='slides__list'>
                           <h2 className='slides__description'>
                             {
-                              playlistsNew.data[index].attributes
-                                .users_permissions_user.data.attributes.username
+                              playlistsNew?.data[index].attributes
+                                ?.users_permissions_user.data?.attributes
+                                .username
                             }
                           </h2>
                           <li className='slides__item'>{attributes.title}</li>

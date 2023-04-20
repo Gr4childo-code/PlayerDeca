@@ -1,50 +1,37 @@
-import React, { useState } from 'react';
-
-import Preloader from '@/ui/components/global/Preloader';
+import React from 'react';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist/CreatePlaylists.module.scss';
 
 export default function CreatePlaylist({
-  loader,
   playlist,
   playlistName,
+  handleSelectOption,
+  handleRemoveFile,
   uploadPlaylist,
   handlePlaylistName,
-  handleDeleteSongPlaylist,
+  newUserPlaylist,
+  handleNewUserPlaylist,
+  fileId,
 }) {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
-  const handleSelect = (e) => {
-    console.log(e.target.value);
-    const audio = e.target.value;
-    setSelectedFiles([...selectedFiles, audio]);
-    console.log(selectedFiles);
-  };
-
-  const handleRemoveFile = (index) => {
-    setSelectedFiles([
-      ...selectedFiles.slice(0, index),
-      ...selectedFiles.slice(index + 1),
-    ]);
-  };
-
   return (
     <div className={styles.playlists}>
       <div className={styles.playlists__left}>
         <div className={styles.playlists__create}>
           <p className={styles.playlists__title}>Создать подборку</p>
-          <input
-            className={styles.playlists__name}
-            value={playlistName}
-            placeholder='Введите название...'
-            onChange={(e) => handlePlaylistName(e)}
-          />
+          {newUserPlaylist.length >= 2 && (
+            <input
+              className={styles.playlists__name}
+              value={playlistName}
+              placeholder='Введите название...'
+              onChange={(e) => handlePlaylistName(e)}
+            />
+          )}
         </div>
         <div>
           <ul className={styles.playlists__added}>
-            {selectedFiles.map((element, index) => (
+            {newUserPlaylist.map(({ author, name }, index) => (
               <li key={index} className={styles.playlists__item}>
-                {index + 1}. {element}
+                {index + 1}. {author} - {name}
                 <button
                   className={styles.button__remove}
                   onClick={() => handleRemoveFile(index)}
@@ -54,66 +41,48 @@ export default function CreatePlaylist({
               </li>
             ))}
           </ul>
-          {selectedFiles.length >= 2 ? (
+          {newUserPlaylist.length >= 2 && (
             <button
               className={styles.playlists__button}
-              onClick={() => uploadPlaylist(selectedFiles)}
+              onClick={() => uploadPlaylist(fileId)}
             >
-              Загрузить
+              Загрузить подборку
             </button>
-          ) : (
-            ''
           )}
         </div>
       </div>
       <div className={styles.playlists__right}>
-        {loader ? (
-          <ul className={styles.playlists__list}>
-            <p className={styles.playlists__info}>
-              Всего загружено: {playlist.length} песен
-            </p>
-            <div className={styles.playlists__select}>
-              <select
-                className={styles.select}
-                onChange={handleSelect}
-                multiple
-              >
-                <option>Выберите песни...</option>
-                {playlist.map(({ id, attributes }, index) => {
-                  return (
-                    <option
-                      key={id}
-                      value={attributes.author}
-                      className={styles.option}
-                    >
-                      {index + 1}. {attributes.author.slice(0, 20)} -{' '}
-                      {attributes.name.slice(0, 25)}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </ul>
-        ) : (
-          <Preloader />
-        )}
+        <ul className={styles.playlists__list}>
+          <p className={styles.playlists__info}>
+            Всего загружено: {playlist.length} песен
+          </p>
+          <div className={styles.playlists__select}>
+            <select
+              className={styles.select}
+              onChange={handleSelectOption}
+              multiple
+            >
+              <option className={styles.option__def}>
+                &mdash;&mdash;&mdash; Выберите песни &mdash;&mdash;&mdash;
+              </option>
+              {playlist.map(({ id, attributes }, index) => {
+                return (
+                  <option
+                    key={id}
+                    value={id}
+                    className={styles.option}
+                    onClick={() => handleNewUserPlaylist(attributes)}
+                  >
+                    {index + 1}.
+                    {attributes.author.slice(0, attributes.author.length)} -{' '}
+                    {attributes.name.slice(0, attributes.name.length)}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </ul>
       </div>
     </div>
   );
-}
-
-{
-  /* {playlist.map(({ name, author }, index) => (
-  <li key={index} className={styles.playlists__item}>
-    {index + 1}. {author} - {name}
-    <div>
-      <button
-        className={styles.button__remove}
-        onClick={() => handleDeleteSongPlaylist(index)}
-      >
-        &mdash;
-      </button>
-    </div>
-  </li>
-))} */
 }

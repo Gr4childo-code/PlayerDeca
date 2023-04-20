@@ -1,18 +1,53 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Preloader from '@/ui/components/global/Preloader';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
-export default function DragAndDrop({
-  poster,
-  handleDrag,
-  dragLoader,
-  handleSelectFile,
-}) {
+export default function DragAndDrop({ handleFilesToUpload, loader }) {
+  const poster = useRef(null);
+  const [active, setActive] = useState(false);
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setActive(true);
+    } else if (e.type === 'dragleave') {
+      setActive(false);
+    }
+  };
+  const handleSelectFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.dataTransfer) {
+      const data = e.dataTransfer.files[0].name.split('.mp3', [1]);
+      const file = {
+        name: data[0].split(' - ')[1],
+        author: data[0].split(' - ')[0],
+        src: e.dataTransfer.files[0],
+        poster: poster.current,
+      };
+      console.log('Добавлена песня: ', file);
+      return handleFilesToUpload(file);
+    } else if (e.target.files) {
+      const data = e.target.files[0].name.split('.mp3', [1]);
+      const file = {
+        name: data[0].split(' - ')[1],
+        author: data[0].split(' - ')[0],
+        src: e.target.files[0],
+        poster: poster.current,
+      };
+      console.log('Добавлена песня: ', file);
+      return handleFilesToUpload(file);
+    }
+  };
+
   return (
     <div className={styles.dropzone}>
-      {dragLoader ? (
-        <form onDragEnter={handleDrag}>
+      {loader ? (
+        <form>
           <p className={styles.dropzone__title}>Добавить песню</p>
           <div>
             <div className={styles.dropzone__wrapper}>
@@ -31,7 +66,9 @@ export default function DragAndDrop({
               />
             </div>
             <div
-              className={styles.dropzone__wrapper}
+              className={`${styles.dropzone__wrapper} ${
+                active && styles.dropzone__wrapper__active
+              }`}
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDrag}

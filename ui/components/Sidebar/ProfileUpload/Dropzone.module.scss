@@ -14,10 +14,9 @@
     padding: 20px;
     width: 400px;
     min-height: 157px;
-    border: 2px dashed var(--ui-color-three);
+    border: 2px dashed var(--gray-50);
     border-radius: 5px;
-    &:hover,
-    &:active {
+    &__active {
       transition: all 0.5s;
       border: 2px dashed var(--ui-color-one);
     }
