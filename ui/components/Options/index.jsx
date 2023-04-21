@@ -17,13 +17,26 @@ const Options = ({
   const [isPlay, setIsPlay] = useState(false);
   const { setAudioContext, audioContext } = useContext(AppContext);
   const [list, setList] = useState([]);
-  const checkUnique = () => {};
+  const checkUnique = (music, playlistQueue) => {
+    for (const IdPlaylist of playlistQueue) {
+      for (const IdMusic of music) {
+        if (IdPlaylist.id == IdMusic.id) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
   const addInQueue = (musicItem) => {
     if (audioContext !== null) {
-      if (musicItem !== undefined) {
+      if (
+        musicItem !== undefined &&
+        checkUnique(musicItem, audioContext.data)
+      ) {
         setAudioContext({
           data: [...audioContext.data, ...musicItem],
         });
+        console.log('я сработал 2');
       } else {
         setList([
           ...list,
