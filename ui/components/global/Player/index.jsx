@@ -27,6 +27,7 @@ export default function Player({ audios }) {
 
   const [isNav, setIsNav] = useState(false);
   const track = useRef(null);
+
   if (audios) {
     track.current = {
       id: audios?.data[0]?.id,
@@ -38,11 +39,12 @@ export default function Player({ audios }) {
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    if (audios !== null) {
+    if (audios == null) {
+      setAudio(null);
+    } else {
       setAudio(AudioInit(track.current));
-      console.log(audios);
     }
-  }, [audios]);
+  }, [audios || track]);
 
   useEffect(() => {
     if (audios) {
@@ -65,7 +67,7 @@ export default function Player({ audios }) {
         );
       });
     }
-  }, [audio ?? null, audios]);
+  }, [audio ?? null]);
 
   const play = () => {
     if (audio) {
@@ -106,17 +108,15 @@ export default function Player({ audios }) {
   };
 
   const nextTrack = (id, attributes) => {
-    if (audios) {
-      track.current = {
-        id,
-        ...attributes,
-        src: attributes?.src?.data[0]?.attributes?.hash,
-        poster: attributes?.poster?.data?.attributes?.url,
-      };
-
-      audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
-      play();
-    }
+    track.current = {
+      id,
+      ...attributes,
+      src: attributes?.src?.data[0]?.attributes?.hash,
+      poster: attributes?.poster?.data?.attributes?.url,
+    };
+    console.log(track.current);
+    audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
+    play();
   };
 
   const _title = `${track?.current?.author} - ${track?.current?.name}`;
@@ -173,8 +173,8 @@ export default function Player({ audios }) {
                   onClick={() => setIsPlayList(!isPlayList)}
                 >
                   <div className={styles.playerBox__info__description}>
-                    <strong>{track.current?.author}</strong> -{' '}
-                    {track.current?.name}
+                    <strong>{track.current.author}</strong> -{' '}
+                    {track.current.name}
                   </div>
                   <span>
                     {currentTime} / {fullTime}
@@ -188,8 +188,7 @@ export default function Player({ audios }) {
                 }`}
               >
                 <div className={styles.playlist__overflow}>
-                  {audios &&
-                    audio &&
+                  {audio &&
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${

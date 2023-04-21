@@ -19,8 +19,6 @@ const Options = ({
   const [list, setList] = useState([]);
   const checkUnique = () => {};
   const addInQueue = (musicItem) => {
-    console.log(musicItem);
-    console.log(audioContext);
     if (audioContext !== null) {
       if (musicItem !== undefined) {
         setAudioContext({
