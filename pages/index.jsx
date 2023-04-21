@@ -61,15 +61,15 @@ export default function Home({ audioTop, playlistsNew, events }) {
                       <ul className='slides__list'>
                         <li className='slides__description'>
                           <p className='slides__date'>
-                            {attributes.date.slice(8, 10)} Марта
+                            {attributes?.date.slice(8, 10)} Марта
                           </p>
                           <p className='slides__time'>
-                            {attributes.time.slice(0, 5)}
+                            {attributes?.time.slice(0, 5)}
                           </p>
                         </li>
                         <li className='slides__description'>
-                          <p className='slides__item'>{attributes.title}</p>
-                          <p className='slides__item'>{attributes.author}</p>
+                          <p className='slides__item'>{attributes?.title}</p>
+                          <p className='slides__item'>{attributes?.author}</p>
                         </li>
                       </ul>
                     </Link>
@@ -104,11 +104,11 @@ export default function Home({ audioTop, playlistsNew, events }) {
                       <ul className='slides__list'>
                         <h2 className='slides__description'>
                           {
-                            attributes.users_permissions_user.data.attributes
-                              .username
+                            attributes?.users_permissions_user?.data?.attributes
+                              ?.username
                           }
                         </h2>
-                        <li className='slides__item'>{attributes.title} </li>
+                        <li className='slides__item'>{attributes?.title} </li>
                       </ul>
                     </Link>
                   </SliderItem>

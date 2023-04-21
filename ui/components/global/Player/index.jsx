@@ -1,5 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { AudioInit, AudioTime } from './player';
+import { getAudios } from '@/api';
+
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,9 +15,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
+import AppContext from '../AppContext';
 
 export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
+  const { setAudioContext } = useContext(AppContext);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [percentage, setPercentage] = useState(0);
   const [fullTime, setfullTime] = useState('00:00');
@@ -24,21 +28,35 @@ export default function Player({ audios }) {
   const [volume, setVolume] = useState(80);
   const [volumeMove, setVolumeMove] = useState(false);
   const [isPlayList, setIsPlayList] = useState(false);
-
+  const [trackInfo, setTrackInfo] = useState('');
   const [isNav, setIsNav] = useState(false);
+  const track = useRef(null);
 
-  const track = useRef({
-    id: audios?.data[0]?.id,
-    ...audios?.data[0]?.attributes,
-    src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
-  });
+  const getDefaultAudios = async () => {
+    setAudioContext(await getAudios());
+  };
 
+  if (audios) {
+    track.current = {
+      id: audios?.data[0]?.id,
+      ...audios?.data[0]?.attributes,
+      src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+      poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+    };
+  }
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    setAudio(AudioInit(track.current));
-  }, []);
+    if (audios !== null) {
+      setAudio(AudioInit(track.current));
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
+    }
+  }, [audios]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
@@ -58,11 +76,19 @@ export default function Player({ audios }) {
         audios?.data[_indexTrach.current]?.id,
         audios?.data[_indexTrach.current]?.attributes
       );
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
     });
   }, [audio ?? null]);
 
   const play = () => {
-    audio?.paused ? audio.play() : audio.pause();
+    if (audio) {
+      audio?.paused ? audio.play() : audio.pause();
+    }
   };
 
   const rewind = (e, active) => {
@@ -81,8 +107,7 @@ export default function Player({ audios }) {
       audio.muted = true;
       return;
     }
-
-    audio.muted = false;
+    if (audio) audio.muted = false;
   };
 
   const volumeTrack = (e, active) => {
@@ -105,20 +130,21 @@ export default function Player({ audios }) {
       src: attributes?.src?.data[0]?.attributes?.hash,
       poster: attributes?.poster?.data?.attributes?.url,
     };
-
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
   };
 
-  const _title = `${track.current?.author} - ${track.current?.name}`;
-
   return (
     <>
       <Head>
-        <title>{_title}</title>
+        <title>
+          {!audio
+            ? 'Трек не выбран'
+            : `${trackInfo.author} - ${trackInfo.name}`}
+        </title>
         <link
           rel='apple-touch-icon'
-          href={`${process.env.NEXT_PUBLIC_API_URL}${track.current?.poster}`}
+          href={`${process.env.NEXT_PUBLIC_API_URL}${track?.current?.poster}`}
         />
       </Head>
 
@@ -143,44 +169,47 @@ export default function Player({ audios }) {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {track.current?.poster ? (
-                <img
-                  src={process.env.NEXT_PUBLIC_API_URL + track.current?.poster}
-                />
+              {!audio ? (
+                ''
+              ) : trackInfo.poster ? (
+                <img src={process.env.NEXT_PUBLIC_API_URL + trackInfo.poster} />
               ) : (
                 <FontAwesomeIcon icon={faMusic} />
               )}
+
               <div
                 className={`${styles.playerBox__play} ${
-                  !audio?.paused ? styles.active : ''
+                  audios == null ? '' : !audio?.paused ? styles.active : ''
                 }`}
-                onClick={play}
+                onClick={audios == null ? getDefaultAudios : play}
               ></div>
             </div>
             <div className={styles.playerBox__body}>
-              <div
-                className={styles.playerBox__info}
-                onClick={() => setIsPlayList(!isPlayList)}
-              >
-                <div className={styles.playerBox__info__description}>
-                  <strong>{track.current?.author}</strong> -{' '}
-                  {track.current?.name}
+              {audio && (
+                <div
+                  className={styles.playerBox__info}
+                  onClick={() => setIsPlayList(!isPlayList)}
+                >
+                  <div className={styles.playerBox__info__description}>
+                    <strong>{trackInfo.author}</strong> - {trackInfo.name}
+                  </div>
+                  <span>
+                    {currentTime} / {fullTime}
+                  </span>
                 </div>
-                <span>
-                  {currentTime} / {fullTime}
-                </span>
-              </div>
+              )}
+
               <div
                 className={`${styles.playlist} ${
                   isPlayList ? styles.playlist__active : ''
                 }`}
               >
                 <div className={styles.playlist__overflow}>
-                  {audios &&
+                  {audio &&
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${
-                          track.current?.id === id
+                          trackInfo?.id === id
                             ? styles.playlist__item_active
                             : ''
                         }`}
@@ -208,8 +237,8 @@ export default function Player({ audios }) {
                           </div>
                         </div>
                         <div className={styles.playlist__info}>
-                          <strong>{attributes.author}</strong> -{' '}
-                          {attributes.name}
+                          <strong>{attributes?.author}</strong> -
+                          {attributes?.name}
                         </div>
                       </div>
                     ))}

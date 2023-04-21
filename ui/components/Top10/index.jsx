@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
-import AppContext from '@/ui/components/global/AppContext';
 import styles from '@/ui/components/Top10/Top10.module.scss';
 import Track from '@/ui/components/Track';
+import Options from '@/ui/components/Options';
 
 const Top10 = ({ audioTop }) => {
-  const { setAudioContext } = useContext(AppContext);
-
   return (
-    <div className={styles.wrapper} onClick={() => setAudioContext(audioTop)}>
+    <div className={styles.wrapper}>
       <div className='title'>Топ 10</div>
+      <Options like={true} queue={[true, [...audioTop.data]]} size={'lg'} />
+
       {audioTop.data?.map(({ id, attributes }, index) => (
         <Track key={id} id={id} index={index + 1} attributes={attributes} />
       ))}

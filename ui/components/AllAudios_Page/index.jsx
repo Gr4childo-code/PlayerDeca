@@ -1,13 +1,10 @@
-import { useState, useContext } from 'react';
-import AppContext from '@/ui/components/global/AppContext';
+import { useState } from 'react';
 
 import Options from '@/ui/components/Options';
 import Track from '@/ui/components/Track';
 import styles from '@/ui/components/AllAudios_Page/AllAudios_Page.module.scss';
 
 const AllAudios_Page = ({ audios }) => {
-  const { setAudioContext } = useContext(AppContext);
-
   const [visible, setVisibale] = useState(10);
 
   const showMoreTrack = () => {
@@ -17,8 +14,8 @@ const AllAudios_Page = ({ audios }) => {
   return (
     <div className={styles.wrapper}>
       <div className={'title'}>Все треки</div>
-      <div className={styles.options} onClick={() => setAudioContext(audios)}>
-        <Options play={true} queue={true} size={'lg'} />
+      <div className={styles.options}>
+        <Options play={true} queue={[true, [...audios.data]]} size={'lg'} />
       </div>
       {audios ? (
         audios &&

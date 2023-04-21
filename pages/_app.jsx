@@ -24,7 +24,7 @@ import '@/styles/sass/grid.scss';
 import Layout from '../ui/components/global/Layout';
 
 export default function App({ Component, pageProps, audios }) {
-  const [audioContext, setAudioContext] = useState(audios);
+  const [audioContext, setAudioContext] = useState(null);
 
   return (
     <SessionProvider session={pageProps?.session}>
