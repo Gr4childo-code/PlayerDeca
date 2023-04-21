@@ -130,6 +130,12 @@ export default function Player({ audios }) {
       src: attributes?.src?.data[0]?.attributes?.hash,
       poster: attributes?.poster?.data?.attributes?.url,
     };
+    setTrackInfo({
+      id: track.current.id,
+      name: track.current.name,
+      author: track.current.author,
+      poster: track.current.poster,
+    });
     audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
   };
@@ -181,7 +187,7 @@ export default function Player({ audios }) {
                 className={`${styles.playerBox__play} ${
                   audios == null ? '' : !audio?.paused ? styles.active : ''
                 }`}
-                onClick={audios == null ? getDefaultAudios : play}
+                onClick={play}
               ></div>
             </div>
             <div className={styles.playerBox__body}>

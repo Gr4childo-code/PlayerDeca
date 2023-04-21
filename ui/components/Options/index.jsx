@@ -75,12 +75,12 @@ const Options = ({
         )}
 
         {like && (
-          <div className={styles.options}>
+          <div className={styles.options} hint={'Добавить в свою коллекцию'}>
             <FontAwesomeIcon icon={faHeart} size={size} />
           </div>
         )}
         {queue && (
-          <div className={styles.options}>
+          <div className={styles.options} hint={'Добавить в очередь'}>
             <FontAwesomeIcon
               icon={faPlus}
               size={size}
