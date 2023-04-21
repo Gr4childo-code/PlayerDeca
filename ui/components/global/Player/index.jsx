@@ -1,5 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { AudioInit, AudioTime } from './player';
+import { getAudios } from '@/api';
+
 import Head from 'next/head';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,9 +15,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
+import AppContext from '../AppContext';
 
 export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
+  const { setAudioContext } = useContext(AppContext);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [percentage, setPercentage] = useState(0);
   const [fullTime, setfullTime] = useState('00:00');
@@ -27,6 +31,10 @@ export default function Player({ audios }) {
   const [trackInfo, setTrackInfo] = useState('');
   const [isNav, setIsNav] = useState(false);
   const track = useRef(null);
+
+  const getDefaultAudios = async () => {
+    setAudioContext(await getAudios());
+  };
 
   if (audios) {
     track.current = {
@@ -126,8 +134,6 @@ export default function Player({ audios }) {
     play();
   };
 
-  // const _title = ``;
-
   return (
     <>
       <Head>
@@ -173,9 +179,9 @@ export default function Player({ audios }) {
 
               <div
                 className={`${styles.playerBox__play} ${
-                  !audio?.paused ? styles.active : ''
+                  audios == null ? '' : !audio?.paused ? styles.active : ''
                 }`}
-                onClick={play}
+                onClick={audios == null ? getDefaultAudios : play}
               ></div>
             </div>
             <div className={styles.playerBox__body}>
