@@ -7,5 +7,23 @@
   cursor: pointer;
   &:hover {
     color: var(--ui-color-one);
+    &:before {
+      opacity: 1;
+    }
+  }
+  &:before {
+    content: attr(hint);
+    position: absolute;
+    white-space: nowrap;
+    transform: translate(-90%, -40px);
+    background: var(--ui-color-one);
+    opacity: 0;
+    font-size: 12px;
+    line-height: 1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: var(--white);
+    transition: opacity 0.15s;
   }
 }
