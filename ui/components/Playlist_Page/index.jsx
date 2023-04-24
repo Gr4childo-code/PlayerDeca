@@ -4,7 +4,6 @@ import Options from '@/ui/components/Options';
 
 const Playlist_Page = ({ playlist }) => {
   const { audio, poster, users_permissions_user } = playlist[0].attributes;
-  console.log(audio.data[0]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.side__bar}>
@@ -59,6 +58,7 @@ const Playlist_Page = ({ playlist }) => {
                 id={id}
                 index={index + 1}
                 attributes={attributes}
+                size={'lg'}
               />
             ))
           ) : (

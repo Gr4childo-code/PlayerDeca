@@ -91,7 +91,7 @@
     &__overflow {
       width: auto;
       &__active {
-        width: calc(100% - 200px);
+        width: calc(100% - 150px);
       }
     }
   }
@@ -101,15 +101,8 @@
     &__overflow {
       left: 0;
       &__active {
-        width: calc(100% - 100px);
+        width: 100%;
       }
-    }
-  }
-}
-@include mq(Mphone) {
-  .search {
-    .item {
-      font-size: 12px;
     }
   }
 }

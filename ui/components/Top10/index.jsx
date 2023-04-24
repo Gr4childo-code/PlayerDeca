@@ -12,7 +12,13 @@ const Top10 = ({ audioTop }) => {
       <Options like={true} queue={[true, [...audioTop.data]]} size={'lg'} />
 
       {audioTop.data?.map(({ id, attributes }, index) => (
-        <Track key={id} id={id} index={index + 1} attributes={attributes} />
+        <Track
+          key={id}
+          id={id}
+          index={index + 1}
+          attributes={attributes}
+          size='lg'
+        />
       ))}
       <span className={styles.link}>
         <Link href={'/allAudios'}>Посмотреть все треки</Link>

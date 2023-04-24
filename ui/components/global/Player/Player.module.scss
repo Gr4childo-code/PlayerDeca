@@ -388,6 +388,7 @@
   color: var(--white-40);
   transition: color 0.15s;
   &:before {
+    display: none;
     content: attr(hint);
     position: absolute;
     bottom: 100%;
@@ -395,14 +396,13 @@
     white-space: nowrap;
     transform: translateX(-50%);
     background: var(--ui-color-one);
-    opacity: 0;
     font-size: 12px;
     line-height: 1;
     padding: 5px 10px;
     border-radius: 5px;
     margin-bottom: 5px;
     color: var(--white);
-    transition: opacity 0.15s;
+    transition: all 0.15s;
   }
   svg {
     width: 100%;
@@ -411,7 +411,7 @@
   &:hover {
     color: var(--whtie);
     &:before {
-      opacity: 1;
+      display: block;
     }
   }
 }
