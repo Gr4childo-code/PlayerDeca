@@ -3,10 +3,7 @@ import Preloader from '@/ui/components/global/Preloader';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
 
-export default function DragAndDrop({
-  handleImagePlaylistToUpload,
-  loaderPlaylist,
-}) {
+export default function MusicDrop({ handleFilesToUpload, loader }) {
   const [active, setActive] = useState(false);
 
   const handleDrag = (e) => {
@@ -19,41 +16,36 @@ export default function DragAndDrop({
       setActive(false);
     }
   };
-
   const handleSelectFile = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (e.dataTransfer) {
-      const poster = e.dataTransfer.files[0];
-      const file = e.dataTransfer.files[0];
-      const reader = new FileReader();
-
-      reader.addEventListener('load', (e) => {
-        const url = e.target.result;
-        handleImagePlaylistToUpload(url, poster);
-      });
-
-      reader.readAsDataURL(file);
+      const data = e.dataTransfer.files[0].name.split('.mp3', [1]);
+      const audio = {
+        name: data[0].split(' - ')[1],
+        author: data[0].split(' - ')[0],
+        src: e.dataTransfer.files[0],
+      };
       setActive(false);
+
+      handleFilesToUpload(audio);
     } else if (e.target.files) {
-      const poster = e.target.files[0];
-      const file = e.target.files[0];
-      const reader = new FileReader();
-
-      reader.addEventListener('load', (e) => {
-        const url = e.target.result;
-        handleImagePlaylistToUpload(url, poster);
-      });
-
-      reader.readAsDataURL(file);
+      const data = e.target.files[0].name.split('.mp3', [1]);
+      const audio = {
+        name: data[0].split(' - ')[1],
+        author: data[0].split(' - ')[0],
+        src: e.target.files[0],
+      };
       setActive(false);
+
+      handleFilesToUpload(audio);
     }
   };
 
   return (
     <div className={styles.dropzone}>
-      {loaderPlaylist ? (
+      {loader ? (
         <form>
           <div
             onDragEnter={handleDrag}
@@ -67,23 +59,20 @@ export default function DragAndDrop({
               }`}
             >
               <label className={styles.dropzone__info}>
-                1. Выберите обложку в формате <br /> ( jpeg, jpg, png, webp ){' '}
-                <br />
+                2. Выберите песню в формате <br /> ( mp3) <br />
               </label>
               <input
                 required
                 className={styles.dropzone__input}
                 type={'file'}
                 onChange={handleSelectFile}
-                accept='image/jpeg, image/jpg, image/png, image/webp'
+                accept='audio/mp3'
               />
             </div>
           </div>
         </form>
       ) : (
-        <div className={styles.loaderPlaylist}>
-          <Preloader />
-        </div>
+        ''
       )}
     </div>
   );

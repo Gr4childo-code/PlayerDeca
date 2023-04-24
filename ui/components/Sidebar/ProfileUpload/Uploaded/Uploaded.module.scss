@@ -1,3 +1,5 @@
+@import '@/styles/sass/grid.scss';
+
 .uploaded {
   &__title {
     font-size: 25px;
@@ -63,6 +65,25 @@
     &:hover,
     &:active {
       background-color: var(--ui-color-two);
+    }
+  }
+}
+
+.image {
+  margin: 0 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@include mq(SMdesktop) {
+  .uploaded {
+    &__title {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 25px;
+      color: var(--ui-color-three);
     }
   }
 }
