@@ -2,7 +2,7 @@
 
 .wrapper {
   display: flex;
-  padding-top: 20px;
+  padding: 45px 0 10px;
 }
 .side__bar {
   display: flex;
@@ -88,6 +88,28 @@
     color: var(--white-90);
   }
 }
+@include mq(SMdesktop) {
+  .side__bar {
+    &__description {
+      .release,
+      .rate {
+      }
+      .release {
+        font-size: 15px;
+        &__dates {
+          font-size: 15px;
+        }
+      }
+      .rate {
+        font-size: 15px;
+
+        &__star {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
 
 @include mq(Lphone) {
   .wrapper {
@@ -124,5 +146,22 @@
   .content {
     margin-top: 40px;
     padding-left: 0;
+  }
+}
+
+@include mq(XSphone) {
+  .side__bar {
+    &__description {
+      .release {
+        &__dates {
+          font-size: 15px;
+        }
+      }
+      .rate {
+        &__star {
+          font-size: 15px;
+        }
+      }
+    }
   }
 }

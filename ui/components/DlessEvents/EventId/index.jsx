@@ -36,7 +36,7 @@ export default function EventId({ events }) {
           <li className={styles.dataEvent__time}>{time.slice(0, 5)}</li>
           <li className={styles.eventInfo__place}>{place}</li>
         </ul>
-        <div>
+        <div className={styles.eventInfo__image}>
           <img
             src={process.env.NEXT_PUBLIC_API_URL + data?.attributes?.['url']}
             alt='no image'

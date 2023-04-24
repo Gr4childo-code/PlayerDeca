@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .search {
   width: 100%;
@@ -89,8 +89,7 @@
 @include mq(tablet) {
   .search {
     &__overflow {
-      width: 100%;
-
+      width: auto;
       &__active {
         width: calc(100% - 200px);
       }
@@ -104,6 +103,13 @@
       &__active {
         width: calc(100% - 100px);
       }
+    }
+  }
+}
+@include mq(Mphone) {
+  .search {
+    .item {
+      font-size: 12px;
     }
   }
 }

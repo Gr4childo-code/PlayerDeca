@@ -58,7 +58,10 @@ export default function Sidebar() {
         })}
         <li className={styles.item}>
           <div className={styles.mobile}>
-            <FontAwesomeIcon icon={faRightFromBracket} />
+            <FontAwesomeIcon
+              icon={faRightFromBracket}
+              onClick={signOutHandle}
+            />
           </div>
           <button className={styles.logout} onClick={signOutHandle}>
             Выйти
