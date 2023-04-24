@@ -316,3 +316,65 @@ a {
     }
   }
 }
+
+.playlists {
+  margin: 60px 0 100px;
+  width: 250px;
+  height: 300px;
+  border-radius: 5px;
+  &__image {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+}
+
+.uploaded {
+  display: flex;
+  justify-content: space-between;
+  min-height: 400px;
+  &__right {
+    max-width: 400px;
+  }
+  &__left {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 420px);
+    min-height: 300px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+}
+
+.test {
+  width: 100%;
+  height: 2px;
+  background-color: var(--gray-50);
+}
+
+@include mq(SMdesktop) {
+  .uploaded {
+    display: flex;
+    flex-direction: column-reverse;
+    &__left {
+      width: 100%;
+    }
+    &__right {
+      max-width: 100%;
+    }
+  }
+}
+@include mq(tablet) {
+  .uploaded {
+    display: flex;
+    flex-direction: column-reverse;
+    &__left {
+      width: 100%;
+    }
+    &__right {
+      max-width: 100%;
+    }
+  }
+}
