@@ -1,103 +1,136 @@
 import React, { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
-import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
 import CreatePlaylist from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
+import UploadedSongs from '@/ui/components/Sidebar/ProfileUpload/Uploaded';
+import UploadedPlaylist from '@/ui/components/Sidebar/ProfileUpload/UploadedPlaylist';
+import PlaylistImageDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Playlist';
+import MusicDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Music';
+import ImageDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Image';
 
 import Toast from '@/ui/components/global/Toast';
 
-import { createAudios, postPlaylist } from '@/api';
+import { createAudios, postPlaylist, getAudiosAll } from '@/api';
 
-export default function UserCollection() {
-  const poster = useRef(null);
+export const getServerSideProps = async () => {
+  const audios = await getAudiosAll();
+
+  return {
+    props: { audios },
+  };
+};
+
+export default function UserCollection({ audios }) {
+  const { data } = audios;
+
+  const [loader, setLoader] = useState(true);
+  const [loaderPlaylist, setLoaderPlaylist] = useState(true);
   const [list, setList] = useState([]);
   const { data: session } = useSession();
-  const [loader, setLoader] = useState(true);
-  const [dragLoader, setDragLoader] = useState(true);
-  const [playlist, setPlaylist] = useState([]);
   const [files, setFiles] = useState([] || '');
+  const [playlist, setPlaylist] = useState(data);
   const [playlistName, setPlaylistName] = useState('');
+  const [fileId, setSongsId] = useState([] || null);
+  const [newUserPlaylist, setNewUserPlaylist] = useState([]);
+  const [image, setImage] = useState(null);
+  const [imagePlaylist, setImagePlaylist] = useState(null);
 
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleImageToUpload = (url, poster) => {
+    setImage({ poster: poster, url: url });
+  };
+  const handleImagePlaylistToUpload = (url, poster) => {
+    setImagePlaylist({ poster: poster, url: url });
+  };
 
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setLoader(true);
-    } else if (e.type === 'dragleave') {
+  const handleFilesToUpload = ({ name, author, src }) => {
+    setFiles([
+      ...files,
+      { name, author, src, poster: image?.poster, url: image?.url },
+    ]);
+  };
+
+  const handleDeleteSong = (index) => {
+    setFiles([...files.slice(0, index), ...files.slice(index + 1)]);
+  };
+
+  const uploadNewSongs = (files) => {
+    files.forEach((element) => {
       setLoader(false);
-    }
+      createAudios(
+        {
+          data: {
+            name: element.name,
+            author: element.author,
+          },
+          files: {
+            src: element.src,
+            poster: element.poster,
+          },
+        },
+        session?.jwt
+      )
+        .then(() => setLoader(true))
+        .then(() => setFiles([]))
+        .then(() =>
+          setList([
+            ...list,
+            {
+              id: Date.now(),
+              type: 'success',
+              description: 'Успешно загружено',
+            },
+          ])
+        )
+        .catch((error) => {
+          throw error;
+        });
+    });
   };
 
-  const handleSelectFile = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.dataTransfer) {
-      const audioData = e.dataTransfer.files[0].name.split('.mp3', [1]);
-      const audio = {
-        name: audioData[0].split(' - ')[1],
-        author: audioData[0].split(' - ')[0],
-        src: e.dataTransfer.files[0],
-      };
-      setFiles([...files, audio]);
-    } else if (e.target.files) {
-      const audioData = e.target.files[0].name.split('.mp3', [1]);
-      const audio = {
-        name: audioData[0].split(' - ')[1],
-        author: audioData[0].split(' - ')[0],
-        src: e.target.files[0],
-        poster: poster.current,
-      };
-      setFiles([...files, audio]);
-    }
+  const handleSelectOption = (e) => {
+    setSongsId([...fileId, Number(e.target.value)]);
   };
 
-  const handleAddSongPlaylist = (index) => {
-    setPlaylist([...playlist, files[index]]);
-  };
-  const handleDeleteSongPlaylist = (index) => {
-    setPlaylist([...playlist.slice(0, index), ...playlist.slice(index + 1)]);
+  const handlePlaylistName = (e) => {
+    setPlaylistName(e.target.value);
   };
 
-  const uploadPlaylist = () => {
-    setLoader(false);
+  const handleRemoveFile = (index) => {
+    setNewUserPlaylist([
+      ...newUserPlaylist.slice(0, index),
+      ...newUserPlaylist.slice(index + 1),
+    ]);
+    setSongsId([...fileId.slice(0, index), ...fileId.slice(index + 1)]);
+  };
+
+  const handleNewUserPlaylist = (attr) => {
+    setNewUserPlaylist([
+      ...newUserPlaylist,
+      { author: attr.author, name: attr.name },
+    ]);
+  };
+
+  const uploadPlaylist = (fileId) => {
+    setPlaylistName('');
+    setLoaderPlaylist(false);
     postPlaylist(
       {
         data: {
           title: playlistName,
           user_id: session?.user.id,
+          audio: {
+            connect: fileId,
+          },
         },
         files: {
-          src: playlist,
+          poster: imagePlaylist.poster,
         },
       },
       session?.jwt
     )
-      .then(() => setLoader(true))
+      .then(() => setLoaderPlaylist(true))
+      .then(() => setNewUserPlaylist([]))
       .then(() => setPlaylistName(''))
-      .then(() => setPlaylist([]))
-      .catch((error) => {
-        throw error;
-      });
-  };
-
-  const upload = (index) => {
-    setDragLoader(false);
-    createAudios(
-      {
-        data: {
-          name: files[index].name,
-          author: files[index].author,
-        },
-        files: {
-          src: files[index].src,
-          poster: poster.current,
-        },
-      },
-      session?.jwt
-    )
-      .then(() => setDragLoader(true))
       .then(() =>
         setList([
           ...list,
@@ -113,34 +146,58 @@ export default function UserCollection() {
       });
   };
 
-  const handlePlaylistName = (e) => {
-    setPlaylistName(e.target.value);
-  };
-
   return (
     <Layout>
       <Toast toastlist={list} setList={setList} />
-      <div>
-        <DragAndDrop
-          files={files}
-          dragLoader={dragLoader}
-          poster={poster}
-          upload={upload}
-          handleDrag={handleDrag}
-          handleSelectFile={handleSelectFile}
-          handleAddSongPlaylist={handleAddSongPlaylist}
-          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
-        />
+      <div className='uploaded'>
+        <div className='uploaded__left'>
+          {loader && (
+            <UploadedSongs
+              files={files}
+              uploadNewSongs={uploadNewSongs}
+              handleDeleteSong={handleDeleteSong}
+            />
+          )}
+        </div>
+        <div className='uploaded__right'>
+          <ImageDrop
+            loader={loader}
+            handleImageToUpload={handleImageToUpload}
+          />
+          <MusicDrop
+            loader={loader}
+            handleFilesToUpload={handleFilesToUpload}
+          />
+        </div>
       </div>
-      <div>
-        <CreatePlaylist
-          loader={loader}
-          playlist={playlist}
-          playlistName={playlistName}
-          uploadPlaylist={uploadPlaylist}
-          handlePlaylistName={handlePlaylistName}
-          handleDeleteSongPlaylist={handleDeleteSongPlaylist}
-        />
+      <div className='test'></div>
+      <div className='uploaded'>
+        <div className='uploaded__left'>
+          {loaderPlaylist && (
+            <UploadedPlaylist
+              imagePlaylist={imagePlaylist}
+              newUserPlaylist={newUserPlaylist}
+              playlistName={playlistName}
+              handleRemoveFile={handleRemoveFile}
+              handlePlaylistName={handlePlaylistName}
+              uploadPlaylist={uploadPlaylist}
+              fileId={fileId}
+            />
+          )}
+        </div>
+        <div className='uploaded__right'>
+          <PlaylistImageDrop
+            loaderPlaylist={loaderPlaylist}
+            handleImagePlaylistToUpload={handleImagePlaylistToUpload}
+          />
+          {loaderPlaylist && (
+            <CreatePlaylist
+              playlist={playlist}
+              handleNewUserPlaylist={handleNewUserPlaylist}
+              handleSelectOption={handleSelectOption}
+            />
+          )}
+        </div>
       </div>
     </Layout>
   );
