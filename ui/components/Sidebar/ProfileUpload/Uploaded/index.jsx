@@ -2,7 +2,11 @@ import React from 'react';
 
 import styles from '@/ui/components/Sidebar/ProfileUpload/Uploaded/Uploaded.module.scss';
 
-export default function Uploaded({ files, uploadNewSongs, handleDeleteSong }) {
+export default function UploadedSongs({
+  files,
+  uploadNewSongs,
+  handleDeleteSong,
+}) {
   return (
     <div className={styles.uploaded}>
       {files.length !== 0 && (

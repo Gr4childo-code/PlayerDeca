@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Preloader from '@/ui/components/global/Preloader';
 
-import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
+import styles from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Dropzone.module.scss';
 
-export default function DragAndDrop({
+export default function PlaylistImageDrop({
   handleImagePlaylistToUpload,
   loaderPlaylist,
 }) {

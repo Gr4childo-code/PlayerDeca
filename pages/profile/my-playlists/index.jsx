@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/ui/components/Sidebar/Layout';
-import DragAndDrop from '@/ui/components/Sidebar/ProfileUpload';
 import CreatePlaylist from '@/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
-import Uploaded from '@/ui/components/Sidebar/ProfileUpload/Uploaded';
+import UploadedSongs from '@/ui/components/Sidebar/ProfileUpload/Uploaded';
 import UploadedPlaylist from '@/ui/components/Sidebar/ProfileUpload/UploadedPlaylist';
+import PlaylistImageDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Playlist';
 import MusicDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Music';
 import ImageDrop from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Image';
 
@@ -56,7 +56,7 @@ export default function UserCollection({ audios }) {
   const uploadNewSongs = (files) => {
     files.forEach((element) => {
       setLoader(false);
-      /* createAudios(
+      createAudios(
         {
           data: {
             name: element.name,
@@ -83,7 +83,7 @@ export default function UserCollection({ audios }) {
         )
         .catch((error) => {
           throw error;
-        }); */
+        });
     });
   };
 
@@ -113,7 +113,7 @@ export default function UserCollection({ audios }) {
   const uploadPlaylist = (fileId) => {
     setPlaylistName('');
     setLoaderPlaylist(false);
-    /* postPlaylist(
+    postPlaylist(
       {
         data: {
           title: playlistName,
@@ -123,7 +123,7 @@ export default function UserCollection({ audios }) {
           },
         },
         files: {
-          poster: image.poster,
+          poster: imagePlaylist.poster,
         },
       },
       session?.jwt
@@ -143,7 +143,7 @@ export default function UserCollection({ audios }) {
       )
       .catch((error) => {
         throw error;
-      }); */
+      });
   };
 
   return (
@@ -152,7 +152,7 @@ export default function UserCollection({ audios }) {
       <div className='uploaded'>
         <div className='uploaded__left'>
           {loader && (
-            <Uploaded
+            <UploadedSongs
               files={files}
               uploadNewSongs={uploadNewSongs}
               handleDeleteSong={handleDeleteSong}
@@ -186,7 +186,7 @@ export default function UserCollection({ audios }) {
           )}
         </div>
         <div className='uploaded__right'>
-          <DragAndDrop
+          <PlaylistImageDrop
             loaderPlaylist={loaderPlaylist}
             handleImagePlaylistToUpload={handleImagePlaylistToUpload}
           />

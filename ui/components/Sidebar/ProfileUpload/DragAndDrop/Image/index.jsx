@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Preloader from '@/ui/components/global/Preloader';
 
-import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
+import styles from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Dropzone.module.scss';
 
 export default function ImageDrop({ handleImageToUpload, loader }) {
   const [active, setActive] = useState(false);

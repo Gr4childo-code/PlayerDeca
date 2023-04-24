@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Preloader from '@/ui/components/global/Preloader';
 
-import styles from '@/ui/components/Sidebar/ProfileUpload/Dropzone.module.scss';
+import styles from '@/ui/components/Sidebar/ProfileUpload/DragAndDrop/Dropzone.module.scss';
 
 export default function MusicDrop({ handleFilesToUpload, loader }) {
   const [active, setActive] = useState(false);
