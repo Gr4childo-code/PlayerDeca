@@ -6,7 +6,6 @@ import Options from '@/ui/components/Options';
 import styles from '@/ui/components/Track/Track.module.scss';
 
 const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
-  const [isPlay, setIsPlay] = useState(false);
   return (
     <div className={styles.track} key={id}>
       <div className={styles.track__number}>{index}</div>
@@ -25,12 +24,7 @@ const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
           </div>
         )}
 
-        <div
-          className={styles.track__hoverState}
-          onClick={() => {
-            setIsPlay(!isPlay);
-          }}
-        >
+        <div className={styles.track__hoverState}>
           <Options play={true} size={size} />
         </div>
       </div>

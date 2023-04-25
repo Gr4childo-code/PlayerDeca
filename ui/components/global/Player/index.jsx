@@ -12,6 +12,7 @@ import {
   faRepeat,
   faBars,
   faTimes,
+  faBrush,
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
@@ -280,6 +281,12 @@ export default function Player({ audios }) {
               </div>
               <div hint='Повторять' className={styles.playerBtn}>
                 <FontAwesomeIcon icon={faRepeat} />
+              </div>
+              <div hint='Очистить плеер' className={styles.playerBtn}>
+                <FontAwesomeIcon
+                  icon={faBrush}
+                  onClick={() => [setAudioContext(null), setAudio(null)]}
+                />
               </div>
             </div>
             <div className={styles.playerToolsMob}>
