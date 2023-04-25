@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef, useContext, useMemo } from 'react';
 import { AudioInit, AudioTime } from './player';
-import { getAudios } from '@/api';
 
 import Head from 'next/head';
 
@@ -16,11 +15,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
-import AppContext from '../AppContext';
+import { AppContext } from '../AppContext';
 
 export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
-  const { setAudioContext } = useContext(AppContext);
+  const { setAudioContext, audioContext } = useContext(AppContext);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [percentage, setPercentage] = useState(0);
   const [fullTime, setfullTime] = useState('00:00');
@@ -33,10 +32,6 @@ export default function Player({ audios }) {
   const [isNav, setIsNav] = useState(false);
   const track = useRef(null);
 
-  const getDefaultAudios = async () => {
-    setAudioContext(await getAudios());
-  };
-
   if (audios) {
     track.current = {
       id: audios?.data[0]?.id,
@@ -48,16 +43,14 @@ export default function Player({ audios }) {
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    if (audios !== null) {
-      setAudio(AudioInit(track.current));
-      setTrackInfo({
-        id: track.current.id,
-        name: track.current.name,
-        author: track.current.author,
-        poster: track.current.poster,
-      });
-    }
-  }, [audios]);
+    setAudio(AudioInit(track.current));
+    setTrackInfo({
+      id: track.current.id,
+      name: track.current.name,
+      author: track.current.author,
+      poster: track.current.poster,
+    });
+  }, []);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
@@ -281,12 +274,6 @@ export default function Player({ audios }) {
               </div>
               <div hint='Повторять' className={styles.playerBtn}>
                 <FontAwesomeIcon icon={faRepeat} />
-              </div>
-              <div hint='Очистить плеер' className={styles.playerBtn}>
-                <FontAwesomeIcon
-                  icon={faBrush}
-                  onClick={() => [setAudioContext(null), setAudio(null)]}
-                />
               </div>
             </div>
             <div className={styles.playerToolsMob}>

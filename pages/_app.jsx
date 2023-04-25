@@ -1,4 +1,4 @@
-import AppContext from '@/ui/components/global/AppContext';
+import { AppContext, PlayContext } from '@/ui/components/global/AppContext';
 import { useState } from 'react';
 import { Roboto } from '@next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -25,18 +25,21 @@ import Layout from '../ui/components/global/Layout';
 
 export default function App({ Component, pageProps, audios }) {
   const [audioContext, setAudioContext] = useState(audios);
+  const [playContext, setPlayContext] = useState(null);
 
   return (
     <SessionProvider session={pageProps?.session}>
       <AppContext.Provider value={{ audioContext, setAudioContext }}>
-        <div className={roboto.className}>
-          <Layout>
-            <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
-            <Component {...pageProps} />
-          </Layout>
+        <PlayContext.Provider value={{ playContext, setPlayContext }}>
+          <div className={roboto.className}>
+            <Layout>
+              <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
+              <Component {...pageProps} />
+            </Layout>
 
-          {audios && <Player audios={audioContext} />}
-        </div>
+            {audios && <Player audios={audioContext} />}
+          </div>
+        </PlayContext.Provider>
       </AppContext.Provider>
     </SessionProvider>
   );
