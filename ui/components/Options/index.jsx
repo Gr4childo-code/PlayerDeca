@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import Toast from '@/ui/components/global/Toast';
 
-import AppContext from '@/ui/components/global/AppContext';
+import { AppContext } from '@/ui/components/global/AppContext';
 import styles from '@/ui/components/Options/Options.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -54,7 +54,6 @@ const Options = ({
       setAudioContext({
         data: musicItem,
       });
-      console.log('я сработал');
     }
   };
   return (
@@ -67,11 +66,16 @@ const Options = ({
               setIsPlay(!isPlay);
             }}
             className={styles.options}
+            hint={'Слушать'}
           >
             {isPlay ? (
               <FontAwesomeIcon icon={faStop} size={size} />
             ) : (
-              <FontAwesomeIcon icon={faPlay} size={size} />
+              <FontAwesomeIcon
+                icon={faPlay}
+                size={size}
+                onClick={() => setAudioContext(play[1])}
+              />
             )}
           </div>
         )}
