@@ -17,10 +17,13 @@ const Options = ({
   const [isPlay, setIsPlay] = useState(false);
   const { setAudioContext, audioContext } = useContext(AppContext);
   const [list, setList] = useState([]);
+
   const checkUnique = (music, playlistQueue) => {
     for (const IdPlaylist of playlistQueue) {
       for (const IdMusic of music) {
-        if (IdPlaylist.id == IdMusic.id) {
+        if (IdPlaylist.id === IdMusic.id) {
+          console.log(IdPlaylist.id, ' - ', IdMusic.id);
+
           return false;
         }
       }
@@ -36,7 +39,6 @@ const Options = ({
         setAudioContext({
           data: [...audioContext.data, ...musicItem],
         });
-        console.log('я сработал 2');
       } else {
         setList([
           ...list,
