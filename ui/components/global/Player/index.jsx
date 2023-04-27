@@ -237,7 +237,7 @@ export default function Player({ audios }) {
                           </div>
                         </div>
                         <div className={styles.playlist__info}>
-                          <strong>{attributes?.author}</strong> -
+                          <strong>{attributes?.author}</strong> - {''}
                           {attributes?.name}
                         </div>
                       </div>
