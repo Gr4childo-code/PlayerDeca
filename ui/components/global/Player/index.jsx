@@ -22,7 +22,7 @@ export default function Player({ audios }) {
   const { setAudioContext, audioContext } = useContext(AppContext);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [percentage, setPercentage] = useState(0);
-  const [fullTime, setfullTime] = useState('00:00');
+  const [fullTime, setFullTime] = useState('00:00');
   const [currentTime, setCurrentTime] = useState('00:00');
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
@@ -44,6 +44,8 @@ export default function Player({ audios }) {
 
   useEffect(() => {
     setAudio(AudioInit(track.current));
+    console.log(audio);
+
     setTrackInfo({
       id: track.current.id,
       name: track.current.name,
@@ -51,10 +53,24 @@ export default function Player({ audios }) {
       poster: track.current.poster,
     });
   }, []);
+  useEffect(() => {
+    if (track.current.id !== trackInfo.id) {
+      audio.muted = false;
+      setAudio(AudioInit(track.current));
+
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
+      audio.muted = true;
+    }
+  }, [audios]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
-      setfullTime(AudioTime(audio.duration));
+      setFullTime(AudioTime(audio.duration));
     });
 
     audio?.addEventListener('timeupdate', () => {
@@ -179,7 +195,7 @@ export default function Player({ audios }) {
 
               <div
                 className={`${styles.playerBox__play} ${
-                  audios == null ? '' : !audio?.paused ? styles.active : ''
+                  !audio?.paused ? styles.active : ''
                 }`}
                 onClick={play}
               ></div>
