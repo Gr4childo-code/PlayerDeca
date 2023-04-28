@@ -23,7 +23,7 @@ const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
         )}
 
         <div className={styles.track__hoverState}>
-          <Options play={true} size={size} />
+          <Options play={true} size={size} dataMusic={[{ id, attributes }]} />
         </div>
       </div>
 
@@ -33,7 +33,12 @@ const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
         <p className={styles.track__music__author}>{attributes?.author}</p>
       </div>
       <div className={styles.track__options}>
-        <Options like={true} queue={[true, [{ id, attributes }]]} size={size} />
+        <Options
+          like={true}
+          queue={true}
+          size={size}
+          dataMusic={[{ id, attributes }]}
+        />
       </div>
     </div>
   );

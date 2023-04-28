@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { AudioInit, AudioTime } from './player';
 
 import Head from 'next/head';
@@ -11,18 +11,16 @@ import {
   faRepeat,
   faBars,
   faTimes,
-  faBrush,
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/ui/components/global/Player/Player.module.scss';
-import { AppContext } from '../AppContext';
 
 export default function Player({ audios }) {
   const [audio, setAudio] = useState(null);
-  const { setAudioContext, audioContext } = useContext(AppContext);
   const [isPlayMove, setIsPlayMove] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
   const [percentage, setPercentage] = useState(0);
-  const [fullTime, setfullTime] = useState('00:00');
+  const [fullTime, setFullTime] = useState('00:00');
   const [currentTime, setCurrentTime] = useState('00:00');
   const [currentTimeMove, setCurrentTimeMove] = useState('00:00');
   const [volume, setVolume] = useState(80);
@@ -30,16 +28,13 @@ export default function Player({ audios }) {
   const [isPlayList, setIsPlayList] = useState(false);
   const [trackInfo, setTrackInfo] = useState('');
   const [isNav, setIsNav] = useState(false);
-  const track = useRef(null);
+  const track = useRef({
+    id: audios?.data[0]?.id,
+    ...audios?.data[0]?.attributes,
+    src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+  });
 
-  if (audios) {
-    track.current = {
-      id: audios?.data[0]?.id,
-      ...audios?.data[0]?.attributes,
-      src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-      poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
-    };
-  }
   const _indexTrach = useRef(0);
 
   useEffect(() => {
@@ -53,8 +48,26 @@ export default function Player({ audios }) {
   }, []);
 
   useEffect(() => {
+    if (audios.data.length == 1) {
+      track.current = {
+        id: audios?.data[0]?.id,
+        ...audios?.data[0]?.attributes,
+        src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+        poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+      };
+      setAudio(AudioInit(track.current));
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
+    }
+  }, [audios]);
+
+  useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
-      setfullTime(AudioTime(audio.duration));
+      setFullTime(AudioTime(audio.duration));
     });
 
     audio?.addEventListener('timeupdate', () => {
@@ -80,9 +93,9 @@ export default function Player({ audios }) {
   }, [audio ?? null]);
 
   const play = () => {
-    if (audio) {
-      audio?.paused ? audio.play() : audio.pause();
-    }
+    audio?.paused
+      ? [audio.play(), setIsPlay(true)]
+      : [audio.pause(), setIsPlay(false)];
   };
 
   const rewind = (e, active) => {
@@ -101,7 +114,7 @@ export default function Player({ audios }) {
       audio.muted = true;
       return;
     }
-    if (audio) audio.muted = false;
+    audio.muted = false;
   };
 
   const volumeTrack = (e, active) => {
@@ -179,7 +192,7 @@ export default function Player({ audios }) {
 
               <div
                 className={`${styles.playerBox__play} ${
-                  audios == null ? '' : !audio?.paused ? styles.active : ''
+                  isPlay ? styles.active : ''
                 }`}
                 onClick={play}
               ></div>
@@ -237,7 +250,7 @@ export default function Player({ audios }) {
                           </div>
                         </div>
                         <div className={styles.playlist__info}>
-                          <strong>{attributes?.author}</strong> -
+                          <strong>{attributes?.author}</strong> - {''}
                           {attributes?.name}
                         </div>
                       </div>

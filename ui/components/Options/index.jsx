@@ -13,6 +13,7 @@ const Options = ({
   like = false,
   queue = false,
   size = 'xs',
+  dataMusic,
 }) => {
   const [isPlay, setIsPlay] = useState(false);
   const { setAudioContext, audioContext } = useContext(AppContext);
@@ -22,8 +23,6 @@ const Options = ({
     for (const IdPlaylist of playlistQueue) {
       for (const IdMusic of music) {
         if (IdPlaylist.id === IdMusic.id) {
-          console.log(IdPlaylist.id, ' - ', IdMusic.id);
-
           return false;
         }
       }
@@ -31,6 +30,7 @@ const Options = ({
     return true;
   };
   const addInQueue = (musicItem) => {
+    console.log(musicItem);
     if (audioContext !== null) {
       if (
         musicItem !== undefined &&
@@ -74,7 +74,7 @@ const Options = ({
               <FontAwesomeIcon
                 icon={faPlay}
                 size={size}
-                onClick={() => setAudioContext(play[1])}
+                onClick={() => setAudioContext({ data: dataMusic })}
               />
             )}
           </div>
@@ -90,7 +90,7 @@ const Options = ({
             <FontAwesomeIcon
               icon={faPlus}
               size={size}
-              onClick={() => addInQueue(queue[1])}
+              onClick={() => addInQueue(dataMusic)}
             />
           </div>
         )}
