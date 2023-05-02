@@ -1,9 +1,8 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Toast from '@/ui/components/global/Toast';
-
 import { AppContext } from '@/ui/components/global/AppContext';
-import styles from '@/ui/components/Options/Options.module.scss';
 
+import styles from '@/ui/components/Options/Options.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faStop, faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -13,13 +12,14 @@ const Options = ({
   like = false,
   queue = false,
   size = 'xs',
-  dataMusic,
-}) => {
+  dataMusic = null,
+}: IOptionsProps): JSX.Element => {
   const [isPlay, setIsPlay] = useState(false);
-  const { setAudioContext, audioContext } = useContext(AppContext);
-  const [list, setList] = useState([]);
 
-  const checkUnique = (music, playlistQueue) => {
+  const { audioContext, setAudioContext } = useContext(AppContext);
+  const [list, setList] = useState<Array<IToast>>([]);
+
+  const checkUnique = (music, playlistQueue): boolean => {
     for (const IdPlaylist of playlistQueue) {
       for (const IdMusic of music) {
         if (IdPlaylist.id === IdMusic.id) {
@@ -29,8 +29,7 @@ const Options = ({
     }
     return true;
   };
-  const addInQueue = (musicItem) => {
-    console.log(musicItem);
+  const addInQueue = (musicItem): void => {
     if (audioContext !== null) {
       if (
         musicItem !== undefined &&
@@ -62,7 +61,7 @@ const Options = ({
       <div className={styles.wrapper}>
         {play && (
           <div
-            onClick={() => {
+            onClick={(): void => {
               setIsPlay(!isPlay);
             }}
             className={styles.options}
@@ -74,7 +73,7 @@ const Options = ({
               <FontAwesomeIcon
                 icon={faPlay}
                 size={size}
-                onClick={() => setAudioContext({ data: dataMusic })}
+                onClick={(): void => setAudioContext({ data: dataMusic })}
               />
             )}
           </div>
@@ -90,7 +89,7 @@ const Options = ({
             <FontAwesomeIcon
               icon={faPlus}
               size={size}
-              onClick={() => addInQueue(dataMusic)}
+              onClick={(): void => addInQueue(dataMusic)}
             />
           </div>
         )}

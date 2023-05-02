@@ -2,8 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import Options from '@/ui/components/Options';
 import styles from '@/ui/components/Track/Track.module.scss';
+import React from 'react';
 
-const Track = ({ id, index, attributes, size = 'sm' }, ...props) => {
+const Track = ({
+  id,
+  index,
+  attributes,
+  size = 'sm',
+}: ITrackProps): React.ReactNode => {
   return (
     <div className={styles.track} key={id}>
       <div className={styles.track__number}>{index}</div>

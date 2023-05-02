@@ -1,10 +1,12 @@
+import React from 'react';
 import Header from '@/ui/components/global/Header';
 
-export default function Layout({ children }) {
+const Layout = ({ children }: Props) => {
   return (
     <main>
       <Header />
       {children}
     </main>
   );
-}
+};
+export default Layout;

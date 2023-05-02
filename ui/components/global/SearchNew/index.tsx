@@ -3,12 +3,13 @@ import { getSearchByAuthor, getSearchDefault } from '@/api';
 
 import styles from './SearchNew.module.scss';
 import Track from '@/ui/components/Track';
+import React from 'react';
 
 const SearchNew = () => {
   const [searchAudio, setserchAudio] = useState([]);
   const [inputValue, setinputValue] = useState('');
 
-  const handleChangeFilter = (e) => {
+  const handleChangeFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setinputValue(e.target.value);
   };
 
