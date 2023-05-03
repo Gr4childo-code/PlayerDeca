@@ -32,11 +32,7 @@ interface IAppProps {
   audios: any;
 }
 
-export default function App({
-  Component,
-  pageProps,
-  audios,
-}: IAppProps): React.ReactNode {
+export default function App({ Component, pageProps, audios }): React.ReactNode {
   const [audioContext, setAudioContext] = useState<Array<any>>(audios);
 
   return (

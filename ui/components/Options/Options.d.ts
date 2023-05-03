@@ -3,7 +3,7 @@ interface IOptionsProps {
   like?: boolean;
   queue?: boolean;
   size?: TSizeProp;
-  dataMusic?: TDataMusic;
+  dataMusic?: Array<TOptionsMusic> | null;
 }
 type TSizeProp =
   | 'xs'
@@ -23,15 +23,15 @@ type TSizeProp =
   | '9x'
   | '10x';
 
-type TDataMusic = {
-  id: number;
-  attributes: TDataMusicAttributes;
-};
-
-type TDataMusicAttributes = {
+type TOptionsMusicAttributes = {
   name: string;
   author: string;
-  likes: number;
-  src: Array;
-  poster: Array;
+  likes?: number;
+  src?: Array;
+  poster?: Array;
+};
+
+type TOptionsMusic = {
+  id: number;
+  attributes: TOptionsMusicAttributes;
 };
