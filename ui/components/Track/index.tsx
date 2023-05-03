@@ -9,7 +9,7 @@ const Track = ({
   index,
   attributes,
   size = 'sm',
-}: ITrackProps): React.ReactNode => {
+}: ITrackProps): JSX.Element => {
   return (
     <div className={styles.track} key={id}>
       <div className={styles.track__number}>{index}</div>

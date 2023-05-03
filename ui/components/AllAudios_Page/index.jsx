@@ -15,7 +15,12 @@ const AllAudios_Page = ({ audios }) => {
     <div className={styles.wrapper}>
       <div className={'title'}>Все треки</div>
       <div className={styles.options}>
-        <Options play={true} queue={[true, [...audios.data]]} size={'lg'} />
+        <Options
+          play={true}
+          // queue={[true, [...audios.data]]}
+          size={'lg'}
+          dataMusic={audios.data}
+        />
       </div>
       {audios ? (
         audios &&

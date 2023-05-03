@@ -6,7 +6,7 @@ import SearchNew from '@/ui/components/global/SearchNew';
 
 import styles from './Header.module.scss';
 
-const Header = (): React.ReactNode => {
+const Header = (): JSX.Element => {
   return (
     <header className={styles.header}>
       <div className='container'>

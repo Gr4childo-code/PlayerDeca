@@ -12,14 +12,14 @@ const Options = ({
   like = false,
   queue = false,
   size = 'xs',
-  dataMusic = null,
+  dataMusic,
 }: IOptionsProps): JSX.Element => {
   const [isPlay, setIsPlay] = useState(false);
 
   const { audioContext, setAudioContext } = useContext(AppContext);
   const [list, setList] = useState<Array<IToast>>([]);
 
-  const checkUnique = (music, playlistQueue): boolean => {
+  const checkUnique = (music: any, playlistQueue: any): boolean => {
     for (const IdPlaylist of playlistQueue) {
       for (const IdMusic of music) {
         if (IdPlaylist.id === IdMusic.id) {
@@ -73,7 +73,7 @@ const Options = ({
               <FontAwesomeIcon
                 icon={faPlay}
                 size={size}
-                onClick={(): void => setAudioContext({ data: dataMusic })}
+                onClick={() => setAudioContext({ data: dataMusic })}
               />
             )}
           </div>
