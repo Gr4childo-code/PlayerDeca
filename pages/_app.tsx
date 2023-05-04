@@ -1,4 +1,5 @@
 import { AppContext } from '@/ui/components/global/AppContext';
+import { AppProps } from 'next/app';
 import { useState } from 'react';
 import { Roboto } from '@next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -24,16 +25,19 @@ import '@/styles/sass/grid.scss';
 
 import Layout from '../ui/components/global/Layout';
 import React from 'react';
-import { AppProps } from 'next/app';
 
 interface IAppProps {
   Component: AppProps;
   pageProps: AppProps;
-  audios: any;
+  audios: IAudios;
 }
 
-export default function App({ Component, pageProps, audios }): React.ReactNode {
-  const [audioContext, setAudioContext] = useState<Array<any>>(audios);
+export default function App({
+  Component,
+  pageProps,
+  audios,
+}: IAppProps): React.ReactNode {
+  const [audioContext, setAudioContext] = useState(audios);
 
   return (
     <SessionProvider session={pageProps?.session}>

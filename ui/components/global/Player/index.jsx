@@ -48,7 +48,7 @@ export default function Player({ audios }) {
   }, []);
 
   useEffect(() => {
-    if (audios.data.length == 1) {
+    if (audios.data.length == 1 || audios.data[0].id !== track.current.id) {
       track.current = {
         id: audios?.data[0]?.id,
         ...audios?.data[0]?.attributes,

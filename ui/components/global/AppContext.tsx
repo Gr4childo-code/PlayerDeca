@@ -1,3 +1,7 @@
 import { createContext } from 'react';
 
-export const AppContext = createContext(null || []);
+type IAudioContext = {
+  value: Array<IAudios>;
+};
+
+export const AppContext = createContext();

@@ -4,6 +4,8 @@ import { getSearchByAuthor, getSearchDefault } from '@/api';
 import styles from './SearchNew.module.scss';
 import Track from '@/ui/components/Track';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 const SearchNew = () => {
   const [searchAudio, setserchAudio] = useState([]);
@@ -59,6 +61,11 @@ const SearchNew = () => {
         }`}
       >
         <div>
+          <FontAwesomeIcon
+            icon={faClose}
+            onClick={() => setserchAudio([])}
+            size={'xl'}
+          />
           {searchAudio?.data?.map(({ id, attributes }, index) => (
             <Track
               key={id}
