@@ -4,4 +4,4 @@ type IAudioContext = {
   value: Array<IAudios>;
 };
 
-export const AppContext = createContext();
+export const AppContext = createContext<any>(null);

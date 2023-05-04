@@ -29,7 +29,7 @@ const Options = ({
     }
     return true;
   };
-  const addInQueue = (musicItem): void => {
+  const addInQueue = (musicItem: any): void => {
     if (audioContext !== null) {
       if (
         musicItem !== undefined &&

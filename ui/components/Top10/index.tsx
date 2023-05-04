@@ -9,13 +9,7 @@ const Top10 = ({ audioTop }: any) => {
   return (
     <div className={styles.wrapper}>
       <div className='title'>Топ 10</div>
-      <Options
-        play={true}
-        like={true}
-        // queue={[true, [...audioTop.data]]}
-        size={'lg'}
-        dataMusic={audioTop.data}
-      />
+      <Options play={true} like={true} size={'lg'} dataMusic={audioTop.data} />
 
       {audioTop.data?.map(
         ({ id, attributes }: ITrackProps, index: number): any => (

@@ -27,8 +27,8 @@ import Layout from '../ui/components/global/Layout';
 import React from 'react';
 
 interface IAppProps {
-  Component: AppProps;
-  pageProps: AppProps;
+  Component: any;
+  pageProps: any;
   audios: IAudios;
 }
 

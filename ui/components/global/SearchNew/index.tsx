@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 const SearchNew = () => {
-  const [searchAudio, setserchAudio] = useState([]);
+  const [searchAudio, setserchAudio] = useState<any>([]);
   const [inputValue, setinputValue] = useState('');
 
   const handleChangeFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +57,7 @@ const SearchNew = () => {
           setserchAudio([]);
         }}
         className={`${styles.search__overflow}  ${
-          !searchAudio?.data?.length == 0 ? styles.search__overflow__active : ''
+          searchAudio?.length == 0 ? ' ' : styles.search__overflow__active
         }`}
       >
         <div>
@@ -66,15 +66,18 @@ const SearchNew = () => {
             onClick={() => setserchAudio([])}
             size={'xl'}
           />
-          {searchAudio?.data?.map(({ id, attributes }, index) => (
-            <Track
-              key={id}
-              id={id}
-              index={index + 1}
-              attributes={attributes}
-              size={'sm'}
-            />
-          ))}
+          {searchAudio &&
+            searchAudio?.data?.map(
+              ({ id, attributes }: ITrackProps, index: number) => (
+                <Track
+                  key={id}
+                  id={id}
+                  index={index + 1}
+                  attributes={attributes}
+                  size={'sm'}
+                />
+              )
+            )}
         </div>
       </div>
     </div>
