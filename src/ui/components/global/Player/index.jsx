@@ -14,8 +14,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/src/ui/components/global/Player/Player.module.scss';
+import { useAppSelector, useAppDispatch } from '@/src/redux/hooks/hooks';
+import { selectAudios, getAudiosProvider } from '@/src/redux/audios/audios';
 
-export default function Player({ audios }) {
+export default function Player() {
+  const dispatch = useAppDispatch();
+  const { audios } = useAppSelector(selectAudios);
+
   const [audio, setAudio] = useState(null);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
@@ -38,6 +43,7 @@ export default function Player({ audios }) {
   const _indexTrach = useRef(0);
 
   useEffect(() => {
+    dispatch(getAudiosProvider());
     setAudio(AudioInit(track.current));
     setTrackInfo({
       id: track.current.id,
@@ -47,23 +53,23 @@ export default function Player({ audios }) {
     });
   }, []);
 
-  useEffect(() => {
-    if (audios.data.length == 1 || audios.data[0].id !== track.current.id) {
-      track.current = {
-        id: audios?.data[0]?.id,
-        ...audios?.data[0]?.attributes,
-        src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-        poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
-      };
-      setAudio(AudioInit(track.current));
-      setTrackInfo({
-        id: track.current.id,
-        name: track.current.name,
-        author: track.current.author,
-        poster: track.current.poster,
-      });
-    }
-  }, [audios]);
+  // useEffect(() => {
+  //   if (audios.data.length == 1 || audios.data[0].id !== track.current.id) {
+  //     track.current = {
+  //       id: audios?.data[0]?.id,
+  //       ...audios?.data[0]?.attributes,
+  //       src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+  //       poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+  //     };
+  //     setAudio(AudioInit(track.current));
+  //     setTrackInfo({
+  //       id: track.current.id,
+  //       name: track.current.name,
+  //       author: track.current.author,
+  //       poster: track.current.poster,
+  //     });
+  //   }
+  // }, [audios]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
@@ -160,7 +166,7 @@ export default function Player({ audios }) {
           href={`${process.env.NEXT_PUBLIC_API_URL}${track?.current?.poster}`}
         />
       </Head>
-
+      data: {audios?.data[0]?.id}
       <div className={styles.player}>
         <div
           className={styles.playerBar}

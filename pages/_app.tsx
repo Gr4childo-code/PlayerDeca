@@ -24,6 +24,7 @@ import '@/styles/sass/grid.scss';
 
 import Layout from '@/src/ui/components/global/Layout';
 import React from 'react';
+import { Providers } from '@/src/redux/provider';
 
 interface IAppProps {
   Component: any;
@@ -40,16 +41,18 @@ export default function App({
 
   return (
     <SessionProvider session={pageProps?.session}>
-      <AppContext.Provider value={{ audioContext, setAudioContext }}>
-        <div className={roboto.className}>
-          <Layout>
-            <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
-            <Component {...pageProps} />
-          </Layout>
+      <Providers>
+        <AppContext.Provider value={{ audioContext, setAudioContext }}>
+          <div className={roboto.className}>
+            <Layout>
+              <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
+              <Component {...pageProps} />
+            </Layout>
 
-          {audios && <Player audios={audioContext} />}
-        </div>
-      </AppContext.Provider>
+            {audios && <Player />}
+          </div>
+        </AppContext.Provider>
+      </Providers>
     </SessionProvider>
   );
 }
