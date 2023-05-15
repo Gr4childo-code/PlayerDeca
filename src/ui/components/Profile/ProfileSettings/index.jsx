@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Toast from '@/src/ui/components/global/Toast/index';
 
-import styles from '@/src/ui/components/Sidebar/ProfileSettings/Settings.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileSettings/Settings.module.scss';
 
 import { postPassword, putEmail, putName } from '@/api';
 import { validatePassword, validateEmail } from '@/src/utils/validators';

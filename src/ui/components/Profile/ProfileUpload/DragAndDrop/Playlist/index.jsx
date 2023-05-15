@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import Preloader from '@/src/ui/components/global/Preloader';
 
-import styles from '@/src/ui/components/Sidebar/ProfileUpload/DragAndDrop/Dropzone.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileUpload/DragAndDrop/Dropzone.module.scss';
 
-export default function ImageDrop({ handleImageToUpload, loader }) {
+export default function PlaylistImageDrop({
+  handleImagePlaylistToUpload,
+  loaderPlaylist,
+}) {
   const [active, setActive] = useState(false);
 
   const handleDrag = (e) => {
@@ -28,7 +31,7 @@ export default function ImageDrop({ handleImageToUpload, loader }) {
 
       reader.addEventListener('load', (e) => {
         const url = e.target.result;
-        handleImageToUpload(url, poster);
+        handleImagePlaylistToUpload(url, poster);
       });
 
       reader.readAsDataURL(file);
@@ -40,7 +43,7 @@ export default function ImageDrop({ handleImageToUpload, loader }) {
 
       reader.addEventListener('load', (e) => {
         const url = e.target.result;
-        handleImageToUpload(url, poster);
+        handleImagePlaylistToUpload(url, poster);
       });
 
       reader.readAsDataURL(file);
@@ -50,7 +53,7 @@ export default function ImageDrop({ handleImageToUpload, loader }) {
 
   return (
     <div className={styles.dropzone}>
-      {loader ? (
+      {loaderPlaylist ? (
         <form>
           <div
             onDragEnter={handleDrag}
@@ -78,7 +81,9 @@ export default function ImageDrop({ handleImageToUpload, loader }) {
           </div>
         </form>
       ) : (
-        <Preloader />
+        <div className={styles.loaderPlaylist}>
+          <Preloader />
+        </div>
       )}
     </div>
   );

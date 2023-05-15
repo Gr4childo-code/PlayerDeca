@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from '@/src/ui/components/Sidebar/ProfileUpload/DragAndDrop/Dropzone.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileUpload/DragAndDrop/Dropzone.module.scss';
 
 export default function MusicDrop({ handleFilesToUpload, loader }) {
   const [active, setActive] = useState(false);

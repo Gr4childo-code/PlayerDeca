@@ -1,7 +1,7 @@
 import { GetSessionParams, getSession } from 'next-auth/react';
-import Layout from '@/src/ui/components/Sidebar/Layout';
+import Layout from '@/src/ui/components/Profile/Layout';
 
-import styles from '@/src/ui/components/Sidebar/Layout/Profile.module.scss';
+import styles from '@/src/ui/components/Profile/Layout/Profile.module.scss';
 
 const profile = ({ session }: any) => {
   const user = session.user;

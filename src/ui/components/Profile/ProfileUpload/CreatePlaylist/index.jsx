@@ -1,4 +1,4 @@
-import styles from '@/src/ui/components/Sidebar/ProfileUpload/CreatePlaylist/CreatePlaylists.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileUpload/CreatePlaylist/CreatePlaylists.module.scss';
 
 export default function CreatePlaylist({
   playlist,

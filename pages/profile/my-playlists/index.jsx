@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import Layout from '@/src/ui/components/Sidebar/Layout';
-import CreatePlaylist from '@/src/ui/components/Sidebar/ProfileUpload/CreatePlaylist';
-import UploadedSongs from '@/src/ui/components/Sidebar/ProfileUpload/Uploaded';
-import UploadedPlaylist from '@/src/ui/components/Sidebar/ProfileUpload/UploadedPlaylist';
-import PlaylistImageDrop from '@/src/ui/components/Sidebar/ProfileUpload/DragAndDrop/Playlist';
-import MusicDrop from '@/src/ui/components/Sidebar/ProfileUpload/DragAndDrop/Music';
-import ImageDrop from '@/src/ui/components/Sidebar/ProfileUpload/DragAndDrop/Image';
+import Layout from '@/src/ui/components/Profile/Layout';
+import CreatePlaylist from '@/src/ui/components/Profile/ProfileUpload/CreatePlaylist';
+import UploadedSongs from '@/src/ui/components/Profile/ProfileUpload/Uploaded';
+import UploadedPlaylist from '@/src/ui/components/Profile/ProfileUpload/UploadedPlaylist';
+import PlaylistImageDrop from '@/src/ui/components/Profile/ProfileUpload/DragAndDrop/Playlist';
+import MusicDrop from '@/src/ui/components/Profile/ProfileUpload/DragAndDrop/Music';
+import ImageDrop from '@/src/ui/components/Profile/ProfileUpload/DragAndDrop/Image';
 
 import Toast from '@/src/ui/components/global/Toast';
 

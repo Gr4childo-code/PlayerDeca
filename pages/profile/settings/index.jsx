@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/react';
-import Layout from '@/src/ui/components/Sidebar/Layout';
-import ProfileSettings from '@/src/ui/components/Sidebar/ProfileSettings';
+import Layout from '@/src/ui/components/Profile/Layout';
+import ProfileSettings from '@/src/ui/components/Profile/ProfileSettings';
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);

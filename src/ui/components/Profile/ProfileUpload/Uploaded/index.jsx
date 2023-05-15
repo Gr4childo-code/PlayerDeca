@@ -1,4 +1,4 @@
-import styles from '@/src/ui/components/Sidebar/ProfileUpload/Uploaded/Uploaded.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileUpload/Uploaded/Uploaded.module.scss';
 
 export default function UploadedSongs({
   files,

@@ -1,4 +1,4 @@
-import styles from '@/src/ui/components/Sidebar/ProfileUpload/UploadedPlaylist/UploadedPlaylist.module.scss';
+import styles from '@/src/ui/components/Profile/ProfileUpload/UploadedPlaylist/UploadedPlaylist.module.scss';
 
 export default function UploadedPlaylist({
   newUserPlaylist,

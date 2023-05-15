@@ -1,4 +1,4 @@
-import styles from '@/src/ui/components/global/Slider/Pagination/Pagination.module.scss';
+import styles from '@/src/ui/components/Slider/Pagination/Pagination.module.scss';
 
 export default function Pagination({
   currentDataSlide,
