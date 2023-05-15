@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Script from 'next/script';
-import Playlist_Page from '@/ui/components/Playlist_Page';
+import Playlist_Page from '@/src/ui/components/Playlist_Page';
 
 import { getPlaylistByID } from '@/api';
 

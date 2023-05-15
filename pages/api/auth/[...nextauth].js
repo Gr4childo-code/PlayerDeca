@@ -1,38 +1,37 @@
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { fetchAPI } from '@/utils/api/fetch'
-
+import { AuthFetch } from '@/api';
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
 
       credentials: {
         identifier: {
-          label: "Identifier",
-          type: "text"
+          label: 'Identifier',
+          type: 'text',
         },
         password: {
-          label: "Password",
-          type: "password"
-        }
+          label: 'Password',
+          type: 'password',
+        },
       },
 
       async authorize(credentials) {
-        const response = await fetchAPI('/auth/local', "POST", {
+        const response = await AuthFetch('/auth/local', {
           identifier: credentials.identifier,
           password: credentials.password,
-        })
+        });
 
         const user = await response.json();
 
         if (response.ok && user) {
-          return user
+          return user;
         }
 
-        return null
-      }
-    })
+        return null;
+      },
+    }),
   ],
 
   session: {
@@ -45,18 +44,20 @@ export const authOptions = {
   },
 
   pages: {
-    signIn: '/auth/login'
+    signIn: '/auth/login',
   },
 
   callbacks: {
     async session({ session, token }) {
-      return Promise.resolve({...token, expires: session.expires});
+      return Promise.resolve({ ...token, expires: session.expires });
     },
     async jwt({ token, user }) {
-      if (user) { token = {...user} }
+      if (user) {
+        token = { ...user };
+      }
       return Promise.resolve(token);
-    }
+    },
   },
-}
+};
 
-export default NextAuth(authOptions);;
+export default NextAuth(authOptions);

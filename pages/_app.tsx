@@ -1,5 +1,4 @@
-import { AppContext } from '@/ui/components/global/AppContext';
-import { AppProps } from 'next/app';
+import { AppContext } from '@/src/ui/components/global/AppContext';
 import { useState } from 'react';
 import { Roboto } from '@next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -8,7 +7,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from 'next-auth/react';
 import { getAudios } from '@/api';
 
-import Player from '@/ui/components/global/Player';
+import Player from '@/src/ui/components/global/Player';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
@@ -23,7 +22,7 @@ import '@/styles/sass/Normalize.scss';
 import '@/styles/sass/globals.scss';
 import '@/styles/sass/grid.scss';
 
-import Layout from '../ui/components/global/Layout';
+import Layout from '@/src/ui/components/global/Layout';
 import React from 'react';
 
 interface IAppProps {

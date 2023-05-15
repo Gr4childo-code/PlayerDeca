@@ -1,5 +1,4 @@
-import Layout from '@/ui/components/Sidebar/Layout';
-import React from 'react';
+import Layout from '@/src/ui/components/Sidebar/Layout';
 
 export default function Upload() {
   return <Layout></Layout>;
