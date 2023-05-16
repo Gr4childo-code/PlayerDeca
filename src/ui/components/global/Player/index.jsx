@@ -33,43 +33,49 @@ export default function Player() {
   const [isPlayList, setIsPlayList] = useState(false);
   const [trackInfo, setTrackInfo] = useState('');
   const [isNav, setIsNav] = useState(false);
-  const track = useRef({
-    id: audios?.data[0]?.id,
-    ...audios?.data[0]?.attributes,
-    src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-    poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
-  });
-
+  const track = useRef();
   const _indexTrach = useRef(0);
 
   useEffect(() => {
-    dispatch(getAudiosProvider());
-    setAudio(AudioInit(track.current));
-    setTrackInfo({
-      id: track.current.id,
-      name: track.current.name,
-      author: track.current.author,
-      poster: track.current.poster,
+    dispatch(getAudiosProvider()).then((status) => {
+      track.current = {
+        id: status.payload?.data[0]?.id,
+        ...status.payload?.data[0]?.attributes,
+        src: status.payload?.data[0]?.attributes?.src?.data[0]?.attributes
+          ?.hash,
+        poster:
+          status.payload?.data[0]?.attributes?.poster?.data?.attributes?.url,
+      };
+      setAudio(AudioInit(track.current));
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
     });
-  }, []);
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (audios.data.length == 1 || audios.data[0].id !== track.current.id) {
-  //     track.current = {
-  //       id: audios?.data[0]?.id,
-  //       ...audios?.data[0]?.attributes,
-  //       src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
-  //       poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
-  //     };
-  //     setAudio(AudioInit(track.current));
-  //     setTrackInfo({
-  //       id: track.current.id,
-  //       name: track.current.name,
-  //       author: track.current.author,
-  //       poster: track.current.poster,
-  //     });
-  //   }
-  // }, [audios]);
+  useEffect(() => {
+    if (
+      audios?.data?.length == 1 ||
+      audios?.data[0]?.id !== track?.current?.id
+    ) {
+      track.current = {
+        id: audios?.data[0]?.id,
+        ...audios?.data[0]?.attributes,
+        src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
+        poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
+      };
+      setAudio(AudioInit(track.current));
+      setTrackInfo({
+        id: track.current.id,
+        name: track.current.name,
+        author: track.current.author,
+        poster: track.current.poster,
+      });
+    }
+  }, [audios]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
@@ -166,7 +172,6 @@ export default function Player() {
           href={`${process.env.NEXT_PUBLIC_API_URL}${track?.current?.poster}`}
         />
       </Head>
-      data: {audios?.data[0]?.id}
       <div className={styles.player}>
         <div
           className={styles.playerBar}
@@ -210,7 +215,7 @@ export default function Player() {
                   onClick={() => setIsPlayList(!isPlayList)}
                 >
                   <div className={styles.playerBox__info__description}>
-                    <strong>{trackInfo.author}</strong> - {trackInfo.name}
+                    <strong>{track.current.author}</strong> - {trackInfo.name}
                   </div>
                   <span>
                     {currentTime} / {fullTime}

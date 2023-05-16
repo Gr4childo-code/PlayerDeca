@@ -35,30 +35,21 @@ interface IAppProps {
 export default function App({
   Component,
   pageProps,
-  audios,
 }: IAppProps): React.ReactNode {
-  const [audioContext, setAudioContext] = useState(audios);
-
   return (
     <SessionProvider session={pageProps?.session}>
       <Providers>
-        <AppContext.Provider value={{ audioContext, setAudioContext }}>
-          <div className={roboto.className}>
-            <Layout>
-              <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
-              <Component {...pageProps} />
-            </Layout>
+        {/* <AppContext.Provider value={{ audioContext, setAudioContext }}> */}
+        <div className={roboto.className}>
+          <Layout>
+            <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
+            <Component {...pageProps} />
+          </Layout>
 
-            {audios && <Player />}
-          </div>
-        </AppContext.Provider>
+          <Player />
+        </div>
+        {/* </AppContext.Provider> */}
       </Providers>
     </SessionProvider>
   );
 }
-
-App.getInitialProps = async () => {
-  const audios = await getAudios();
-
-  return { audios };
-};

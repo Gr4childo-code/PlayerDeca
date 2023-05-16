@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .playlists {
   &__wrapper {
@@ -12,7 +12,7 @@
     min-height: 280px;
     height: 280px;
     border-radius: 5px;
-    object-fit: cover;
+    object-fit: none;
     cursor: pointer;
   }
   &__list {

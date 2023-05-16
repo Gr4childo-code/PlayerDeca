@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 import Toast from '@/src/ui/components/global/Toast';
-import { AppContext } from '@/src/ui/components/global/AppContext';
 
 import styles from '@/src/ui/components/Options/Options.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faStop, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch } from '@/src/redux/hooks/hooks';
+import { playNewTrack } from '@/src/redux/audios/audios';
 
 const Options = ({
   play = false,
@@ -14,47 +15,47 @@ const Options = ({
   size = 'xs',
   dataMusic,
 }: IOptionsProps): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [isPlay, setIsPlay] = useState(false);
 
-  const { audioContext, setAudioContext } = useContext(AppContext);
   const [list, setList] = useState<Array<IToast>>([]);
 
-  const checkUnique = (music: any, playlistQueue: any): boolean => {
-    for (const IdPlaylist of playlistQueue) {
-      for (const IdMusic of music) {
-        if (IdPlaylist.id === IdMusic.id) {
-          return false;
-        }
-      }
-    }
-    return true;
-  };
-  const addInQueue = (musicItem: any): void => {
-    if (audioContext !== null) {
-      if (
-        musicItem !== undefined &&
-        checkUnique(musicItem, audioContext.data)
-      ) {
-        setAudioContext({
-          data: [...audioContext.data, ...musicItem],
-        });
-      } else {
-        setList([
-          ...list,
-          {
-            id: Date.now(),
-            type: 'warn',
-            title: `Ошибка добавления музыки`,
-            description: 'Одинаковую музыку нельзя добавлять больше 1 раза',
-          },
-        ]);
-      }
-    } else {
-      setAudioContext({
-        data: musicItem,
-      });
-    }
-  };
+  // const checkUnique = (music: any, playlistQueue: any): boolean => {
+  //   for (const IdPlaylist of playlistQueue) {
+  //     for (const IdMusic of music) {
+  //       if (IdPlaylist.id === IdMusic.id) {
+  //         return false;
+  //       }
+  //     }
+  //   }
+  //   return true;
+  // };
+  // const addInQueue = (musicItem: any): void => {
+  //   if (audioContext !== null) {
+  //     if (
+  //       musicItem !== undefined &&
+  //       checkUnique(musicItem, audioContext.data)
+  //     ) {
+  //       setAudioContext({
+  //         data: [...audioContext.data, ...musicItem],
+  //       });
+  //     } else {
+  //       setList([
+  //         ...list,
+  //         {
+  //           id: Date.now(),
+  //           type: 'warn',
+  //           title: `Ошибка добавления музыки`,
+  //           description: 'Одинаковую музыку нельзя добавлять больше 1 раза',
+  //         },
+  //       ]);
+  //     }
+  //   } else {
+  //     setAudioContext({
+  //       data: musicItem,
+  //     });
+  //   }
+  // };
   return (
     <>
       <Toast toastlist={list} setList={setList} />
@@ -73,7 +74,8 @@ const Options = ({
               <FontAwesomeIcon
                 icon={faPlay}
                 size={size}
-                onClick={() => setAudioContext({ data: dataMusic })}
+                // onClick={() => setAudioContext({ data: dataMusic })}
+                onClick={() => dispatch(playNewTrack({ data: dataMusic }))}
               />
             )}
           </div>
@@ -89,7 +91,7 @@ const Options = ({
             <FontAwesomeIcon
               icon={faPlus}
               size={size}
-              onClick={(): void => addInQueue(dataMusic)}
+              // onClick={(): void => addInQueue(dataMusic)}
             />
           </div>
         )}

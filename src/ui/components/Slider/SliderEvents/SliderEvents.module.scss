@@ -1,4 +1,4 @@
-@import "@/styles/sass/grid.scss";
+@import '@/styles/sass/grid.scss';
 
 .events {
   &__wrapper {
@@ -9,7 +9,7 @@
     max-height: 500px;
     height: 500px;
     border-radius: 5px;
-    object-fit: cover;
+    object-fit: none;
     cursor: pointer;
   }
 

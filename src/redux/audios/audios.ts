@@ -24,7 +24,11 @@ export const getAudiosProvider = createAsyncThunk(
 const getAudiosSlice = createSlice({
   name: 'audios',
   initialState,
-  reducers: {},
+  reducers: {
+    playNewTrack: (state, action) => {
+      state.audios = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAudiosProvider.pending, (state) => {
@@ -42,5 +46,6 @@ const getAudiosSlice = createSlice({
   },
 });
 
+export const { playNewTrack } = getAudiosSlice.actions;
 export const selectAudios = (state: RootState) => state.audiosAll;
 export default getAudiosSlice.reducer;
