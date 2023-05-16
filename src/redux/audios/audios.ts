@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAudios } from '@/api';
 import type { RootState } from '@/src/redux/store/store';
+
 export type TGetAudios = {
   audios: any;
+  currentAudio: any[];
   pending: boolean;
   error: boolean;
 };
-const initialState = {
+const initialState: TGetAudios = {
   audios: null,
+  currentAudio: [],
   pending: false,
   error: false,
 };
@@ -28,6 +31,15 @@ const getAudiosSlice = createSlice({
     playNewTrack: (state, action) => {
       state.audios = action.payload;
     },
+    // addTrackInQueue: (state, action) => {
+    //   const isExists = state.audios.filter();
+    //   if (isExists) {
+    //   }
+    //   state.audios;
+    // },
+    setCurrentAudio: (state, action) => {
+      state.currentAudio = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -46,6 +58,6 @@ const getAudiosSlice = createSlice({
   },
 });
 
-export const { playNewTrack } = getAudiosSlice.actions;
-export const selectAudios = (state: RootState) => state.audiosAll;
+export const { playNewTrack, setCurrentAudio } = getAudiosSlice.actions;
+export const selectAudios = (state: RootState): TGetAudios => state.audiosAll;
 export default getAudiosSlice.reducer;

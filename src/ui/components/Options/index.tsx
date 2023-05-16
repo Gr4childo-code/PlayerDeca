@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faStop, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/src/redux/hooks/hooks';
-import { playNewTrack } from '@/src/redux/audios/audios';
+import { playNewTrack, setCurrentAudio } from '@/src/redux/audios/audios';
 
 const Options = ({
   play = false,
@@ -17,8 +17,12 @@ const Options = ({
 }: IOptionsProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const [isPlay, setIsPlay] = useState(false);
-
   const [list, setList] = useState<Array<IToast>>([]);
+
+  const handleClickNewTrack = () => {
+    dispatch(playNewTrack({ data: dataMusic }));
+    dispatch(setCurrentAudio({ data: dataMusic }));
+  };
 
   // const checkUnique = (music: any, playlistQueue: any): boolean => {
   //   for (const IdPlaylist of playlistQueue) {
@@ -75,7 +79,7 @@ const Options = ({
                 icon={faPlay}
                 size={size}
                 // onClick={() => setAudioContext({ data: dataMusic })}
-                onClick={() => dispatch(playNewTrack({ data: dataMusic }))}
+                onClick={handleClickNewTrack}
               />
             )}
           </div>

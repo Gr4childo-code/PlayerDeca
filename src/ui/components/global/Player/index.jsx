@@ -15,12 +15,15 @@ import {
 
 import styles from '@/src/ui/components/global/Player/Player.module.scss';
 import { useAppSelector, useAppDispatch } from '@/src/redux/hooks/hooks';
-import { selectAudios, getAudiosProvider } from '@/src/redux/audios/audios';
+import {
+  selectAudios,
+  getAudiosProvider,
+  setCurrentAudio,
+} from '@/src/redux/audios/audios';
 
 export default function Player() {
   const dispatch = useAppDispatch();
-  const { audios } = useAppSelector(selectAudios);
-
+  const { audios, currentAudio } = useAppSelector(selectAudios);
   const [audio, setAudio] = useState(null);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
@@ -47,6 +50,7 @@ export default function Player() {
           status.payload?.data[0]?.attributes?.poster?.data?.attributes?.url,
       };
       setAudio(AudioInit(track.current));
+
       setTrackInfo({
         id: track.current.id,
         name: track.current.name,
@@ -54,12 +58,12 @@ export default function Player() {
         poster: track.current.poster,
       });
     });
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (
-      audios?.data?.length == 1 ||
-      audios?.data[0]?.id !== track?.current?.id
+      audios?.data[0]?.id !== track?.current?.id &&
+      track?.current?.id !== undefined
     ) {
       track.current = {
         id: audios?.data[0]?.id,
@@ -67,6 +71,10 @@ export default function Player() {
         src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
         poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
       };
+      audio.pause();
+      setIsPlay(false);
+      setPercentage(0);
+
       setAudio(AudioInit(track.current));
       setTrackInfo({
         id: track.current.id,
@@ -75,7 +83,7 @@ export default function Player() {
         poster: track.current.poster,
       });
     }
-  }, [audios]);
+  }, [currentAudio]);
 
   useEffect(() => {
     audio?.addEventListener('canplaythrough', () => {
