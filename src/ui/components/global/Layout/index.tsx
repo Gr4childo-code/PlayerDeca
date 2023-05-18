@@ -1,7 +1,11 @@
 import React from 'react';
 import Header from '@/src/ui/components/global/Header';
 
-const Layout = ({ children }: React.ReactNode): JSX.Element => {
+interface IProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: IProps): JSX.Element => {
   return (
     <main>
       <Header />
