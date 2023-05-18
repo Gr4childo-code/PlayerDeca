@@ -1,5 +1,5 @@
 import { GetSessionParams, getSession } from 'next-auth/react';
-// import Layout from '@/src/ui/components/Profile/Layout';
+import Layout from '@/src/ui/components/Profile/Layout';
 
 import styles from '@/src/ui/components/Profile/Layout/Profile.module.scss';
 
@@ -7,7 +7,7 @@ const profile = ({ session }: any) => {
   const user = session.user;
 
   return (
-    <>
+    <Layout>
       <div className={styles.wrapper}>
         <ul className={styles.userInfo}>
           <li className={styles.userInfo__item}>
@@ -30,7 +30,7 @@ const profile = ({ session }: any) => {
           </li>
         </ul>
       </div>
-    </>
+    </Layout>
   );
 };
 
