@@ -1,5 +1,4 @@
-import React from 'react';
-import EventsAll from '@/ui/components/DlessEvents/EventsAll';
+import EventsAll from '@/src/ui/components/DlessEvents/EventsAll';
 
 import { getEvents } from '@/api';
 
