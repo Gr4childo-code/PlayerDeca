@@ -1,11 +1,8 @@
-import { AppContext } from '@/src/ui/components/global/AppContext';
-import { useState } from 'react';
 import { Roboto } from '@next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import NextNProgress from 'nextjs-progressbar';
 
 import { SessionProvider } from 'next-auth/react';
-import { getAudios } from '@/api';
 
 import Player from '@/src/ui/components/global/Player';
 
@@ -29,7 +26,6 @@ import { Providers } from '@/src/redux/provider';
 interface IAppProps {
   Component: any;
   pageProps: any;
-  audios: IAudios;
 }
 
 export default function App({
@@ -39,16 +35,13 @@ export default function App({
   return (
     <SessionProvider session={pageProps?.session}>
       <Providers>
-        {/* <AppContext.Provider value={{ audioContext, setAudioContext }}> */}
         <div className={roboto.className}>
           <Layout>
             <NextNProgress color='#e92a67' height={3} showOnShallow={false} />
             <Component {...pageProps} />
           </Layout>
-
           <Player />
         </div>
-        {/* </AppContext.Provider> */}
       </Providers>
     </SessionProvider>
   );

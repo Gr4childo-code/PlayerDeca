@@ -20,11 +20,11 @@ export const getServerSideProps = async () => {
   const events = await getEvents();
 
   return {
-    props: { audioTop, playlistsNew, events },
+    props: { playlistsNew, events, audioTop },
   };
 };
 
-export default function Home({ audioTop, playlistsNew, events }) {
+export default function Home({ playlistsNew, events, audioTop }: any) {
   return (
     <>
       <Head>
@@ -39,7 +39,7 @@ export default function Home({ audioTop, playlistsNew, events }) {
             <div className='slider'>
               <div className='title'>События DLESS</div>
               <Slider buttons={true} pagination={true}>
-                {events?.data?.map(({ id, attributes }) => (
+                {events?.data?.map(({ id, attributes }: any) => (
                   <SliderItem key={id}>
                     <Link href={`/events/${id}`}>
                       {attributes.poster?.data?.attributes?.url ? (
@@ -81,38 +81,40 @@ export default function Home({ audioTop, playlistsNew, events }) {
             <div className='slider'>
               <div className='title'>Новинки от пользователей</div>
               <Slider buttons={true} pagination={true}>
-                {playlistsNew?.data?.map(({ id, attributes }, index) => (
-                  <SliderItem key={id}>
-                    <Link href={`/playlist/${id}`}>
-                      {attributes.poster?.data?.attributes?.url ? (
-                        <img
-                          className='slides'
-                          src={
-                            process.env.NEXT_PUBLIC_API_URL +
-                            attributes?.poster?.data?.attributes?.url
-                          }
-                          alt={'image'}
-                        />
-                      ) : (
-                        <div className='slides'>
-                          <div className='noImage'>
-                            <FontAwesomeIcon icon={faMusic} size='10x' />{' '}
+                {playlistsNew?.data?.map(
+                  ({ id, attributes }: any, index: number) => (
+                    <SliderItem key={id}>
+                      <Link href={`/playlist/${id}`}>
+                        {attributes.poster?.data?.attributes?.url ? (
+                          <img
+                            className='slides'
+                            src={
+                              process.env.NEXT_PUBLIC_API_URL +
+                              attributes?.poster?.data?.attributes?.url
+                            }
+                            alt={'image'}
+                          />
+                        ) : (
+                          <div className='slides'>
+                            <div className='noImage'>
+                              <FontAwesomeIcon icon={faMusic} size='10x' />{' '}
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
 
-                      <ul className='slides__list'>
-                        <h2 className='slides__description'>
-                          {
-                            attributes?.users_permissions_user?.data?.attributes
-                              ?.username
-                          }
-                        </h2>
-                        <li className='slides__item'>{attributes?.title} </li>
-                      </ul>
-                    </Link>
-                  </SliderItem>
-                ))}
+                        <ul className='slides__list'>
+                          <h2 className='slides__description'>
+                            {
+                              attributes?.users_permissions_user?.data
+                                ?.attributes?.username
+                            }
+                          </h2>
+                          <li className='slides__item'>{attributes?.title} </li>
+                        </ul>
+                      </Link>
+                    </SliderItem>
+                  )
+                )}
               </Slider>
             </div>
             <EventsAll events={events} />
