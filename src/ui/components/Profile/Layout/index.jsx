@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from '@/src/ui/components/profile';
+import Sidebar from '@/src/ui/components/Profile';
 
 import styles from './Layout.module.scss';
 

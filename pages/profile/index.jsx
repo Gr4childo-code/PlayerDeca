@@ -3,7 +3,7 @@ import Layout from '@/src/ui/components/Profile/Layout';
 
 import styles from '@/src/ui/components/Profile/Layout/Profile.module.scss';
 
-const profile = ({ session }: any) => {
+const profile = ({ session }) => {
   const user = session.user;
 
   return (
@@ -36,7 +36,7 @@ const profile = ({ session }: any) => {
 
 export default profile;
 
-export const getServerSideProps = async (ctx: GetSessionParams | undefined) => {
+export const getServerSideProps = async (ctx) => {
   return {
     props: {
       session: await getSession(ctx),
