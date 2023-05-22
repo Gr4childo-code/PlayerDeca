@@ -18,13 +18,13 @@ import { useAppSelector, useAppDispatch } from '@/src/redux/hooks/hooks';
 import {
   selectAudios,
   getAudiosProvider,
-  setCurrentAudio,
+  setCurrentPlayAudio,
 } from '@/src/redux/audios/audios';
 
 export default function Player() {
   const dispatch = useAppDispatch();
-  const { audios, currentAudio } = useAppSelector(selectAudios);
-  const [audio, setAudio] = useState(null);
+  const { audios, currentAudio, currentPlayAudio } =
+    useAppSelector(selectAudios);
   const [isPlayMove, setIsPlayMove] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
   const [percentage, setPercentage] = useState(0);
@@ -49,14 +49,14 @@ export default function Player() {
         poster:
           status.payload?.data[0]?.attributes?.poster?.data?.attributes?.url,
       };
-      setAudio(AudioInit(track.current));
-
       setTrackInfo({
         id: track.current.id,
         name: track.current.name,
         author: track.current.author,
         poster: track.current.poster,
       });
+      dispatch(setCurrentPlayAudio(AudioInit(track.current)));
+      console.log(currentPlayAudio);
     });
   }, []);
 
@@ -71,11 +71,11 @@ export default function Player() {
         src: audios?.data[0]?.attributes?.src?.data[0]?.attributes?.hash,
         poster: audios?.data[0]?.attributes?.poster?.data?.attributes?.url,
       };
-      audio.pause();
+      currentPlayAudio.pause();
       setIsPlay(false);
       setPercentage(0);
+      dispatch(setCurrentPlayAudio(AudioInit(track.current)));
 
-      setAudio(AudioInit(track.current));
       setTrackInfo({
         id: track.current.id,
         name: track.current.name,
@@ -86,16 +86,18 @@ export default function Player() {
   }, [currentAudio]);
 
   useEffect(() => {
-    audio?.addEventListener('canplaythrough', () => {
-      setFullTime(AudioTime(audio.duration));
+    currentPlayAudio?.addEventListener('canplaythrough', () => {
+      setFullTime(AudioTime(currentPlayAudio.duration));
     });
 
-    audio?.addEventListener('timeupdate', () => {
-      setPercentage((audio.currentTime / audio.duration) * 100);
-      setCurrentTime(AudioTime(audio.currentTime));
+    currentPlayAudio?.addEventListener('timeupdate', () => {
+      setPercentage(
+        (currentPlayAudio.currentTime / currentPlayAudio.duration) * 100
+      );
+      setCurrentTime(AudioTime(currentPlayAudio.currentTime));
     });
 
-    audio?.addEventListener('ended', () => {
+    currentPlayAudio?.addEventListener('ended', () => {
       _indexTrach.current < audios?.data.length - 1
         ? _indexTrach.current++
         : (_indexTrach.current = 0);
@@ -110,12 +112,12 @@ export default function Player() {
         poster: track.current.poster,
       });
     });
-  }, [audio ?? null]);
+  }, [currentPlayAudio ?? null]);
 
   const play = () => {
-    audio?.paused
-      ? [audio.play(), setIsPlay(true)]
-      : [audio.pause(), setIsPlay(false)];
+    currentPlayAudio?.paused
+      ? [currentPlayAudio.play(), setIsPlay(true)]
+      : [currentPlayAudio.pause(), setIsPlay(false)];
   };
 
   const rewind = (e, active) => {
@@ -125,16 +127,18 @@ export default function Player() {
     const pageX = e.pageX;
 
     e.target.children[0].style.width = `${(pageX / rect.width) * 100}%`;
-    setCurrentTimeMove(AudioTime((e.pageX / rect.width) * audio?.duration));
+    setCurrentTimeMove(
+      AudioTime((e.pageX / rect.width) * currentPlayAudio?.duration)
+    );
 
     if (active) {
-      const rewind = (pageX / rect.width) * audio.duration;
+      const rewind = (pageX / rect.width) * currentPlayAudio.duration;
 
-      audio.currentTime = rewind;
-      audio.muted = true;
+      currentPlayAudio.currentTime = rewind;
+      currentPlayAudio.muted = true;
       return;
     }
-    audio.muted = false;
+    currentPlayAudio.muted = false;
   };
 
   const volumeTrack = (e, active) => {
@@ -146,7 +150,7 @@ export default function Player() {
       const offsetVolume = offesetX / 100;
 
       setVolume(Math.floor(offesetX));
-      audio.volume = offsetVolume < 0 ? 0 : offsetVolume;
+      currentPlayAudio.volume = offsetVolume < 0 ? 0 : offsetVolume;
     }
   };
 
@@ -163,7 +167,7 @@ export default function Player() {
       author: track.current.author,
       poster: track.current.poster,
     });
-    audio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
+    currentPlayAudio.src = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${track.current?.src}.mp3`;
     play();
   };
 
@@ -171,7 +175,7 @@ export default function Player() {
     <>
       <Head>
         <title>
-          {!audio
+          {!currentPlayAudio
             ? 'Трек не выбран'
             : `${trackInfo.author} - ${trackInfo.name}`}
         </title>
@@ -201,7 +205,7 @@ export default function Player() {
         <div className='container'>
           <div className={styles.playerBox}>
             <div className={styles.playerBox__cover}>
-              {!audio ? (
+              {!currentPlayAudio ? (
                 ''
               ) : trackInfo.poster ? (
                 <img src={process.env.NEXT_PUBLIC_API_URL + trackInfo.poster} />
@@ -217,13 +221,13 @@ export default function Player() {
               ></div>
             </div>
             <div className={styles.playerBox__body}>
-              {audio && (
+              {currentPlayAudio && (
                 <div
                   className={styles.playerBox__info}
                   onClick={() => setIsPlayList(!isPlayList)}
                 >
                   <div className={styles.playerBox__info__description}>
-                    <strong>{track.current.author}</strong> - {trackInfo.name}
+                    <strong>{track?.current?.author}</strong> - {trackInfo.name}
                   </div>
                   <span>
                     {currentTime} / {fullTime}
@@ -237,7 +241,7 @@ export default function Player() {
                 }`}
               >
                 <div className={styles.playlist__overflow}>
-                  {audio &&
+                  {currentPlayAudio &&
                     audios?.data.map(({ id, attributes }, index) => (
                       <div
                         className={`${styles.playlist__item} ${

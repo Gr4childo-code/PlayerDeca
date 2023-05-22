@@ -5,11 +5,13 @@ import type { RootState } from '@/src/redux/store/store';
 export type TGetAudios = {
   audios: any;
   currentAudio: any[];
+  currentPlayAudio: any;
   pending: boolean;
   error: boolean;
 };
 const initialState: TGetAudios = {
   audios: null,
+  currentPlayAudio: null,
   currentAudio: [],
   pending: false,
   error: false,
@@ -40,6 +42,9 @@ const getAudiosSlice = createSlice({
     setCurrentAudio: (state, action) => {
       state.currentAudio = action.payload;
     },
+    setCurrentPlayAudio: (state, action) => {
+      state.currentPlayAudio = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,6 +63,7 @@ const getAudiosSlice = createSlice({
   },
 });
 
-export const { playNewTrack, setCurrentAudio } = getAudiosSlice.actions;
+export const { playNewTrack, setCurrentAudio, setCurrentPlayAudio } =
+  getAudiosSlice.actions;
 export const selectAudios = (state: RootState): TGetAudios => state.audiosAll;
 export default getAudiosSlice.reducer;
