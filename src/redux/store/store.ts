@@ -6,6 +6,8 @@ export const store = configureStore({
   reducer: {
     audiosAll: audiosReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
   devTools: true,
 });
 export type AppDispatch = typeof store.dispatch;
